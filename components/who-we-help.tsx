@@ -83,16 +83,11 @@ export function WhoWeHelp() {
                     )}
                   />
                 </span>
-                <div
-                  className={cn(
-                    "grid transition-all duration-300 ease-in-out",
-                    isOpen ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
-                  )}
-                >
-                  <p className="overflow-hidden text-pretty text-sm leading-relaxed text-muted-foreground">
+                {isOpen && (
+                  <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground animate-in fade-in slide-in-from-top-1 duration-300">
                     {practice.detail}
                   </p>
-                </div>
+                )}
               </button>
             )
           })}
