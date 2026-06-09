@@ -3,21 +3,25 @@ import { TrendingDown, LineChart, Compass, BarChart3 } from "lucide-react"
 const problems = [
   {
     icon: LineChart,
+    image: "/problems/patient-flow.png",
     title: "Inconsistent patient flow",
     description: "Your schedule swings from fully booked to worryingly quiet with no reliable way to predict it.",
   },
   {
     icon: TrendingDown,
+    image: "/problems/revenue.png",
     title: "Unpredictable revenue",
     description: "When new patients dry up, so does cash flow, making it hard to plan or grow with confidence.",
   },
   {
     icon: Compass,
+    image: "/problems/marketing-guesswork.png",
     title: "Marketing that feels like guesswork",
     description: "You're left wondering what's actually working and where your budget is quietly disappearing.",
   },
   {
     icon: BarChart3,
+    image: "/problems/vanity-metrics.png",
     title: "Agencies focused on vanity metrics",
     description: "Impressions and clicks look nice on a report, but they don't fill your appointment book.",
   },
@@ -36,17 +40,26 @@ export function ProblemSection() {
         </p>
       </div>
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {problems.map((problem) => (
           <div
             key={problem.title}
-            className="rounded-2xl border border-border bg-card p-6 transition-shadow hover:shadow-md"
+            className="overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-md"
           >
-            <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-accent text-accent-foreground">
-              <problem.icon className="h-5 w-5" />
+            <div className="relative">
+              <img
+                src={problem.image || "/placeholder.svg"}
+                alt={problem.title}
+                className="aspect-[4/3] w-full object-cover"
+              />
+              <div className="absolute -bottom-5 left-5 flex h-12 w-12 items-center justify-center rounded-xl bg-card text-primary shadow-md ring-1 ring-border">
+                <problem.icon className="h-6 w-6" />
+              </div>
             </div>
-            <h3 className="mt-5 font-semibold text-card-foreground">{problem.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{problem.description}</p>
+            <div className="px-5 pb-6 pt-8">
+              <h3 className="font-semibold text-card-foreground">{problem.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{problem.description}</p>
+            </div>
           </div>
         ))}
       </div>
