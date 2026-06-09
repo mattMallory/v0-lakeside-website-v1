@@ -18,6 +18,18 @@ export function Hero() {
         aria-hidden="true"
         className="animate-float-c pointer-events-none absolute left-1/2 top-8 h-64 w-64 rounded-full bg-primary/25 blur-3xl"
       />
+      <div
+        aria-hidden="true"
+        className="animate-float-b pointer-events-none absolute -left-16 bottom-0 h-72 w-72 rounded-full bg-accent/60 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="animate-float-a pointer-events-none absolute right-10 bottom-4 h-72 w-72 rounded-full bg-primary/30 blur-3xl"
+      />
+      <div
+        aria-hidden="true"
+        className="animate-float-c pointer-events-none absolute left-1/3 bottom-0 h-56 w-56 rounded-full bg-accent/50 blur-3xl"
+      />
 
       <div className="relative mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
