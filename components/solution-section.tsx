@@ -22,7 +22,7 @@ export function SolutionSection() {
             Lakeside combines four proven pillars into one streamlined system designed to generate qualified patient
             inquiries, predictably and on repeat.
           </p>
-          <Button render={<Link href="#contact" />} size="lg" className="mt-8 rounded-full px-8">
+          <Button render={<Link href="#contact" />} nativeButton={false} size="lg" className="mt-8 rounded-full px-8">
             Schedule a Consultation
           </Button>
         </div>

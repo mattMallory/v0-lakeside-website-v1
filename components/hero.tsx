@@ -27,12 +27,13 @@ export function Hero() {
           so you can focus on patient care.
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button render={<Link href="#contact" />} size="lg" className="rounded-full px-8">
+          <Button render={<Link href="#contact" />} nativeButton={false} size="lg" className="rounded-full px-8">
             Schedule a Consultation
             <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
           <Button
             render={<Link href="#how-it-works" />}
+            nativeButton={false}
             size="lg"
             variant="outline"
             className="rounded-full px-8 bg-transparent"

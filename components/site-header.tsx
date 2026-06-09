@@ -38,7 +38,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          <Button render={<Link href="#contact" />} className="rounded-full">
+          <Button render={<Link href="#contact" />} nativeButton={false} className="rounded-full">
             Schedule a Consultation
           </Button>
         </div>
@@ -67,6 +67,7 @@ export function SiteHeader() {
             ))}
             <Button
               render={<Link href="#contact" onClick={() => setOpen(false)} />}
+              nativeButton={false}
               className="mt-2 rounded-full"
             >
               Schedule a Consultation

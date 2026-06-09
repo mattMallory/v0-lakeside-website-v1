@@ -47,6 +47,7 @@ export function HowItWorks() {
       <div className="mt-10 flex justify-center">
         <Button
           render={<Link href="#system" />}
+          nativeButton={false}
           size="lg"
           variant="outline"
           className="rounded-full px-8 bg-transparent"

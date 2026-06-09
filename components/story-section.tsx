@@ -14,11 +14,12 @@ export function StorySection() {
         time worrying about where the next patient is coming from.
       </p>
       <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-        <Button render={<Link href="#system" />} size="lg" className="rounded-full px-8">
+        <Button render={<Link href="#system" />} nativeButton={false} size="lg" className="rounded-full px-8">
           Learn About Our System
         </Button>
         <Button
           render={<Link href="#contact" />}
+          nativeButton={false}
           size="lg"
           variant="outline"
           className="rounded-full px-8 bg-transparent"

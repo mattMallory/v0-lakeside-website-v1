@@ -21,7 +21,7 @@ export function CtaSection() {
           <p className="mx-auto mt-4 max-w-xl text-pretty text-lg text-background/70">
             Book a free growth consultation and we'll map out a patient acquisition system tailored to your clinic.
           </p>
-          <Button render={<Link href="#contact" />} size="lg" className="mt-8 rounded-full px-8">
+          <Button render={<Link href="#contact" />} nativeButton={false} size="lg" className="mt-8 rounded-full px-8">
             Schedule Your Growth Consultation
             <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
