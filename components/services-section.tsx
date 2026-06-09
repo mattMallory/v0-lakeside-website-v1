@@ -42,7 +42,7 @@ export function ServicesSection() {
               key={service.title}
               className="flex gap-5 rounded-2xl border border-border bg-card p-7 transition-shadow hover:shadow-md"
             >
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
                 <service.icon className="h-6 w-6" />
               </div>
               <div>
