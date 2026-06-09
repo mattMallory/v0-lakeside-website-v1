@@ -28,7 +28,7 @@ export function ProblemSection() {
     <section className="mx-auto max-w-6xl px-6 py-20">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          Most Clinics Depend On Referrals Alone
+          Problems We Can Help You Solve
         </h2>
         <p className="mt-4 text-pretty text-lg text-muted-foreground">
           If referrals slow down, does your schedule slow down too? Many clinic owners struggle with the same
