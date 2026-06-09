@@ -125,6 +125,27 @@
   80% { transform: rotate(4deg); }
 }
 
+@keyframes float-blob-a {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(40px, 30px) scale(1.08); }
+  66% { transform: translate(-25px, 20px) scale(0.96); }
+}
+
+@keyframes float-blob-b {
+  0%, 100% { transform: translate(0px, 0px) scale(1); }
+  33% { transform: translate(-35px, 25px) scale(0.94); }
+  66% { transform: translate(30px, -20px) scale(1.1); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .animate-float-a {
+    animation: float-blob-a 16s ease-in-out infinite;
+  }
+  .animate-float-b {
+    animation: float-blob-b 20s ease-in-out infinite;
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
