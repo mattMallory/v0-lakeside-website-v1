@@ -44,19 +44,19 @@ export function ProblemSection() {
         {problems.map((problem) => (
           <div
             key={problem.title}
-            className="overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-md"
+            className="rounded-2xl border border-border bg-card p-5 transition-shadow hover:shadow-md"
           >
-            <div className="relative">
+            <div className="relative overflow-hidden rounded-xl">
               <img
                 src={problem.image || "/placeholder.svg"}
                 alt={problem.title}
                 className="aspect-[4/3] w-full object-cover"
               />
-              <div className="absolute -bottom-5 left-5 flex h-12 w-12 items-center justify-center rounded-xl bg-card text-primary shadow-md ring-1 ring-border">
+              <div className="absolute bottom-4 left-4 flex h-12 w-12 items-center justify-center rounded-xl bg-card text-primary shadow-md ring-1 ring-border">
                 <problem.icon className="h-6 w-6" />
               </div>
             </div>
-            <div className="px-5 pb-6 pt-8">
+            <div className="pt-5">
               <h3 className="font-semibold text-card-foreground">{problem.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{problem.description}</p>
             </div>
