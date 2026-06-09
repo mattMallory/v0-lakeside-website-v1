@@ -1,16 +1,31 @@
+import { SiteHeader } from "@/components/site-header"
+import { Hero } from "@/components/hero"
+import { ProblemSection } from "@/components/problem-section"
+import { SolutionSection } from "@/components/solution-section"
+import { HowItWorks } from "@/components/how-it-works"
+import { ServicesSection } from "@/components/services-section"
+import { WhyChoose } from "@/components/why-choose"
+import { WhoWeHelp } from "@/components/who-we-help"
+import { StorySection } from "@/components/story-section"
+import { CtaSection } from "@/components/cta-section"
+import { SiteFooter } from "@/components/site-footer"
+
 export default function Home() {
   return (
-    <div className="flex min-h-screen items-center justify-center font-sans">
-      <main className="flex w-full max-w-3xl flex-col items-center gap-8 px-6 py-16 text-center sm:items-start sm:text-left">
-        <div className="flex flex-col gap-4">
-          <h1 className="text-4xl font-bold tracking-tight">
-            Lakeside Redesign
-          </h1>
-          <p className="max-w-md text-lg text-muted-foreground">
-            To get started, send a prompt or modify this page directly.
-          </p>
-        </div>
+    <div className="min-h-screen bg-background">
+      <SiteHeader />
+      <main>
+        <Hero />
+        <ProblemSection />
+        <SolutionSection />
+        <HowItWorks />
+        <ServicesSection />
+        <WhyChoose />
+        <WhoWeHelp />
+        <StorySection />
+        <CtaSection />
       </main>
+      <SiteFooter />
     </div>
-  );
+  )
 }

@@ -10,8 +10,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Lakeside | More Patient Appointments For Your Clinic',
+  description:
+    'Lakeside helps natural healthcare clinics generate qualified patient inquiries through proven lead generation systems so you can focus on patient care.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -39,10 +40,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
-      <body className="font-sans antialiased">
-        {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
-      </body>
+      <body className="font-sans antialiased bg-background">{children}{process.env.NODE_ENV === 'production' && <Analytics />}</body>
     </html>
   )
 }
