@@ -8,11 +8,11 @@ export function Hero() {
       {/* soft warm glow accents */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/20 blur-3xl"
+        className="animate-float-a pointer-events-none absolute -left-24 top-10 h-72 w-72 rounded-full bg-primary/20 blur-3xl"
       />
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute -right-24 top-32 h-80 w-80 rounded-full bg-accent/60 blur-3xl"
+        className="animate-float-b pointer-events-none absolute -right-24 top-32 h-80 w-80 rounded-full bg-accent/60 blur-3xl"
       />
 
       <div className="relative mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
