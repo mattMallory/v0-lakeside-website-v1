@@ -36,10 +36,10 @@ export function StorySection() {
         <div className="relative order-1 lg:order-2">
           <div className="overflow-hidden rounded-2xl">
             <Image
-              src="/story/therapy-session-clean.png"
+              src="/story/therapy-session-clean.jpg"
               alt="A clinician treating a patient during a therapy session"
-              width={683}
-              height={499}
+              width={2354}
+              height={1568}
               className="h-auto w-full object-cover"
               priority
             />
