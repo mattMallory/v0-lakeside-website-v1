@@ -22,7 +22,7 @@ const problems = [
   {
     icon: BarChart3,
     image: "/problems/vanity-metrics.png",
-    title: "Agencies focused on vanity metrics",
+    title: "Confus metrics",
     description: "Impressions and clicks look nice on a report, but they don't fill your appointment book.",
   },
 ]
