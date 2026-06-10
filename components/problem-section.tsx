@@ -22,7 +22,7 @@ const problems = [
   {
     icon: BarChart3,
     image: "/problems/marketing-guesswork-v2.jpg",
-    title: "Metrics",
+    title: "Confusing Metrics",
     description: "Impressions and clicks look nice on a report, but they don't fill your appointment book.",
   },
 ]
