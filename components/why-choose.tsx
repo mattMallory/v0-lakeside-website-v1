@@ -4,22 +4,16 @@ import { Button } from "@/components/ui/button"
 
 const cards = [
   {
-    image: "/why/multichannel.png",
+    image: "/why/ad-campaign-v2.jpg",
     alt: "Patient profile surrounded by connected outreach channel icons",
-    heading: "Wellness-specific patient strategies",
+    heading: "Wellness-Specific Patient Strategies",
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
   },
   {
-    image: "/why/local-patients.png",
+    image: "/why/demographics-v3.jpg",
     alt: "Map dotted with local patient locations near a clinic",
-    heading: "The right patients in your area",
+    heading: "The Right Patients in Your Area",
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
-  },
-  {
-    image: "/why/booked-calendar.png",
-    alt: "Appointment calendar filling with booked patient time slots",
-    heading: "Your first appointments within a month",
-    body: "We set up and launch your campaign in the first 14 days. Within the next 30 days, you'll start seeing new patient appointments land directly on your clinic's calendar.",
   },
   {
     image: "/why/growth-chart.png",
@@ -56,8 +50,8 @@ export function WhyChoose() {
         {/* Scrolling cards */}
         <div className="flex flex-col gap-8">
           {cards.map((card) => (
-            <article key={card.heading} className="rounded-2xl bg-card p-3 shadow-sm ring-1 ring-border">
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-xl bg-foreground">
+            <article key={card.heading} className="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border">
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[5px] bg-foreground">
                 <Image
                   src={card.image || "/placeholder.svg"}
                   alt={card.alt}
@@ -66,7 +60,7 @@ export function WhyChoose() {
                   sizes="(min-width: 1024px) 33vw, 100vw"
                 />
               </div>
-              <div className="px-3 pb-4 pt-5">
+              <div className="pt-5">
                 <h3 className="text-xl font-bold text-card-foreground">{card.heading}</h3>
                 <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">{card.body}</p>
               </div>
