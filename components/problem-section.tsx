@@ -16,7 +16,7 @@ const problems = [
   {
     icon: Compass,
     image: "/problems/marketing-guesswork.png",
-    title: "Marketing that feels like guesswork",
+    title: "Marketing guesswork",
     description: "You're left wondering what's actually working and where your budget is quietly disappearing.",
   },
   {
