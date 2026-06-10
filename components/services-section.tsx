@@ -9,18 +9,18 @@ const services = [
   },
   {
     icon: LayoutTemplate,
-    title: "Landing Pages",
+    title: "More booked appointments",
     description:
       "Turn clicks into consultations with conversion-focused landing pages designed specifically for healthcare practices.",
   },
   {
     icon: Users,
-    title: "Lead Management",
+    title: "Better lead follow-up",
     description: "Never lose a potential patient because of missed follow-up opportunities or slow response times.",
   },
   {
     icon: Gauge,
-    title: "Campaign Optimization",
+    title: "Higher marketing ROI",
     description: "Continuous monitoring and improvement to maximize performance and lower your cost per appointment.",
   },
 ]
