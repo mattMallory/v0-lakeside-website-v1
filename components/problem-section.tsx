@@ -3,7 +3,7 @@ import { TrendingDown, LineChart, Compass, BarChart3 } from "lucide-react"
 const problems = [
   {
     icon: LineChart,
-    image: "/problems/patient-flow.png",
+    image: "/problems/low-patients.jpg",
     title: "Inconsistent patient flow",
     description: "Your schedule swings from fully booked to worryingly quiet with no reliable way to predict it.",
   },
