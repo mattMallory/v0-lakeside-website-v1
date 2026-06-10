@@ -3,7 +3,7 @@ import { Megaphone, LayoutTemplate, Users, Gauge } from "lucide-react"
 const services = [
   {
     icon: Megaphone,
-    title: "Paid Advertising",
+    title: "More qualified leads",
     description:
       "Generate qualified patient inquiries through targeted Google and Meta advertising campaigns built for healthcare.",
   },
