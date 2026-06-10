@@ -3,10 +3,10 @@ import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const pillars = [
-  "Paid Advertising",
-  "Conversion-Focused Landing Pages",
-  "Lead Management",
-  "Ongoing Optimization",
+  "Generate Qualified Patient Leads",
+  "Increase booked appointments",
+  "Better Follow-Up",
+  "Higher Marketing ROI",
 ]
 
 export function SolutionSection() {
