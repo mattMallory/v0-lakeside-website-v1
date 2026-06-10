@@ -3,24 +3,24 @@ import { Megaphone, LayoutTemplate, Users, Gauge } from "lucide-react"
 const services = [
   {
     icon: Megaphone,
-    title: "More qualified leads",
+    title: "Targeted Advertising Campaigns",
     description:
       "Generate qualified patient inquiries through targeted Google and Meta advertising campaigns built for healthcare.",
   },
   {
     icon: LayoutTemplate,
-    title: "Landing Pages",
+    title: "Conversion-Focused Landing Pages",
     description:
       "Turn clicks into consultations with conversion-focused landing pages designed specifically for healthcare practices.",
   },
   {
     icon: Users,
-    title: "Lead Management",
+    title: "Automated Patient Follow-Up",
     description: "Never lose a potential patient because of missed follow-up opportunities or slow response times.",
   },
   {
     icon: Gauge,
-    title: "Campaign Optimization",
+    title: "Continued Campaign Optimization",
     description: "Continuous monitoring and improvement to maximize performance and lower your cost per appointment.",
   },
 ]

@@ -3,26 +3,26 @@ import { TrendingDown, LineChart, Compass, BarChart3 } from "lucide-react"
 const problems = [
   {
     icon: LineChart,
-    image: "/problems/patient-flow.png",
-    title: "Inconsistent patient flow",
+    image: "/problems/low-patients.jpg",
+    title: "Inconsistent Patient Flow",
     description: "Your schedule swings from fully booked to worryingly quiet with no reliable way to predict it.",
   },
   {
     icon: TrendingDown,
-    image: "/problems/revenue.png",
-    title: "Unpredictable revenue",
+    image: "/problems/unpredictable-revenue.jpg",
+    title: "Unpredictable Revenue",
     description: "When new patients dry up, so does cash flow, making it hard to plan or grow with confidence.",
   },
   {
     icon: Compass,
     image: "/problems/marketing-guesswork.png",
-    title: "Marketing guesswork",
+    title: "Marketing Guesswork",
     description: "You're left wondering what's actually working and where your budget is quietly disappearing.",
   },
   {
     icon: BarChart3,
-    image: "/problems/vanity-metrics.png",
-    title: "Confus metrics",
+    image: "/problems/marketing-guesswork-v2.jpg",
+    title: "Metrics",
     description: "Impressions and clicks look nice on a report, but they don't fill your appointment book.",
   },
 ]
