@@ -63,8 +63,8 @@ export function SearchOverlayGraphic({
 
       {/* Sliding / fading overlay graphic */}
       <div
-        style={{ transformOrigin: "bottom left" }}
-        className={`absolute ${overlayPositionClass} ${overlayWidthClass} transition-all duration-700 ease-out ${
+        style={{ transformOrigin: "center" }}
+        className={`absolute ${overlayPositionClass} ${overlayWidthClass} transition-all delay-[1500ms] duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
           visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-[0.8] opacity-0"
         }`}
       >
