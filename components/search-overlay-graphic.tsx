@@ -38,7 +38,7 @@ export function SearchOverlayGraphic() {
 
       {/* Sliding / fading overlay graphic (~60% of the space) */}
       <div
-        className={`absolute left-3 top-60 w-[60%] transition-all duration-700 ease-out sm:left-4 ${
+        className={`absolute left-3 top-50 w-[60%] transition-all duration-700 ease-out sm:left-4 ${
           visible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
         }`}
       >
