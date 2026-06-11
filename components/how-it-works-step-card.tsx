@@ -7,16 +7,26 @@ type Step = {
 }
 
 export function HowItWorksStepCard({ step }: { step: Step }) {
-  function handleMouseEnter(event: React.MouseEvent<HTMLElement>) {
-    const numberEl = event.currentTarget.querySelector<HTMLElement>("[data-step-number]")
+  function triggerBounce(el: HTMLElement) {
+    const numberEl = el.querySelector<HTMLElement>("[data-step-number]")
     if (!numberEl) return
     numberEl.classList.remove("animate-step-bounce")
     void numberEl.getBoundingClientRect()
     numberEl.classList.add("animate-step-bounce")
   }
 
+  function handleMouseEnter(event: React.MouseEvent<HTMLElement>) {
+    triggerBounce(event.currentTarget)
+  }
+
   function handleMouseLeave(event: React.MouseEvent<HTMLElement>) {
     event.currentTarget.querySelector<HTMLElement>("[data-step-number]")?.classList.remove("animate-step-bounce")
+  }
+
+  function handleTouchStart(event: React.TouchEvent<HTMLElement>) {
+    const numberEl = event.currentTarget.querySelector<HTMLElement>("[data-step-number]")
+    numberEl?.classList.add("text-primary")
+    triggerBounce(event.currentTarget)
   }
 
   return (
@@ -24,6 +34,7 @@ export function HowItWorksStepCard({ step }: { step: Step }) {
       className="group relative rounded-2xl border border-border bg-card p-6"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
     >
       <span
         data-step-number
