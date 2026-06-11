@@ -1,6 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { SearchOverlayGraphic } from "@/components/search-overlay-graphic"
 
 const cards = [
   {
@@ -10,8 +11,8 @@ const cards = [
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
   },
   {
-    image: "/why/demographics-v3.jpg",
-    alt: "Map dotted with local patient locations near a clinic",
+    graphic: "search-overlay" as const,
+    alt: "Patient searching for a local wellness clinic on her phone",
     heading: "The Right Patients in Your Area",
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
   },
@@ -51,15 +52,19 @@ export function WhyChoose() {
         <div className="flex flex-col gap-8">
           {cards.map((card) => (
             <article key={card.heading} className="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border">
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[5px] bg-foreground">
-                <Image
-                  src={card.image || "/placeholder.svg"}
-                  alt={card.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                />
-              </div>
+              {card.graphic === "search-overlay" ? (
+                <SearchOverlayGraphic />
+              ) : (
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[5px] bg-foreground">
+                  <Image
+                    src={card.image || "/placeholder.svg"}
+                    alt={card.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(min-width: 1024px) 33vw, 100vw"
+                  />
+                </div>
+              )}
               <div className="pt-5">
                 <h3 className="text-xl font-bold text-card-foreground">{card.heading}</h3>
                 <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">{card.body}</p>
