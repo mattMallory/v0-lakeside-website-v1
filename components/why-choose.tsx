@@ -11,7 +11,7 @@ const cards = [
     overlayAlt: "Wellness-specific patient acquisition strategy",
     // EDIT PER TILE: overlay size (Tailwind width) + position
     overlayWidthClass: "w-[60%]",
-    overlayPositionClassMobile: "left-3 top-32",
+    overlayPositionClassMobile: "left-3 top-20",
     overlayPositionClass: "sm:left-4 sm:top-49",
     heading: "Wellness-Specific Patient Strategies",
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
@@ -22,7 +22,7 @@ const cards = [
     overlayImage: "/why/Frame 11.png",
     overlayAlt: "Google search results showing local wellness clinics with ratings and directions",
     overlayWidthClass: "w-[40%]",
-    overlayPositionClassMobile: "left-24 top-16",
+    overlayPositionClassMobile: "left-24 top-14",
     overlayPositionClass: "sm:left-40 sm:top-25",
     heading: "The Right Patients in Your Area",
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
