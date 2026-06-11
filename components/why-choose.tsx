@@ -9,6 +9,9 @@ const cards = [
     baseAlt: "Patient researching wellness clinics",
     overlayImage: "/why/places-overlay.png",
     overlayAlt: "Wellness-specific patient acquisition strategy",
+    // EDIT PER TILE: overlay size (Tailwind width) + position
+    overlayWidthClass: "w-[60%]",
+    overlayPositionClass: "left-3 top-45 sm:left-4",
     heading: "Wellness-Specific Patient Strategies",
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
   },
@@ -17,6 +20,8 @@ const cards = [
     baseAlt: "Patient searching for a local wellness clinic on her phone",
     overlayImage: "/why/Frame 11.png",
     overlayAlt: "Google search results showing local wellness clinics with ratings and directions",
+    overlayWidthClass: "w-[60%]",
+    overlayPositionClass: "left-3 top-45 sm:left-4",
     heading: "The Right Patients in Your Area",
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
   },
@@ -25,6 +30,8 @@ const cards = [
     baseAlt: "Clinic owner reviewing growth reports",
     overlayImage: "/why/places-overlay.png",
     overlayAlt: "Predictable measurable growth reporting",
+    overlayWidthClass: "w-[60%]",
+    overlayPositionClass: "left-3 top-45 sm:left-4",
     heading: "Predictable, measurable growth",
     body: "No more guessing or relying on referrals alone. You get transparent reporting you can actually understand and a steady, repeatable flow of new patients month after month.",
   },
@@ -63,6 +70,8 @@ export function WhyChoose() {
                 baseAlt={card.baseAlt}
                 overlayImage={card.overlayImage}
                 overlayAlt={card.overlayAlt}
+                overlayWidthClass={card.overlayWidthClass}
+                overlayPositionClass={card.overlayPositionClass}
               />
               <div className="pt-5">
                 <h3 className="text-xl font-bold text-card-foreground">{card.heading}</h3>
