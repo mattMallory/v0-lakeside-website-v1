@@ -13,7 +13,7 @@ const cards = [
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
   },
   {
-    baseImage: "/why/Frame 12.jpg",
+    baseImage: "/why/Frame 11.png",
     baseAlt: "Patient searching for a local wellness clinic on her phone",
     overlayImage: "/why/places-overlay.png",
     overlayAlt: "Google search results showing local wellness clinics with ratings and directions",
