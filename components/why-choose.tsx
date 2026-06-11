@@ -11,7 +11,7 @@ const cards = [
     overlayAlt: "Wellness-specific patient acquisition strategy",
     // EDIT PER TILE: overlay size (Tailwind width) + position
     overlayWidthClass: "w-[60%]",
-    overlayPositionClass: "left-3 top-48 sm:left-4",
+    overlayPositionClass: "left-3 top-60 sm:left-4",
     heading: "Wellness-Specific Patient Strategies",
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
   },
