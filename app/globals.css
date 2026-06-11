@@ -157,6 +157,69 @@
   100% { transform: translate(0px, 0px) scale(1); }
 }
 
+@keyframes hero-water-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(220px, 140px) scale(1.1); }
+  50% { transform: translate(420px, 60px) scale(0.92); }
+  75% { transform: translate(180px, -200px) scale(1.06); }
+}
+
+@keyframes hero-water-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-260px, 100px) scale(1.08); }
+  50% { transform: translate(-480px, -120px) scale(0.94); }
+  75% { transform: translate(-200px, -280px) scale(1.04); }
+}
+
+@keyframes hero-water-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(140px, -180px) scale(1.12); }
+  50% { transform: translate(-120px, -340px) scale(0.9); }
+  75% { transform: translate(-280px, -80px) scale(1.02); }
+}
+
+@keyframes hero-water-4 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-180px, 220px) scale(0.92); }
+  50% { transform: translate(80px, 380px) scale(1.1); }
+  75% { transform: translate(300px, 180px) scale(0.96); }
+}
+
+@keyframes hero-water-5 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(320px, 80px) scale(1.06); }
+  50% { transform: translate(520px, 260px) scale(0.88); }
+  75% { transform: translate(240px, 380px) scale(1.08); }
+}
+
+@keyframes hero-water-6 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-220px, -160px) scale(1.1); }
+  50% { transform: translate(-80px, -360px) scale(0.92); }
+  75% { transform: translate(200px, -240px) scale(1.04); }
+}
+
+@keyframes hero-water-7 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(160px, 280px) scale(0.9); }
+  50% { transform: translate(-60px, 420px) scale(1.12); }
+  75% { transform: translate(-240px, 260px) scale(0.96); }
+}
+
+@keyframes hero-water-8 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-300px, 160px) scale(1.08); }
+  50% { transform: translate(-460px, 320px) scale(0.94); }
+  75% { transform: translate(-220px, 120px) scale(1.06); }
+}
+
+@keyframes hero-water-9 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(280px, -160px) scale(0.92); }
+  50% { transform: translate(140px, 240px) scale(1.1); }
+  75% { transform: translate(-180px, 320px) scale(0.98); }
+}
+
 .animate-float-a {
   animation: float-blob-a 23s ease-in-out infinite;
 }
@@ -167,10 +230,43 @@
   animation: float-blob-c 37s ease-in-out infinite;
 }
 
+.hero-water-1,
+.hero-water-2,
+.hero-water-3,
+.hero-water-4,
+.hero-water-5,
+.hero-water-6,
+.hero-water-7,
+.hero-water-8,
+.hero-water-9 {
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.hero-water-1 { animation-name: hero-water-1; }
+.hero-water-2 { animation-name: hero-water-2; }
+.hero-water-3 { animation-name: hero-water-3; }
+.hero-water-4 { animation-name: hero-water-4; }
+.hero-water-5 { animation-name: hero-water-5; }
+.hero-water-6 { animation-name: hero-water-6; }
+.hero-water-7 { animation-name: hero-water-7; }
+.hero-water-8 { animation-name: hero-water-8; }
+.hero-water-9 { animation-name: hero-water-9; }
+
 @media (prefers-reduced-motion: reduce) {
   .animate-float-a,
   .animate-float-b,
-  .animate-float-c {
+  .animate-float-c,
+  .hero-water-1,
+  .hero-water-2,
+  .hero-water-3,
+  .hero-water-4,
+  .hero-water-5,
+  .hero-water-6,
+  .hero-water-7,
+  .hero-water-8,
+  .hero-water-9 {
     animation: none;
   }
 }

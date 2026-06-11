@@ -16,7 +16,7 @@ const cards = [
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
   },
   {
-    image: "/why/growth-chart.png",
+    image: "/why/leadflow.jpg",
     alt: "Rising growth chart showing clinic patient and revenue growth",
     heading: "Predictable, measurable growth",
     body: "No more guessing or relying on referrals alone. You get transparent reporting you can actually understand and a steady, repeatable flow of new patients month after month.",
@@ -38,7 +38,7 @@ export function WhyChoose() {
             grow. Here&apos;s why clinics trust us.
           </p>
           <Button
-            render={<Link href="#contact" />}
+            render={<Link href="/consultation" />}
             nativeButton={false}
             size="lg"
             className="mt-8 rounded-full px-8"
