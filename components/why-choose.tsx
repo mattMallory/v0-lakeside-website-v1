@@ -21,7 +21,7 @@ const cards = [
     overlayImage: "/why/Frame 11.png",
     overlayAlt: "Google search results showing local wellness clinics with ratings and directions",
     overlayWidthClass: "w-[40%]",
-    overlayPositionClass: "left-3 top-45 sm:left-4",
+    overlayPositionClass: "left-3 top-25 sm:left-4",
     heading: "The Right Patients in Your Area",
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
   },
