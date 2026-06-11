@@ -9,14 +9,21 @@ const cards = [
     baseAlt: "Patient researching wellness clinics",
     overlayImage: "/why/places-overlay.png",
     overlayAlt: "Wellness-specific patient acquisition strategy",
+    // EDIT PER TILE: overlay size (Tailwind width) + position
+    overlayWidthClass: "w-[60%]",
+    overlayPositionClassMobile: "left-3 top-20",
+    overlayPositionClass: "sm:left-4 sm:top-49",
     heading: "Wellness-Specific Patient Strategies",
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
   },
   {
-    baseImage: "/why/woman-full-photo.jpg",
+    baseImage: "/why/Fram-12-2.jpg",
     baseAlt: "Patient searching for a local wellness clinic on her phone",
-    overlayImage: "/why/places-overlay.png",
+    overlayImage: "/why/Frame 11.png",
     overlayAlt: "Google search results showing local wellness clinics with ratings and directions",
+    overlayWidthClass: "w-[40%]",
+    overlayPositionClassMobile: "left-24 top-14",
+    overlayPositionClass: "sm:left-40 sm:top-25",
     heading: "The Right Patients in Your Area",
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
   },
@@ -25,6 +32,9 @@ const cards = [
     baseAlt: "Clinic owner reviewing growth reports",
     overlayImage: "/why/places-overlay.png",
     overlayAlt: "Predictable measurable growth reporting",
+    overlayWidthClass: "w-[60%]",
+    overlayPositionClassMobile: "left-3 top-32",
+    overlayPositionClass: "sm:left-4 sm:top-45",
     heading: "Predictable, measurable growth",
     body: "No more guessing or relying on referrals alone. You get transparent reporting you can actually understand and a steady, repeatable flow of new patients month after month.",
   },
@@ -63,6 +73,9 @@ export function WhyChoose() {
                 baseAlt={card.baseAlt}
                 overlayImage={card.overlayImage}
                 overlayAlt={card.overlayAlt}
+                overlayWidthClass={card.overlayWidthClass}
+                overlayPositionClass={card.overlayPositionClass}
+                overlayPositionClassMobile={card.overlayPositionClassMobile}
               />
               <div className="pt-5">
                 <h3 className="text-xl font-bold text-card-foreground">{card.heading}</h3>
