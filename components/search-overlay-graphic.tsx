@@ -15,8 +15,10 @@ type SearchOverlayGraphicProps = {
   overlayHeight?: number
   /** Tailwind width class for the overlay (defaults to ~60%) */
   overlayWidthClass?: string
-  /** Tailwind positioning classes for the overlay placement */
+  /** Tailwind positioning classes for the overlay on larger screens (use sm:/md: prefixes) */
   overlayPositionClass?: string
+  /** Tailwind positioning classes for the overlay on small screens (unprefixed, applied first) */
+  overlayPositionClassMobile?: string
 }
 
 export function SearchOverlayGraphic({
@@ -27,7 +29,8 @@ export function SearchOverlayGraphic({
   overlayWidth = 627,
   overlayHeight = 257,
   overlayWidthClass = "w-[60%]",
-  overlayPositionClass = "left-3 top-45 sm:left-4",
+  overlayPositionClass = "sm:left-4",
+  overlayPositionClassMobile = "left-3 top-45",
 }: SearchOverlayGraphicProps) {
   const ref = useRef<HTMLDivElement>(null)
   const [visible, setVisible] = useState(false)
@@ -64,7 +67,7 @@ export function SearchOverlayGraphic({
       {/* Sliding / fading overlay graphic */}
       <div
         style={{ transformOrigin: "center" }}
-        className={`absolute ${overlayPositionClass} ${overlayWidthClass} transition-all delay-600 duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+        className={`absolute ${overlayPositionClassMobile} ${overlayPositionClass} ${overlayWidthClass} transition-all delay-600 duration-700 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
           visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-[0.8] opacity-0"
         }`}
       >
