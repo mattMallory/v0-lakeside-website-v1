@@ -32,12 +32,18 @@ export function HowItWorksStepCard({ step }: { step: Step }) {
     triggerBounce(event.currentTarget)
   }
 
+  function handleTouchEnd() {
+    setTouchActive(false)
+  }
+
   return (
     <article
       className="group relative rounded-2xl border border-border bg-card p-6"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      onTouchCancel={handleTouchEnd}
     >
       <span
         data-step-number
