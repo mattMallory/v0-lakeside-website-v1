@@ -2,18 +2,38 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navItems = [
-  { label: "System", href: "#system" },
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Who We Help", href: "#who-we-help" },
-  { label: "Why Lakeside", href: "#why" },
+  { label: "Our System", href: "/#system" },
+  { label: "How It Works", href: "/#how-it-works" },
+  { label: "Who We Help", href: "/#who-we-help" },
+  { label: "Why Lakeside", href: "/#why" },
 ]
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
+  const pathname = usePathname()
+
+  function handleNavClick(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
+    const hashIndex = href.indexOf("#")
+    if (hashIndex === -1) return
+
+    const sectionId = href.slice(hashIndex + 1)
+    setOpen(false)
+
+    if (pathname !== "/") {
+      event.preventDefault()
+      window.location.assign(href)
+      return
+    }
+
+    event.preventDefault()
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" })
+    window.history.pushState(null, "", href)
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
@@ -27,6 +47,7 @@ export function SiteHeader() {
             <Link
               key={item.href}
               href={item.href}
+              onClick={(event) => handleNavClick(event, item.href)}
               className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {item.label}
@@ -35,7 +56,7 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden md:block">
-          <Button render={<Link href="#contact" />} nativeButton={false} className="rounded-full">
+          <Button render={<Link href="/consultation" />} nativeButton={false} className="rounded-full">
             Schedule a Consultation
           </Button>
         </div>
@@ -56,14 +77,14 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                onClick={() => setOpen(false)}
+                onClick={(event) => handleNavClick(event, item.href)}
                 className="rounded-md px-2 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground"
               >
                 {item.label}
               </Link>
             ))}
             <Button
-              render={<Link href="#contact" onClick={() => setOpen(false)} />}
+              render={<Link href="/consultation" onClick={() => setOpen(false)} />}
               nativeButton={false}
               className="mt-2 rounded-full"
             >

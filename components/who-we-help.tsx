@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Activity, Bone, FlaskConical, Leaf, HeartPulse, Sparkles, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -32,12 +33,16 @@ const practices = [
   {
     name: "Wellness Clinics",
     icon: HeartPulse,
+    image: "/why/growth-chart.png",
+    imageAlt: "Wellness clinic growth chart showing increasing patient bookings",
     detail:
       "Grow your membership and service bookings with a steady stream of qualified inquiries for your wellness offerings.",
   },
   {
     name: "Integrative Health Practices",
     icon: Sparkles,
+    image: "/why/multichannel.png",
+    imageAlt: "Integrative health practice connecting multiple patient care channels",
     detail:
       "Position your practice as the go-to destination for patients seeking the best of conventional and complementary care.",
   },
@@ -67,7 +72,7 @@ export function WhoWeHelp() {
                 aria-expanded={isOpen}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 className={cn(
-                  "flex flex-col items-center rounded-2xl border bg-card px-6 py-8 text-center transition-colors",
+                  "flex w-full flex-col items-center rounded-2xl border bg-card px-6 py-8 text-center transition-colors",
                   isOpen ? "border-primary" : "border-border hover:border-primary/50",
                 )}
               >
@@ -84,9 +89,9 @@ export function WhoWeHelp() {
                   />
                 </span>
                 {isOpen && (
-                  <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground animate-in fade-in slide-in-from-top-1 duration-300">
-                    {practice.detail}
-                  </p>
+                  <div className="mt-4 w-full animate-in fade-in slide-in-from-top-1 duration-300">
+                    <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground">{practice.detail}</p>
+                  </div>
                 )}
               </button>
             )

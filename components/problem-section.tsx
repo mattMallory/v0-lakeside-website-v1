@@ -9,13 +9,13 @@ const problems = [
   },
   {
     icon: TrendingDown,
-    image: "/problems/unpredictable-revenue.jpg",
+    image: "/why/patient-room.jpg",
     title: "Unpredictable Revenue",
     description: "When new patients dry up, so does cash flow, making it hard to plan or grow with confidence.",
   },
   {
     icon: Compass,
-    image: "/problems/marketing-guesswork.png",
+    image: "/problems/unpredictable-revenue.jpg",
     title: "Marketing Guesswork",
     description: "You're left wondering what's actually working and where your budget is quietly disappearing.",
   },
