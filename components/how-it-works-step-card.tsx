@@ -1,5 +1,7 @@
 "use client"
 
+import { useState } from "react"
+
 type Step = {
   number: string
   title: string
@@ -7,6 +9,8 @@ type Step = {
 }
 
 export function HowItWorksStepCard({ step }: { step: Step }) {
+  const [touchActive, setTouchActive] = useState(false)
+
   function triggerBounce(el: HTMLElement) {
     const numberEl = el.querySelector<HTMLElement>("[data-step-number]")
     if (!numberEl) return
@@ -24,8 +28,7 @@ export function HowItWorksStepCard({ step }: { step: Step }) {
   }
 
   function handleTouchStart(event: React.TouchEvent<HTMLElement>) {
-    const numberEl = event.currentTarget.querySelector<HTMLElement>("[data-step-number]")
-    numberEl?.classList.add("text-primary")
+    setTouchActive(true)
     triggerBounce(event.currentTarget)
   }
 
@@ -38,7 +41,9 @@ export function HowItWorksStepCard({ step }: { step: Step }) {
     >
       <span
         data-step-number
-        className="inline-block origin-bottom text-4xl font-bold text-primary/30 transition-colors duration-300 ease-out group-hover:text-primary"
+        className={`inline-block origin-bottom text-4xl font-bold transition-colors duration-300 ease-out group-hover:text-primary ${
+          touchActive ? "text-primary" : "text-primary/30"
+        }`}
       >
         {step.number}
       </span>
