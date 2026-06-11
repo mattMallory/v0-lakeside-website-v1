@@ -10,7 +10,7 @@ export function StorySection() {
         <div className="order-2 text-center lg:order-1 lg:text-left">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Why Lakeside</p>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Clinic Owners Should Heal, Not Market
+            Focus On Your Patients, Not Marketing
           </h2>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
             We started Lakeside because too many clinic owners are forced to become marketers when they should be
