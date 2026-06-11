@@ -1,23 +1,30 @@
-import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { SearchOverlayGraphic } from "@/components/search-overlay-graphic"
 
 const cards = [
   {
-    image: "/why/ad-campaign-v2.jpg",
-    alt: "Patient profile surrounded by connected outreach channel icons",
+    // EDIT PER TILE: base photo + overlay graphic
+    baseImage: "/why/woman-full-photo.jpg",
+    baseAlt: "Patient researching wellness clinics",
+    overlayImage: "/why/places-overlay.png",
+    overlayAlt: "Wellness-specific patient acquisition strategy",
     heading: "Wellness-Specific Patient Strategies",
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
   },
   {
-    image: "/why/demographics-v3.jpg",
-    alt: "Map dotted with local patient locations near a clinic",
+    baseImage: "/why/woman-full-photo.jpg",
+    baseAlt: "Patient searching for a local wellness clinic on her phone",
+    overlayImage: "/why/places-overlay.png",
+    overlayAlt: "Google search results showing local wellness clinics with ratings and directions",
     heading: "The Right Patients in Your Area",
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
   },
   {
-    image: "/why/leadflow.jpg",
-    alt: "Rising growth chart showing clinic patient and revenue growth",
+    baseImage: "/why/woman-full-photo.jpg",
+    baseAlt: "Clinic owner reviewing growth reports",
+    overlayImage: "/why/places-overlay.png",
+    overlayAlt: "Predictable measurable growth reporting",
     heading: "Predictable, measurable growth",
     body: "No more guessing or relying on referrals alone. You get transparent reporting you can actually understand and a steady, repeatable flow of new patients month after month.",
   },
@@ -51,15 +58,12 @@ export function WhyChoose() {
         <div className="flex flex-col gap-8">
           {cards.map((card) => (
             <article key={card.heading} className="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border">
-              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[5px] bg-foreground">
-                <Image
-                  src={card.image || "/placeholder.svg"}
-                  alt={card.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 1024px) 33vw, 100vw"
-                />
-              </div>
+              <SearchOverlayGraphic
+                baseImage={card.baseImage}
+                baseAlt={card.baseAlt}
+                overlayImage={card.overlayImage}
+                overlayAlt={card.overlayAlt}
+              />
               <div className="pt-5">
                 <h3 className="text-xl font-bold text-card-foreground">{card.heading}</h3>
                 <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">{card.body}</p>
