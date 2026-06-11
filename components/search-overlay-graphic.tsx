@@ -65,7 +65,7 @@ export function SearchOverlayGraphic({
       <div
         style={{ transformOrigin: "bottom left" }}
         className={`absolute ${overlayPositionClass} ${overlayWidthClass} transition-all duration-700 ease-out ${
-          visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-[0.6] opacity-0"
+          visible ? "translate-y-0 scale-100 opacity-100" : "translate-y-8 scale-[0.8] opacity-0"
         }`}
       >
         <div className="overflow-hidden rounded-lg shadow-[0_20px_50px_-12px_rgba(0,0,0,0.35)] ring-1 ring-black/5">
