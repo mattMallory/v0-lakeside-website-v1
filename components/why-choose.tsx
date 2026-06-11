@@ -13,9 +13,9 @@ const cards = [
     body: "Unlike generalist agencies, we build patient acquisition plans designed around how natural health practices actually grow, speaking directly to the people already searching for your care.",
   },
   {
-    baseImage: "/why/Frame 11.png",
+    baseImage: "/why/Frame 12.jpg",
     baseAlt: "Patient searching for a local wellness clinic on her phone",
-    overlayImage: "/why/places-overlay.png",
+    overlayImage: "/why/Frame 11.png",
     overlayAlt: "Google search results showing local wellness clinics with ratings and directions",
     heading: "The Right Patients in Your Area",
     body: "We carefully target the people most likely to book and stay, so your calendar fills with quality local patients who value your approach, not low-intent clicks that never convert.",
