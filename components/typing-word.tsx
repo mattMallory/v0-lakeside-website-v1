@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 
-const WORDS = ["Appointments", "Leads", "Sales", "Virtual Visits"] as const
+const WORDS = ["Referrals", "Product Sales", "Visits", "Telehealth"] as const
 
 const TYPING_SPEED = 110
 const DELETING_SPEED = 55
-const PAUSE_AFTER_TYPING = 1600
+// Hold for two full cursor blinks (blink cycle is 1s) before deleting.
+const PAUSE_AFTER_TYPING = 2000
 const PAUSE_AFTER_DELETING = 350
 
 export function TypingWord({ className }: { className?: string }) {
@@ -43,20 +44,10 @@ export function TypingWord({ className }: { className?: string }) {
     return () => clearTimeout(timeout)
   }, [text, phase, wordIndex])
 
-  // Reserve the width of the longest word so the headline never reflows.
-  const longestWord = WORDS.reduce((a, b) => (b.length > a.length ? b : a), "")
-
   return (
-    <span className={cn("relative inline-block whitespace-nowrap text-left align-bottom text-primary", className)}>
-      {/* Invisible sizer locks the width to the widest word, keeping "For Your Clinic" in place */}
-      <span className="invisible" aria-hidden="true">
-        {longestWord}
-      </span>
-      {/* Animated text overlaid on top, left-aligned within the reserved space */}
-      <span className="absolute inset-0 flex items-end" aria-hidden="true">
-        <span>{text}</span>
-        <span className="typing-cursor" />
-      </span>
+    <span className={cn("inline-flex items-end whitespace-nowrap text-primary", className)}>
+      <span aria-hidden="true">{text}</span>
+      <span className="typing-cursor" aria-hidden="true" />
       <span className="sr-only">{WORDS[wordIndex]}</span>
     </span>
   )

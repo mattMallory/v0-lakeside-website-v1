@@ -85,7 +85,7 @@ export function Hero() {
           Patient Acquisition For Natural Wellness Clinics
         </p>
         <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
-          More Patient <TypingWord /> For Your Clinic
+          Grow Your Clinic With More <TypingWord />
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
           We help natural healthcare clinics generate qualified patient inquiries through proven lead generation systems
