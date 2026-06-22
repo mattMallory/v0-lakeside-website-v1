@@ -3,7 +3,7 @@ import { Check } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const pillars = [
-  "Generate Qualified Patient Leads",
+  "Generate Qualified New Patients",
   "Increase Booked Appointments",
   "Better Patient Follow-Up",
   "Improve Marketing ROI",
