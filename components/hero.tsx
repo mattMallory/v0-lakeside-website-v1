@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { TypingWord } from "@/components/typing-word"
 
 const heroBlobs = [
   {
@@ -84,7 +85,7 @@ export function Hero() {
           Patient Acquisition For Natural Wellness Clinics
         </p>
         <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
-          More Patient Appointments For Your Clinic
+          More Patient <TypingWord /> For Your Clinic
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
           We help natural healthcare clinics generate qualified patient inquiries through proven lead generation systems
