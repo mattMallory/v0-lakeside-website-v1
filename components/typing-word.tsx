@@ -43,10 +43,20 @@ export function TypingWord({ className }: { className?: string }) {
     return () => clearTimeout(timeout)
   }, [text, phase, wordIndex])
 
+  // Reserve the width of the longest word so the headline never reflows.
+  const longestWord = WORDS.reduce((a, b) => (b.length > a.length ? b : a), "")
+
   return (
-    <span className={cn("relative inline-block whitespace-nowrap text-primary", className)}>
-      <span aria-hidden="true">{text}</span>
-      <span className="typing-cursor" aria-hidden="true" />
+    <span className={cn("relative inline-block whitespace-nowrap text-left align-bottom text-primary", className)}>
+      {/* Invisible sizer locks the width to the widest word, keeping "For Your Clinic" in place */}
+      <span className="invisible" aria-hidden="true">
+        {longestWord}
+      </span>
+      {/* Animated text overlaid on top, left-aligned within the reserved space */}
+      <span className="absolute inset-0 flex items-end" aria-hidden="true">
+        <span>{text}</span>
+        <span className="typing-cursor" />
+      </span>
       <span className="sr-only">{WORDS[wordIndex]}</span>
     </span>
   )

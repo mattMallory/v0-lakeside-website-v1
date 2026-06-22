@@ -296,11 +296,11 @@
 .typing-cursor {
   display: inline-block;
   width: 0.6em;
-  height: 0.12em;
+  height: 0.1em;
   margin-left: 0.04em;
+  margin-bottom: 0.12em;
   border-radius: 9999px;
   background-color: currentColor;
-  vertical-align: baseline;
   animation: typing-cursor-blink 1s steps(1) infinite;
 }
 
