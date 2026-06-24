@@ -3,23 +3,32 @@ import Image from "next/image"
 import { Bell } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
-export function StorySection() {
+type StorySectionContent = {
+  eyebrow: string
+  headline: string
+  description: string
+  primaryCta: string
+  secondaryCta: string
+  imageUrl: string
+  imageAlt: string
+  notificationTitle: string
+  notificationHeading: string
+  notificationBody: string
+}
+
+export function StorySection({ content }: { content: StorySectionContent }) {
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="order-2 text-center lg:order-1 lg:text-left">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">Why Lakeside</p>
+          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{content.eyebrow}</p>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-            Focus On Your Patients, Not Marketing
+            {content.headline}
           </h2>
-          <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
-            We started Lakeside because too many clinic owners are forced to become marketers when they should be
-            focused on helping patients. Our goal is simple: build reliable patient acquisition systems so clinic owners
-            can spend less time worrying about where the next patient is coming from.
-          </p>
+          <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">{content.description}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
             <Button render={<Link href="#system" />} nativeButton={false} size="lg" className="rounded-full px-8">
-              Learn About Our System
+              {content.primaryCta}
             </Button>
             <Button
               render={<Link href="#contact" />}
@@ -28,7 +37,7 @@ export function StorySection() {
               variant="outline"
               className="rounded-full px-8 bg-transparent"
             >
-              View Case Studies
+              {content.secondaryCta}
             </Button>
           </div>
         </div>
@@ -36,8 +45,8 @@ export function StorySection() {
         <div className="relative order-1 lg:order-2">
           <div className="overflow-hidden rounded-2xl">
             <Image
-              src="/story/therapy-session-clean.jpg"
-              alt="A clinician treating a patient during a therapy session"
+              src={content.imageUrl || "/placeholder.svg"}
+              alt={content.imageAlt}
               width={2354}
               height={1568}
               className="h-auto w-full object-cover"
@@ -51,11 +60,11 @@ export function StorySection() {
                 <span className="flex h-9 w-9 items-center justify-center rounded-full bg-accent text-accent-foreground">
                   <Bell className="h-5 w-5 animate-[wiggle_1.2s_ease-in-out_infinite]" />
                 </span>
-                <p className="text-lg font-bold tracking-tight text-foreground">New Message</p>
+                <p className="text-lg font-bold tracking-tight text-foreground">{content.notificationTitle}</p>
               </div>
               <div className="mt-3 rounded-xl bg-muted/60 p-3">
-                <p className="text-sm font-semibold text-foreground">Consultation Booked</p>
-                <p className="mt-0.5 text-sm text-muted-foreground">John S. has scheduled with you.</p>
+                <p className="text-sm font-semibold text-foreground">{content.notificationHeading}</p>
+                <p className="mt-0.5 text-sm text-muted-foreground">{content.notificationBody}</p>
               </div>
             </div>
           </div>

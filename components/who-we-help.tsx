@@ -2,68 +2,33 @@
 
 import { useState } from "react"
 import Image from "next/image"
-import { Activity, Bone, FlaskConical, Leaf, HeartPulse, Sparkles, ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { getIcon } from "@/lib/icons"
+import type { WhoWeHelpPractice } from "@/lib/payload"
 
-const practices = [
-  {
-    name: "Acupuncturists",
-    icon: Activity,
-    detail:
-      "We help acupuncture practices fill their schedules with patients actively seeking natural pain relief, fertility support, and stress management.",
-  },
-  {
-    name: "Chiropractors",
-    icon: Bone,
-    detail:
-      "Attract new patients looking for spinal health, mobility, and drug-free pain solutions with campaigns built for chiropractic care.",
-  },
-  {
-    name: "Functional Medicine Clinics",
-    icon: FlaskConical,
-    detail:
-      "Reach patients ready to invest in root-cause care, advanced testing, and personalized treatment plans for chronic conditions.",
-  },
-  {
-    name: "Naturopathic Doctors",
-    icon: Leaf,
-    detail:
-      "Connect with health-conscious patients who value holistic, evidence-informed naturopathic medicine and long-term wellness.",
-  },
-  {
-    name: "Wellness Clinics",
-    icon: HeartPulse,
-    image: "/why/growth-chart.png",
-    imageAlt: "Wellness clinic growth chart showing increasing patient bookings",
-    detail:
-      "Grow your membership and service bookings with a steady stream of qualified inquiries for your wellness offerings.",
-  },
-  {
-    name: "Integrative Health Practices",
-    icon: Sparkles,
-    image: "/why/multichannel.png",
-    imageAlt: "Integrative health practice connecting multiple patient care channels",
-    detail:
-      "Position your practice as the go-to destination for patients seeking the best of conventional and complementary care.",
-  },
-]
+type WhoWeHelpContent = {
+  headline: string
+  subheadline: string
+  practices: WhoWeHelpPractice[]
+}
 
-export function WhoWeHelp() {
+export function WhoWeHelp({ content }: { content: WhoWeHelpContent }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
     <section id="who-we-help" className="bg-secondary/60 py-20">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">Who We Help</h2>
-          <p className="mt-4 text-pretty text-lg text-muted-foreground">
-            We partner with natural healthcare practices across the wellness spectrum.
-          </p>
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            {content.headline}
+          </h2>
+          <p className="mt-4 text-pretty text-lg text-muted-foreground">{content.subheadline}</p>
         </div>
 
         <div className="mt-12 grid items-start gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {practices.map((practice, index) => {
-            const Icon = practice.icon
+          {content.practices.map((practice, index) => {
+            const Icon = getIcon(practice.icon)
             const isOpen = openIndex === index
             return (
               <button
@@ -90,6 +55,17 @@ export function WhoWeHelp() {
                 </span>
                 {isOpen && (
                   <div className="mt-4 w-full animate-in fade-in slide-in-from-top-1 duration-300">
+                    {practice.imageUrl && (
+                      <div className="relative mx-auto mb-4 aspect-[16/10] w-full max-w-xs overflow-hidden rounded-lg">
+                        <Image
+                          src={practice.imageUrl}
+                          alt={practice.imageAlt || practice.name}
+                          fill
+                          className="object-cover"
+                          sizes="(min-width: 1024px) 20vw, 80vw"
+                        />
+                      </div>
+                    )}
                     <p className="mt-3 text-pretty text-sm leading-relaxed text-muted-foreground">{practice.detail}</p>
                   </div>
                 )}

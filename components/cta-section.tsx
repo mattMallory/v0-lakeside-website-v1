@@ -1,8 +1,13 @@
 import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import type { HomepageContent } from "@/lib/payload"
 
-export function CtaSection() {
+type CtaSectionProps = {
+  content: Pick<HomepageContent, "ctaHeadline" | "ctaSubheadline" | "ctaButton">
+}
+
+export function CtaSection({ content }: CtaSectionProps) {
   return (
     <section id="contact" className="px-6 py-20">
       <div className="relative mx-auto max-w-5xl overflow-hidden rounded-3xl bg-foreground px-6 py-16 text-center sm:px-12">
@@ -20,13 +25,11 @@ export function CtaSection() {
         />
         <div className="relative">
           <h2 className="text-balance text-3xl font-bold tracking-tight text-background sm:text-4xl">
-            Ready To Generate More Patient Appointments?
+            {content.ctaHeadline}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-pretty text-lg text-background/70">
-            Book a free growth consultation and we'll map out a patient acquisition system tailored to your clinic.
-          </p>
+          <p className="mx-auto mt-4 max-w-xl text-pretty text-lg text-background/70">{content.ctaSubheadline}</p>
           <Button render={<Link href="/consultation" />} nativeButton={false} size="lg" className="mt-8 rounded-full px-8">
-            Schedule Your Consultation
+            {content.ctaButton}
             <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
         </div>
