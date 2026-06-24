@@ -27,8 +27,13 @@ export type ServiceItem = {
 }
 
 export type WhyChooseCard = {
-  imageUrl: string
-  imageAlt: string
+  baseImage: string
+  baseAlt: string
+  overlayImage: string
+  overlayAlt: string
+  overlayWidthClass: string
+  overlayPositionClassMobile: string
+  overlayPositionClass: string
   heading: string
   body: string
 }

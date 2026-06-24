@@ -250,15 +250,45 @@ export const Homepage: GlobalConfig = {
               defaultValue: defaultHomepageContent.whyChooseCards,
               fields: [
                 {
-                  name: "imageUrl",
+                  name: "baseImage",
                   type: "text",
-                  label: "Image URL",
+                  label: "Base Image URL",
                   required: true,
                 },
                 {
-                  name: "imageAlt",
+                  name: "baseAlt",
                   type: "text",
-                  label: "Image Alt Text",
+                  label: "Base Image Alt Text",
+                  required: true,
+                },
+                {
+                  name: "overlayImage",
+                  type: "text",
+                  label: "Overlay Image URL",
+                  required: true,
+                },
+                {
+                  name: "overlayAlt",
+                  type: "text",
+                  label: "Overlay Alt Text",
+                  required: true,
+                },
+                {
+                  name: "overlayWidthClass",
+                  type: "text",
+                  label: "Overlay Width Class",
+                  required: true,
+                },
+                {
+                  name: "overlayPositionClassMobile",
+                  type: "text",
+                  label: "Overlay Position (Mobile)",
+                  required: true,
+                },
+                {
+                  name: "overlayPositionClass",
+                  type: "text",
+                  label: "Overlay Position (Desktop)",
                   required: true,
                 },
                 {
