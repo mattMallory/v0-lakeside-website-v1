@@ -2,6 +2,14 @@ import Link from "next/link"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import type { HomepageContent } from "@/lib/payload"
+
+type HeroProps = {
+  content: Pick<
+    HomepageContent,
+    "heroEyebrow" | "heroHeadline" | "heroSubheadline" | "heroPrimaryCta" | "heroSecondaryCta"
+  >
+}
 
 const heroBlobs = [
   {
@@ -60,7 +68,7 @@ const heroBlobs = [
   },
 ] as const
 
-export function Hero() {
+export function Hero({ content }: HeroProps) {
   return (
     <section className="relative overflow-hidden min-h-[32rem] md:min-h-[36rem]">
       {heroBlobs.map((blob) => (
@@ -80,19 +88,16 @@ export function Hero() {
       ))}
 
       <div className="relative mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
-        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-primary">
-          Patient Acquisition For Natural Wellness Clinics
-        </p>
+        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-primary">{content.heroEyebrow}</p>
         <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
-          More Patient Appointments For Your Clinic
+          {content.heroHeadline}
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
-          We help natural healthcare clinics generate qualified patient inquiries through proven lead generation systems
-          so you can focus on patient care.
+          {content.heroSubheadline}
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button render={<Link href="/consultation" />} nativeButton={false} size="lg" className="rounded-full px-8">
-            Schedule a Consultation
+            {content.heroPrimaryCta}
             <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
           <Button
@@ -102,7 +107,7 @@ export function Hero() {
             variant="outline"
             className="rounded-full px-8 bg-transparent"
           >
-            See How It Works
+            {content.heroSecondaryCta}
           </Button>
         </div>
       </div>
