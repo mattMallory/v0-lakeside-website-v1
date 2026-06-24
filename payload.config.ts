@@ -14,7 +14,7 @@ import { seedHomepageIfEmpty } from "./lib/seed-homepage"
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const isVercel = process.env.VERCEL === "1"
+const usePostgres = Boolean(process.env.POSTGRES_URL)
 
 export default buildConfig({
   admin: {
@@ -30,7 +30,7 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
-  db: isVercel
+  db: usePostgres
     ? vercelPostgresAdapter()
     : sqliteAdapter({
         client: {
