@@ -30,3 +30,6 @@ payload-types.ts
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# payload uploads
+media/
