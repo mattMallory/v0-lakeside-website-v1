@@ -1,5 +1,6 @@
 import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres"
 
+import { getPayloadBlobPlugins } from "./lib/get-payload-blob-plugins"
 import { getPostgresUrl } from "./lib/db-url"
 import { createPayloadConfig } from "./lib/payload-config-base"
 
@@ -15,4 +16,7 @@ export default createPayloadConfig(
       connectionString: postgresUrl,
     },
   }),
+  {
+    plugins: getPayloadBlobPlugins(),
+  },
 )

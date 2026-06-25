@@ -13,7 +13,12 @@ import { seedHomepageIfEmpty } from "./seed-homepage"
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-export function createPayloadConfig(db: Config["db"]) {
+export function createPayloadConfig(
+  db: Config["db"],
+  options: {
+    plugins?: Config["plugins"]
+  } = {},
+) {
   return buildConfig({
     admin: {
       user: Users.slug,
@@ -29,6 +34,7 @@ export function createPayloadConfig(db: Config["db"]) {
       outputFile: path.resolve(dirname, "..", "payload-types.ts"),
     },
     db,
+    ...(options.plugins ? { plugins: options.plugins } : {}),
     sharp,
     onInit: async (payload) => {
       await seedHomepageIfEmpty(payload)
