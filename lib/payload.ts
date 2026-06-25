@@ -1,6 +1,3 @@
-import config from "@payload-config"
-import { getPayload } from "payload"
-
 import { defaultHomepageContent } from "@/lib/homepage-defaults"
 
 export type ProblemItem = {
@@ -123,6 +120,8 @@ export async function getHomepageContent(): Promise<HomepageContent> {
   }
 
   try {
+    const { default: config } = await import("@payload-config")
+    const { getPayload } = await import("payload")
     const payload = await getPayload({ config })
     const homepage = await payload.findGlobal({
       slug: "homepage",

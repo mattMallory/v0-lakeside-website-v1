@@ -11,7 +11,7 @@ import { CtaSection } from "@/components/cta-section"
 import { SiteFooter } from "@/components/site-footer"
 import { getHomepageContent } from "@/lib/payload"
 
-export const dynamic = "force-dynamic"
+export const revalidate = 60
 
 export default async function Home() {
   const homepage = await getHomepageContent()

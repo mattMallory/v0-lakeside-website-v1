@@ -10,7 +10,6 @@ import { Media } from "./collections/Media"
 import { Users } from "./collections/Users"
 import { Homepage } from "./globals/Homepage"
 import { seedHomepageIfEmpty } from "./lib/seed-homepage"
-import { migrations } from "./migrations"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -46,7 +45,6 @@ export default buildConfig({
         pool: {
           connectionString: postgresUrl,
         },
-        prodMigrations: migrations,
       })
     : sqliteAdapter({
         client: {
