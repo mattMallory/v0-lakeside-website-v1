@@ -10,11 +10,22 @@ import { Media } from "./collections/Media"
 import { Users } from "./collections/Users"
 import { Homepage } from "./globals/Homepage"
 import { seedHomepageIfEmpty } from "./lib/seed-homepage"
+import { migrations } from "./migrations"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
-const usePostgres = Boolean(process.env.POSTGRES_URL)
+function getPostgresUrl() {
+  return (
+    process.env.POSTGRES_URL_NON_POOLING ||
+    process.env.DATABASE_URL_UNPOOLED ||
+    process.env.POSTGRES_URL ||
+    process.env.DATABASE_URL
+  )
+}
+
+const postgresUrl = getPostgresUrl()
+const usePostgres = Boolean(postgresUrl)
 
 export default buildConfig({
   admin: {
@@ -31,7 +42,12 @@ export default buildConfig({
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: usePostgres
-    ? vercelPostgresAdapter()
+    ? vercelPostgresAdapter({
+        pool: {
+          connectionString: postgresUrl,
+        },
+        prodMigrations: migrations,
+      })
     : sqliteAdapter({
         client: {
           url: process.env.DATABASE_URL || "file:./payload.db",
