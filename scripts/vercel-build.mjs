@@ -9,8 +9,22 @@ env.NODE_OPTIONS = ["--no-deprecation", ...(env.NODE_OPTIONS?.split(" ").filter(
   .filter((value, index, array) => array.indexOf(value) === index)
   .join(" ")
 
-const postgresUrl =
-  env.POSTGRES_URL_NON_POOLING || env.DATABASE_URL_UNPOOLED || env.POSTGRES_URL || env.DATABASE_URL
+function isPostgresUrl(url) {
+  return Boolean(url?.startsWith("postgres://") || url?.startsWith("postgresql://"))
+}
+
+function getPostgresMigrationUrl() {
+  const candidates = [
+    env.POSTGRES_URL_NON_POOLING,
+    env.DATABASE_URL_UNPOOLED,
+    env.POSTGRES_URL,
+    env.DATABASE_URL,
+  ]
+
+  return candidates.find(isPostgresUrl)
+}
+
+const postgresUrl = getPostgresMigrationUrl()
 
 function run(label, command) {
   console.log(`\n[build] ${label}`)
@@ -19,7 +33,7 @@ function run(label, command) {
 }
 
 if (env.PAYLOAD_SECRET && postgresUrl) {
-  env.POSTGRES_URL = env.POSTGRES_URL_NON_POOLING || env.DATABASE_URL_UNPOOLED || env.POSTGRES_URL
+  env.POSTGRES_URL = postgresUrl
   run("Running database migrations", "node ./node_modules/payload/bin.js migrate")
 } else {
   console.warn("[build] Skipping migrations — missing PAYLOAD_SECRET or Postgres URL")

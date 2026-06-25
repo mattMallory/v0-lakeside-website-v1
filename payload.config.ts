@@ -1,6 +1,6 @@
 import path from "path"
 import { fileURLToPath } from "url"
-import { postgresAdapter } from "@payloadcms/db-postgres"
+import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres"
 import { sqliteAdapter } from "@payloadcms/db-sqlite"
 import { lexicalEditor } from "@payloadcms/richtext-lexical"
 import { buildConfig } from "payload"
@@ -9,19 +9,11 @@ import sharp from "sharp"
 import { Media } from "./collections/Media"
 import { Users } from "./collections/Users"
 import { Homepage } from "./globals/Homepage"
+import { getPostgresUrl } from "./lib/db-url"
 import { seedHomepageIfEmpty } from "./lib/seed-homepage"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
-
-function getPostgresUrl() {
-  return (
-    process.env.POSTGRES_URL_NON_POOLING ||
-    process.env.DATABASE_URL_UNPOOLED ||
-    process.env.POSTGRES_URL ||
-    process.env.DATABASE_URL
-  )
-}
 
 const postgresUrl = getPostgresUrl()
 const usePostgres = Boolean(postgresUrl)
@@ -41,7 +33,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: usePostgres
-    ? postgresAdapter({
+    ? vercelPostgresAdapter({
         pool: {
           connectionString: postgresUrl,
         },

@@ -1,4 +1,5 @@
 import { defaultHomepageContent } from "@/lib/homepage-defaults"
+import { getPostgresUrl } from "@/lib/db-url"
 
 export type ProblemItem = {
   icon: string
@@ -103,15 +104,6 @@ function withFallback<T>(value: T | null | undefined, fallback: T): T {
 function mergeArray<T>(value: T[] | null | undefined, fallback: T[]): T[] {
   if (!value || value.length === 0) return fallback
   return value
-}
-
-function getPostgresUrl() {
-  return (
-    process.env.POSTGRES_URL_NON_POOLING ||
-    process.env.DATABASE_URL_UNPOOLED ||
-    process.env.POSTGRES_URL ||
-    process.env.DATABASE_URL
-  )
 }
 
 export async function getHomepageContent(): Promise<HomepageContent> {
