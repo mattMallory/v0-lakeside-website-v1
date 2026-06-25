@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
-  serverExternalPackages: ["sharp", "payload", "@payloadcms/db-vercel-postgres"],
+  serverExternalPackages: ["payload", "@payloadcms/db-vercel-postgres"],
   typescript: {
     ignoreBuildErrors: true,
   },

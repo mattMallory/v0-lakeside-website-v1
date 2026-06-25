@@ -39,6 +39,6 @@ if (env.PAYLOAD_SECRET && postgresUrl) {
   console.warn("[build] Skipping migrations — missing PAYLOAD_SECRET or Postgres URL")
 }
 
-run("Running Next.js build", "node ./node_modules/next/dist/bin/next build")
+run("Running Next.js build", "node ./node_modules/next/dist/bin/next build --webpack")
 
 console.log("\n[build] Done.")
