@@ -1,4 +1,4 @@
-import { spawnSync } from "node:child_process"
+import { execSync } from "node:child_process"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
@@ -15,46 +15,34 @@ const postgresUrl =
 
 if (!postgresUrl) {
   console.error("[ci] ERROR: No Postgres URL found.")
-  console.error("[ci] Expected one of: POSTGRES_URL_NON_POOLING, POSTGRES_URL, DATABASE_URL")
-  console.error("[ci] Link Neon in Vercel → Storage → Connect to Project (enable Production + Preview).")
+  console.error("[ci] Link Neon in Vercel → Storage → Connect to Project.")
   process.exit(1)
 }
 
 env.POSTGRES_URL = postgresUrl
-
-const nodeOptions = ["--no-deprecation", ...(env.NODE_OPTIONS?.split(" ").filter(Boolean) ?? [])]
-env.NODE_OPTIONS = [...new Set(nodeOptions)].join(" ")
+env.NODE_OPTIONS = ["--no-deprecation", ...(env.NODE_OPTIONS?.split(" ").filter(Boolean) ?? [])]
+  .filter((value, index, array) => array.indexOf(value) === index)
+  .join(" ")
 
 console.log("[ci] Env check:")
 console.log(`  PAYLOAD_SECRET: set (${env.PAYLOAD_SECRET.length} chars)`)
-console.log(`  POSTGRES_URL: set (using ${env.POSTGRES_URL_NON_POOLING ? "non-pooling" : "pooled"} connection)`)
-console.log(`  VERCEL: ${env.VERCEL ?? "0"}`)
+console.log(
+  `  POSTGRES_URL: set (${env.POSTGRES_URL_NON_POOLING || env.DATABASE_URL_UNPOOLED ? "non-pooling" : "pooled"})`,
+)
 
-function run(label, command, args) {
-  console.log(`\n[ci] ${label}...`)
-  const result = spawnSync(command, args, {
-    env,
-    cwd: root,
-    encoding: "utf8",
-    shell: false,
-  })
-
-  if (result.stdout) process.stdout.write(result.stdout)
-  if (result.stderr) process.stderr.write(result.stderr)
-
-  if (result.status !== 0) {
-    console.error(`\n[ci] FAILED: ${label} (exit ${result.status ?? "unknown"})`)
-    console.error(
-      "[ci] If the error mentions 'already exists', reset your Neon database branch:",
-    )
-    console.error("[ci]   Vercel → Storage → Neon → Open in Neon → Reset branch / drop all tables")
-    console.error("[ci] Then redeploy.")
-    process.exit(result.status ?? 1)
+function run(label, command) {
+  console.log(`\n[ci] ===== ${label} =====`)
+  console.log(`[ci] $ ${command}`)
+  try {
+    execSync(command, { stdio: "inherit", env, cwd: root, shell: true })
+  } catch (error) {
+    const exitCode = typeof error.status === "number" ? error.status : 1
+    console.error(`\n[ci] FAILED: ${label} (exit ${exitCode})`)
+    process.exit(exitCode)
   }
 }
 
-run("Migration status", "pnpm", ["exec", "payload", "migrate:status"])
-run("Running payload migrate", "pnpm", ["exec", "payload", "migrate"])
-run("Running next build", "pnpm", ["exec", "next", "build"])
+run("payload migrate", "node ./node_modules/payload/bin.js migrate")
+run("next build", "node ./node_modules/next/dist/bin/next build")
 
 console.log("\n[ci] Build complete.")
