@@ -4,6 +4,10 @@ import { del, put } from "@vercel/blob"
 import path from "path"
 import type { Plugin } from "payload"
 
+function normalizeStoreId(storeId: string) {
+  return storeId.startsWith("store_") ? storeId.slice("store_".length) : storeId
+}
+
 function getBlobStoreId(): string | undefined {
   const raw = process.env.BLOB_STORE_ID
 
@@ -11,11 +15,19 @@ function getBlobStoreId(): string | undefined {
     return undefined
   }
 
-  return raw.replace(/^store_/i, "").toLowerCase()
+  return normalizeStoreId(raw)
 }
 
 function getPublicBlobBaseUrl(storeId: string) {
   return `https://${storeId}.public.blob.vercel-storage.com`
+}
+
+function getBlobPutOptions(mimeType: string) {
+  return {
+    access: "public" as const,
+    contentType: mimeType,
+    storeId: process.env.BLOB_STORE_ID,
+  }
 }
 
 function buildBlobUrl({
@@ -46,7 +58,13 @@ function buildBlobUrl({
 function createOidcBlobAdapter(baseUrl: string) {
   return ({ prefix = "" }: { prefix?: string }) => ({
     name: "vercel-blob-oidc",
-    generateURL: ({ filename, prefix: urlPrefix = "" }: { filename: string; prefix?: string }) =>
+    generateURL: ({
+      filename,
+      prefix: urlPrefix = "",
+    }: {
+      filename: string
+      prefix?: string
+    }) =>
       buildBlobUrl({
         baseUrl,
         collectionPrefix: prefix,
@@ -67,6 +85,9 @@ function createOidcBlobAdapter(baseUrl: string) {
           filename,
           prefix: docPrefix,
         }),
+        {
+          storeId: process.env.BLOB_STORE_ID,
+        },
       )
     },
     handleUpload: async ({
@@ -82,10 +103,7 @@ function createOidcBlobAdapter(baseUrl: string) {
         filename,
       })
 
-      const result = await put(fileKey, buffer, {
-        access: "public",
-        contentType: mimeType,
-      })
+      const result = await put(fileKey, buffer, getBlobPutOptions(mimeType))
 
       if (result.pathname) {
         const pathname = result.pathname.replace(/^\/+/, "")
@@ -131,6 +149,7 @@ export function oidcVercelBlobStorage(): Plugin | null {
       collections: {
         media: {
           adapter,
+          disablePayloadAccessControl: true,
         },
       },
     })(config)
