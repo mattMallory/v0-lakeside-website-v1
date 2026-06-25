@@ -1,7 +1,7 @@
 import path from "path"
 import { fileURLToPath } from "url"
+import { postgresAdapter } from "@payloadcms/db-postgres"
 import { sqliteAdapter } from "@payloadcms/db-sqlite"
-import { vercelPostgresAdapter } from "@payloadcms/db-vercel-postgres"
 import { lexicalEditor } from "@payloadcms/richtext-lexical"
 import { buildConfig } from "payload"
 import sharp from "sharp"
@@ -42,7 +42,7 @@ export default buildConfig({
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
   db: usePostgres
-    ? vercelPostgresAdapter({
+    ? postgresAdapter({
         pool: {
           connectionString: postgresUrl,
         },

@@ -11,12 +11,15 @@ importers:
       '@base-ui/react':
         specifier: ^1.5.0
         version: 1.5.0(@date-fns/tz@1.4.1)(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@payloadcms/db-postgres':
+        specifier: ^3.85.1
+        version: 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))
       '@payloadcms/db-sqlite':
         specifier: ^3.85.1
-        version: 3.85.1(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(bufferutil@4.1.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)
+        version: 3.85.1(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(bufferutil@4.1.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)
       '@payloadcms/db-vercel-postgres':
         specifier: ^3.85.1
-        version: 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))
+        version: 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))
       '@payloadcms/next':
         specifier: ^3.85.1
         version: 3.85.1(@types/react@19.2.14)(graphql@16.14.0)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.7.3)
@@ -1479,6 +1482,11 @@ packages:
   '@open-draft/until@2.1.0':
     resolution: {integrity: sha512-U69T3ItWHvLwGg5eJ0n3I62nWuE6ilHlmz7zM0npLBRvPRd7e6NYmg54vvRtP5mZG7kZqZCFVdsTWo7BPtBujg==}
 
+  '@payloadcms/db-postgres@3.85.1':
+    resolution: {integrity: sha512-mAuSYbdJRlixzJO9IXasub3iE6c3wuSIhsLrPpOY1qGJmioFMYa9z1KhCMmDHEV5oAfKHBl0/XY1SR+FfHj7tQ==}
+    peerDependencies:
+      payload: 3.85.1
+
   '@payloadcms/db-sqlite@3.85.1':
     resolution: {integrity: sha512-+5bVk9ClpwJB9w6zoPeaLABRWbsLAxgfgl5dWGBxo+UwTgc8DYrzDukycvZ3cR/TB/pRnyoA+33rP7mEpeVA7g==}
     peerDependencies:
@@ -1688,6 +1696,9 @@ packages:
 
   '@types/pg@8.11.6':
     resolution: {integrity: sha512-/2WmmBXHLsfRqzfHW7BNZ8SbYzE8OSk7i3WjFYvfgRHj7S1xj+16Je5fUKv3lVdVzk/zn9TXOqf+avFCFIE0yQ==}
+
+  '@types/pg@8.20.0':
+    resolution: {integrity: sha512-bEPFOaMAHTEP1EzpvHTbmwR8UsFyHSKsRisLIHVMXnpNefSbGA1bD6CVy+qKjGSqmZqNqBDV2azOBo8TgkcVow==}
 
   '@types/react-dom@19.2.3':
     resolution: {integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ==}
@@ -5202,13 +5213,56 @@ snapshots:
 
   '@open-draft/until@2.1.0': {}
 
-  '@payloadcms/db-sqlite@3.85.1(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(bufferutil@4.1.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)':
+  '@payloadcms/db-postgres@3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))':
     dependencies:
-      '@libsql/client': 0.14.0(bufferutil@4.1.0)
-      '@payloadcms/drizzle': 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)
+      '@payloadcms/drizzle': 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)
+      '@types/pg': 8.20.0
       console-table-printer: 2.12.1
       drizzle-kit: 0.31.7
-      drizzle-orm: 0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(pg@8.20.0)
+      drizzle-orm: 0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(pg@8.20.0)
+      payload: 3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3)
+      pg: 8.20.0
+      prompts: 2.4.2
+      to-snake-case: 1.0.0
+      uuid: 13.0.2
+    transitivePeerDependencies:
+      - '@aws-sdk/client-rds-data'
+      - '@cloudflare/workers-types'
+      - '@electric-sql/pglite'
+      - '@libsql/client'
+      - '@libsql/client-wasm'
+      - '@neondatabase/serverless'
+      - '@op-engineering/op-sqlite'
+      - '@opentelemetry/api'
+      - '@planetscale/database'
+      - '@prisma/client'
+      - '@tidbcloud/serverless'
+      - '@types/better-sqlite3'
+      - '@types/sql.js'
+      - '@upstash/redis'
+      - '@vercel/postgres'
+      - '@xata.io/client'
+      - better-sqlite3
+      - bun-types
+      - expo-sqlite
+      - gel
+      - knex
+      - kysely
+      - mysql2
+      - pg-native
+      - postgres
+      - prisma
+      - sql.js
+      - sqlite3
+      - supports-color
+
+  '@payloadcms/db-sqlite@3.85.1(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(bufferutil@4.1.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)':
+    dependencies:
+      '@libsql/client': 0.14.0(bufferutil@4.1.0)
+      '@payloadcms/drizzle': 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)
+      console-table-printer: 2.12.1
+      drizzle-kit: 0.31.7
+      drizzle-orm: 0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(pg@8.20.0)
       payload: 3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3)
       prompts: 2.4.2
       to-snake-case: 1.0.0
@@ -5246,13 +5300,13 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@payloadcms/db-vercel-postgres@3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))':
+  '@payloadcms/db-vercel-postgres@3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))':
     dependencies:
-      '@payloadcms/drizzle': 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)
+      '@payloadcms/drizzle': 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)
       '@vercel/postgres': 0.10.0
       console-table-printer: 2.12.1
       drizzle-kit: 0.31.7
-      drizzle-orm: 0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(pg@8.20.0)
+      drizzle-orm: 0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(pg@8.20.0)
       payload: 3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3)
       pg: 8.20.0
       prompts: 2.4.2
@@ -5290,11 +5344,11 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@payloadcms/drizzle@3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)':
+  '@payloadcms/drizzle@3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)':
     dependencies:
       console-table-printer: 2.12.1
       dequal: 2.0.3
-      drizzle-orm: 0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(pg@8.20.0)
+      drizzle-orm: 0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(pg@8.20.0)
       payload: 3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3)
       prompts: 2.4.2
       to-snake-case: 1.0.0
@@ -5593,6 +5647,12 @@ snapshots:
       '@types/node': 24.10.4
       pg-protocol: 1.15.0
       pg-types: 4.1.0
+
+  '@types/pg@8.20.0':
+    dependencies:
+      '@types/node': 24.10.4
+      pg-protocol: 1.15.0
+      pg-types: 2.2.0
 
   '@types/react-dom@19.2.3(@types/react@19.2.14)':
     dependencies:
@@ -5968,10 +6028,10 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.11.6)(@vercel/postgres@0.10.0)(pg@8.20.0):
+  drizzle-orm@0.45.2(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(pg@8.20.0):
     optionalDependencies:
       '@libsql/client': 0.14.0(bufferutil@4.1.0)
-      '@types/pg': 8.11.6
+      '@types/pg': 8.20.0
       '@vercel/postgres': 0.10.0
       pg: 8.20.0
 

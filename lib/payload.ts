@@ -108,7 +108,20 @@ function mergeArray<T>(value: T[] | null | undefined, fallback: T[]): T[] {
   return value
 }
 
+function getPostgresUrl() {
+  return (
+    process.env.POSTGRES_URL_NON_POOLING ||
+    process.env.DATABASE_URL_UNPOOLED ||
+    process.env.POSTGRES_URL ||
+    process.env.DATABASE_URL
+  )
+}
+
 export async function getHomepageContent(): Promise<HomepageContent> {
+  if (!process.env.PAYLOAD_SECRET || !getPostgresUrl()) {
+    return defaultHomepageContent
+  }
+
   try {
     const payload = await getPayload({ config })
     const homepage = await payload.findGlobal({
@@ -190,7 +203,8 @@ export async function getHomepageContent(): Promise<HomepageContent> {
       ctaSubheadline: withFallback(homepage.ctaSubheadline, defaultHomepageContent.ctaSubheadline),
       ctaButton: withFallback(homepage.ctaButton, defaultHomepageContent.ctaButton),
     }
-  } catch {
+  } catch (error) {
+    console.error("[payload] Failed to load homepage content:", error)
     return defaultHomepageContent
   }
 }
