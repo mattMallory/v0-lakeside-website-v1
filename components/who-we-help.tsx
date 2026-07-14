@@ -20,7 +20,7 @@ export function WhoWeHelp({ content }: { content: WhoWeHelpContent }) {
     <section id="who-we-help" className="bg-secondary/60 py-20">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             {content.headline}
           </h2>
           <p className="mt-4 text-pretty text-lg text-muted-foreground">{content.subheadline}</p>
@@ -41,7 +41,7 @@ export function WhoWeHelp({ content }: { content: WhoWeHelpContent }) {
                   isOpen ? "border-primary" : "border-border hover:border-primary/50",
                 )}
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-accent-foreground">
+                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-icon">
                   <Icon className="h-6 w-6" />
                 </span>
                 <span className="mt-4 flex items-center gap-1.5 font-semibold text-card-foreground">
@@ -49,7 +49,7 @@ export function WhoWeHelp({ content }: { content: WhoWeHelpContent }) {
                   <ChevronDown
                     className={cn(
                       "h-4 w-4 text-muted-foreground transition-transform",
-                      isOpen && "rotate-180 text-primary",
+                      isOpen && "rotate-180 text-icon",
                     )}
                   />
                 </span>

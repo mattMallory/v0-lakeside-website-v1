@@ -15,7 +15,7 @@ export function WhyChoose({ content }: { content: WhyChooseContent }) {
     <section id="why" className="mx-auto max-w-6xl px-6 py-20">
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <div className="lg:sticky lg:top-24 lg:h-fit lg:self-start lg:py-12">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             {content.headline}
           </h2>
           <p className="mt-5 text-pretty text-lg leading-relaxed text-muted-foreground">{content.description}</p>

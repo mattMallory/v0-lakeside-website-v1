@@ -89,7 +89,7 @@ export function Hero({ content }: HeroProps) {
 
       <div className="relative mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
         <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-primary">{content.heroEyebrow}</p>
-        <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-foreground sm:text-5xl md:text-6xl">
+        <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-heading sm:text-5xl md:text-6xl">
           {content.heroHeadline}
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">

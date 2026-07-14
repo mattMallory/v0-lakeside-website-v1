@@ -11,7 +11,7 @@ export function ProblemSection({ content }: { content: ProblemSectionContent }) 
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h2 className="text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
           {content.headline}
         </h2>
         <p className="mt-4 text-pretty text-lg text-muted-foreground">{content.subheadline}</p>
@@ -31,7 +31,7 @@ export function ProblemSection({ content }: { content: ProblemSectionContent }) 
                   alt={problem.title}
                   className="aspect-[4/3] w-full object-cover"
                 />
-                <div className="absolute -bottom-5 left-5 flex h-12 w-12 items-center justify-center rounded-xl bg-card text-primary shadow-md ring-1 ring-border">
+                <div className="absolute -bottom-5 left-5 flex h-12 w-12 items-center justify-center rounded-xl bg-card text-icon shadow-md ring-1 ring-border">
                   <Icon className="h-6 w-6" />
                 </div>
               </div>

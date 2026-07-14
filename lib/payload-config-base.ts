@@ -7,7 +7,9 @@ import sharp from "sharp"
 
 import { Media } from "../collections/Media"
 import { Users } from "../collections/Users"
+import { Branding } from "../globals/Branding"
 import { Homepage } from "../globals/Homepage"
+import { seedBrandingIfEmpty } from "./seed-branding"
 import { seedHomepageIfEmpty } from "./seed-homepage"
 
 const filename = fileURLToPath(import.meta.url)
@@ -27,7 +29,7 @@ export function createPayloadConfig(
       },
     },
     collections: [Users, Media],
-    globals: [Homepage],
+    globals: [Branding, Homepage],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || "",
     typescript: {
@@ -37,6 +39,7 @@ export function createPayloadConfig(
     ...(options.plugins ? { plugins: options.plugins } : {}),
     sharp,
     onInit: async (payload) => {
+      await seedBrandingIfEmpty(payload)
       await seedHomepageIfEmpty(payload)
     },
   })

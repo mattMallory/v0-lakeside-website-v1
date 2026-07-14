@@ -13,7 +13,7 @@ export function ServicesSection({ content }: { content: ServicesSectionContent }
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{content.eyebrow}</p>
-          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             {content.headline}
           </h2>
         </div>
@@ -26,7 +26,7 @@ export function ServicesSection({ content }: { content: ServicesSectionContent }
                 key={service.title}
                 className="flex gap-5 rounded-2xl border border-border bg-card p-7 transition-shadow hover:shadow-md"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-accent-foreground">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-icon">
                   <Icon className="h-6 w-6" />
                 </div>
                 <div>

@@ -17,7 +17,7 @@ export function SolutionSection({ content }: { content: SolutionSectionContent }
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2">
         <div>
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{content.eyebrow}</p>
-          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             {content.headline}
           </h2>
           <p className="mt-4 text-pretty text-lg text-muted-foreground">{content.description}</p>
@@ -30,7 +30,7 @@ export function SolutionSection({ content }: { content: SolutionSectionContent }
           <ul className="flex flex-col gap-4">
             {content.pillars.map((pillar) => (
               <li key={pillar.text} className="flex items-center gap-4 rounded-xl bg-secondary/70 px-5 py-4">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-icon text-white">
                   <Check className="h-4 w-4" />
                 </span>
                 <span className="font-medium text-card-foreground">{pillar.text}</span>

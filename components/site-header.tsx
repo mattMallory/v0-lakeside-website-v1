@@ -4,6 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu, X } from "lucide-react"
+import { useBranding } from "@/components/branding-provider"
 import { Button } from "@/components/ui/button"
 
 const navItems = [
@@ -16,6 +17,7 @@ const navItems = [
 export function SiteHeader() {
   const [open, setOpen] = useState(false)
   const pathname = usePathname()
+  const branding = useBranding()
 
   function handleNavClick(event: React.MouseEvent<HTMLAnchorElement>, href: string) {
     const hashIndex = href.indexOf("#")
@@ -39,7 +41,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center">
-          <img src="/lakeside-logo.svg" alt="Lakeside" className="h-[1.4rem] w-auto" />
+          <img src={branding.logoUrl} alt={branding.logoAlt} className="h-[1.4rem] w-auto" />
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

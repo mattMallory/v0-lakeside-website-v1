@@ -1,4 +1,8 @@
+"use client"
+
 import Link from "next/link"
+
+import { useBranding } from "@/components/branding-provider"
 
 const columns = [
   {
@@ -16,13 +20,15 @@ const columns = [
 ]
 
 export function SiteFooter() {
+  const branding = useBranding()
+
   return (
     <footer className="border-t border-border bg-background">
       <div className="mx-auto max-w-6xl px-6 py-14">
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <Link href="/" className="flex items-center">
-              <img src="/lakeside-logo.svg" alt="Lakeside" className="h-7 w-auto" />
+              <img src={branding.logoUrl} alt={branding.logoAlt} className="h-7 w-auto" />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Patient acquisition systems for natural wellness clinics. More appointments, less marketing guesswork.
@@ -31,7 +37,7 @@ export function SiteFooter() {
 
           {columns.map((col) => (
             <div key={col.title}>
-              <h3 className="text-sm font-semibold text-foreground">{col.title}</h3>
+              <h3 className="text-sm font-semibold text-heading">{col.title}</h3>
               <ul className="mt-4 flex flex-col gap-3">
                 {col.links.map((link) => (
                   <li key={link}>

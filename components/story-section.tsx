@@ -22,7 +22,7 @@ export function StorySection({ content }: { content: StorySectionContent }) {
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="order-2 text-center lg:order-1 lg:text-left">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{content.eyebrow}</p>
-          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
             {content.headline}
           </h2>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">{content.description}</p>

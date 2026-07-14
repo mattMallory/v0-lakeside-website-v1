@@ -33,11 +33,17 @@
   --color-secondary: var(--secondary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
+  --color-button-foreground: var(--button-foreground);
+  --color-button: var(--button);
+  --color-secondary-button-foreground: var(--secondary-button-foreground);
+  --color-secondary-button: var(--secondary-button);
+  --color-icon: var(--icon);
   --color-popover-foreground: var(--popover-foreground);
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-foreground: var(--foreground);
+  --color-heading: var(--heading);
   --color-background: var(--background);
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
@@ -52,12 +58,18 @@
 :root {
   --background: oklch(0.985 0.005 245);
   --foreground: oklch(0.21 0.03 245);
+  --heading: oklch(0.21 0.03 245);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.21 0.03 245);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.21 0.03 245);
   --primary: oklch(0.55 0.16 245);
   --primary-foreground: oklch(0.99 0 0);
+  --button: oklch(0.55 0.16 245);
+  --button-foreground: oklch(0.99 0 0);
+  --secondary-button: oklch(0.55 0.16 245);
+  --secondary-button-foreground: oklch(0.55 0.16 245);
+  --icon: oklch(0.55 0.16 245);
   --secondary: oklch(0.96 0.01 245);
   --secondary-foreground: oklch(0.21 0.03 245);
   --muted: oklch(0.96 0.01 245);
@@ -305,5 +317,6 @@
   h5,
   h6 {
     font-family: var(--font-heading);
+    color: var(--heading);
   }
 }
