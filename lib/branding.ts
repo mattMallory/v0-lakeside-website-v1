@@ -1,10 +1,14 @@
+import { unstable_noStore as noStore } from "next/cache"
+
 import { defaultBrandingContent, type BrandingContent } from "@/lib/branding-defaults"
 import type { GoogleFontName } from "@/lib/google-fonts"
 import { googleFontOptions } from "@/lib/google-fonts"
 
 type MediaLike = {
   url?: string | null
+  filename?: string | null
   alt?: string | null
+  updatedAt?: string | null
 }
 
 const colorKeys = [
@@ -48,13 +52,26 @@ function resolveFont(value: string | null | undefined, fallback: GoogleFontName)
   return match?.value ?? fallback
 }
 
+function withCacheBust(url: string, updatedAt?: string | null): string {
+  if (!updatedAt) return url
+  const stamp = Date.parse(updatedAt)
+  if (Number.isNaN(stamp)) return url
+  const separator = url.includes("?") ? "&" : "?"
+  return `${url}${separator}v=${stamp}`
+}
+
 function resolveMediaUrl(logo: number | MediaLike | null | undefined): string | null {
   if (!logo || typeof logo === "number") return null
-  if (typeof logo.url === "string" && logo.url.trim()) return logo.url
-  return null
+
+  const rawUrl = typeof logo.url === "string" ? logo.url.trim() : ""
+  if (!rawUrl) return null
+
+  return withCacheBust(rawUrl, logo.updatedAt)
 }
 
 export async function getBrandingContent(): Promise<BrandingContent> {
+  noStore()
+
   if (!process.env.PAYLOAD_SECRET) {
     return defaultBrandingContent
   }
@@ -66,9 +83,26 @@ export async function getBrandingContent(): Promise<BrandingContent> {
     const branding = await payload.findGlobal({
       slug: "branding",
       depth: 1,
+      overrideAccess: true,
     })
 
-    const logoUrl = resolveMediaUrl(branding.logo as number | MediaLike | null | undefined)
+    let logo = branding.logo as number | MediaLike | null | undefined
+
+    // If the relation id exists but depth did not populate, fetch media directly.
+    if (typeof logo === "number") {
+      try {
+        logo = (await payload.findByID({
+          collection: "media",
+          id: logo,
+          depth: 0,
+          overrideAccess: true,
+        })) as MediaLike
+      } catch {
+        logo = null
+      }
+    }
+
+    const logoUrl = resolveMediaUrl(logo)
     const colors = Object.fromEntries(
       colorKeys.map((key) => [
         key,
@@ -81,7 +115,10 @@ export async function getBrandingContent(): Promise<BrandingContent> {
 
     return {
       logoUrl: logoUrl ?? defaultBrandingContent.logoUrl,
-      logoAlt: withFallback(branding.logoAlt, defaultBrandingContent.logoAlt),
+      logoAlt: withFallback(
+        branding.logoAlt || (typeof logo === "object" && logo?.alt) || null,
+        defaultBrandingContent.logoAlt,
+      ),
       ...colors,
       headingFont: resolveFont(branding.headingFont, defaultBrandingContent.headingFont),
       bodyFont: resolveFont(branding.bodyFont, defaultBrandingContent.bodyFont),

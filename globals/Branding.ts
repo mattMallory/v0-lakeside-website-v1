@@ -2,6 +2,7 @@ import type { GlobalConfig, TextField } from "payload"
 
 import { defaultBrandingContent } from "@/lib/branding-defaults"
 import { googleFontOptions } from "@/lib/google-fonts"
+import { revalidateSite } from "@/lib/revalidate-site"
 
 const hexColorValidate: TextField["validate"] = (value) => {
   if (!value) return true
@@ -41,6 +42,13 @@ export const Branding: GlobalConfig = {
   access: {
     read: () => true,
   },
+  hooks: {
+    afterChange: [
+      async () => {
+        await revalidateSite()
+      },
+    ],
+  },
   fields: [
     {
       type: "tabs",
@@ -54,7 +62,8 @@ export const Branding: GlobalConfig = {
               relationTo: "media",
               label: "Logo",
               admin: {
-                description: "Shown in the site header and footer. SVG or PNG recommended.",
+                description:
+                  "Shown in the site header and footer. SVG or PNG recommended. After uploading or choosing a file, click Save.",
               },
             },
             {
