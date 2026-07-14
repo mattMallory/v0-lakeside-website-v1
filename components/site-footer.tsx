@@ -28,7 +28,12 @@ export function SiteFooter() {
         <div className="grid gap-10 lg:grid-cols-[1.5fr_1fr_1fr_1fr]">
           <div>
             <Link href="/" className="flex items-center">
-              <img src={branding.logoUrl} alt={branding.logoAlt} className="h-7 w-auto" />
+              <img
+                src={branding.logoUrl}
+                alt={branding.logoAlt}
+                className="w-auto"
+                style={{ height: branding.logoHeight }}
+              />
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
               Patient acquisition systems for natural wellness clinics. More appointments, less marketing guesswork.

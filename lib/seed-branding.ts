@@ -22,6 +22,7 @@ export async function seedBrandingIfEmpty(payload: Payload) {
         slug: "branding",
         data: {
           logoAlt: defaultBrandingContent.logoAlt,
+          logoHeight: defaultBrandingContent.logoHeight,
           primaryColor: defaultBrandingContent.primaryColor,
           iconColor: defaultBrandingContent.iconColor,
           buttonColor: defaultBrandingContent.buttonColor,

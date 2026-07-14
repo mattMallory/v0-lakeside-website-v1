@@ -3,6 +3,8 @@ import type { GoogleFontName } from "@/lib/google-fonts"
 export type BrandingContent = {
   logoUrl: string
   logoAlt: string
+  /** Rendered logo height in pixels (width scales proportionally). */
+  logoHeight: number
   primaryColor: string
   iconColor: string
   buttonColor: string
@@ -24,6 +26,7 @@ export type BrandingContent = {
 export const defaultBrandingContent: BrandingContent = {
   logoUrl: "/lakeside-logo.svg",
   logoAlt: "Lakeside",
+  logoHeight: 44,
   primaryColor: "#3B6FD8",
   iconColor: "#3B6FD8",
   buttonColor: "#3B6FD8",

@@ -1,6 +1,7 @@
 import * as migration_20260624_224333 from './20260624_224333';
 import * as migration_20260714_branding from './20260714_branding';
 import * as migration_20260714_branding_colors from './20260714_branding_colors';
+import * as migration_20260714_branding_logo_height from './20260714_branding_logo_height';
 
 export const migrations = [
   {
@@ -17,5 +18,10 @@ export const migrations = [
     up: migration_20260714_branding_colors.up,
     down: migration_20260714_branding_colors.down,
     name: '20260714_branding_colors'
+  },
+  {
+    up: migration_20260714_branding_logo_height.up,
+    down: migration_20260714_branding_logo_height.down,
+    name: '20260714_branding_logo_height'
   },
 ];

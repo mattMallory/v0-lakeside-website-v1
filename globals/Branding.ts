@@ -72,6 +72,19 @@ export const Branding: GlobalConfig = {
               label: "Logo alt text",
               defaultValue: defaultBrandingContent.logoAlt,
             },
+            {
+              name: "logoHeight",
+              type: "number",
+              label: "Logo height (px)",
+              defaultValue: defaultBrandingContent.logoHeight,
+              min: 16,
+              max: 96,
+              admin: {
+                description:
+                  "Height of the logo in the header and footer. Width scales automatically. Try 40–56 if it looks small.",
+                step: 1,
+              },
+            },
           ],
         },
         {

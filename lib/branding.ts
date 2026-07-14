@@ -52,6 +52,12 @@ function resolveFont(value: string | null | undefined, fallback: GoogleFontName)
   return match?.value ?? fallback
 }
 
+function resolveLogoHeight(value: unknown, fallback: number): number {
+  const n = typeof value === "number" ? value : typeof value === "string" ? Number(value) : NaN
+  if (!Number.isFinite(n)) return fallback
+  return Math.min(96, Math.max(16, Math.round(n)))
+}
+
 function withCacheBust(url: string, updatedAt?: string | null): string {
   if (!updatedAt) return url
   const stamp = Date.parse(updatedAt)
@@ -118,6 +124,10 @@ export async function getBrandingContent(): Promise<BrandingContent> {
       logoAlt: withFallback(
         branding.logoAlt || (typeof logo === "object" && logo?.alt) || null,
         defaultBrandingContent.logoAlt,
+      ),
+      logoHeight: resolveLogoHeight(
+        (branding as { logoHeight?: number | null }).logoHeight,
+        defaultBrandingContent.logoHeight,
       ),
       ...colors,
       headingFont: resolveFont(branding.headingFont, defaultBrandingContent.headingFont),
