@@ -2,6 +2,7 @@ import type { GlobalConfig } from "payload"
 
 import { iconOptions } from "@/lib/icons"
 import { defaultHomepageContent } from "@/lib/homepage-defaults"
+import { revalidateSite } from "@/lib/revalidate-site"
 
 const iconField = {
   name: "icon",
@@ -15,6 +16,13 @@ export const Homepage: GlobalConfig = {
   label: "Homepage",
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      async () => {
+        await revalidateSite()
+      },
+    ],
   },
   fields: [
     {

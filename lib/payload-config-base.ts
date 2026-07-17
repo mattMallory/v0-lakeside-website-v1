@@ -9,6 +9,7 @@ import { Media } from "../collections/Media"
 import { Users } from "../collections/Users"
 import { Branding } from "../globals/Branding"
 import { Homepage } from "../globals/Homepage"
+import { getSeoPlugin } from "./seo-plugin"
 import { seedBrandingIfEmpty } from "./seed-branding"
 import { seedHomepageIfEmpty } from "./seed-homepage"
 
@@ -36,7 +37,7 @@ export function createPayloadConfig(
       outputFile: path.resolve(dirname, "..", "payload-types.ts"),
     },
     db,
-    ...(options.plugins ? { plugins: options.plugins } : {}),
+    plugins: [getSeoPlugin(), ...(options.plugins ?? [])],
     sharp,
     onInit: async (payload) => {
       await seedBrandingIfEmpty(payload)

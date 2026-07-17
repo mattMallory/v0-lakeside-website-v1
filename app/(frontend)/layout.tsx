@@ -5,6 +5,7 @@ import { Geist, Geist_Mono, Lexend_Deca } from "next/font/google"
 import { BrandingProvider } from "@/components/branding-provider"
 import { buildBrandingCssVariables, getBrandingContent } from "@/lib/branding"
 import { buildGoogleFontsStylesheetUrl } from "@/lib/google-fonts"
+import { getHomepageSeo } from "@/lib/homepage-seo"
 import "../globals.css"
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
@@ -17,28 +18,51 @@ const lexendDeca = Lexend_Deca({
   subsets: ["latin"],
 })
 
-export const metadata: Metadata = {
-  title: "Lakeside | More Patient Appointments For Your Clinic",
-  description:
-    "Lakeside helps natural healthcare clinics generate qualified patient inquiries through proven lead generation systems so you can focus on patient care.",
-  generator: "v0.app",
-  icons: {
-    icon: [
-      {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
-      },
-    ],
-    apple: "/apple-icon.png",
-  },
+export async function generateMetadata(): Promise<Metadata> {
+  const seo = await getHomepageSeo()
+
+  return {
+    title: seo.title,
+    description: seo.description,
+    generator: "v0.app",
+    openGraph: {
+      title: seo.title,
+      description: seo.description,
+      ...(seo.imageUrl
+        ? {
+            images: [
+              {
+                url: seo.imageUrl,
+                alt: seo.imageAlt || seo.title,
+              },
+            ],
+          }
+        : {}),
+    },
+    twitter: {
+      card: seo.imageUrl ? "summary_large_image" : "summary",
+      title: seo.title,
+      description: seo.description,
+      ...(seo.imageUrl ? { images: [seo.imageUrl] } : {}),
+    },
+    icons: {
+      icon: [
+        {
+          url: "/icon-light-32x32.png",
+          media: "(prefers-color-scheme: light)",
+        },
+        {
+          url: "/icon-dark-32x32.png",
+          media: "(prefers-color-scheme: dark)",
+        },
+        {
+          url: "/icon.svg",
+          type: "image/svg+xml",
+        },
+      ],
+      apple: "/apple-icon.png",
+    },
+  }
 }
 
 export const revalidate = 60
