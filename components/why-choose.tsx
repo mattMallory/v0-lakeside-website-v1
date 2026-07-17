@@ -23,7 +23,7 @@ export function WhyChoose({ content }: { content: WhyChooseContent }) {
             render={<Link href="/consultation" />}
             nativeButton={false}
             size="lg"
-            className="mt-8 rounded-full px-8"
+            className="mt-8"
           >
             {content.cta}
           </Button>
@@ -31,7 +31,7 @@ export function WhyChoose({ content }: { content: WhyChooseContent }) {
 
         <div className="flex flex-col gap-8">
           {content.cards.map((card) => (
-            <article key={card.heading} className="rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border">
+            <article key={card.heading} className="rounded-[12px] bg-card p-6 shadow-sm ring-1 ring-border">
               <SearchOverlayGraphic
                 baseImage={card.baseImage}
                 baseAlt={card.baseAlt}

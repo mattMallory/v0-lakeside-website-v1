@@ -140,36 +140,42 @@ export async function getBrandingContent(): Promise<BrandingContent> {
 }
 
 export function buildBrandingCssVariables(branding: BrandingContent): string {
-  const heading = `"${branding.headingFont}", var(--font-lexend-deca), sans-serif`
-  const body = `"${branding.bodyFont}", var(--font-geist-sans), sans-serif`
+  const heading = `"${branding.headingFont}", system-ui, sans-serif`
+  const body = `"${branding.bodyFont}", system-ui, sans-serif`
 
   return `:root {
   --background: ${branding.backgroundColor};
   --foreground: ${branding.textColor};
   --heading: ${branding.headingColor};
-  --card: ${branding.backgroundColor};
+  --card: #FFFFFF;
   --card-foreground: ${branding.headingColor};
-  --popover: ${branding.backgroundColor};
+  --popover: #FFFFFF;
   --popover-foreground: ${branding.textColor};
   --primary: ${branding.primaryColor};
   --primary-foreground: ${branding.buttonTextColor};
   --icon: ${branding.iconColor};
   --button: ${branding.buttonColor};
   --button-foreground: ${branding.buttonTextColor};
+  --button-hover: #1D4F8A;
+  --button-active: #163D6E;
   --secondary-button: ${branding.secondaryButtonColor};
   --secondary-button-foreground: ${branding.secondaryButtonTextColor};
   --secondary: ${branding.secondaryColor};
   --secondary-foreground: ${branding.textColor};
-  --muted: ${branding.secondaryColor};
+  --muted: #F3F4F6;
   --muted-foreground: ${branding.mutedTextColor};
   --accent: ${branding.accentColor};
   --accent-foreground: ${branding.primaryColor};
   --border: ${branding.borderColor};
   --input: ${branding.borderColor};
   --ring: ${branding.focusRingColor};
+  --ink: #0E1726;
+  --lake-pale: #EFF6FF;
+  --lake-light: #DBEAFE;
   --chart-1: ${branding.primaryColor};
   --sidebar-primary: ${branding.primaryColor};
   --font-heading: ${heading};
   --font-sans: ${body};
+  --font-logo: "Space Grotesk", system-ui, sans-serif;
 }`
 }

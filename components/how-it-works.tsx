@@ -32,7 +32,6 @@ export function HowItWorks({ content }: { content: HowItWorksContent }) {
           nativeButton={false}
           size="lg"
           variant="outline"
-          className="rounded-full px-8 bg-transparent"
         >
           {content.button}
         </Button>

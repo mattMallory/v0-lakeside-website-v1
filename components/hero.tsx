@@ -70,7 +70,7 @@ const heroBlobs = [
 
 export function Hero({ content }: HeroProps) {
   return (
-    <section className="relative overflow-hidden min-h-[32rem] md:min-h-[36rem]">
+    <section className="relative overflow-hidden border-b border-border bg-white min-h-[32rem] md:min-h-[36rem]">
       {heroBlobs.map((blob) => (
         <div
           key={blob.animation}
@@ -88,15 +88,15 @@ export function Hero({ content }: HeroProps) {
       ))}
 
       <div className="relative mx-auto max-w-4xl px-6 py-20 text-center md:py-28">
-        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.18em] text-primary">{content.heroEyebrow}</p>
-        <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-heading sm:text-5xl md:text-6xl">
+        <p className="mb-5 text-sm font-semibold uppercase tracking-[0.1em] text-primary">{content.heroEyebrow}</p>
+        <h1 className="text-balance text-4xl font-bold leading-[1.05] tracking-[-0.026em] text-heading sm:text-5xl md:text-6xl">
           {content.heroHeadline}
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-[1.55] text-muted-foreground md:text-[19px]">
           {content.heroSubheadline}
         </p>
         <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Button render={<Link href="/consultation" />} nativeButton={false} size="lg" className="rounded-full px-8">
+          <Button render={<Link href="/consultation" />} nativeButton={false} size="lg">
             {content.heroPrimaryCta}
             <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
@@ -105,7 +105,6 @@ export function Hero({ content }: HeroProps) {
             nativeButton={false}
             size="lg"
             variant="outline"
-            className="rounded-full px-8 bg-transparent"
           >
             {content.heroSecondaryCta}
           </Button>

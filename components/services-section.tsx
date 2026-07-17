@@ -9,11 +9,11 @@ type ServicesSectionContent = {
 
 export function ServicesSection({ content }: { content: ServicesSectionContent }) {
   return (
-    <section id="system" className="bg-secondary/60 py-20">
+    <section id="system" className="bg-white py-20">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.18em] text-primary">{content.eyebrow}</p>
-          <h2 className="mt-3 text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-primary">{content.eyebrow}</p>
+          <h2 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
             {content.headline}
           </h2>
         </div>
@@ -24,10 +24,10 @@ export function ServicesSection({ content }: { content: ServicesSectionContent }
             return (
               <div
                 key={service.title}
-                className="flex gap-5 rounded-2xl border border-border bg-card p-7 transition-shadow hover:shadow-md"
+                className="flex gap-5 rounded-[12px] border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-lake-light hover:shadow-[0_4px_6px_-1px_rgba(16,23,38,0.07),0_2px_4px_-2px_rgba(16,23,38,0.05)]"
               >
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-accent text-icon">
-                  <Icon className="h-6 w-6" />
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-lake-pale text-icon">
+                  <Icon className="h-[22px] w-[22px]" />
                 </div>
                 <div>
                   <h3 className="font-semibold text-card-foreground">{service.title}</h3>

@@ -1,21 +1,29 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Lexend_Deca } from "next/font/google"
+import { Geist_Mono, Manrope, Space_Grotesk } from "next/font/google"
 
 import { BrandingProvider } from "@/components/branding-provider"
 import { buildBrandingCssVariables, getBrandingContent } from "@/lib/branding"
-import { buildGoogleFontsStylesheetUrl } from "@/lib/google-fonts"
+import {
+  buildFontshareStylesheetUrl,
+  buildGoogleFontsStylesheetUrl,
+} from "@/lib/google-fonts"
 import { getHomepageSeo } from "@/lib/homepage-seo"
 import "../globals.css"
 
-const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 })
-const lexendDeca = Lexend_Deca({
-  variable: "--font-lexend-deca",
+const manrope = Manrope({
+  variable: "--font-manrope",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+})
+const spaceGrotesk = Space_Grotesk({
+  variable: "--font-space-grotesk",
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
 })
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -76,17 +84,28 @@ export default async function RootLayout({
   const googleFontsHref = buildGoogleFontsStylesheetUrl([
     branding.headingFont,
     branding.bodyFont,
+    "Space Grotesk",
+  ])
+  const fontshareHref = buildFontshareStylesheetUrl([
+    branding.headingFont,
+    branding.bodyFont,
+    "Satoshi",
   ])
 
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${lexendDeca.variable}`}>
+    <html
+      lang="en"
+      className={`${geistMono.variable} ${manrope.variable} ${spaceGrotesk.variable}`}
+    >
       <head>
+        <link rel="preconnect" href="https://api.fontshare.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {fontshareHref ? <link rel="stylesheet" href={fontshareHref} /> : null}
         {googleFontsHref ? <link rel="stylesheet" href={googleFontsHref} /> : null}
         <style dangerouslySetInnerHTML={{ __html: buildBrandingCssVariables(branding) }} />
       </head>
-      <body className="font-sans antialiased bg-background">
+      <body className="font-sans antialiased bg-background text-[18px] leading-[1.72]">
         <BrandingProvider value={branding}>{children}</BrandingProvider>
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>

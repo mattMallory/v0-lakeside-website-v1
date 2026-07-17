@@ -3,6 +3,25 @@ import type { Payload } from "payload"
 import { defaultBrandingContent } from "@/lib/branding-defaults"
 import { linkBrandingLogoIfMissing } from "@/lib/link-branding-logo"
 
+const LEGACY_PRIMARY = "#3B6FD8"
+
+function isLegacyPalette(branding: {
+  primaryColor?: string | null
+  backgroundColor?: string | null
+  headingFont?: string | null
+}): boolean {
+  const primary = (branding.primaryColor || "").toUpperCase()
+  const background = (branding.backgroundColor || "").toUpperCase()
+  const headingFont = branding.headingFont || ""
+
+  return (
+    primary === LEGACY_PRIMARY ||
+    background === "#F7F9FC" ||
+    headingFont === "Lexend Deca" ||
+    !branding.primaryColor
+  )
+}
+
 export async function seedBrandingIfEmpty(payload: Payload) {
   try {
     const branding = await payload.findGlobal({
@@ -10,19 +29,12 @@ export async function seedBrandingIfEmpty(payload: Payload) {
       depth: 0,
     })
 
-    const hasCustomLogo = Boolean(branding.logo)
-    const hasCustomColors =
-      branding.buttonColor ||
-      branding.primaryColor ||
-      branding.backgroundColor ||
-      branding.textColor
-
-    if (!hasCustomLogo && !hasCustomColors) {
+    if (isLegacyPalette(branding)) {
       await payload.updateGlobal({
         slug: "branding",
         data: {
-          logoAlt: defaultBrandingContent.logoAlt,
-          logoHeight: defaultBrandingContent.logoHeight,
+          logoAlt: branding.logoAlt || defaultBrandingContent.logoAlt,
+          logoHeight: branding.logoHeight || defaultBrandingContent.logoHeight,
           primaryColor: defaultBrandingContent.primaryColor,
           iconColor: defaultBrandingContent.iconColor,
           buttonColor: defaultBrandingContent.buttonColor,

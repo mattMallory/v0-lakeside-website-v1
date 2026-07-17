@@ -11,7 +11,7 @@ export function ProblemSection({ content }: { content: ProblemSectionContent }) 
   return (
     <section className="mx-auto max-w-6xl px-6 py-20">
       <div className="mx-auto max-w-2xl text-center">
-        <h2 className="text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
+        <h2 className="text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
           {content.headline}
         </h2>
         <p className="mt-4 text-pretty text-lg text-muted-foreground">{content.subheadline}</p>
@@ -23,7 +23,7 @@ export function ProblemSection({ content }: { content: ProblemSectionContent }) 
           return (
             <div
               key={problem.title}
-              className="overflow-hidden rounded-2xl border border-border bg-card transition-shadow hover:shadow-md"
+              className="overflow-hidden rounded-[12px] border border-border bg-card transition-all hover:-translate-y-0.5 hover:border-lake-light hover:shadow-[0_4px_6px_-1px_rgba(16,23,38,0.07),0_2px_4px_-2px_rgba(16,23,38,0.05)]"
             >
               <div className="relative">
                 <img
@@ -31,8 +31,8 @@ export function ProblemSection({ content }: { content: ProblemSectionContent }) 
                   alt={problem.title}
                   className="aspect-[4/3] w-full object-cover"
                 />
-                <div className="absolute -bottom-5 left-5 flex h-12 w-12 items-center justify-center rounded-xl bg-card text-icon shadow-md ring-1 ring-border">
-                  <Icon className="h-6 w-6" />
+                <div className="absolute -bottom-5 left-5 flex h-11 w-11 items-center justify-center rounded-[10px] bg-lake-pale text-icon shadow-sm ring-1 ring-lake-light">
+                  <Icon className="h-[22px] w-[22px]" />
                 </div>
               </div>
               <div className="px-5 pb-6 pt-8">

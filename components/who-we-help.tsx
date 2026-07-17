@@ -17,10 +17,10 @@ export function WhoWeHelp({ content }: { content: WhoWeHelpContent }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 
   return (
-    <section id="who-we-help" className="bg-secondary/60 py-20">
+    <section id="who-we-help" className="bg-white py-20">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-heading sm:text-4xl">
+          <h2 className="text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
             {content.headline}
           </h2>
           <p className="mt-4 text-pretty text-lg text-muted-foreground">{content.subheadline}</p>
@@ -37,12 +37,12 @@ export function WhoWeHelp({ content }: { content: WhoWeHelpContent }) {
                 aria-expanded={isOpen}
                 onClick={() => setOpenIndex(isOpen ? null : index)}
                 className={cn(
-                  "flex w-full flex-col items-center rounded-2xl border bg-card px-6 py-8 text-center transition-colors",
-                  isOpen ? "border-primary" : "border-border hover:border-primary/50",
+                  "flex w-full flex-col items-center rounded-[12px] border bg-card px-6 py-8 text-center transition-colors",
+                  isOpen ? "border-primary" : "border-border hover:border-lake-light",
                 )}
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-icon">
-                  <Icon className="h-6 w-6" />
+                <span className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-lake-pale text-icon">
+                  <Icon className="h-[22px] w-[22px]" />
                 </span>
                 <span className="mt-4 flex items-center gap-1.5 font-semibold text-card-foreground">
                   {practice.name}
