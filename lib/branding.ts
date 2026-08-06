@@ -1,6 +1,11 @@
 import { unstable_noStore as noStore } from "next/cache"
 
 import { defaultBrandingContent, type BrandingContent } from "@/lib/branding-defaults"
+import {
+  bodyFontFamily,
+  headingFontFamily,
+  logoFontFamily,
+} from "@/lib/fonts"
 import type { GoogleFontName } from "@/lib/google-fonts"
 import { googleFontOptions } from "@/lib/google-fonts"
 
@@ -140,9 +145,8 @@ export async function getBrandingContent(): Promise<BrandingContent> {
 }
 
 export function buildBrandingCssVariables(branding: BrandingContent): string {
-  const heading = `"${branding.headingFont}", system-ui, sans-serif`
-  const body = `"${branding.bodyFont}", system-ui, sans-serif`
-
+  // Brand Guide v20 type roles — always use self-hosted Satoshi + next/font Manrope.
+  // Color tokens still come from the Branding CMS.
   return `:root {
   --background: ${branding.backgroundColor};
   --foreground: ${branding.textColor};
@@ -174,8 +178,8 @@ export function buildBrandingCssVariables(branding: BrandingContent): string {
   --lake-light: #DBEAFE;
   --chart-1: ${branding.primaryColor};
   --sidebar-primary: ${branding.primaryColor};
-  --font-heading: ${heading};
-  --font-sans: ${body};
-  --font-logo: "Space Grotesk", system-ui, sans-serif;
+  --font-heading: ${headingFontFamily};
+  --font-sans: ${bodyFontFamily};
+  --font-logo: ${logoFontFamily};
 }`
 }

@@ -1,6 +1,6 @@
-import { getPostgresUrl } from "./lib/db-url"
+import { shouldUsePostgresConfig } from "./lib/db-url"
 
-const config = getPostgresUrl()
+const config = shouldUsePostgresConfig()
   ? (await import("./payload.config.postgres")).default
   : (await import("./payload.config.sqlite")).default
 

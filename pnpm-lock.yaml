@@ -6,6 +6,17 @@ settings:
 
 overrides:
   '@vercel/blob': 2.5.0
+  '@payloadcms/db-postgres': 3.85.1
+  '@payloadcms/db-sqlite': 3.85.1
+  '@payloadcms/db-vercel-postgres': 3.85.1
+  '@payloadcms/drizzle': 3.85.1
+  '@payloadcms/next': 3.85.1
+  '@payloadcms/plugin-cloud-storage': 3.85.1
+  '@payloadcms/richtext-lexical': 3.85.1
+  '@payloadcms/storage-vercel-blob': 3.85.1
+  '@payloadcms/ui': 3.85.1
+  '@payloadcms/translations': 3.85.1
+  payload: 3.85.1
 
 importers:
 
@@ -15,22 +26,25 @@ importers:
         specifier: ^1.5.0
         version: 1.5.0(@date-fns/tz@1.4.1)(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@payloadcms/db-vercel-postgres':
-        specifier: ^3.85.1
+        specifier: 3.85.1
         version: 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@types/pg@8.20.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))
       '@payloadcms/next':
-        specifier: ^3.85.1
+        specifier: 3.85.1
         version: 3.85.1(@types/react@19.2.14)(graphql@16.14.0)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.7.3)
       '@payloadcms/plugin-cloud-storage':
-        specifier: ^3.85.1
+        specifier: 3.85.1
         version: 3.85.1(@types/react@19.2.14)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.7.3)
       '@payloadcms/plugin-seo':
         specifier: 3.85.1
         version: 3.85.1(@types/react@19.2.14)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.7.3)
       '@payloadcms/richtext-lexical':
-        specifier: ^3.85.1
+        specifier: 3.85.1
         version: 3.85.1(@faceless-ui/modal@3.0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@faceless-ui/scroll-info@2.0.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(@payloadcms/next@3.85.1(@types/react@19.2.14)(graphql@16.14.0)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.7.3))(@types/react@19.2.14)(bufferutil@4.1.0)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.7.3)(yjs@13.6.31)
       '@payloadcms/storage-vercel-blob':
-        specifier: ^3.85.1
+        specifier: 3.85.1
+        version: 3.85.1(@types/react@19.2.14)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.7.3)
+      '@payloadcms/ui':
+        specifier: 3.85.1
         version: 3.85.1(@types/react@19.2.14)(monaco-editor@0.55.1)(next@16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4))(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(typescript@5.7.3)
       '@vercel/analytics':
         specifier: 1.6.1
@@ -60,7 +74,7 @@ importers:
         specifier: 16.2.6
         version: 16.2.6(@babel/core@7.29.7)(babel-plugin-macros@3.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(sass@1.77.4)
       payload:
-        specifier: ^3.85.1
+        specifier: 3.85.1
         version: 3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3)
       react:
         specifier: 19.2.4
@@ -82,10 +96,10 @@ importers:
         version: 1.4.0
     devDependencies:
       '@payloadcms/db-postgres':
-        specifier: ^3.85.1
+        specifier: 3.85.1
         version: 3.85.1(@libsql/client@0.14.0(bufferutil@4.1.0))(@vercel/postgres@0.10.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))
       '@payloadcms/db-sqlite':
-        specifier: ^3.85.1
+        specifier: 3.85.1
         version: 3.85.1(@types/pg@8.20.0)(@vercel/postgres@0.10.0)(bufferutil@4.1.0)(payload@3.85.1(bufferutil@4.1.0)(graphql@16.14.0)(typescript@5.7.3))(pg@8.20.0)
       '@tailwindcss/postcss':
         specifier: ^4.2.0
@@ -381,11 +395,11 @@ packages:
 
   '@esbuild-kit/core-utils@3.3.2':
     resolution: {integrity: sha512-sPRAnw9CdSsRmEtnsl2WXWdyquogVpB3yZ3dgwJfe8zrOzTsV7cJvmwrKVa+0ma5BoiGJ+BoqkMvawbayKUsqQ==}
-    deprecated: 'Merged into tsx: https://tsx.is'
+    deprecated: 'Merged into tsx: https://tsx.hirok.io'
 
   '@esbuild-kit/esm-loader@2.6.5':
     resolution: {integrity: sha512-FxEMIkJKnodyA1OaCUoEvbYRkoZlLZ4d/eXFu9Fh8CbBBgP5EmZxrfTRyN0qpXZ4vOvqnE5YdRdcrmUUXuU+dA==}
-    deprecated: 'Merged into tsx: https://tsx.is'
+    deprecated: 'Merged into tsx: https://tsx.hirok.io'
 
   '@esbuild/aix-ppc64@0.25.12':
     resolution: {integrity: sha512-Hhmwd6CInZ3dwpuGTF8fJG6yoWmsToE+vYgD4nytZVxcu1ulHpUQRAB1UJ8+N1Am3Mz4+xOByoQoSZf4D+CpkA==}

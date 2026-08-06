@@ -3,7 +3,7 @@ import type { NextConfig } from "next"
 import path from "path"
 import { fileURLToPath } from "url"
 
-import { getPostgresUrl } from "./lib/db-url"
+import { shouldUsePostgresConfig } from "./lib/db-url"
 
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
@@ -31,10 +31,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "*.public.blob.vercel-storage.com",
       },
+      {
+        protocol: "https",
+        hostname: "madebylakeside.com",
+      },
     ],
   },
   webpack: (webpackConfig, { webpack }) => {
-    if (getPostgresUrl()) {
+    if (shouldUsePostgresConfig()) {
       webpackConfig.plugins.push(
         new webpack.IgnorePlugin({
           resourceRegExp: /payload\.config\.sqlite(\.ts)?$/,
