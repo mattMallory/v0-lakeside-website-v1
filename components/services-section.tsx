@@ -1,10 +1,10 @@
 import { getIcon } from "@/lib/icons"
-import type { ServiceItem } from "@/lib/payload"
+import type { ServiceOffering } from "@/lib/services-defaults"
 
 type ServicesSectionContent = {
   eyebrow: string
   headline: string
-  items: ServiceItem[]
+  items: ServiceOffering[]
 }
 
 export function ServicesSection({

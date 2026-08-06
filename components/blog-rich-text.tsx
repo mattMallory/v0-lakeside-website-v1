@@ -115,8 +115,14 @@ export const blogRichTextConverters: JSXConvertersFunction = ({ defaultConverter
   },
 })
 
+/**
+ * Callers read `content` from `BlogPostDetail`, which types it as
+ * `Record<string, unknown>` (`lib/blog-types.ts`) even though the stored value is
+ * always a Lexical editor state. Accepting either lets this component describe
+ * what it actually renders without forcing a cast at every call site.
+ */
 type BlogRichTextProps = {
-  content: Record<string, unknown>
+  content: SerializedEditorState | Record<string, unknown>
 }
 
 export function BlogRichText({ content }: BlogRichTextProps) {

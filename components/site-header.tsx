@@ -23,11 +23,11 @@ export function SiteHeader() {
   const ctaNavIndex = navItems.length
 
   useEffect(() => {
-    const toggle = document.getElementById(MOBILE_MENU_TOGGLE_ID)
+    const toggle = document.getElementById(MOBILE_MENU_TOGGLE_ID) as HTMLInputElement | null
     const overlay = document.querySelector(".site-mobile-nav-overlay")
     if (!toggle || !overlay) return
 
-    function syncAria() {
+    const syncAria = () => {
       overlay.setAttribute("aria-hidden", toggle.checked ? "false" : "true")
     }
 
