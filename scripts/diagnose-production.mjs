@@ -3,6 +3,8 @@ import path from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 import { tsImport } from "tsx/esm/api"
 
+import { formatBlobStorageState } from "./blob-storage-state.mjs"
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 
 function isPostgresUrl(url) {
@@ -13,6 +15,7 @@ console.log("Environment diagnostics:")
 console.log(`  payloadSecret: ${process.env.PAYLOAD_SECRET?.trim() ? "yes" : "no"}`)
 console.log(`  postgresUrl: ${isPostgresUrl(process.env.POSTGRES_URL) ? "yes" : "no"}`)
 console.log(`  postgresUrlNonPooling: ${isPostgresUrl(process.env.POSTGRES_URL_NON_POOLING) ? "yes" : "no"}`)
+console.log(`  blobStorage: ${formatBlobStorageState()}`)
 console.log(`  vercel: ${process.env.VERCEL ? "yes" : "no"}`)
 
 if (!process.env.PAYLOAD_SECRET?.trim()) {

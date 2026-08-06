@@ -29,6 +29,30 @@ import { seedServicesIfEmpty } from "./seed-services"
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
+/**
+ * Payload signs admin session tokens with this secret. An empty value is
+ * publicly known, which would make those tokens forgeable, so refuse to build a
+ * config rather than fall back to one.
+ *
+ * Callers that only need CMS content (the mapper layer in `lib/`) check
+ * `PAYLOAD_SECRET` themselves and return defaults before importing this config,
+ * so this throw is reached only when something is actually booting Payload —
+ * the admin panel, the REST/GraphQL API, or a seeding/migration script.
+ */
+function requirePayloadSecret(): string {
+  const secret = process.env.PAYLOAD_SECRET?.trim()
+
+  if (!secret) {
+    throw new Error(
+      "PAYLOAD_SECRET is not set. Payload cannot start without it, because it signs admin session tokens.\n" +
+        "  Local development: add PAYLOAD_SECRET to .env (any long random string, e.g. `openssl rand -hex 32`).\n" +
+        "  Production: set PAYLOAD_SECRET in Vercel → Settings → Environment Variables, for both Production and Preview.",
+    )
+  }
+
+  return secret
+}
+
 export function createPayloadConfig(
   db: Config["db"],
   options: {
@@ -46,7 +70,7 @@ export function createPayloadConfig(
     collections: [Users, Media, Categories, Tags, Posts],
     globals: [Branding, Homepage, About, Services, Legal, Navigation],
     editor: lexicalEditor(),
-    secret: process.env.PAYLOAD_SECRET || "",
+    secret: requirePayloadSecret(),
     typescript: {
       outputFile: path.resolve(dirname, "..", "payload-types.ts"),
     },
