@@ -254,18 +254,3 @@ export function createLexicalContent(blocks: Array<{ type: "p" | "h2" | "h3"; te
   return createLexicalArticleContent(blocks)
 }
 
-export function createLexicalContentWithPatientJourney({
-  before = [],
-  journey = defaultPatientJourneyBlock,
-  after = [],
-}: {
-  before?: Array<{ type: "p" | "h2" | "h3"; text: string }>
-  journey?: PatientJourneyProps
-  after?: Array<{ type: "p" | "h2" | "h3"; text: string }>
-}) {
-  return createLexicalArticleContent([
-    ...before,
-    { type: "patientJourney", fields: journey },
-    ...after,
-  ])
-}
