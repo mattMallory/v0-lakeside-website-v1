@@ -23,3 +23,7 @@ export function getPostgresMigrationUrl(): string | undefined {
 
   return candidates.find(isPostgresUrl)
 }
+
+export function shouldUsePostgresConfig(): boolean {
+  return Boolean(getPostgresUrl() || process.env.VERCEL)
+}
