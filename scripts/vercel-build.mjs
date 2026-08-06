@@ -2,6 +2,8 @@ import { execSync } from "node:child_process"
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
+import { formatBlobStorageState } from "./blob-storage-state.mjs"
+
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..")
 const env = { ...process.env }
 
@@ -74,6 +76,7 @@ function logEnvDiagnostics() {
     }`,
   )
   console.log(`[build]   resolvedPostgresUrl: ${getPostgresMigrationUrl() ? "yes" : "no"}`)
+  console.log(`[build]   blobStorage: ${formatBlobStorageState(env)}`)
   console.log(`[build]   vercel: ${env.VERCEL ? "yes" : "no"}`)
   console.log(`[build]   vercelEnv: ${env.VERCEL_ENV || "unknown"}`)
   console.log(`[build]   gitBranch: ${env.VERCEL_GIT_COMMIT_REF || "unknown"}`)
@@ -89,18 +92,34 @@ function run(label, command) {
 
 logEnvDiagnostics()
 
-if (env.PAYLOAD_SECRET && postgresUrl) {
-  env.POSTGRES_URL = postgresUrl
-  run("Running database migrations", "node ./node_modules/payload/bin.js migrate")
-} else {
-  console.warn("[build] Skipping migrations — missing PAYLOAD_SECRET or Postgres URL")
-  if (!env.PAYLOAD_SECRET?.trim()) {
-    console.warn("[build]   Missing: PAYLOAD_SECRET")
-  }
-  if (!postgresUrl) {
-    console.warn("[build]   Missing: a valid Postgres connection string")
-  }
+// Building without these produces a deploy that looks green but 500s at runtime,
+// or serves against a schema the build never migrated. Fail here instead.
+const missing = []
+
+if (!env.PAYLOAD_SECRET?.trim()) {
+  missing.push("PAYLOAD_SECRET — required for /admin and the Payload API")
 }
+
+if (!postgresUrl) {
+  missing.push(
+    "a valid Postgres connection string — set POSTGRES_URL (or POSTGRES_URL_NON_POOLING / DATABASE_URL)",
+  )
+}
+
+if (missing.length > 0) {
+  console.error("\n[build] Cannot run database migrations — required configuration is missing:")
+  for (const item of missing) {
+    console.error(`[build]   Missing: ${item}`)
+  }
+  console.error(
+    "[build] Set these in Vercel → Settings → Environment Variables for BOTH Production and Preview,\n" +
+      "[build] since pull request builds use the Preview environment. Refusing to build.",
+  )
+  process.exit(1)
+}
+
+env.POSTGRES_URL = postgresUrl
+run("Running database migrations", "node ./node_modules/payload/bin.js migrate")
 
 run("Running Next.js build", "node ./node_modules/next/dist/bin/next build --webpack")
 
