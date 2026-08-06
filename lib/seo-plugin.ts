@@ -1,6 +1,7 @@
 import { seoPlugin } from "@payloadcms/plugin-seo"
 import type { Plugin } from "payload"
 
+import { defaultAboutSeo } from "@/lib/about-seo-defaults"
 import { defaultHomepageSeo } from "@/lib/homepage-seo-defaults"
 
 function getSiteURL(): string {
@@ -21,22 +22,49 @@ function getSiteURL(): string {
 
 export function getSeoPlugin(): Plugin {
   return seoPlugin({
-    globals: ["homepage"],
+    collections: ["posts"],
+    globals: ["homepage", "about"],
     uploadsCollection: "media",
     tabbedUI: true,
-    generateTitle: ({ doc }) => {
+    generateTitle: ({ doc, collectionConfig, globalConfig }) => {
+      if (collectionConfig?.slug === "posts" && typeof doc?.title === "string" && doc.title.trim()) {
+        return `${doc.title.trim()} | Lakeside Blog`
+      }
+
+      if (globalConfig?.slug === "about" && typeof doc?.heroTitle === "string" && doc.heroTitle.trim()) {
+        return `${doc.heroTitle.trim()} | Lakeside`
+      }
+
       const headline =
         typeof doc?.heroHeadline === "string" && doc.heroHeadline.trim()
           ? doc.heroHeadline.trim()
           : "More Patient Appointments For Your Clinic"
       return `Lakeside | ${headline}`
     },
-    generateDescription: ({ doc }) => {
+    generateDescription: ({ doc, collectionConfig, globalConfig }) => {
+      if (collectionConfig?.slug === "posts" && typeof doc?.excerpt === "string" && doc.excerpt.trim()) {
+        return doc.excerpt.trim()
+      }
+
+      if (globalConfig?.slug === "about" && typeof doc?.heroDescription === "string" && doc.heroDescription.trim()) {
+        return doc.heroDescription.trim()
+      }
+
       if (typeof doc?.heroSubheadline === "string" && doc.heroSubheadline.trim()) {
         return doc.heroSubheadline.trim()
       }
-      return defaultHomepageSeo.description
+      return globalConfig?.slug === "about" ? defaultAboutSeo.description : defaultHomepageSeo.description
     },
-    generateURL: () => getSiteURL(),
+    generateURL: ({ doc, collectionConfig, globalConfig }) => {
+      if (collectionConfig?.slug === "posts" && typeof doc?.slug === "string" && doc.slug.trim()) {
+        return `${getSiteURL()}/blog/${doc.slug.trim()}`
+      }
+
+      if (globalConfig?.slug === "about") {
+        return `${getSiteURL()}/about`
+      }
+
+      return getSiteURL()
+    },
   })
 }

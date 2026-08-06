@@ -1,30 +1,17 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from "next"
-import { Geist_Mono, Manrope, Space_Grotesk } from "next/font/google"
 
 import { BrandingProvider } from "@/components/branding-provider"
+import { NavigationProvider } from "@/components/navigation-provider"
 import { buildBrandingCssVariables, getBrandingContent } from "@/lib/branding"
-import {
-  buildFontshareStylesheetUrl,
-  buildGoogleFontsStylesheetUrl,
-} from "@/lib/google-fonts"
+import { getNavigationContent } from "@/lib/navigation"
+import { manrope, satoshi, spaceGrotesk } from "@/lib/fonts"
 import { getHomepageSeo } from "@/lib/homepage-seo"
+import { metricCountUpInlineScript } from "@/lib/metric-count-up-inline"
+import { budgetPlannerLayoutScript } from "@/lib/budget-planner-layout-script"
+import { offerBuilderLayoutScript } from "@/lib/offer-builder-layout-script"
+import { techLogosRevealInlineScript } from "@/lib/tech-logos-reveal-inline"
 import "../globals.css"
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-})
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700", "800"],
-})
-const spaceGrotesk = Space_Grotesk({
-  variable: "--font-space-grotesk",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-})
 
 export async function generateMetadata(): Promise<Metadata> {
   const seo = await getHomepageSeo()
@@ -80,33 +67,27 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const branding = await getBrandingContent()
-  const googleFontsHref = buildGoogleFontsStylesheetUrl([
-    branding.headingFont,
-    branding.bodyFont,
-    "Space Grotesk",
-  ])
-  const fontshareHref = buildFontshareStylesheetUrl([
-    branding.headingFont,
-    branding.bodyFont,
-    "Satoshi",
+  const [branding, navigation] = await Promise.all([
+    getBrandingContent(),
+    getNavigationContent(),
   ])
 
   return (
     <html
       lang="en"
-      className={`${geistMono.variable} ${manrope.variable} ${spaceGrotesk.variable}`}
+      className={`${satoshi.variable} ${manrope.variable} ${spaceGrotesk.variable} max-w-full overflow-x-clip`}
     >
       <head>
-        <link rel="preconnect" href="https://api.fontshare.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        {fontshareHref ? <link rel="stylesheet" href={fontshareHref} /> : null}
-        {googleFontsHref ? <link rel="stylesheet" href={googleFontsHref} /> : null}
         <style dangerouslySetInnerHTML={{ __html: buildBrandingCssVariables(branding) }} />
       </head>
-      <body className="font-sans antialiased bg-background text-[18px] leading-[1.72]">
-        <BrandingProvider value={branding}>{children}</BrandingProvider>
+      <body className={`${manrope.variable} overflow-x-clip antialiased bg-background text-[18px] leading-[1.72]`}>
+        <BrandingProvider value={branding}>
+          <NavigationProvider value={navigation}>{children}</NavigationProvider>
+        </BrandingProvider>
+        <script dangerouslySetInnerHTML={{ __html: budgetPlannerLayoutScript }} />
+        <script dangerouslySetInnerHTML={{ __html: offerBuilderLayoutScript }} />
+        <script dangerouslySetInnerHTML={{ __html: metricCountUpInlineScript }} />
+        <script dangerouslySetInnerHTML={{ __html: techLogosRevealInlineScript }} />
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>

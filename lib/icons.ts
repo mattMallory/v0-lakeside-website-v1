@@ -3,6 +3,7 @@ import {
   BarChart3,
   Bone,
   Compass,
+  Database,
   FlaskConical,
   Gauge,
   HeartPulse,
@@ -10,9 +11,11 @@ import {
   Leaf,
   LineChart,
   Megaphone,
+  Palette,
   Sparkles,
   TrendingDown,
   Users,
+  Zap,
   type LucideIcon,
 } from "lucide-react"
 
@@ -31,6 +34,9 @@ const iconMap: Record<string, LucideIcon> = {
   leaf: Leaf,
   "heart-pulse": HeartPulse,
   sparkles: Sparkles,
+  zap: Zap,
+  palette: Palette,
+  database: Database,
 }
 
 export const iconOptions = Object.keys(iconMap).map((value) => ({

@@ -4,26 +4,31 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
-    "build": "cross-env NODE_OPTIONS=--no-deprecation next build --webpack",
+    "dev": "node scripts/sync-layout-scripts.mjs && cross-env PAYLOAD_DB_PUSH=false NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next dev --webpack",
+    "build": "node scripts/sync-layout-scripts.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next build --webpack",
     "ci": "node scripts/vercel-build.mjs",
-    "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
+    "start": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next start",
     "lint": "eslint .",
-    "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "generate:types": "cross-env NODE_OPTIONS=--no-deprecation payload generate:types",
-    "generate:importmap": "cross-env NODE_OPTIONS=--no-deprecation payload generate:importmap",
-    "migrate:create:vercel": "cross-env NODE_OPTIONS=--no-deprecation POSTGRES_URL=${POSTGRES_URL:-postgresql://localhost:5432/payload} payload migrate:create"
+    "payload": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload",
+    "generate:types": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload generate:types",
+    "generate:importmap": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload generate:importmap",
+    "migrate:create:vercel": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" POSTGRES_URL=${POSTGRES_URL:-postgresql://localhost:5432/payload} payload migrate:create",
+    "reset:local-admin": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/reset-local-admin.mjs",
+    "seed:blog": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/seed-blog.mjs",
+    "seed:about": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/seed-about.mjs",
+    "setup:services-global": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/migrate-services-global-sqlite.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/setup-services-global.mjs",
+    "setup:navigation-global": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/migrate-navigation-global-sqlite.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/setup-navigation-global.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
-    "@payloadcms/db-vercel-postgres": "^3.85.1",
-    "@payloadcms/next": "^3.85.1",
-    "@payloadcms/plugin-cloud-storage": "^3.85.1",
+    "@payloadcms/db-vercel-postgres": "3.85.1",
+    "@payloadcms/next": "3.85.1",
+    "@payloadcms/plugin-cloud-storage": "3.85.1",
     "@payloadcms/plugin-seo": "3.85.1",
-    "@payloadcms/richtext-lexical": "^3.85.1",
-    "@payloadcms/storage-vercel-blob": "^3.85.1",
+    "@payloadcms/richtext-lexical": "3.85.1",
+    "@payloadcms/storage-vercel-blob": "3.85.1",
     "@vercel/analytics": "1.6.1",
-    "@vercel/blob": "^2.5.0",
+    "@vercel/blob": "2.5.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cross-env": "^10.1.0",
@@ -31,7 +36,7 @@
     "graphql": "^16.8.1",
     "lucide-react": "^1.16.0",
     "next": "16.2.6",
-    "payload": "^3.85.1",
+    "payload": "3.85.1",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "shadcn": "^4.8.0",
@@ -40,8 +45,8 @@
     "tw-animate-css": "^1.4.0"
   },
   "devDependencies": {
-    "@payloadcms/db-postgres": "^3.85.1",
-    "@payloadcms/db-sqlite": "^3.85.1",
+    "@payloadcms/db-postgres": "3.85.1",
+    "@payloadcms/db-sqlite": "3.85.1",
     "@tailwindcss/postcss": "^4.2.0",
     "@types/node": "^24",
     "@types/react": "19.2.14",
@@ -50,6 +55,20 @@
     "tailwindcss": "^4.2.0",
     "typescript": "5.7.3"
   },
+  "overrides": {
+    "@vercel/blob": "2.5.0",
+    "@payloadcms/db-postgres": "3.85.1",
+    "@payloadcms/db-sqlite": "3.85.1",
+    "@payloadcms/db-vercel-postgres": "3.85.1",
+    "@payloadcms/drizzle": "3.85.1",
+    "@payloadcms/next": "3.85.1",
+    "@payloadcms/plugin-cloud-storage": "3.85.1",
+    "@payloadcms/richtext-lexical": "3.85.1",
+    "@payloadcms/storage-vercel-blob": "3.85.1",
+    "@payloadcms/ui": "3.85.1",
+    "@payloadcms/translations": "3.85.1",
+    "payload": "3.85.1"
+  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
@@ -57,7 +76,18 @@
       "unrs-resolver"
     ],
     "overrides": {
-      "@vercel/blob": "2.5.0"
+      "@vercel/blob": "2.5.0",
+      "@payloadcms/db-postgres": "3.85.1",
+      "@payloadcms/db-sqlite": "3.85.1",
+      "@payloadcms/db-vercel-postgres": "3.85.1",
+      "@payloadcms/drizzle": "3.85.1",
+      "@payloadcms/next": "3.85.1",
+      "@payloadcms/plugin-cloud-storage": "3.85.1",
+      "@payloadcms/richtext-lexical": "3.85.1",
+      "@payloadcms/storage-vercel-blob": "3.85.1",
+      "@payloadcms/ui": "3.85.1",
+      "@payloadcms/translations": "3.85.1",
+      "payload": "3.85.1"
     }
   }
 }

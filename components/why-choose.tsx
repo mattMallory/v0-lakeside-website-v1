@@ -1,6 +1,6 @@
+import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { SearchOverlayGraphic } from "@/components/search-overlay-graphic"
 import type { WhyChooseCard } from "@/lib/payload"
 
 type WhyChooseContent = {
@@ -32,15 +32,15 @@ export function WhyChoose({ content }: { content: WhyChooseContent }) {
         <div className="flex flex-col gap-8">
           {content.cards.map((card) => (
             <article key={card.heading} className="rounded-[12px] bg-card p-6 shadow-sm ring-1 ring-border">
-              <SearchOverlayGraphic
-                baseImage={card.baseImage}
-                baseAlt={card.baseAlt}
-                overlayImage={card.overlayImage}
-                overlayAlt={card.overlayAlt}
-                overlayWidthClass={card.overlayWidthClass}
-                overlayPositionClass={card.overlayPositionClass}
-                overlayPositionClassMobile={card.overlayPositionClassMobile}
-              />
+              <div className="relative aspect-[16/11] w-full overflow-hidden rounded-2xl bg-muted">
+                <Image
+                  src={card.imageUrl || "/placeholder.svg"}
+                  alt={card.imageAlt}
+                  fill
+                  className="object-cover"
+                  sizes="(min-width: 1024px) 33vw, 100vw"
+                />
+              </div>
               <div className="pt-5">
                 <h3 className="text-xl font-bold text-card-foreground">{card.heading}</h3>
                 <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">{card.body}</p>

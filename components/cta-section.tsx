@@ -1,43 +1,33 @@
 import Link from "next/link"
-import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import type { HomepageContent } from "@/lib/payload"
+
+import { cn } from "@/lib/utils"
 
 type CtaSectionProps = {
-  content: Pick<HomepageContent, "ctaHeadline" | "ctaSubheadline" | "ctaButton">
+  content: {
+    ctaHeadline: string
+    ctaSubheadline: string
+    ctaButton: string
+    ctaButtonUrl?: string
+  }
+  className?: string
 }
 
-export function CtaSection({ content }: CtaSectionProps) {
+export function CtaSection({ content, className }: CtaSectionProps) {
   return (
-    <section id="contact" className="px-6 py-20">
-      <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[16px] bg-ink px-6 py-16 text-center sm:px-12">
-        <div
-          aria-hidden="true"
-          className="animate-float-a pointer-events-none absolute -left-16 -top-16 h-64 w-64 rounded-full bg-primary/40 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="animate-float-b pointer-events-none absolute -bottom-20 -right-10 h-64 w-64 rounded-full bg-primary/30 blur-3xl"
-        />
-        <div
-          aria-hidden="true"
-          className="animate-float-c pointer-events-none absolute left-1/2 top-0 h-56 w-56 rounded-full bg-primary/25 blur-3xl"
-        />
-        <div className="relative">
-          <h2 className="text-balance text-3xl font-bold tracking-[-0.026em] text-white sm:text-4xl">
+    <section id="contact" className={cn("mx-auto max-w-[1120px] px-6 pt-5 pb-24", className)}>
+      <div className="flex flex-wrap items-center justify-between gap-8 rounded-2xl bg-[#3761a2] p-[clamp(36px,6vw,64px)]">
+        <div className="max-w-[520px]">
+          <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.1] tracking-[-0.03em] text-white">
             {content.ctaHeadline}
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-pretty text-lg text-slate-400">{content.ctaSubheadline}</p>
-          <Button
-            render={<Link href="/consultation" />}
-            nativeButton={false}
-            size="lg"
-            className="mt-8 bg-white text-primary shadow-none hover:bg-lake-pale hover:text-primary"
-          >
-            {content.ctaButton}
-            <ArrowRight className="ml-1 h-4 w-4" />
-          </Button>
+          <p className="mt-3 text-pretty text-base leading-relaxed text-[#DCE8F6]">{content.ctaSubheadline}</p>
         </div>
+        <Link
+          href={content.ctaButtonUrl ?? "/consultation"}
+          className="rounded-full bg-white px-[30px] py-4 font-brand-display text-base font-bold whitespace-nowrap text-[#3761a2] no-underline"
+        >
+          {content.ctaButton}
+        </Link>
       </div>
     </section>
   )

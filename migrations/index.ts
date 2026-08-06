@@ -5,6 +5,16 @@ import * as migration_20260714_branding_logo_height from './20260714_branding_lo
 import * as migration_20260717_homepage_seo from './20260717_homepage_seo';
 import * as migration_20260717_brand_guide_satoshi_font from './20260717_brand_guide_satoshi_font';
 import * as migration_20260717_brand_guide_v20 from './20260717_brand_guide_v20';
+import * as migration_20260723_why_choose_card_images from './20260723_why_choose_card_images';
+import * as migration_20260723_services_global from './20260723_services_global';
+
+import * as migration_20260724_case_study_fields from './20260724_case_study_fields';
+import * as migration_20260731_homepage_growth_system from './20260731_homepage_growth_system';
+import * as migration_20260731_funnel_step_images from './20260731_funnel_step_images';
+import * as migration_20260803_testimonial_photo from './20260803_testimonial_photo';
+import * as migration_20260803_team_image from './20260803_team_image';
+import * as migration_20260805_legal_global from './20260805_legal_global';
+import * as migration_20260805_navigation_global from './20260805_navigation_global';
 
 export const migrations = [
   {
@@ -41,5 +51,55 @@ export const migrations = [
     up: migration_20260717_brand_guide_v20.up,
     down: migration_20260717_brand_guide_v20.down,
     name: '20260717_brand_guide_v20'
+  },
+  {
+    up: migration_20260723_why_choose_card_images.up,
+    down: migration_20260723_why_choose_card_images.down,
+    name: '20260723_why_choose_card_images'
+  },
+  {
+    up: migration_20260723_services_global.up,
+    down: migration_20260723_services_global.down,
+    name: '20260723_services_global'
+  },
+  {
+    up: migration_20260724_services_page_content.up,
+    down: migration_20260724_services_page_content.down,
+    name: '20260724_services_page_content'
+  },
+  {
+    up: migration_20260724_case_study_fields.up,
+    down: migration_20260724_case_study_fields.down,
+    name: '20260724_case_study_fields'
+  },
+  {
+    up: migration_20260731_homepage_growth_system.up,
+    down: migration_20260731_homepage_growth_system.down,
+    name: '20260731_homepage_growth_system'
+  },
+  {
+    up: migration_20260731_funnel_step_images.up,
+    down: migration_20260731_funnel_step_images.down,
+    name: '20260731_funnel_step_images'
+  },
+  {
+    up: migration_20260803_testimonial_photo.up,
+    down: migration_20260803_testimonial_photo.down,
+    name: '20260803_testimonial_photo'
+  },
+  {
+    up: migration_20260803_team_image.up,
+    down: migration_20260803_team_image.down,
+    name: '20260803_team_image'
+  },
+  {
+    up: migration_20260805_legal_global.up,
+    down: migration_20260805_legal_global.down,
+    name: '20260805_legal_global'
+  },
+  {
+    up: migration_20260805_navigation_global.up,
+    down: migration_20260805_navigation_global.down,
+    name: '20260805_navigation_global'
   },
 ];

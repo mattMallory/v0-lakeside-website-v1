@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="CRM and automation workflow">
+  <rect width="640" height="400" fill="#EFF6FF"/>
+  <rect x="24" y="24" width="592" height="352" rx="16" fill="#FFFFFF" stroke="#DBEAFE" stroke-width="2"/>
+  <rect x="48" y="48" width="140" height="12" rx="6" fill="#2563A8" opacity="0.85"/>
+  <rect x="48" y="72" width="96" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="48" y="108" width="120" height="72" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="60" y="124" width="72" height="8" rx="4" fill="#64748B"/>
+  <rect x="60" y="144" width="96" height="10" rx="5" fill="#2563A8" opacity="0.25"/>
+  <rect x="60" y="162" width="80" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="188" y="108" width="120" height="72" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="200" y="124" width="72" height="8" rx="4" fill="#64748B"/>
+  <rect x="200" y="144" width="96" height="10" rx="5" fill="#FBC02D" opacity="0.35"/>
+  <rect x="200" y="162" width="80" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="328" y="108" width="120" height="72" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="340" y="124" width="72" height="8" rx="4" fill="#64748B"/>
+  <rect x="340" y="144" width="96" height="10" rx="5" fill="#FF4A00" opacity="0.3"/>
+  <rect x="340" y="162" width="80" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="468" y="108" width="120" height="72" rx="12" fill="#2563A8" opacity="0.08" stroke="#2563A8" stroke-width="1.5"/>
+  <rect x="480" y="124" width="72" height="8" rx="4" fill="#2563A8"/>
+  <rect x="480" y="144" width="96" height="10" rx="5" fill="#2563A8" opacity="0.35"/>
+  <rect x="480" y="162" width="80" height="8" rx="4" fill="#2563A8" opacity="0.5"/>
+  <path d="M168 144h20M308 144h20M448 144h20" stroke="#94A3B8" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 4"/>
+  <rect x="48" y="212" width="544" height="140" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="64" y="232" width="120" height="10" rx="5" fill="#64748B"/>
+  <circle cx="120" cy="290" r="28" fill="#FFFFFF" stroke="#2563A8" stroke-width="2"/>
+  <rect x="104" y="284" width="32" height="12" rx="4" fill="#2563A8" opacity="0.2"/>
+  <path d="M148 290h56" stroke="#2563A8" stroke-width="2" stroke-dasharray="6 4"/>
+  <circle cx="232" cy="290" r="28" fill="#FFFFFF" stroke="#FF4A00" stroke-width="2"/>
+  <path d="M248 282 236 290l12 8" stroke="#FF4A00" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M260 290h56" stroke="#94A3B8" stroke-width="2" stroke-dasharray="6 4"/>
+  <circle cx="344" cy="290" r="28" fill="#FFFFFF" stroke="#6D00CC" stroke-width="2"/>
+  <circle cx="344" cy="290" r="8" fill="#6D00CC" opacity="0.5"/>
+  <path d="M372 290h56" stroke="#94A3B8" stroke-width="2" stroke-dasharray="6 4"/>
+  <circle cx="456" cy="290" r="28" fill="#FFFFFF" stroke="#006BFF" stroke-width="2"/>
+  <rect x="444" y="282" width="24" height="16" rx="3" fill="#006BFF" opacity="0.25"/>
+  <rect x="64" y="332" width="180" height="8" rx="4" fill="#22C55E" opacity="0.35"/>
+  <rect x="260" y="332" width="140" height="8" rx="4" fill="#2563A8" opacity="0.25"/>
+  <rect x="420" y="332" width="96" height="8" rx="4" fill="#94A3B8"/>
+</svg>

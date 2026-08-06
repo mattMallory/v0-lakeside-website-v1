@@ -13,10 +13,10 @@ type SolutionSectionContent = {
 
 export function SolutionSection({ content }: { content: SolutionSectionContent }) {
   return (
-    <section className="bg-lake-pale/80 py-20">
+    <section className="bg-white py-20">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-6 lg:grid-cols-2">
         <div>
-          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-primary">{content.eyebrow}</p>
+          <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">{content.eyebrow}</p>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
             {content.headline}
           </h2>

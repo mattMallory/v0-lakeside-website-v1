@@ -21,7 +21,7 @@ export function StorySection({ content }: { content: StorySectionContent }) {
     <section className="mx-auto max-w-6xl px-6 py-20">
       <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="order-2 text-center lg:order-1 lg:text-left">
-          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-primary">{content.eyebrow}</p>
+          <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">{content.eyebrow}</p>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
             {content.headline}
           </h2>

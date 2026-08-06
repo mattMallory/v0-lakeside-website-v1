@@ -7,12 +7,18 @@ type ServicesSectionContent = {
   items: ServiceItem[]
 }
 
-export function ServicesSection({ content }: { content: ServicesSectionContent }) {
+export function ServicesSection({
+  content,
+  id = "system",
+}: {
+  content: ServicesSectionContent
+  id?: string
+}) {
   return (
-    <section id="system" className="bg-white py-20">
+    <section id={id} className="bg-white py-20">
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-[0.1em] text-primary">{content.eyebrow}</p>
+          <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">{content.eyebrow}</p>
           <h2 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
             {content.headline}
           </h2>

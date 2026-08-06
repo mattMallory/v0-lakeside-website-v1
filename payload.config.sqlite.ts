@@ -7,5 +7,6 @@ export default createPayloadConfig(
     client: {
       url: process.env.DATABASE_URL || "file:./payload.db",
     },
+    push: process.env.PAYLOAD_DB_PUSH === "true",
   }),
 )

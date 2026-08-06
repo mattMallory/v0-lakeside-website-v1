@@ -1,6 +1,7 @@
 import type { Payload } from "payload"
 
-import { defaultHomepageContent } from "@/lib/homepage-defaults"
+import { growthSystemToPayloadData } from "@/lib/homepage-growth-system-payload"
+import { defaultGrowthSystemContent } from "@/lib/homepage-growth-system-defaults"
 
 export async function seedHomepageIfEmpty(payload: Payload) {
   try {
@@ -9,13 +10,13 @@ export async function seedHomepageIfEmpty(payload: Payload) {
       depth: 0,
     })
 
-    if (homepage.problemItems && homepage.problemItems.length > 0) {
+    if (homepage.gsHeroHeadline) {
       return
     }
 
     await payload.updateGlobal({
       slug: "homepage",
-      data: defaultHomepageContent,
+      data: growthSystemToPayloadData(defaultGrowthSystemContent),
     })
   } catch (error) {
     console.error("[seed] Failed to seed homepage global:", error)

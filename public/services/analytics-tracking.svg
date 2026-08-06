@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 400" fill="none" role="img" aria-label="Analytics and tracking dashboard">
+  <rect width="640" height="400" fill="#EFF6FF"/>
+  <rect x="24" y="24" width="592" height="352" rx="16" fill="#FFFFFF" stroke="#DBEAFE" stroke-width="2"/>
+  <rect x="48" y="48" width="160" height="12" rx="6" fill="#2563A8" opacity="0.85"/>
+  <rect x="48" y="72" width="104" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="48" y="108" width="124" height="80" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="60" y="124" width="72" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="60" y="144" width="88" height="18" rx="4" fill="#2563A8" opacity="0.9"/>
+  <rect x="60" y="170" width="56" height="8" rx="4" fill="#22C55E"/>
+  <rect x="188" y="108" width="124" height="80" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="200" y="124" width="72" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="200" y="144" width="72" height="18" rx="4" fill="#2563A8" opacity="0.9"/>
+  <rect x="200" y="170" width="48" height="8" rx="4" fill="#22C55E"/>
+  <rect x="328" y="108" width="124" height="80" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="340" y="124" width="72" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="340" y="144" width="80" height="18" rx="4" fill="#2563A8" opacity="0.9"/>
+  <rect x="340" y="170" width="52" height="8" rx="4" fill="#22C55E"/>
+  <rect x="468" y="108" width="124" height="80" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="480" y="124" width="72" height="8" rx="4" fill="#94A3B8"/>
+  <rect x="480" y="144" width="64" height="18" rx="4" fill="#2563A8" opacity="0.9"/>
+  <rect x="480" y="170" width="44" height="8" rx="4" fill="#22C55E"/>
+  <rect x="48" y="212" width="360" height="140" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="64" y="232" width="120" height="10" rx="5" fill="#64748B"/>
+  <path d="M72 320 112 280 152 296 192 248 232 264 272 220 312 236 352 200 392 216" stroke="#2563A8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M72 320 112 280 152 296 192 248 232 264 272 220 312 236 352 200 392 216V332H72z" fill="#2563A8" opacity="0.08"/>
+  <circle cx="392" cy="216" r="6" fill="#2563A8"/>
+  <rect x="424" y="212" width="168" height="140" rx="12" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <rect x="440" y="232" width="96" height="10" rx="5" fill="#64748B"/>
+  <rect x="440" y="256" width="136" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="440" y="256" width="96" height="12" rx="6" fill="#2563A8" opacity="0.7"/>
+  <rect x="440" y="280" width="136" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="440" y="280" width="72" height="12" rx="6" fill="#4285F4" opacity="0.65"/>
+  <rect x="440" y="304" width="136" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="440" y="304" width="112" height="12" rx="6" fill="#22C55E" opacity="0.55"/>
+  <rect x="440" y="328" width="136" height="12" rx="6" fill="#E2E8F0"/>
+  <rect x="440" y="328" width="48" height="12" rx="6" fill="#F59E0B" opacity="0.6"/>
+</svg>
