@@ -32,3 +32,12 @@ next-env.d.ts
 
 # payload uploads
 media/
+
+# playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# layout snapshots recorded by e2e/tools/layout-snapshot.spec.ts
+/.layout/

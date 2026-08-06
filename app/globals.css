@@ -5,6 +5,16 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  /* Breakpoints. The site's canonical vocabulary is the Tailwind v4 default
+     scale — 640 / 768 / 1024 / 1280 / 1536 — and it is not overridden here.
+     Hand-written media queries and matchMedia strings must use those values, or
+     one less than them for a `max-width`. See docs/breakpoints.md.
+
+     `planner` is the one recorded exception: the intrinsic wrap point of the
+     budget-planner row. It is named here so the value is visible to every layer
+     rather than living only as a magic number inside one media query. */
+  --breakpoint-planner: 821px;
+
   --font-mono: ui-monospace, monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -974,6 +984,12 @@
   touch-action: manipulation;
 }
 
+/* NAMED EXCEPTION — `--breakpoint-planner` (821px). See docs/breakpoints.md.
+   This is the intrinsic wrap point of the row below: a 380px form and a 320px
+   results card plus a 24px gap and the page gutter stop fitting side by side at
+   about this width. It does not align with `md`, and every way of aligning it
+   changes what the planner renders between 768px and 820px, so it is recorded
+   as an exception pending a design decision rather than moved. */
 @media (max-width: 820px) {
   .budget-planner-layout {
     display: flex;
@@ -1202,17 +1218,12 @@
   color: #ffffff;
 }
 
-@media (min-width: 821px) {
-  .offer-builder-preview {
-    position: sticky;
-    top: 5rem;
-    align-self: start;
-    height: fit-content;
-    z-index: 20;
-  }
-}
+/* The sticky preview is expressed on the element itself as `md:sticky md:top-20
+   md:h-fit md:self-start` (components/chiropractic-offer-builder.tsx). It used to
+   be duplicated here behind `min-width: 821px`, which disagreed with the `md:`
+   utilities on the same element by 53px. */
 
-@media (max-width: 820px) {
+@media (max-width: 767px) {
   .blog-offer-builder-breakout {
     overflow: visible;
   }
@@ -1241,10 +1252,11 @@
     pointer-events: auto;
   }
 
-  .offer-builder-status,
-  .offer-builder-desktop-sidepanel {
-    display: none !important;
-  }
+  /* `.offer-builder-status` and `.offer-builder-desktop-sidepanel` are hidden
+     below `md` by their own `hidden md:grid` / `hidden md:flex` utilities. This
+     block used to repeat that with `display: none !important` at a different
+     breakpoint, and the 53px where the two disagreed hid both copies of the
+     lead-capture form. */
 
   .offer-builder-preview [data-ob="offercard"] {
     padding: 18px 20px !important;

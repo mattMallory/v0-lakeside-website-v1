@@ -262,7 +262,11 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
       return rect.top < window.innerHeight + 120 && rect.bottom > -120
     })
 
-    const isMobile = typeof window !== "undefined" && window.matchMedia("(max-width: 820px)").matches
+    // Below `md` the mobile panel is the visible one; it sits far enough down the
+    // page that the in-view check would otherwise never fire, so the embed is
+    // initialised eagerly. This must track the panel's own `md:` boundary.
+    const isMobile =
+      typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
     if (!inView && !isMobile) return
 
     const nextUrl = buildEmbedUrl()
@@ -608,7 +612,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
 
           <div
             ref={previewPanelRef}
-            className="offer-builder-preview z-20 flex flex-col gap-3.5 lg:sticky lg:top-20 lg:h-fit lg:self-start"
+            className="offer-builder-preview z-20 flex flex-col gap-3.5 md:sticky md:top-20 md:h-fit md:self-start"
           >
             <div
               data-ob="offercard"
@@ -679,7 +683,10 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               </div>
             </div>
 
-            <div className="offer-builder-desktop-sidepanel hidden flex-col gap-3.5 md:flex">
+            <div
+              data-lead-capture="offer-builder"
+              className="offer-builder-desktop-sidepanel hidden flex-col gap-3.5 md:flex"
+            >
               <OfferBuilderClarityPanel clarity={clarity} />
 
               <OfferBuilderEmailPanel
@@ -694,7 +701,11 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
             </div>
           </div>
 
-          <div ref={mobileEmbedRef} className="offer-builder-mobile-panel space-y-4 md:hidden">
+          <div
+            ref={mobileEmbedRef}
+            data-lead-capture="offer-builder"
+            className="offer-builder-mobile-panel space-y-4 md:hidden"
+          >
             <OfferBuilderClarityPanel clarity={clarity} />
             <OfferBuilderEmailPanel
               clarity={clarity}

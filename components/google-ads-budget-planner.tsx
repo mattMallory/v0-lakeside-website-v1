@@ -459,7 +459,11 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
               </p>
             </div>
 
-            <div ref={desktopEmbedRef} className="budget-planner-desktop-panel mt-auto hidden pt-6 md:block">
+            <div
+              ref={desktopEmbedRef}
+              data-lead-capture="budget-planner"
+              className="budget-planner-desktop-panel mt-auto hidden pt-6 md:block"
+            >
               {saveCopy}
               <BudgetPlannerEmailPanel
                 formUrl={formUrl}
@@ -472,7 +476,10 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             </div>
           </div>
 
-          <div className="budget-planner-mobile-panel space-y-4 md:hidden">
+          <div
+            data-lead-capture="budget-planner"
+            className="budget-planner-mobile-panel space-y-4 md:hidden"
+          >
             {saveCopy}
             <BudgetPlannerEmailPanel
               formUrl={formUrl}
