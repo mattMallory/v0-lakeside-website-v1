@@ -7,21 +7,6 @@ export type AboutProcessItem = {
   description: string
 }
 
-export function getProcessTitleLines(title: string): [string, string] {
-  if (title.includes("\n")) {
-    const [first, second] = title.split("\n")
-    return [first, second]
-  }
-
-  const words = title.trim().split(/\s+/)
-  if (words.length <= 2) {
-    return [words[0] ?? title, words[1] ?? ""]
-  }
-
-  const midpoint = Math.ceil(words.length / 2)
-  return [words.slice(0, midpoint).join(" "), words.slice(midpoint).join(" ")]
-}
-
 export type TeamMemberSocialLinks = {
   linkedin?: string
   youtube?: string
