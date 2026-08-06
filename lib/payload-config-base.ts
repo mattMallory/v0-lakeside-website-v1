@@ -25,13 +25,6 @@ import { seedLegalIfEmpty } from "./seed-legal"
 import { seedNavigationIfEmpty } from "./seed-navigation"
 import { seedHomepageIfEmpty } from "./seed-homepage"
 import { seedServicesIfEmpty } from "./seed-services"
-import { ensureAboutGlobalSqlite } from "./ensure-about-global-sqlite"
-import { ensureCaseStudyHighlightGlobalsSqlite } from "./ensure-case-study-highlight-globals-sqlite"
-import { ensurePostsCaseStudySqlite } from "./ensure-posts-case-study-sqlite"
-import { ensureLegalGlobalSqlite } from "./ensure-legal-global-sqlite"
-import { ensureNavigationGlobalSqlite } from "./ensure-navigation-global-sqlite"
-import { ensureHomepageGrowthSystemSqlite } from "./ensure-homepage-growth-system-sqlite"
-import { ensureServicesGlobalSqlite } from "./ensure-services-global-sqlite"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -40,6 +33,7 @@ export function createPayloadConfig(
   db: Config["db"],
   options: {
     plugins?: Config["plugins"]
+    beforeSeed?: () => Promise<void>
   } = {},
 ) {
   return buildConfig({
@@ -60,13 +54,9 @@ export function createPayloadConfig(
     plugins: [getSeoPlugin(), ...(options.plugins ?? [])],
     sharp,
     onInit: async (payload) => {
-      await ensureLegalGlobalSqlite()
-      await ensureNavigationGlobalSqlite()
-      await ensureServicesGlobalSqlite()
-      await ensureHomepageGrowthSystemSqlite()
-      await ensurePostsCaseStudySqlite()
-      await ensureAboutGlobalSqlite()
-      await ensureCaseStudyHighlightGlobalsSqlite()
+      if (options.beforeSeed) {
+        await options.beforeSeed()
+      }
       await seedBrandingIfEmpty(payload)
       await seedHomepageIfEmpty(payload)
       await seedAboutIfEmpty(payload)
