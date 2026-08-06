@@ -56,9 +56,11 @@ export function CaseStudyHighlight({
             >
               {headline}
             </h2>
-            <p className={cn("mt-4 text-lg font-semibold", isDark ? "text-white" : "text-heading")}>
-              {caseStudy.clientName}
-            </p>
+            {caseStudy.clientName ? (
+              <p className={cn("mt-4 text-lg font-semibold", isDark ? "text-white" : "text-heading")}>
+                {caseStudy.clientName}
+              </p>
+            ) : null}
             {caseStudy.clientLocation ? (
               <p className={cn("mt-1 text-sm", isDark ? "text-[#94A3B8]" : "text-muted-foreground")}>
                 {caseStudy.clientLocation}

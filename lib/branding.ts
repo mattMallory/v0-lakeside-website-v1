@@ -1,5 +1,6 @@
 import { unstable_noStore as noStore } from "next/cache"
 
+import { resolveMediaUrl, withFallback, type MediaLike } from "@/lib/cms-mappers"
 import { defaultBrandingContent, type BrandingContent } from "@/lib/branding-defaults"
 import {
   bodyFontFamily,
@@ -8,13 +9,7 @@ import {
 } from "@/lib/fonts"
 import type { GoogleFontName } from "@/lib/google-fonts"
 import { googleFontOptions } from "@/lib/google-fonts"
-
-type MediaLike = {
-  url?: string | null
-  filename?: string | null
-  alt?: string | null
-  updatedAt?: string | null
-}
+import type { Branding } from "@/payload-types"
 
 const colorKeys = [
   "primaryColor",
@@ -31,13 +26,7 @@ const colorKeys = [
   "mutedTextColor",
   "borderColor",
   "focusRingColor",
-] as const satisfies ReadonlyArray<keyof BrandingContent>
-
-function withFallback<T>(value: T | null | undefined, fallback: T): T {
-  if (value === null || value === undefined) return fallback
-  if (typeof value === "string" && value.trim() === "") return fallback
-  return value
-}
+] as const satisfies ReadonlyArray<keyof BrandingContent & keyof Branding>
 
 function isHexColor(value: string): boolean {
   return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(value)
@@ -71,13 +60,15 @@ function withCacheBust(url: string, updatedAt?: string | null): string {
   return `${url}${separator}v=${stamp}`
 }
 
-function resolveMediaUrl(logo: number | MediaLike | null | undefined): string | null {
-  if (!logo || typeof logo === "number") return null
+// Branding is the one place a media URL is cache-busted: the logo must change in the
+// browser the moment it is replaced in the admin panel. The shared resolver supplies the
+// URL and the cache-busting stamp is composed on top of it here.
+function resolveLogoUrl(logo: number | MediaLike | null | undefined): string | undefined {
+  const rawUrl = resolveMediaUrl(logo)?.trim()
+  if (!rawUrl) return undefined
 
-  const rawUrl = typeof logo.url === "string" ? logo.url.trim() : ""
-  if (!rawUrl) return null
-
-  return withCacheBust(rawUrl, logo.updatedAt)
+  const updatedAt = typeof logo === "object" && logo ? logo.updatedAt : undefined
+  return withCacheBust(rawUrl, updatedAt)
 }
 
 export async function getBrandingContent(): Promise<BrandingContent> {
@@ -97,7 +88,7 @@ export async function getBrandingContent(): Promise<BrandingContent> {
       overrideAccess: true,
     })
 
-    let logo = branding.logo as number | MediaLike | null | undefined
+    let logo: number | MediaLike | null | undefined = branding.logo
 
     // If the relation id exists but depth did not populate, fetch media directly.
     if (typeof logo === "number") {
@@ -113,15 +104,9 @@ export async function getBrandingContent(): Promise<BrandingContent> {
       }
     }
 
-    const logoUrl = resolveMediaUrl(logo)
+    const logoUrl = resolveLogoUrl(logo)
     const colors = Object.fromEntries(
-      colorKeys.map((key) => [
-        key,
-        resolveHex(
-          (branding as Record<string, string | null | undefined>)[key],
-          defaultBrandingContent[key],
-        ),
-      ]),
+      colorKeys.map((key) => [key, resolveHex(branding[key], defaultBrandingContent[key])]),
     ) as Pick<BrandingContent, (typeof colorKeys)[number]>
 
     return {
@@ -130,10 +115,7 @@ export async function getBrandingContent(): Promise<BrandingContent> {
         branding.logoAlt || (typeof logo === "object" && logo?.alt) || null,
         defaultBrandingContent.logoAlt,
       ),
-      logoHeight: resolveLogoHeight(
-        (branding as { logoHeight?: number | null }).logoHeight,
-        defaultBrandingContent.logoHeight,
-      ),
+      logoHeight: resolveLogoHeight(branding.logoHeight, defaultBrandingContent.logoHeight),
       ...colors,
       headingFont: resolveFont(branding.headingFont, defaultBrandingContent.headingFont),
       bodyFont: resolveFont(branding.bodyFont, defaultBrandingContent.bodyFont),

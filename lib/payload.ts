@@ -18,7 +18,7 @@ export async function getHomepageContent(): Promise<HomepageContent> {
       depth: 2,
     })
 
-    return mapGrowthSystemContent(homepage as Record<string, unknown>)
+    return mapGrowthSystemContent(homepage)
   } catch (error) {
     console.error("[payload] Failed to load homepage content:", error)
     return defaultGrowthSystemContent

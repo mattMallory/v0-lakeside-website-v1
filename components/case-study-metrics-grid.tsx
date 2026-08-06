@@ -47,6 +47,11 @@ export function CaseStudyMetricsGrid({
   hideFullWidth = false,
 }: CaseStudyMetricsGridProps) {
   const visibleMetrics = hideFullWidth ? metrics.filter((metric) => !metric.spanFull) : metrics
+
+  // A case study that carries no metrics of its own renders none, rather than an empty
+  // spaced container or another client's figures.
+  if (visibleMetrics.length === 0) return null
+
   const standardMetrics = visibleMetrics.filter((metric) => !metric.spanFull)
   const fullWidthMetrics = visibleMetrics.filter((metric) => metric.spanFull)
 

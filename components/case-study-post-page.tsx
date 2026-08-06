@@ -32,8 +32,12 @@ export function CaseStudyPostPage({ post, relatedPosts }: CaseStudyPostPageProps
             </h1>
 
             <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
-              <span className="font-medium text-heading">{post.clientName}</span>
-              <span className="text-border">·</span>
+              {post.clientName?.trim() ? (
+                <>
+                  <span className="font-medium text-heading">{post.clientName.trim()}</span>
+                  <span className="text-border">·</span>
+                </>
+              ) : null}
               <span>{formatBlogDate(post.publishedAt)}</span>
               <span className="text-border">·</span>
               <span>by {post.authorName}</span>

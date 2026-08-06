@@ -10,10 +10,15 @@ type SidebarItem = {
 }
 
 function buildSidebarItems(post: CaseStudyPost): SidebarItem[] {
-  const items: SidebarItem[] = [
-    { label: "Practice", value: post.clientName },
-    { label: "Location", value: post.clientLocation },
-  ]
+  const items: SidebarItem[] = []
+
+  if (post.clientName?.trim()) {
+    items.push({ label: "Practice", value: post.clientName.trim() })
+  }
+
+  if (post.clientLocation?.trim()) {
+    items.push({ label: "Location", value: post.clientLocation.trim() })
+  }
 
   if (post.practiceInfo.practiceType?.trim()) {
     items.push({ label: "Practice Type", value: post.practiceInfo.practiceType.trim() })
