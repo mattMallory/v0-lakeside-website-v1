@@ -54,19 +54,23 @@ export function createPayloadConfig(
     plugins: [getSeoPlugin(), ...(options.plugins ?? [])],
     sharp,
     onInit: async (payload) => {
-      if (options.beforeSeed) {
-        await options.beforeSeed()
+      try {
+        if (options.beforeSeed) {
+          await options.beforeSeed()
+        }
+        await seedBrandingIfEmpty(payload)
+        await seedHomepageIfEmpty(payload)
+        await seedAboutIfEmpty(payload)
+        await seedServicesIfEmpty(payload)
+        await seedLegalIfEmpty(payload)
+        await seedNavigationIfEmpty(payload)
+        await seedBlogIfEmpty(payload)
+        await seedCaseStudyHighlightGlobal(payload, "homepage")
+        await seedCaseStudyHighlightGlobal(payload, "about")
+        await seedCaseStudyHighlightGlobal(payload, "services-page")
+      } catch (error) {
+        console.error("[payload] onInit seeding failed:", error)
       }
-      await seedBrandingIfEmpty(payload)
-      await seedHomepageIfEmpty(payload)
-      await seedAboutIfEmpty(payload)
-      await seedServicesIfEmpty(payload)
-      await seedLegalIfEmpty(payload)
-      await seedNavigationIfEmpty(payload)
-      await seedBlogIfEmpty(payload)
-      await seedCaseStudyHighlightGlobal(payload, "homepage")
-      await seedCaseStudyHighlightGlobal(payload, "about")
-      await seedCaseStudyHighlightGlobal(payload, "services-page")
     },
   })
 }

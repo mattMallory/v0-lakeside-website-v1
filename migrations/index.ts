@@ -8,7 +8,13 @@ import * as migration_20260717_brand_guide_v20 from './20260717_brand_guide_v20'
 import * as migration_20260723_why_choose_card_images from './20260723_why_choose_card_images';
 import * as migration_20260723_services_global from './20260723_services_global';
 
+import * as migration_20260724_services_page_content from './20260724_services_page_content';
+import * as migration_20260724_blog_collections from './20260724_blog_collections';
 import * as migration_20260724_case_study_fields from './20260724_case_study_fields';
+import * as migration_20260724_case_study_practice_info from './20260724_case_study_practice_info';
+import * as migration_20260724_about_global from './20260724_about_global';
+import * as migration_20260724_case_study_highlight_globals from './20260724_case_study_highlight_globals';
+import * as migration_20260730_homepage_growth_system_tables from './20260730_homepage_growth_system_tables';
 import * as migration_20260731_homepage_growth_system from './20260731_homepage_growth_system';
 import * as migration_20260731_funnel_step_images from './20260731_funnel_step_images';
 import * as migration_20260803_testimonial_photo from './20260803_testimonial_photo';
@@ -68,9 +74,34 @@ export const migrations = [
     name: '20260724_services_page_content'
   },
   {
+    up: migration_20260724_blog_collections.up,
+    down: migration_20260724_blog_collections.down,
+    name: '20260724_blog_collections'
+  },
+  {
     up: migration_20260724_case_study_fields.up,
     down: migration_20260724_case_study_fields.down,
     name: '20260724_case_study_fields'
+  },
+  {
+    up: migration_20260724_case_study_practice_info.up,
+    down: migration_20260724_case_study_practice_info.down,
+    name: '20260724_case_study_practice_info'
+  },
+  {
+    up: migration_20260724_about_global.up,
+    down: migration_20260724_about_global.down,
+    name: '20260724_about_global'
+  },
+  {
+    up: migration_20260724_case_study_highlight_globals.up,
+    down: migration_20260724_case_study_highlight_globals.down,
+    name: '20260724_case_study_highlight_globals'
+  },
+  {
+    up: migration_20260730_homepage_growth_system_tables.up,
+    down: migration_20260730_homepage_growth_system_tables.down,
+    name: '20260730_homepage_growth_system_tables'
   },
   {
     up: migration_20260731_homepage_growth_system.up,
