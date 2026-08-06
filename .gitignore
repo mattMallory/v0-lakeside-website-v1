@@ -22,7 +22,6 @@ yarn-error.log*
 
 # payload
 payload.db
-payload-types.ts
 
 # vercel
 .vercel
