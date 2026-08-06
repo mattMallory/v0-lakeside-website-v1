@@ -1,4 +1,9 @@
 import type { CaseStudyHighlightContent } from "@/lib/case-study-highlight"
+import type { Homepage } from "@/payload-types"
+
+// Derived from the schema rather than declared as `string`, so a seed cannot write an
+// icon name the CMS select does not offer — which would then fail to render.
+export type GrowthSystemIcon = NonNullable<Homepage["gsWhoCriteria"]>[number]["icon"]
 
 export type GrowthSystemStat = {
   value: string
@@ -6,7 +11,7 @@ export type GrowthSystemStat = {
 }
 
 export type GrowthSystemCriterion = {
-  icon: string
+  icon: GrowthSystemIcon
   title: string
   description: string
 }
@@ -21,7 +26,7 @@ export type GrowthSystemFunnelStep = {
 }
 
 export type GrowthSystemPillar = {
-  icon: string
+  icon: GrowthSystemIcon
   title: string
   body: string
 }
