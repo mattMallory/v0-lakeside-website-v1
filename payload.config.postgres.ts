@@ -17,6 +17,8 @@ export default createPayloadConfig(
     pool: {
       connectionString: postgresUrl,
     },
+    // Schema changes go through migrations only — avoids interactive drizzle push prompts.
+    push: false,
   }),
   {
     plugins: getPayloadBlobPlugins(),

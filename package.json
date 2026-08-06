@@ -15,6 +15,10 @@
     "migrate:create:vercel": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" POSTGRES_URL=${POSTGRES_URL:-postgresql://localhost:5432/payload} payload migrate:create",
     "reset:local-admin": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/reset-local-admin.mjs",
     "seed:blog": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/seed-blog.mjs",
+    "seed:blog:production": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/seed-blog-production.mjs",
+    "migrate:production": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/migrate-production.mjs",
+    "diagnose:production": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/diagnose-production.mjs",
+    "reset:production-admin": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/reset-production-admin.mjs",
     "seed:about": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/seed-about.mjs",
     "setup:services-global": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/migrate-services-global-sqlite.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/setup-services-global.mjs",
     "setup:navigation-global": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/migrate-navigation-global-sqlite.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/setup-navigation-global.mjs"
