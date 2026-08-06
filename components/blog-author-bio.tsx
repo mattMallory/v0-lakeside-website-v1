@@ -1,10 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 
-type MediaLike = {
-  url?: string | null
-  alt?: string | null
-}
+import { resolveMediaUrl, type MediaLike } from "@/lib/cms-mappers"
 
 type BlogAuthorBioProps = {
   photo?: number | MediaLike | null
@@ -12,14 +9,6 @@ type BlogAuthorBioProps = {
   role?: string | null
   bio: string
   linkedinUrl?: string | null
-}
-
-function resolvePhoto(photo: number | MediaLike | null | undefined) {
-  if (!photo || typeof photo === "number") {
-    return null
-  }
-
-  return typeof photo.url === "string" && photo.url.trim() ? photo.url : null
 }
 
 function getInitials(name: string) {
@@ -40,7 +29,7 @@ function LinkedInIcon() {
 }
 
 export function BlogAuthorBio({ photo, name, role, bio, linkedinUrl }: BlogAuthorBioProps) {
-  const photoUrl = resolvePhoto(photo)
+  const photoUrl = resolveMediaUrl(photo)
   const photoAlt = typeof photo === "object" && photo?.alt ? photo.alt : name
 
   return (

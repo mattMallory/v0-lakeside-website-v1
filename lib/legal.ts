@@ -1,14 +1,10 @@
+import { withFallback } from "@/lib/cms-mappers"
 import { defaultLegalContent, type LegalContent, type LegalPageContent } from "@/lib/legal-defaults"
+import type { Legal } from "@/payload-types"
 
 type LegalSectionDoc = {
   title?: string | null
   body?: string | null
-}
-
-function withFallback<T>(value: T | null | undefined, fallback: T): T {
-  if (value === null || value === undefined) return fallback
-  if (typeof value === "string" && value.trim() === "") return fallback
-  return value
 }
 
 function mapSections(
@@ -31,24 +27,22 @@ function mapSections(
 }
 
 function mapLegalPage(
-  doc: Record<string, unknown>,
+  doc: Legal,
   prefix: "privacy" | "terms",
   fallback: LegalPageContent,
 ): LegalPageContent {
-  const sectionsKey = `${prefix}Sections`
-
   return {
-    eyebrow: withFallback(doc[`${prefix}Eyebrow`] as string, fallback.eyebrow),
-    title: withFallback(doc[`${prefix}Title`] as string, fallback.title),
-    lastUpdated: withFallback(doc[`${prefix}LastUpdated`] as string, fallback.lastUpdated),
-    intro: withFallback(doc[`${prefix}Intro`] as string, fallback.intro),
-    sections: mapSections(doc[sectionsKey] as LegalSectionDoc[] | undefined, fallback.sections),
-    seoTitle: withFallback(doc[`${prefix}SeoTitle`] as string, fallback.seoTitle),
-    seoDescription: withFallback(doc[`${prefix}SeoDescription`] as string, fallback.seoDescription),
+    eyebrow: withFallback(doc[`${prefix}Eyebrow`], fallback.eyebrow),
+    title: withFallback(doc[`${prefix}Title`], fallback.title),
+    lastUpdated: withFallback(doc[`${prefix}LastUpdated`], fallback.lastUpdated),
+    intro: withFallback(doc[`${prefix}Intro`], fallback.intro),
+    sections: mapSections(doc[`${prefix}Sections`], fallback.sections),
+    seoTitle: withFallback(doc[`${prefix}SeoTitle`], fallback.seoTitle),
+    seoDescription: withFallback(doc[`${prefix}SeoDescription`], fallback.seoDescription),
   }
 }
 
-function mapLegalContent(doc: Record<string, unknown>): LegalContent {
+function mapLegalContent(doc: Legal): LegalContent {
   return {
     privacy: mapLegalPage(doc, "privacy", defaultLegalContent.privacy),
     terms: mapLegalPage(doc, "terms", defaultLegalContent.terms),
@@ -69,7 +63,7 @@ export async function getLegalContent(): Promise<LegalContent> {
       depth: 0,
     })
 
-    return mapLegalContent(legal as Record<string, unknown>)
+    return mapLegalContent(legal)
   } catch (error) {
     console.error("[payload] Failed to load legal content:", error)
     return defaultLegalContent

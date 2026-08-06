@@ -1,5 +1,7 @@
 import { cache } from "react"
 
+import { withFallback } from "@/lib/cms-mappers"
+import type { Navigation } from "@/payload-types"
 import {
   defaultNavigationContent,
   type NavItem,
@@ -9,12 +11,6 @@ import {
 type NavItemDoc = {
   label?: string | null
   href?: string | null
-}
-
-function withFallback<T>(value: T | null | undefined, fallback: T): T {
-  if (value === null || value === undefined) return fallback
-  if (typeof value === "string" && value.trim() === "") return fallback
-  return value
 }
 
 function mapNavItems(
@@ -36,24 +32,12 @@ function mapNavItems(
   return mapped.length > 0 ? mapped : fallback
 }
 
-function mapNavigationContent(doc: Record<string, unknown>): NavigationContent {
+function mapNavigationContent(doc: Navigation): NavigationContent {
   return {
-    headerNavItems: mapNavItems(
-      doc.headerNavItems as NavItemDoc[] | undefined,
-      defaultNavigationContent.headerNavItems,
-    ),
-    headerCtaLabel: withFallback(
-      doc.headerCtaLabel as string,
-      defaultNavigationContent.headerCtaLabel,
-    ),
-    headerCtaHref: withFallback(
-      doc.headerCtaHref as string,
-      defaultNavigationContent.headerCtaHref,
-    ),
-    footerNavItems: mapNavItems(
-      doc.footerNavItems as NavItemDoc[] | undefined,
-      defaultNavigationContent.footerNavItems,
-    ),
+    headerNavItems: mapNavItems(doc.headerNavItems, defaultNavigationContent.headerNavItems),
+    headerCtaLabel: withFallback(doc.headerCtaLabel, defaultNavigationContent.headerCtaLabel),
+    headerCtaHref: withFallback(doc.headerCtaHref, defaultNavigationContent.headerCtaHref),
+    footerNavItems: mapNavItems(doc.footerNavItems, defaultNavigationContent.footerNavItems),
   }
 }
 
@@ -71,7 +55,7 @@ async function fetchNavigationContent(): Promise<NavigationContent> {
       depth: 0,
     })
 
-    return mapNavigationContent(navigation as unknown as Record<string, unknown>)
+    return mapNavigationContent(navigation)
   } catch (error) {
     console.error("[payload] Failed to load navigation content:", error)
     return defaultNavigationContent

@@ -54,9 +54,12 @@ export type CaseStudyPracticeInfo = {
   marketReach?: string | null
 }
 
+// clientName and clientLocation are nullable on purpose: a case study that does not
+// carry its own client details must render without them rather than borrow another
+// client's. Consumers guard each field before rendering it.
 export type CaseStudyPost = BlogPost & {
-  clientName: string
-  clientLocation: string
+  clientName: string | null
+  clientLocation: string | null
   practiceInfo: CaseStudyPracticeInfo
   metrics: CaseStudyMetric[]
   isCaseStudy: true

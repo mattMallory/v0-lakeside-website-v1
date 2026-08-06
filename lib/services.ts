@@ -1,3 +1,4 @@
+import { resolveMediaAlt, resolveMediaUrl, withFallback } from "@/lib/cms-mappers"
 import {
   defaultServicesContent,
   type ServiceOffering,
@@ -5,52 +6,15 @@ import {
   type TechCategory,
 } from "@/lib/services-defaults"
 import { mapCaseStudyHighlight } from "@/lib/case-study-highlight"
+import type { ServicesPage } from "@/payload-types"
 
-type MediaLike = {
-  url?: string | null
-  alt?: string | null
-}
-
-type TechCategoryItemDoc = {
-  label?: string | null
-}
-
-type TechCategoryDoc = {
-  title?: string | null
-  image?: number | MediaLike | null
-  imageAlt?: string | null
-  items?: TechCategoryItemDoc[] | null
-}
-
-type OfferingItemDoc = {
-  icon?: string | null
-  title?: string | null
-  description?: string | null
-}
-
-function withFallback<T>(value: T | null | undefined, fallback: T): T {
-  if (value === null || value === undefined) return fallback
-  if (typeof value === "string" && value.trim() === "") return fallback
-  return value
-}
-
-function mergeArray<T>(value: T[] | null | undefined, fallback: T[]): T[] {
-  if (!value || value.length === 0) return fallback
-  return value
-}
-
-function resolveMediaUrl(media: number | MediaLike | null | undefined): string | undefined {
-  if (!media || typeof media === "number") return undefined
-  return typeof media.url === "string" && media.url.trim() ? media.url : undefined
-}
-
-function resolveMediaAlt(media: number | MediaLike | null | undefined): string | undefined {
-  if (!media || typeof media === "number") return undefined
-  return typeof media.alt === "string" && media.alt.trim() ? media.alt : undefined
-}
+// Document shapes come from the generated schema rather than hand-written mirrors, so a
+// renamed or retyped CMS field fails the build instead of silently yielding undefined.
+type TechCategoryDoc = NonNullable<ServicesPage["technologyCategories"]>[number]
+type OfferingItemDoc = NonNullable<ServicesPage["offeringsItems"]>[number]
 
 function mapTechCategoryItems(
-  items: TechCategoryItemDoc[] | null | undefined,
+  items: TechCategoryDoc["items"],
   fallback: string[],
 ): string[] {
   const mapped =
@@ -101,16 +65,18 @@ export async function getServicesContent(): Promise<ServicesContent> {
       depth: 2,
     })
 
+    // Each document array is mapped on its own. When it yields nothing, the section falls
+    // back to its defaults below, which is what the previous merge-then-map achieved.
     const fallbackCategories = defaultServicesContent.technology.categories
-    const categories = mergeArray(services.technologyCategories, fallbackCategories)
+    const categories = (services.technologyCategories ?? [])
       .map((category, index) =>
-        mapTechCategory(category as TechCategoryDoc, fallbackCategories[index] ?? fallbackCategories[0]),
+        mapTechCategory(category, fallbackCategories[index] ?? fallbackCategories[0]),
       )
       .filter((category): category is TechCategory => Boolean(category))
 
     const fallbackOfferings = defaultServicesContent.offerings.items
-    const offeringsItems = mergeArray(services.offeringsItems, fallbackOfferings)
-      .map((item, index) => mapOfferingItem(item as OfferingItemDoc, fallbackOfferings[index] ?? fallbackOfferings[0]))
+    const offeringsItems = (services.offeringsItems ?? [])
+      .map((item, index) => mapOfferingItem(item, fallbackOfferings[index] ?? fallbackOfferings[0]))
       .filter((item): item is ServiceOffering => Boolean(item))
 
     const aboutImageUrl =
