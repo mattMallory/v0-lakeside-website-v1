@@ -37,29 +37,35 @@ export async function seedCaseStudyHighlightGlobal(
   payload: Payload,
   slug: "homepage" | "about" | "services-page",
 ) {
-  const global = await payload.findGlobal({
-    slug,
-    depth: 0,
-  })
+  // Matches every other seed function: a failure here is logged and contained rather than
+  // propagating to whatever is running the seed chain.
+  try {
+    const global = await payload.findGlobal({
+      slug,
+      depth: 0,
+    })
 
-  const needsBackfill =
-    !global.caseStudyEyebrow ||
-    !global.caseStudyHeadline ||
-    !global.caseStudyFeaturedPost
+    const needsBackfill =
+      !global.caseStudyEyebrow ||
+      !global.caseStudyHeadline ||
+      !global.caseStudyFeaturedPost
 
-  if (!needsBackfill) return
+    if (!needsBackfill) return
 
-  const featuredPostId =
-    typeof global.caseStudyFeaturedPost === "number"
-      ? global.caseStudyFeaturedPost
-      : await findDefaultCaseStudyPostId(payload)
+    const featuredPostId =
+      typeof global.caseStudyFeaturedPost === "number"
+        ? global.caseStudyFeaturedPost
+        : await findDefaultCaseStudyPostId(payload)
 
-  await payload.updateGlobal({
-    slug,
-    data: {
-      caseStudyEyebrow: global.caseStudyEyebrow || defaultCaseStudyHighlightContent.eyebrow,
-      caseStudyHeadline: global.caseStudyHeadline || defaultCaseStudyHighlightContent.headline,
-      ...(featuredPostId ? { caseStudyFeaturedPost: featuredPostId } : {}),
-    },
-  })
+    await payload.updateGlobal({
+      slug,
+      data: {
+        caseStudyEyebrow: global.caseStudyEyebrow || defaultCaseStudyHighlightContent.eyebrow,
+        caseStudyHeadline: global.caseStudyHeadline || defaultCaseStudyHighlightContent.headline,
+        ...(featuredPostId ? { caseStudyFeaturedPost: featuredPostId } : {}),
+      },
+    })
+  } catch (error) {
+    console.error(`[seed] Failed to seed case study highlight for "${slug}":`, error)
+  }
 }

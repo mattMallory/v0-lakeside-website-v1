@@ -53,6 +53,18 @@ function requirePayloadSecret(): string {
   return secret
 }
 
+/**
+ * Runs one seeding step, logging and swallowing any failure so the remaining steps still
+ * run. Seeding is best-effort: a global that cannot be seeded should not stop the others.
+ */
+async function runSeedStep(label: string, step: () => Promise<void>) {
+  try {
+    await step()
+  } catch (error) {
+    console.error(`[payload] Seed step "${label}" failed; continuing with the rest:`, error)
+  }
+}
+
 export function createPayloadConfig(
   db: Config["db"],
   options: {
@@ -78,23 +90,28 @@ export function createPayloadConfig(
     plugins: [getSeoPlugin(), ...(options.plugins ?? [])],
     sharp,
     onInit: async (payload) => {
-      try {
-        if (options.beforeSeed) {
-          await options.beforeSeed()
-        }
-        await seedBrandingIfEmpty(payload)
-        await seedHomepageIfEmpty(payload)
-        await seedAboutIfEmpty(payload)
-        await seedServicesIfEmpty(payload)
-        await seedLegalIfEmpty(payload)
-        await seedNavigationIfEmpty(payload)
-        await seedBlogIfEmpty(payload)
-        await seedCaseStudyHighlightGlobal(payload, "homepage")
-        await seedCaseStudyHighlightGlobal(payload, "about")
-        await seedCaseStudyHighlightGlobal(payload, "services-page")
-      } catch (error) {
-        console.error("[payload] onInit seeding failed:", error)
+      // Each step is isolated so one failure cannot skip the steps after it. Previously a
+      // single try/catch wrapped the whole chain, which made the outcome depend on
+      // ordering: anything after the first throw silently never ran.
+      if (options.beforeSeed) {
+        await runSeedStep("prepare database schema", options.beforeSeed)
       }
+      await runSeedStep("branding", () => seedBrandingIfEmpty(payload))
+      await runSeedStep("homepage", () => seedHomepageIfEmpty(payload))
+      await runSeedStep("about", () => seedAboutIfEmpty(payload))
+      await runSeedStep("services", () => seedServicesIfEmpty(payload))
+      await runSeedStep("legal", () => seedLegalIfEmpty(payload))
+      await runSeedStep("navigation", () => seedNavigationIfEmpty(payload))
+      await runSeedStep("blog", () => seedBlogIfEmpty(payload))
+      await runSeedStep("case study highlight (homepage)", () =>
+        seedCaseStudyHighlightGlobal(payload, "homepage"),
+      )
+      await runSeedStep("case study highlight (about)", () =>
+        seedCaseStudyHighlightGlobal(payload, "about"),
+      )
+      await runSeedStep("case study highlight (services)", () =>
+        seedCaseStudyHighlightGlobal(payload, "services-page"),
+      )
     },
   })
 }

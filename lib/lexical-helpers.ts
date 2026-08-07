@@ -1,5 +1,6 @@
 import { defaultPatientJourneyBlock } from "@/lib/patient-journey-defaults"
 import type { PatientJourneyProps } from "@/lib/patient-journey-types"
+import type { Post } from "@/payload-types"
 
 type LexicalTextNode = {
   type: "text"
@@ -237,14 +238,17 @@ function mapContentItem(item: LexicalContentItem): LexicalNode {
   return createTextBlock(item)
 }
 
-export function createLexicalArticleContent(items: LexicalContentItem[]) {
+// Annotated with the generated Post["content"] type so the root node's `format` and
+// `direction` are checked against the alignment unions the schema actually permits,
+// rather than being widened to `string` and only failing when a seed writes them.
+export function createLexicalArticleContent(items: LexicalContentItem[]): Post["content"] {
   return {
     root: {
       type: "root",
       format: "",
       indent: 0,
       version: 1,
-      direction: "ltr" as const,
+      direction: "ltr",
       children: items.map(mapContentItem),
     },
   }
