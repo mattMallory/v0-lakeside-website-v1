@@ -1,32 +1,24 @@
 import { sqliteAdapter } from "@payloadcms/db-sqlite"
 
-import { ensureAboutGlobalSqlite } from "./lib/ensure-about-global-sqlite"
-import { ensureCaseStudyHighlightGlobalsSqlite } from "./lib/ensure-case-study-highlight-globals-sqlite"
-import { ensureHomepageGrowthSystemSqlite } from "./lib/ensure-homepage-growth-system-sqlite"
-import { ensureLegalGlobalSqlite } from "./lib/ensure-legal-global-sqlite"
-import { ensureNavigationGlobalSqlite } from "./lib/ensure-navigation-global-sqlite"
-import { ensurePostsCaseStudySqlite } from "./lib/ensure-posts-case-study-sqlite"
-import { ensureServicesGlobalSqlite } from "./lib/ensure-services-global-sqlite"
 import { createPayloadConfig } from "./lib/payload-config-base"
 
-async function ensureSqliteGlobals() {
-  await ensureLegalGlobalSqlite()
-  await ensureNavigationGlobalSqlite()
-  await ensureServicesGlobalSqlite()
-  await ensureHomepageGrowthSystemSqlite()
-  await ensurePostsCaseStudySqlite()
-  await ensureAboutGlobalSqlite()
-  await ensureCaseStudyHighlightGlobalsSqlite()
-}
-
+// Local development only — this config is selected when no Postgres URL is set and VERCEL
+// is unset (see lib/db-url.ts). Production goes through payload.config.postgres.ts, whose
+// adapter hard-codes push: false and takes its schema from migrations/.
+//
+// Push is on by default so a fresh clone gets a working database. Payload generates the
+// whole local schema from this config, which is the only way local and the config can be
+// guaranteed to agree — hand-written DDL can only ever match by coincidence, and used to
+// leave the local database missing 28 of its 37 tables.
+//
+// Set PAYLOAD_DB_PUSH=false to opt out. Note that push asks for confirmation on the
+// terminal before anything it considers destructive, so a non-interactive process that
+// hits a destructive diff will wait for input rather than fail.
 export default createPayloadConfig(
   sqliteAdapter({
     client: {
       url: process.env.DATABASE_URL || "file:./payload.db",
     },
-    push: process.env.PAYLOAD_DB_PUSH === "true",
+    push: process.env.PAYLOAD_DB_PUSH !== "false",
   }),
-  {
-    beforeSeed: ensureSqliteGlobals,
-  },
 )

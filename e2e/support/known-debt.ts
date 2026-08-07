@@ -100,6 +100,21 @@ export const TOUCH_TARGET_DEBT: DebtEntry[] = [
     finding: "MOB-04",
     note: "Sort select, 98x38px.",
   },
+  // These two only render once the blog has posts and tags to show. The local database
+  // had neither until the schema work landed, so the suite could not see them before —
+  // the CSS is unchanged and predates that work. Measured on this branch at every width.
+  {
+    route: "/blog",
+    match: "button.font-brand-display.min-w-10.rounded-[10px]",
+    finding: "MOB-04",
+    note: "Pagination buttons in components/blog-roll.tsx, 40x36px and 44x38px. Only render with enough posts to paginate.",
+  },
+  {
+    route: "/blog",
+    match: "button.rounded-full.px-3.py-1.5",
+    finding: "MOB-04",
+    note: "Tag filter pills in components/blog-sidebar.tsx, 28px tall (47-106px wide). Only render when tags exist.",
+  },
 
   // --- Budget planner ---
   {
