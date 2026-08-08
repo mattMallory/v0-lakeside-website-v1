@@ -1,9 +1,12 @@
 import type { Payload } from "payload"
 
 /** When Branding has no logo, attach the newest media file that looks like a logo. */
+// preferredMediaId is a number: this project's Payload config uses numeric IDs, and the
+// Branding.logo relation will not accept a string. Declaring it as string | number let a
+// value through that could never be stored.
 export async function linkBrandingLogoIfMissing(
   payload: Payload,
-  preferredMediaId?: number | string | null,
+  preferredMediaId?: number | null,
 ) {
   try {
     const branding = await payload.findGlobal({

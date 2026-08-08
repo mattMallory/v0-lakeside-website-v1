@@ -21,6 +21,7 @@ import * as migration_20260803_testimonial_photo from './20260803_testimonial_ph
 import * as migration_20260803_team_image from './20260803_team_image';
 import * as migration_20260805_legal_global from './20260805_legal_global';
 import * as migration_20260805_navigation_global from './20260805_navigation_global';
+import * as migration_20260808_branding_surface_colors from './20260808_branding_surface_colors';
 
 export const migrations = [
   {
@@ -132,5 +133,10 @@ export const migrations = [
     up: migration_20260805_navigation_global.up,
     down: migration_20260805_navigation_global.down,
     name: '20260805_navigation_global'
+  },
+  {
+    up: migration_20260808_branding_surface_colors.up,
+    down: migration_20260808_branding_surface_colors.down,
+    name: '20260808_branding_surface_colors'
   },
 ];

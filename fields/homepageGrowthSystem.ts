@@ -252,6 +252,10 @@ export const homepageGrowthSystemTabs: Tab[] = [
       label: "Featured testimonial",
       maxRows: 1,
       defaultValue: defaultGrowthSystemContent.testimonials,
+      admin: {
+        description:
+          "One testimonial only — the homepage results section is designed around a single quote, so a second would not appear anywhere on the page.",
+      },
       fields: [
         {
           name: "photo",

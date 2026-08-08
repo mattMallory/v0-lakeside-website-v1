@@ -48,8 +48,11 @@ export async function seedBrandingIfEmpty(payload: Payload) {
       ...(isBlank(branding.mutedTextColor) && { mutedTextColor: d.mutedTextColor }),
       ...(isBlank(branding.borderColor) && { borderColor: d.borderColor }),
       ...(isBlank(branding.focusRingColor) && { focusRingColor: d.focusRingColor }),
-      ...(isBlank(branding.headingFont) && { headingFont: d.headingFont }),
-      ...(isBlank(branding.bodyFont) && { bodyFont: d.bodyFont }),
+      ...(isBlank(branding.surfaceColor) && { surfaceColor: d.surfaceColor }),
+      ...(isBlank(branding.mutedSurfaceColor) && { mutedSurfaceColor: d.mutedSurfaceColor }),
+      ...(isBlank(branding.buttonHoverColor) && { buttonHoverColor: d.buttonHoverColor }),
+      ...(isBlank(branding.buttonActiveColor) && { buttonActiveColor: d.buttonActiveColor }),
+      ...(isBlank(branding.inkColor) && { inkColor: d.inkColor }),
       ...(isBlank(branding.logoAlt) && { logoAlt: d.logoAlt }),
       ...(branding.logoHeight === null || branding.logoHeight === undefined
         ? { logoHeight: d.logoHeight }

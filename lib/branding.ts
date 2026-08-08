@@ -7,8 +7,6 @@ import {
   headingFontFamily,
   logoFontFamily,
 } from "@/lib/fonts"
-import type { GoogleFontName } from "@/lib/google-fonts"
-import { googleFontOptions } from "@/lib/google-fonts"
 import type { Branding } from "@/payload-types"
 
 const colorKeys = [
@@ -26,6 +24,11 @@ const colorKeys = [
   "mutedTextColor",
   "borderColor",
   "focusRingColor",
+  "surfaceColor",
+  "mutedSurfaceColor",
+  "buttonHoverColor",
+  "buttonActiveColor",
+  "inkColor",
 ] as const satisfies ReadonlyArray<keyof BrandingContent & keyof Branding>
 
 function isHexColor(value: string): boolean {
@@ -38,12 +41,6 @@ function resolveHex(
 ): string {
   const resolved = withFallback(value, fallback)
   return isHexColor(resolved) ? resolved : fallback
-}
-
-function resolveFont(value: string | null | undefined, fallback: GoogleFontName): GoogleFontName {
-  if (!value) return fallback
-  const match = googleFontOptions.find((option) => option.value === value)
-  return match?.value ?? fallback
 }
 
 function resolveLogoHeight(value: unknown, fallback: number): number {
@@ -117,8 +114,6 @@ export async function getBrandingContent(): Promise<BrandingContent> {
       ),
       logoHeight: resolveLogoHeight(branding.logoHeight, defaultBrandingContent.logoHeight),
       ...colors,
-      headingFont: resolveFont(branding.headingFont, defaultBrandingContent.headingFont),
-      bodyFont: resolveFont(branding.bodyFont, defaultBrandingContent.bodyFont),
     }
   } catch (error) {
     console.error("[payload] Failed to load branding content:", error)
@@ -133,33 +128,44 @@ export function buildBrandingCssVariables(branding: BrandingContent): string {
   --background: ${branding.backgroundColor};
   --foreground: ${branding.textColor};
   --heading: ${branding.headingColor};
-  --card: #FFFFFF;
+  --card: ${branding.surfaceColor};
   --card-foreground: ${branding.headingColor};
-  --popover: #FFFFFF;
+  --popover: ${branding.surfaceColor};
   --popover-foreground: ${branding.textColor};
   --primary: ${branding.primaryColor};
   --primary-foreground: ${branding.buttonTextColor};
   --icon: ${branding.iconColor};
   --button: ${branding.buttonColor};
   --button-foreground: ${branding.buttonTextColor};
-  --button-hover: #1D4F8A;
-  --button-active: #163D6E;
+  --button-hover: ${branding.buttonHoverColor};
+  --button-active: ${branding.buttonActiveColor};
   --secondary-button: ${branding.secondaryButtonColor};
   --secondary-button-foreground: ${branding.secondaryButtonTextColor};
   --secondary: ${branding.secondaryColor};
   --secondary-foreground: ${branding.textColor};
-  --muted: #F3F4F6;
+  --muted: ${branding.mutedSurfaceColor};
   --muted-foreground: ${branding.mutedTextColor};
   --accent: ${branding.accentColor};
   --accent-foreground: ${branding.primaryColor};
   --border: ${branding.borderColor};
   --input: ${branding.borderColor};
   --ring: ${branding.focusRingColor};
-  --ink: #0E1726;
-  --lake-pale: #EFF6FF;
-  --lake-light: #DBEAFE;
+  --ink: ${branding.inkColor};
+  --lake-pale: ${branding.secondaryColor};
+  --lake-light: ${branding.accentColor};
   --chart-1: ${branding.primaryColor};
+  --chart-2: ${branding.buttonHoverColor};
+  --chart-3: ${branding.accentColor};
+  --chart-4: ${branding.buttonActiveColor};
+  --chart-5: ${branding.inkColor};
+  --sidebar: ${branding.surfaceColor};
+  --sidebar-foreground: ${branding.headingColor};
   --sidebar-primary: ${branding.primaryColor};
+  --sidebar-primary-foreground: ${branding.buttonTextColor};
+  --sidebar-accent: ${branding.secondaryColor};
+  --sidebar-accent-foreground: ${branding.headingColor};
+  --sidebar-border: ${branding.borderColor};
+  --sidebar-ring: ${branding.focusRingColor};
   --font-heading: ${headingFontFamily};
   --font-sans: ${bodyFontFamily};
   --font-logo: ${logoFontFamily};
