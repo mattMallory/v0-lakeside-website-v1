@@ -597,55 +597,25 @@ export interface Branding {
    */
   focusRingColor?: string | null;
   /**
-   * Applied to all headings (h1–h6).
+   * Background of cards, popovers, and the sidebar.
    */
-  headingFont:
-    | 'Satoshi'
-    | 'Manrope'
-    | 'Space Grotesk'
-    | 'Lexend Deca'
-    | 'Geist'
-    | 'Inter'
-    | 'DM Sans'
-    | 'Outfit'
-    | 'Plus Jakarta Sans'
-    | 'Poppins'
-    | 'Montserrat'
-    | 'Nunito Sans'
-    | 'Source Sans 3'
-    | 'IBM Plex Sans'
-    | 'Lato'
-    | 'Open Sans'
-    | 'Roboto'
-    | 'Playfair Display'
-    | 'Fraunces'
-    | 'Merriweather'
-    | 'Libre Baskerville';
+  surfaceColor?: string | null;
   /**
-   * Applied to body copy and UI text.
+   * Muted fills behind quiet UI areas.
    */
-  bodyFont:
-    | 'Satoshi'
-    | 'Manrope'
-    | 'Space Grotesk'
-    | 'Lexend Deca'
-    | 'Geist'
-    | 'Inter'
-    | 'DM Sans'
-    | 'Outfit'
-    | 'Plus Jakarta Sans'
-    | 'Poppins'
-    | 'Montserrat'
-    | 'Nunito Sans'
-    | 'Source Sans 3'
-    | 'IBM Plex Sans'
-    | 'Lato'
-    | 'Open Sans'
-    | 'Roboto'
-    | 'Playfair Display'
-    | 'Fraunces'
-    | 'Merriweather'
-    | 'Libre Baskerville';
+  mutedSurfaceColor?: string | null;
+  /**
+   * Primary button background on hover.
+   */
+  buttonHoverColor?: string | null;
+  /**
+   * Primary button background while pressed.
+   */
+  buttonActiveColor?: string | null;
+  /**
+   * Darkest brand tone, used for deep panels and metric cards.
+   */
+  inkColor?: string | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -764,6 +734,9 @@ export interface Homepage {
    * For your team only — not shown on the live site.
    */
   gsResultsPlaceholder?: string | null;
+  /**
+   * One testimonial only — the homepage results section is designed around a single quote, so a second would not appear anywhere on the page.
+   */
   gsTestimonials?:
     | {
         photo?: (number | null) | Media;
@@ -1106,8 +1079,11 @@ export interface BrandingSelect<T extends boolean = true> {
   mutedTextColor?: T;
   borderColor?: T;
   focusRingColor?: T;
-  headingFont?: T;
-  bodyFont?: T;
+  surfaceColor?: T;
+  mutedSurfaceColor?: T;
+  buttonHoverColor?: T;
+  buttonActiveColor?: T;
+  inkColor?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

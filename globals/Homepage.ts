@@ -9,7 +9,12 @@ type HomepageData = Record<string, unknown>
 function normalizeHomepageData(data: HomepageData): HomepageData {
   const testimonials = data.gsTestimonials
   if (Array.isArray(testimonials)) {
-    data.gsTestimonials = testimonials.slice(0, 1).map((item) => {
+    // Only fills in a missing photoAlt. This used to slice the array to one row as well,
+    // which ran before validation and so silently discarded extra testimonials instead of
+    // letting the field's maxRows report the limit. The homepage renders exactly one
+    // testimonial (components/homepage-growth-system.tsx:209), and maxRows is what tells
+    // an editor so.
+    data.gsTestimonials = testimonials.map((item) => {
       const testimonial = item as Record<string, unknown>
       return {
         ...testimonial,

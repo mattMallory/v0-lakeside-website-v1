@@ -1,5 +1,3 @@
-import type { GoogleFontName } from "@/lib/google-fonts"
-
 export type BrandingContent = {
   logoUrl: string
   logoAlt: string
@@ -19,8 +17,11 @@ export type BrandingContent = {
   mutedTextColor: string
   borderColor: string
   focusRingColor: string
-  headingFont: GoogleFontName
-  bodyFont: GoogleFontName
+  surfaceColor: string
+  mutedSurfaceColor: string
+  buttonHoverColor: string
+  buttonActiveColor: string
+  inkColor: string
 }
 
 /** Lakeside Brand Guide v20 tokens. */
@@ -42,8 +43,13 @@ export const defaultBrandingContent: BrandingContent = {
   mutedTextColor: "#6B7280",
   borderColor: "#E8E9EB",
   focusRingColor: "#2563A8",
-  headingFont: "Satoshi",
-  bodyFont: "Manrope",
+  // Defaults are the literals the CSS generator used to hardcode, so default branding
+  // emits exactly the same values it did before these became editable.
+  surfaceColor: "#FFFFFF",
+  mutedSurfaceColor: "#F3F4F6",
+  buttonHoverColor: "#1D4F8A",
+  buttonActiveColor: "#163D6E",
+  inkColor: "#0E1726",
 }
 
 export const brandGuideTokens = {
