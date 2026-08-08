@@ -6,7 +6,7 @@
   "packageManager": "pnpm@10.34.5",
   "scripts": {
     "dev": "node scripts/sync-layout-scripts.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next dev --webpack",
-    "build": "node scripts/sync-layout-scripts.mjs && node scripts/check-payload-types.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next build --webpack",
+    "build": "node scripts/sync-layout-scripts.mjs && node scripts/check-payload-types.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node --import tsx scripts/check-schema-parity.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next build --webpack",
     "ci": "node scripts/vercel-build.mjs",
     "start": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next start",
     "lint": "eslint .",

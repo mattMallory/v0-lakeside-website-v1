@@ -121,6 +121,15 @@ if (missing.length > 0) {
 env.POSTGRES_URL = postgresUrl
 run("Running database migrations", "node ./node_modules/payload/bin.js migrate")
 
+// These three guards are the pre-build steps of the `build` script in package.json.
+// This script invokes `next build` directly rather than going through that script, so
+// without them a deploy would skip every check a local build performs: stale
+// public/scripts output, a drifted payload-types.ts, and a config field with no
+// migration would all ship green. Keep this list in step with package.json "build".
+run("Syncing inline layout scripts", "node ./scripts/sync-layout-scripts.mjs")
+run("Verifying generated Payload types", "node ./scripts/check-payload-types.mjs")
+run("Checking schema parity", "node --import tsx ./scripts/check-schema-parity.mjs")
+
 run("Running Next.js build", "node ./node_modules/next/dist/bin/next build --webpack")
 
 console.log("\n[build] Done.")

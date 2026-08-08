@@ -25,6 +25,25 @@ const tmpDb = path.join(fs.mkdtempSync(path.join(os.tmpdir(), "parity-")), "pari
 process.env.DATABASE_URL = `file:${tmpDb}`
 process.env.PAYLOAD_DB_PUSH = "true"
 
+// payload.config.ts picks Postgres whenever any Postgres URL is set or VERCEL is
+// truthy, so on a deploy this would otherwise load the production config and read
+// the live database instead of the throwaway file above. Clear every selector
+// shouldUsePostgresConfig() reads (lib/db-url.ts) so this check always compares the
+// config against migrations, never against a real database.
+for (const key of [
+  "VERCEL",
+  "POSTGRES_URL",
+  "POSTGRES_URL_NON_POOLING",
+  "POSTGRES_PRISMA_URL",
+  "DATABASE_URL_UNPOOLED",
+  "POSTGRES_HOST",
+  "POSTGRES_USER",
+  "POSTGRES_PASSWORD",
+  "POSTGRES_DATABASE",
+]) {
+  delete process.env[key]
+}
+
 const { getPayload } = await import("payload")
 const { default: config } = await import("@payload-config")
 
