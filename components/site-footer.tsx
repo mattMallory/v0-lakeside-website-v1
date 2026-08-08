@@ -45,7 +45,9 @@ export async function SiteFooter() {
               <img
                 src={branding.logoUrl}
                 alt={branding.logoAlt}
-                className="h-[34px] w-auto max-w-[9.5rem] object-contain object-left brightness-0 invert"
+                // Height comes from Branding; resolveLogoHeight clamps it to 16-96px.
+                style={{ height: `${branding.logoHeight}px` }}
+                className="w-auto max-w-[9.5rem] object-contain object-left brightness-0 invert"
               />
             </Link>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
