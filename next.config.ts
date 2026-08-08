@@ -25,9 +25,6 @@ const nextConfig: NextConfig = {
     "@libsql/client",
     "libsql",
   ],
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
     localPatterns: [
