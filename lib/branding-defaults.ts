@@ -28,7 +28,8 @@ export type BrandingContent = {
 export const defaultBrandingContent: BrandingContent = {
   logoUrl: "/lakeside-logo.svg",
   logoAlt: "Lakeside",
-  logoHeight: 44,
+  // 34px is what the header and footer render, so a fresh install is unchanged.
+  logoHeight: 34,
   primaryColor: "#2563A8",
   iconColor: "#2563A8",
   buttonColor: "#2563A8",

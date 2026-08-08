@@ -80,7 +80,10 @@ export function SiteHeader() {
             src={branding.logoUrl}
             alt={branding.logoAlt}
             suppressHydrationWarning
-            className="h-[34px] w-auto max-w-[9.5rem] object-contain object-left"
+            // Height comes from Branding; resolveLogoHeight clamps it to 16-96px.
+            // max-width still bounds a wide logo independently of its height.
+            style={{ height: `${branding.logoHeight}px` }}
+            className="w-auto max-w-[9.5rem] object-contain object-left"
           />
         </Link>
 
