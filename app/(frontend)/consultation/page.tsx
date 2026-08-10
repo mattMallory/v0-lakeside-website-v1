@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { ConsultationForm } from "@/components/consultation-form"
+import { resolveConsultationFormMode } from "@/lib/ghl-consultation"
 
 export const metadata: Metadata = {
   title: "Schedule a Consultation | Lakeside",
@@ -10,6 +11,8 @@ export const metadata: Metadata = {
 }
 
 export default function ConsultationPage() {
+  const formMode = resolveConsultationFormMode()
+
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
@@ -25,7 +28,7 @@ export default function ConsultationPage() {
           </p>
         </div>
         <div className="mt-10">
-          <ConsultationForm />
+          <ConsultationForm mode={formMode} />
         </div>
       </main>
       <SiteFooter />

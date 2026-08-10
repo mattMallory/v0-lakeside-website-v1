@@ -34,6 +34,9 @@ if (!postgresUrl) {
 process.env.POSTGRES_URL = postgresUrl
 process.env.PAYLOAD_DB_PUSH = "false"
 
+// Host only — never log the credentials embedded in the connection string.
+console.log(`  database host: ${new URL(postgresUrl).hostname}`)
+
 const configUrl = pathToFileURL(path.join(root, "payload.config.postgres.ts")).href
 
 try {
@@ -43,8 +46,15 @@ try {
   console.log("\nInitializing Payload...")
   const payload = await getPayload({ config })
 
-  const users = await payload.find({ collection: "users", limit: 1 })
+  const users = await payload.find({ collection: "users", limit: 100 })
   console.log(`\nPayload initialized successfully. Users in DB: ${users.totalDocs}`)
+
+  for (const user of users.docs) {
+    const locked = user.lockUntil && new Date(user.lockUntil) > new Date()
+    console.log(
+      `  - ${user.email} (login attempts: ${user.loginAttempts ?? 0}${locked ? ", LOCKED" : ""})`,
+    )
+  }
 
   const homepage = await payload.findGlobal({ slug: "homepage" })
   console.log(`Homepage global loaded (id: ${homepage.id}).`)

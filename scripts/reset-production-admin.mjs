@@ -28,6 +28,9 @@ if (!postgresUrl) {
 process.env.POSTGRES_URL = postgresUrl
 process.env.PAYLOAD_DB_PUSH = "false"
 
+// Host only — never log the credentials embedded in the connection string.
+console.log(`Target database host: ${new URL(postgresUrl).hostname}`)
+
 const email = process.env.PRODUCTION_ADMIN_EMAIL || "matt@madebylakeside.com"
 const password = process.env.PRODUCTION_ADMIN_PASSWORD
 
@@ -61,6 +64,12 @@ if (existing.docs.length === 0) {
     collection: "users",
     id: existing.docs[0].id,
     data: { password },
+  })
+  // Clears any lockout from repeated failed login attempts.
+  await payload.unlock({
+    collection: "users",
+    data: { email },
+    overrideAccess: true,
   })
   console.log(`Reset password for production admin user: ${email}`)
 }
