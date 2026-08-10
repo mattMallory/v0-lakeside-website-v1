@@ -1,5 +1,6 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from "next"
+import Script from "next/script"
 
 import { BrandingProvider } from "@/components/branding-provider"
 import { NavigationProvider } from "@/components/navigation-provider"
@@ -7,10 +8,6 @@ import { buildBrandingCssVariables, getBrandingContent } from "@/lib/branding"
 import { getNavigationContent } from "@/lib/navigation"
 import { manrope, satoshi, spaceGrotesk } from "@/lib/fonts"
 import { getHomepageSeo } from "@/lib/homepage-seo"
-import { metricCountUpInlineScript } from "@/lib/metric-count-up-inline"
-import { budgetPlannerLayoutScript } from "@/lib/budget-planner-layout-script"
-import { offerBuilderLayoutScript } from "@/lib/offer-builder-layout-script"
-import { techLogosRevealInlineScript } from "@/lib/tech-logos-reveal-inline"
 import "../globals.css"
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -84,10 +81,10 @@ export default async function RootLayout({
         <BrandingProvider value={branding}>
           <NavigationProvider value={navigation}>{children}</NavigationProvider>
         </BrandingProvider>
-        <script dangerouslySetInnerHTML={{ __html: budgetPlannerLayoutScript }} />
-        <script dangerouslySetInnerHTML={{ __html: offerBuilderLayoutScript }} />
-        <script dangerouslySetInnerHTML={{ __html: metricCountUpInlineScript }} />
-        <script dangerouslySetInnerHTML={{ __html: techLogosRevealInlineScript }} />
+        <Script src="/scripts/lakeside-budget-planner.js" strategy="afterInteractive" />
+        <Script src="/scripts/lakeside-offer-builder.js" strategy="afterInteractive" />
+        <Script src="/scripts/lakeside-metric-count-up.js" strategy="afterInteractive" />
+        <Script src="/scripts/lakeside-tech-logos-reveal.js" strategy="afterInteractive" />
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
