@@ -3,6 +3,12 @@ import { NextResponse } from "next/server"
 import { buildCustomFieldsFromKeys } from "@/lib/ghl-custom-field-ids"
 import { isValidEmail } from "@/lib/ghl-form"
 import {
+  GHL_CONSULTATION_FIELD_KEYS,
+  GHL_CONSULTATION_MESSAGE_ALIASES,
+  GHL_CONSULTATION_NOTE_TITLE,
+} from "@/lib/ghl-consultation"
+import {
+  createGhlContactNote,
   GhlApiError,
   GhlConfigError,
   getGhlConfig,
@@ -17,6 +23,7 @@ type ContactRequestBody = {
   companyName?: string
   source?: string
   tags?: string[]
+  note?: string
   customFields?: Record<string, string>
 }
 
@@ -75,7 +82,18 @@ export async function POST(request: Request) {
   }
 
   const customFieldKeys = parseCustomFields(body.customFields)
-  const customFields = customFieldKeys ? await buildCustomFieldsFromKeys(customFieldKeys) : []
+  const customFields = customFieldKeys
+    ? await buildCustomFieldsFromKeys(customFieldKeys, {
+        keyAliases: {
+          [GHL_CONSULTATION_FIELD_KEYS.message]: [...GHL_CONSULTATION_MESSAGE_ALIASES],
+        },
+      })
+    : []
+
+  const noteBody = typeof body.note === "string" ? body.note.trim() : ""
+  const messageKey = GHL_CONSULTATION_FIELD_KEYS.message
+  const messageInCustomFields = Boolean(customFieldKeys?.[messageKey])
+  const messageMappedToGhl = customFields.some((field) => field.key === messageKey)
 
   try {
     const result = await upsertGhlContact({
@@ -96,6 +114,31 @@ export async function POST(request: Request) {
       typeof (result as { contact?: { id?: string } }).contact?.id === "string"
         ? (result as { contact: { id: string } }).contact.id
         : undefined
+
+    const shouldCreateNote = contactId && noteBody && !messageMappedToGhl
+
+    if (shouldCreateNote) {
+      try {
+        await createGhlContactNote(contactId, {
+          title: GHL_CONSULTATION_NOTE_TITLE,
+          body: noteBody,
+        })
+      } catch (noteError) {
+        if (messageInCustomFields) {
+          console.error("[ghl/contact] note fallback failed", noteError)
+          return NextResponse.json(
+            {
+              ok: false,
+              error:
+                "We saved your contact but could not store your message. Please email us directly.",
+            },
+            { status: 502 },
+          )
+        }
+
+        console.error("[ghl/contact] optional note failed", noteError)
+      }
+    }
 
     return NextResponse.json({ ok: true, contactId })
   } catch (error) {
