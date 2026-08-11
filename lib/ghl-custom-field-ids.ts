@@ -23,7 +23,18 @@ function envCustomFieldId(uniqueKey: string): string | undefined {
   return process.env[envName]?.trim() || undefined
 }
 
-function parseCustomFieldList(payload: unknown): Array<{ id: string; fieldKey: string }> {
+function slugifyFieldName(name: string): string {
+  return name
+    .trim()
+    .toLowerCase()
+    .replace(/['']/g, "")
+    .replace(/[^a-z0-9]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+}
+
+function parseCustomFieldList(
+  payload: unknown,
+): Array<{ id: string; fieldKey: string; name?: string }> {
   if (!payload || typeof payload !== "object") return []
 
   const root = payload as Record<string, unknown>
@@ -46,9 +57,10 @@ function parseCustomFieldList(payload: unknown): Array<{ id: string; fieldKey: s
         : typeof record.key === "string"
           ? record.key.trim()
           : ""
+    const name = typeof record.name === "string" ? record.name.trim() : ""
 
     if (id && fieldKey) {
-      fields.push({ id, fieldKey })
+      fields.push({ id, fieldKey, name: name || undefined })
     }
   }
 
@@ -106,6 +118,10 @@ async function fetchCustomFieldIdMap(config: GhlConfig): Promise<Map<string, str
   for (const field of parseCustomFieldList(parsed)) {
     map.set(normalizeCustomFieldKey(field.fieldKey), field.id)
     map.set(field.fieldKey, field.id)
+
+    if (field.name) {
+      map.set(slugifyFieldName(field.name), field.id)
+    }
   }
 
   customFieldIdCache = { map, fetchedAt: now }
@@ -115,11 +131,23 @@ async function fetchCustomFieldIdMap(config: GhlConfig): Promise<Map<string, str
 async function resolveCustomFieldId(
   uniqueKey: string,
   idMap: Map<string, string>,
+  aliases: string[] = [],
 ): Promise<string | undefined> {
-  const fromEnv = envCustomFieldId(uniqueKey)
-  if (fromEnv) return fromEnv
+  const candidates = [uniqueKey, ...aliases]
 
-  return idMap.get(uniqueKey) ?? idMap.get(`contact.${uniqueKey}`)
+  for (const key of candidates) {
+    const fromEnv = envCustomFieldId(key)
+    if (fromEnv) return fromEnv
+
+    const resolved =
+      idMap.get(key) ??
+      idMap.get(`contact.${key}`) ??
+      idMap.get(slugifyFieldName(key))
+
+    if (resolved) return resolved
+  }
+
+  return undefined
 }
 
 /**
@@ -131,6 +159,10 @@ async function resolveCustomFieldId(
  */
 export async function buildCustomFieldsFromKeys(
   fields: Record<string, string | number | boolean | null | undefined>,
+  options?: {
+    /** Extra lookup keys per field (e.g. GHL display names or legacy form keys). */
+    keyAliases?: Record<string, string[]>
+  },
 ): Promise<GhlCustomField[]> {
   const config = getGhlConfig()
   const idMap = config ? await fetchCustomFieldIdMap(config) : new Map<string, string>()
@@ -144,7 +176,11 @@ export async function buildCustomFieldsFromKeys(
     const field_value = String(rawValue).trim()
     if (!field_value) continue
 
-    const fieldId = await resolveCustomFieldId(uniqueKey, idMap)
+    const fieldId = await resolveCustomFieldId(
+      uniqueKey,
+      idMap,
+      options?.keyAliases?.[uniqueKey],
+    )
     if (!fieldId) {
       unresolved.push(uniqueKey)
       continue

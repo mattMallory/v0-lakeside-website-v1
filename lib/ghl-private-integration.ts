@@ -20,6 +20,11 @@ export type GhlUpsertContactInput = {
   customFields?: GhlCustomField[]
 }
 
+export type GhlContactNoteInput = {
+  body: string
+  title?: string
+}
+
 export type GhlConfig = {
   token: string
   locationId: string
@@ -92,6 +97,57 @@ export async function upsertGhlContact(input: GhlUpsertContactInput): Promise<un
       Accept: "application/json",
     },
     body: JSON.stringify(body),
+  })
+
+  const text = await response.text()
+  let parsed: unknown = text
+
+  try {
+    parsed = text ? JSON.parse(text) : null
+  } catch {
+    // keep raw text for error logging
+  }
+
+  if (!response.ok) {
+    const detail =
+      typeof parsed === "object" && parsed !== null && "message" in parsed
+        ? String((parsed as { message: unknown }).message)
+        : text || response.statusText
+    throw new GhlApiError(response.status, detail)
+  }
+
+  return parsed
+}
+
+/**
+ * Attach a note to a contact (contacts scope). Used when a message cannot map to a custom field.
+ */
+export async function createGhlContactNote(
+  contactId: string,
+  input: GhlContactNoteInput,
+): Promise<unknown> {
+  const config = getGhlConfig()
+  if (!config) {
+    throw new GhlConfigError()
+  }
+
+  const body = input.body?.trim()
+  if (!body) {
+    throw new Error("Note body is required.")
+  }
+
+  const response = await fetch(`${GHL_API_BASE}/contacts/${contactId}/notes`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${config.token}`,
+      Version: GHL_API_VERSION,
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    },
+    body: JSON.stringify({
+      body,
+      title: input.title?.trim() || undefined,
+    }),
   })
 
   const text = await response.text()

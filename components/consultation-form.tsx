@@ -45,6 +45,7 @@ function GhlEmbedConsultationForm() {
 function NativeConsultationForm() {
   const [mounted, setMounted] = useState(false)
   const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
   const [email, setEmail] = useState("")
   const [phone, setPhone] = useState("")
   const [practiceName, setPracticeName] = useState("")
@@ -61,15 +62,19 @@ function NativeConsultationForm() {
     setStatus("submitting")
     setErrorMessage(null)
 
+    const trimmedMessage = message.trim()
+
     const result = await submitGhlContact({
-      firstName,
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
       email,
       phone,
       companyName: practiceName,
       source: GHL_CONSULTATION_SOURCE,
       tags: [...GHL_CONSULTATION_TAGS],
-      customFields: message.trim()
-        ? { [GHL_CONSULTATION_FIELD_KEYS.message]: message.trim() }
+      note: trimmedMessage || undefined,
+      customFields: trimmedMessage
+        ? { [GHL_CONSULTATION_FIELD_KEYS.message]: trimmedMessage }
         : undefined,
     })
 
@@ -109,21 +114,39 @@ function NativeConsultationForm() {
       className="rounded-2xl border border-border bg-card p-6 shadow-sm ring-1 ring-border md:p-8"
     >
       <div className="grid gap-5 md:grid-cols-2">
-        <div className="md:col-span-2">
+        <div>
           <label htmlFor="consult-first-name" className="mb-1.5 block text-sm font-medium text-heading">
-            Name
+            First name
           </label>
           <input
             id="consult-first-name"
             name="firstName"
             type="text"
             required
-            autoComplete="name"
+            autoComplete="given-name"
             data-lpignore="true"
             data-1p-ignore
             className={fieldClass}
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="consult-last-name" className="mb-1.5 block text-sm font-medium text-heading">
+            Last name
+          </label>
+          <input
+            id="consult-last-name"
+            name="lastName"
+            type="text"
+            required
+            autoComplete="family-name"
+            data-lpignore="true"
+            data-1p-ignore
+            className={fieldClass}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
           />
         </div>
 

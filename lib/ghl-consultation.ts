@@ -14,6 +14,18 @@ export const GHL_CONSULTATION_FIELD_KEYS = {
   message: "message",
 } as const
 
+/** Alternate GHL Unique Keys / labels for the consultation message field. */
+export const GHL_CONSULTATION_MESSAGE_ALIASES = [
+  "message",
+  "what_would_you_like_help_with",
+  "help_with",
+  "consultation_message",
+  "contact_message",
+  "notes",
+] as const
+
+export const GHL_CONSULTATION_NOTE_TITLE = "What would you like help with?"
+
 export const GHL_CONSULTATION_TAGS = ["consultation-request", "website-lead"] as const
 
 export const GHL_CONSULTATION_SOURCE = "Consultation Page"

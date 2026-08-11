@@ -6,6 +6,8 @@ export type SubmitGhlContactPayload = {
   companyName?: string
   source?: string
   tags?: string[]
+  /** Plain-text note added on the GHL contact when custom field mapping is unavailable. */
+  note?: string
   /** Keys must match GHL custom field Unique Keys (mapped server-side via GHL_CF_* env). */
   customFields?: Record<string, string>
 }
