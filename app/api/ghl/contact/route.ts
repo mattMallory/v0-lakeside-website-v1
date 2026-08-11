@@ -6,12 +6,15 @@ import {
   GHL_CONSULTATION_FIELD_KEYS,
   GHL_CONSULTATION_MESSAGE_ALIASES,
   GHL_CONSULTATION_NOTE_TITLE,
+  getConsultationMessageFieldId,
 } from "@/lib/ghl-consultation"
 import {
   createGhlContactNote,
   GhlApiError,
   GhlConfigError,
   getGhlConfig,
+  resolveGhlContactId,
+  updateGhlContact,
   upsertGhlContact,
 } from "@/lib/ghl-private-integration"
 
@@ -82,7 +85,7 @@ export async function POST(request: Request) {
   }
 
   const customFieldKeys = parseCustomFields(body.customFields)
-  const customFields = customFieldKeys
+  let customFields = customFieldKeys
     ? await buildCustomFieldsFromKeys(customFieldKeys, {
         keyAliases: {
           [GHL_CONSULTATION_FIELD_KEYS.message]: [...GHL_CONSULTATION_MESSAGE_ALIASES],
@@ -92,8 +95,19 @@ export async function POST(request: Request) {
 
   const noteBody = typeof body.note === "string" ? body.note.trim() : ""
   const messageKey = GHL_CONSULTATION_FIELD_KEYS.message
-  const messageInCustomFields = Boolean(customFieldKeys?.[messageKey])
-  const messageMappedToGhl = customFields.some((field) => field.key === messageKey)
+  const messageText = customFieldKeys?.[messageKey]
+  const directMessageFieldId = getConsultationMessageFieldId()
+
+  if (messageText && directMessageFieldId) {
+    customFields = [
+      ...customFields.filter((field) => field.key !== messageKey),
+      {
+        id: directMessageFieldId,
+        key: messageKey,
+        field_value: messageText,
+      },
+    ]
+  }
 
   try {
     const result = await upsertGhlContact({
@@ -107,37 +121,43 @@ export async function POST(request: Request) {
       customFields: customFields.length ? customFields : undefined,
     })
 
-    const contactId =
-      typeof result === "object" &&
-      result !== null &&
-      "contact" in result &&
-      typeof (result as { contact?: { id?: string } }).contact?.id === "string"
-        ? (result as { contact: { id: string } }).contact.id
-        : undefined
+    const contactId = await resolveGhlContactId(result, email || undefined, phone || undefined)
 
-    const shouldCreateNote = contactId && noteBody && !messageMappedToGhl
+    if (contactId && customFields.length) {
+      try {
+        await updateGhlContact(contactId, { customFields })
+      } catch (updateError) {
+        console.error("[ghl/contact] custom field update failed", updateError)
+      }
+    }
 
-    if (shouldCreateNote) {
+    if (contactId && noteBody) {
       try {
         await createGhlContactNote(contactId, {
           title: GHL_CONSULTATION_NOTE_TITLE,
           body: noteBody,
         })
       } catch (noteError) {
-        if (messageInCustomFields) {
-          console.error("[ghl/contact] note fallback failed", noteError)
-          return NextResponse.json(
-            {
-              ok: false,
-              error:
-                "We saved your contact but could not store your message. Please email us directly.",
-            },
-            { status: 502 },
-          )
-        }
-
-        console.error("[ghl/contact] optional note failed", noteError)
+        console.error("[ghl/contact] note creation failed", noteError)
+        return NextResponse.json(
+          {
+            ok: false,
+            error:
+              "We saved your contact but could not store your message. Please email us directly.",
+          },
+          { status: 502 },
+        )
       }
+    } else if (noteBody && !contactId) {
+      console.error("[ghl/contact] could not resolve contact id for note/custom fields")
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "We saved your contact but could not attach your message. Please email us directly.",
+        },
+        { status: 502 },
+      )
     }
 
     return NextResponse.json({ ok: true, contactId })
