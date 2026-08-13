@@ -14,6 +14,7 @@
     "test:e2e:report": "playwright show-report",
     "payload": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload",
     "check:schema-parity": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node --import tsx scripts/check-schema-parity.mjs",
+    "db:setup": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node --env-file-if-exists=.env --import tsx scripts/setup-database.mjs",
     "generate:types": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload generate:types",
     "check:types": "node scripts/check-payload-types.mjs",
     "generate:importmap": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload generate:importmap",

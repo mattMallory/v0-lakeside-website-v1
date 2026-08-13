@@ -16,8 +16,19 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
-  reporter: process.env.CI ? [["github"], ["list"]] : [["list"]],
-  timeout: 30_000,
+  // The HTML reporter only runs in CI, where the workflow uploads
+  // playwright-report/ as an artifact on failure so a red run is diagnosable
+  // without reproducing it locally.
+  reporter: process.env.CI
+    ? [["github"], ["list"], ["html", { open: "never" }]]
+    : [["list"]],
+  // Headroom on CI runners, which have far fewer cores than a development
+  // machine. This is not covering for a slow page: measured against the built
+  // server, /services returns in 30-230ms and media in ~19ms even under ten
+  // concurrent requests. The occasional 30s navigation timeout seen locally is
+  // the browser being starved of CPU, not the server being slow, and a slower
+  // runner has less CPU to go round.
+  timeout: process.env.CI ? 60_000 : 30_000,
   expect: { timeout: 5_000 },
 
   use: {
