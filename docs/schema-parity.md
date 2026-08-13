@@ -23,9 +23,16 @@ the config on boot.
 Nothing else creates local tables. There is no hand-written SQLite DDL, by design: see
 *Why push rather than hand-written DDL* below.
 
-**A fresh clone needs no schema step.** Create a `.env` with `PAYLOAD_SECRET` and
-`DATABASE_URL=file:./payload.db`, then `pnpm dev` or `pnpm build`. The database is built on
-first boot and seeded by `onInit`.
+**A fresh clone does need a schema step.** Create a `.env` with `PAYLOAD_SECRET` and
+`DATABASE_URL=file:./payload.db`, then run **`pnpm db:setup`** (or boot `pnpm dev` once). The
+database is built by push and seeded by `onInit`.
+
+**`pnpm build` does not create the schema.** Push runs only in dev, so a build against a
+missing `payload.db` produces **zero tables and still exits 0** — the site then renders
+entirely from hardcoded defaults, `/blog` shows no posts, and `/blog/[slug]` does not
+prerender. Measured: 0 tables and ~304 database errors from a build alone, versus 37 tables
+and 21/21 static pages after the schema step. There is no error to notice, which is why this
+is called out rather than left to be discovered.
 
 ### If push asks a question
 
@@ -83,7 +90,7 @@ If you want to verify the tooling rather than trust it:
 ```bash
 # 1. Build a local schema from nothing
 rm -f payload.db
-pnpm build                     # or: pnpm dev, then stop it once it boots
+pnpm db:setup                  # `pnpm build` will NOT do this — push runs only in dev
 
 # 2. Every table the config declares
 sqlite3 payload.db "select name from sqlite_master where type='table' \
