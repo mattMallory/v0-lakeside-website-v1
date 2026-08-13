@@ -78,6 +78,11 @@ jobs:
           echo "::add-mask::$secret"
           echo "PAYLOAD_SECRET=$secret" >> "$GITHUB_ENV"
 
+      # Creates the schema and fails if the result is empty. `next build` does not
+      # create it — building from no database exits 0 with zero tables.
+      - name: Create and verify database
+        run: pnpm db:setup -- --fresh
+
       - name: Build
         run: |
           set -o pipefail

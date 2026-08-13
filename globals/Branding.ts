@@ -52,6 +52,11 @@ export const Branding: GlobalConfig = {
   },
   fields: [
     {
+      name: "ciParityProbe",
+      type: "text",
+      label: "CI parity probe",
+    },
+    {
       type: "tabs",
       tabs: [
         {
