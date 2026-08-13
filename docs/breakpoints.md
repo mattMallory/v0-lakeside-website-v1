@@ -30,10 +30,13 @@ Two rules follow from having one vocabulary:
    If a panel is `md:hidden`, the script that decides whether that panel is on
    screen must ask for `(max-width: 767px)` and nothing else.
 
-No `--breakpoint-*` token overrides the defaults. Tailwind's values are the canon
-precisely because they are already what every `sm:`/`md:`/`lg:` utility in the
-codebase compiles to — redefining them would silently move several hundred
-existing class usages.
+The five `--breakpoint-*` tokens are declared explicitly in the `@theme` block of
+`app/globals.css`, at exactly Tailwind's default values and in the same units
+(`40rem` / `48rem` / `64rem` / `80rem` / `96rem`). They are written out so every
+layer can see the same five numbers rather than inheriting them invisibly — not
+to change them. **No token overrides a default**, and none should: these values
+are already what every `sm:`/`md:`/`lg:` utility in the codebase compiles to, so
+altering one would silently move several hundred existing class usages.
 
 ---
 
@@ -78,44 +81,36 @@ exception. This is the complete list as of this change.
 | `max-width: 1023px` (JS) | `about-process-diagram.tsx` | **Folded in** — `max-lg`. |
 | `max-width: 767px` (JS) | `tech-logos-reveal-inline.ts`, `metric-count-up-inline.ts` | **Folded in** — `max-md`. |
 | `MOBILE_MAX_WIDTH = 767` | `google-ads-budget-planner.tsx` | **Folded in** — `max-md`. |
-| `max-width: 820px` | `globals.css`, **budget-planner** layout block | **NAMED EXCEPTION — `planner`.** See below. |
+| `max-width: 820px` | `globals.css`, **budget-planner** layout block | **Resolved.** The `--breakpoint-planner` token is deleted. The media query still reads `max-width: 820px`; moving it to `767px` is an approved visual change and is made separately. |
 
 Image `sizes` attributes also contain widths (768, 1024). They are resource-selection
 hints for the browser, not layout boundaries, and already use canon values.
 
 ---
 
-## The one exception: `planner` (821px)
+## The former exception: `planner` (821px) — resolved
 
-```css
---breakpoint-planner: 821px;
-```
+**There are no exceptions. The canon above is the whole vocabulary.**
 
-**What it is.** The intrinsic wrap point of the budget planner's row: a 380px form
-column and a 320px results column, plus a 24px gap and the page gutter, stop
-fitting side by side at about this width.
+The budget planner used to wrap its row at 820/821px rather than at `md`, because
+that is where a 380px form column and a 320px results column stop fitting side by
+side. It was recorded as a named exception because every way of removing it changed
+what the planner rendered between 768 and 820px, and that was a design decision
+rather than a cleanup.
 
-**Why it was not folded into `md`.** The budget planner has the same 768-versus-820
-split as the offer builder, but without the `!important`, so it degrades instead of
-disappearing — lead capture stays reachable at every width. Between 768 and 820 it
-renders the *desktop* email panel inside a *stacked* layout, which is inconsistent
-but not broken.
+**The decision was taken on 2026-08-13: the layout boundary moves to `md` (768px).**
+The two columns will sit side by side from 768px up. Measured beforehand at 820px:
+the results card moves from full width at x=56 to a 304px column at x=460.
 
-Every way of removing the inconsistency changes what the planner renders in that
-band, and both directions were measured, not guessed:
+That is an intentional visual change, so it is made separately from the token work.
+As of this document:
 
-- Moving the layout boundary to `md` (767) makes the two columns sit side by side
-  from 768px. Measured at 820px: the results card moves from full width at x=56 to
-  a 304px column at x=460.
-- Moving the panel boundary to 821 instead swaps which email panel shows — the
-  form moves from inside the dark results card to a block below it.
-
-Both are visual changes beyond making hidden content appear, so neither was made
-unilaterally. **This needs a design decision**, and until it is taken the value is
-named rather than anonymous, so every layer can see it and the next person does not
-rediscover it as a magic number.
-
-Resolving it should delete this token and this section.
+- `--breakpoint-planner` is **deleted** — it declared 821px while the rule
+  implementing it hardcoded `max-width: 820px` and never read the token, and no
+  `planner:` variant was ever used. It was documentation wearing the shape of a
+  mechanism.
+- The `max-width: 820px` media query in `app/globals.css` is **still there**, and
+  moves to `767px` when the approved layout change is made.
 
 ---
 
