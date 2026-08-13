@@ -70,6 +70,8 @@ export function buildOfferBuilderFieldValues(payload: OfferBuilderGhlPayload): R
     [GHL_OFFER_BUILDER_FIELD_KEYS.previewTitle]: preview.title,
     [GHL_OFFER_BUILDER_FIELD_KEYS.previewBody]: preview.body,
     [GHL_OFFER_BUILDER_FIELD_KEYS.offerSummary]: buildOfferSummary(payload.state),
+    [GHL_OFFER_BUILDER_FIELD_KEYS.builderSource]: "offer-builder",
+    [GHL_OFFER_BUILDER_FIELD_KEYS.builderPageUrl]: payload.pageUrl ?? "",
   }
 }
 

@@ -1,8 +1,8 @@
 "use client"
 
-import { useCallback, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { useMemo, useRef } from "react"
 
-import { GhlEmbedFormSlot } from "@/components/ghl-embed-form-slot"
+import { GhlNativeEmailCapture } from "@/components/ghl-native-email-capture"
 import {
   computeBudgetPlanner,
   defaultBudgetPlannerState,
@@ -14,7 +14,9 @@ import {
   type BudgetPlannerState,
 } from "@/lib/budget-planner"
 import { readBudgetPlannerStateFromDom } from "@/lib/budget-planner-dom"
-import { buildBudgetPlannerGhlUrl } from "@/lib/budget-planner-ghl"
+import { buildBudgetPlannerFieldValues } from "@/lib/budget-planner-ghl"
+import { GHL_BUDGET_PLANNER_SOURCE, GHL_BUDGET_PLANNER_TAGS } from "@/lib/ghl-budget-planner"
+import { submitGhlContact } from "@/lib/submit-ghl-contact"
 import { cn } from "@/lib/utils"
 
 type BudgetPillOptionProps = {
@@ -44,203 +46,31 @@ function BudgetPillOption({ name, value, label, defaultChecked = false }: Budget
   )
 }
 
-function BudgetPlannerEmailPanel({
-  formUrl,
-  submitMode,
-  ghlEmbedUrl,
-  embedRefreshKey,
-  embedUpdating,
-  onRedirectSave,
-}: {
-  formUrl?: string
-  submitMode: string
-  ghlEmbedUrl: string | null
-  embedRefreshKey: number
-  embedUpdating: boolean
-  onRedirectSave: () => void
-}) {
-  return (
-    <div className="budget-planner-email">
-      {!formUrl ? (
-        <p className="text-sm text-[#F87171]">
-          GHL form URL is not configured. Add NEXT_PUBLIC_GHL_BUDGET_PLANNER_FORM_URL to your
-          environment.
-        </p>
-      ) : submitMode === "redirect" ? (
-        <button
-          type="button"
-          onClick={onRedirectSave}
-          className="inline-flex w-full items-center justify-center rounded-full bg-primary px-5 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#1D4F8A]"
-        >
-          Save your plan
-        </button>
-      ) : (
-        <GhlEmbedFormSlot
-          title="Save your budget plan"
-          embedUrl={ghlEmbedUrl}
-          embedRefreshKey={embedRefreshKey}
-          isUpdating={embedUpdating}
-          waitingMessage="Pause on your final numbers and the email form will load here with your plan pre-filled."
-          className="bg-white"
-          placeholderClassName="bg-white/5"
-        />
-      )}
-    </div>
-  )
-}
-
-function budgetPlannerStateKey(state: BudgetPlannerState) {
-  return `${state.patientValue}|${state.market}|${state.service}|${state.followup}|${state.leadConversion}`
-}
-
-function buildPlannerEmbedUrl(
-  formUrl: string | undefined,
-  submitMode: string,
-  state: BudgetPlannerState,
-  pageUrl?: string,
-) {
-  if (!formUrl || submitMode === "redirect") return null
-
-  return buildBudgetPlannerGhlUrl(formUrl, {
-    state,
-    pageUrl,
-  })
-}
-
-const CALCULATOR_SETTLE_MS = 1200
-const MOBILE_MAX_WIDTH = 767
-
-function isMobileViewport() {
-  return typeof window !== "undefined" && window.matchMedia(`(max-width: ${MOBILE_MAX_WIDTH}px)`).matches
-}
-
 export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolean }) {
-  const formUrl = process.env.NEXT_PUBLIC_GHL_BUDGET_PLANNER_FORM_URL
-  const submitMode = process.env.NEXT_PUBLIC_BUDGET_PLANNER_SUBMIT_MODE ?? "embed"
-
-  const [ghlEmbedUrl, setGhlEmbedUrl] = useState<string | null>(() =>
-    buildPlannerEmbedUrl(formUrl, submitMode, defaultBudgetPlannerState),
-  )
-  const [prefillSnapshot, setPrefillSnapshot] = useState<string | null>(() =>
-    budgetPlannerStateKey(defaultBudgetPlannerState),
-  )
-  const [embedRefreshKey, setEmbedRefreshKey] = useState(0)
-  const [calculatorSettled, setCalculatorSettled] = useState(true)
-
   const rootRef = useRef<HTMLElement>(null)
-  const desktopEmbedRef = useRef<HTMLDivElement>(null)
-  const prefillKeyRef = useRef(prefillSnapshot ?? "")
-  const settleKeyRef = useRef(budgetPlannerStateKey(defaultBudgetPlannerState))
-  const settleTimerRef = useRef<number | null>(null)
-
-  const embedUpdating = !calculatorSettled && prefillSnapshot !== null
-
-  const applyEmbedFromDom = useCallback(
-    (options?: { refresh?: boolean }) => {
-      if (!formUrl || submitMode === "redirect") return
-
-      const root = rootRef.current
-      if (!root) return
-
-      const currentState = readBudgetPlannerStateFromDom(root)
-      const currentKey = budgetPlannerStateKey(currentState)
-      const nextUrl = buildPlannerEmbedUrl(formUrl, submitMode, currentState, window.location.href)
-
-      if (!nextUrl) return
-
-      if (prefillKeyRef.current === currentKey && !options?.refresh) return
-
-      prefillKeyRef.current = currentKey
-      setGhlEmbedUrl(nextUrl)
-      setPrefillSnapshot(currentKey)
-
-      if (options?.refresh) {
-        setEmbedRefreshKey((current) => current + 1)
-      }
-    },
-    [formUrl, submitMode],
-  )
-
-  const queueDesktopSettleRefresh = useCallback(() => {
-    if (isMobileViewport()) return
-
-    setCalculatorSettled(false)
-    if (settleTimerRef.current !== null) {
-      window.clearTimeout(settleTimerRef.current)
-    }
-
-    settleTimerRef.current = window.setTimeout(() => {
-      setCalculatorSettled(true)
-      applyEmbedFromDom({ refresh: true })
-    }, CALCULATOR_SETTLE_MS)
-  }, [applyEmbedFromDom])
-
-  useLayoutEffect(() => {
-    if (!formUrl || submitMode === "redirect") return
-
-    applyEmbedFromDom({ refresh: true })
-
-    const root = rootRef.current
-    if (!root) return
-
-    settleKeyRef.current = budgetPlannerStateKey(readBudgetPlannerStateFromDom(root))
-
-    const onInteraction = () => {
-      const currentKey = budgetPlannerStateKey(readBudgetPlannerStateFromDom(root))
-      if (currentKey === settleKeyRef.current) return
-
-      settleKeyRef.current = currentKey
-
-      if (isMobileViewport()) {
-        applyEmbedFromDom({ refresh: true })
-        return
-      }
-
-      queueDesktopSettleRefresh()
-    }
-
-    root.addEventListener("input", onInteraction, true)
-    root.addEventListener("change", onInteraction, true)
-
-    const interval = window.setInterval(() => {
-      const currentKey = budgetPlannerStateKey(readBudgetPlannerStateFromDom(root))
-      if (currentKey === settleKeyRef.current) return
-
-      settleKeyRef.current = currentKey
-
-      if (isMobileViewport()) {
-        applyEmbedFromDom({ refresh: true })
-        return
-      }
-
-      queueDesktopSettleRefresh()
-    }, 400)
-
-    return () => {
-      root.removeEventListener("input", onInteraction, true)
-      root.removeEventListener("change", onInteraction, true)
-      window.clearInterval(interval)
-      if (settleTimerRef.current !== null) {
-        window.clearTimeout(settleTimerRef.current)
-      }
-    }
-  }, [applyEmbedFromDom, formUrl, queueDesktopSettleRefresh, submitMode])
 
   const result = useMemo(() => computeBudgetPlanner(defaultBudgetPlannerState), [])
   const nextStep = useMemo(() => getBudgetPlannerNextStep(defaultBudgetPlannerState), [])
   const budgetLabel = formatBudgetRange(result.budgetLow, result.budgetHigh)
   const landingConversionLabel = `${Math.round(result.landingConversion * 100)}%`
 
-  function handleRedirectSave() {
-    if (!formUrl || !rootRef.current) return
+  async function handleEmailSubmit(email: string) {
+    const root = rootRef.current
+    if (!root) {
+      return { ok: false, error: "Calculator not ready. Please try again." }
+    }
 
-    const currentState = readBudgetPlannerStateFromDom(rootRef.current)
-    window.location.assign(
-      buildBudgetPlannerGhlUrl(formUrl, {
-        state: currentState,
+    const state = readBudgetPlannerStateFromDom(root)
+
+    return submitGhlContact({
+      email,
+      source: GHL_BUDGET_PLANNER_SOURCE,
+      tags: [...GHL_BUDGET_PLANNER_TAGS],
+      customFields: buildBudgetPlannerFieldValues({
+        state,
         pageUrl: typeof window !== "undefined" ? window.location.href : undefined,
       }),
-    )
+    })
   }
 
   const saveCopy = (
@@ -249,17 +79,26 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
         Save your budget plan
       </div>
       <div className="budget-planner-save-desc mb-4 text-xs leading-relaxed text-[#64748B]">
-        Enter your email below. Your calculator answers are pre-filled automatically.
+        Enter your email below. Your calculator answers are included automatically.
       </div>
     </>
+  )
+
+  const emailPanel = (
+    <GhlNativeEmailCapture
+      tone="dark"
+      className="bg-white rounded-[11px] px-4 py-4"
+      buttonLabel="Save your plan"
+      successTitle="Plan saved — check your inbox."
+      successMessage="We emailed your personalized budget plan with the numbers from this calculator."
+      onSubmit={handleEmailSubmit}
+    />
   )
 
   return (
     <section
       ref={rootRef}
       id="planner"
-      data-bp-form-url={formUrl ?? ""}
-      data-bp-submit-mode={submitMode}
       className={cn(embedded ? "bg-transparent" : "border-y border-border bg-white")}
     >
       <div className="mx-auto max-w-[980px] px-6 py-14 md:py-16">
@@ -460,19 +299,11 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             </div>
 
             <div
-              ref={desktopEmbedRef}
               data-lead-capture="budget-planner"
               className="budget-planner-desktop-panel mt-auto hidden pt-6 md:block"
             >
               {saveCopy}
-              <BudgetPlannerEmailPanel
-                formUrl={formUrl}
-                submitMode={submitMode}
-                ghlEmbedUrl={ghlEmbedUrl}
-                embedRefreshKey={embedRefreshKey}
-                embedUpdating={embedUpdating}
-                onRedirectSave={handleRedirectSave}
-              />
+              {emailPanel}
             </div>
           </div>
 
@@ -481,14 +312,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             className="budget-planner-mobile-panel space-y-4 md:hidden"
           >
             {saveCopy}
-            <BudgetPlannerEmailPanel
-              formUrl={formUrl}
-              submitMode={submitMode}
-              ghlEmbedUrl={ghlEmbedUrl}
-              embedRefreshKey={embedRefreshKey}
-              embedUpdating={embedUpdating}
-              onRedirectSave={handleRedirectSave}
-            />
+            {emailPanel}
           </div>
         </div>
 

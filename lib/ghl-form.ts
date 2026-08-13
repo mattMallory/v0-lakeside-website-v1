@@ -36,3 +36,7 @@ function truncateField(value: string): string {
   if (value.length <= MAX_FIELD_LENGTH) return value
   return `${value.slice(0, MAX_FIELD_LENGTH - 1)}…`
 }
+
+export function isValidEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())
+}

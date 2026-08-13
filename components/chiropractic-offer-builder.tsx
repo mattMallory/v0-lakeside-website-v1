@@ -1,10 +1,12 @@
 "use client"
 
 import { ArrowRight, Check } from "lucide-react"
-import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react"
 
-import { GhlEmbedFormSlot } from "@/components/ghl-embed-form-slot"
-import { buildOfferBuilderGhlUrl } from "@/lib/offer-builder-ghl"
+import { GhlNativeEmailCapture } from "@/components/ghl-native-email-capture"
+import { buildOfferBuilderFieldValues } from "@/lib/offer-builder-ghl"
+import { GHL_OFFER_BUILDER_SOURCE, GHL_OFFER_BUILDER_TAGS } from "@/lib/ghl-offer-builder"
+import { submitGhlContact } from "@/lib/submit-ghl-contact"
 import {
   OFFER_BUILDER_ACTIONS,
   OFFER_BUILDER_AUDIENCES,
@@ -18,7 +20,6 @@ import {
   defaultOfferBuilderState,
   effectiveConcern,
   lc,
-  offerBuilderStateKey,
   type OfferBuilderState,
 } from "@/lib/offer-builder"
 import { attachOfferBuilderFormListeners, offerInputId } from "@/lib/offer-builder-dom"
@@ -61,8 +62,6 @@ function StepCard({
     </div>
   )
 }
-
-const OFFER_SETTLE_MS = 1200
 
 type OfferBuilderClarity = ReturnType<typeof computeOfferClarity>
 
@@ -119,59 +118,28 @@ function OfferBuilderClarityPanel({ clarity }: { clarity: OfferBuilderClarity })
   )
 }
 
-function OfferBuilderEmailPanel({
-  clarity,
-  formUrl,
-  submitMode,
-  ghlEmbedUrl,
-  embedRefreshKey,
-  embedUpdating,
-  onRedirectSave,
-}: {
-  clarity: OfferBuilderClarity
-  formUrl?: string
-  submitMode: string
-  ghlEmbedUrl: string | null
-  embedRefreshKey: number
-  embedUpdating: boolean
-  onRedirectSave: () => void
-}) {
-  const embedCardClass = "rounded-[14px] border border-border bg-white"
-
+function OfferBuilderEmailPanel({ clarity, state }: { clarity: OfferBuilderClarity; state: OfferBuilderState }) {
   return (
     <div className="offer-builder-email">
-      {!clarity.ready ? (
-        <GhlEmbedFormSlot
-          title="Email me this offer"
-          embedUrl={null}
-          className={embedCardClass}
-          placeholderClassName="bg-white"
-          waitingMessage="Complete all four offer clarity checks above to unlock the email form. Your answers will be pre-filled automatically."
-        />
-      ) : !formUrl ? (
-        <p className="text-sm text-[#F87171]">
-          GHL form URL is not configured. Add NEXT_PUBLIC_GHL_OFFER_BUILDER_FORM_URL to your
-          environment.
-        </p>
-      ) : submitMode === "redirect" ? (
-        <button
-          type="button"
-          onClick={onRedirectSave}
-          className="inline-flex w-full items-center justify-center rounded-xl bg-primary px-5 py-3.5 text-[15px] font-semibold text-white transition-colors hover:bg-[#1D4F8A]"
-        >
-          Email me this offer
-        </button>
-      ) : (
-        <GhlEmbedFormSlot
-          title="Email me this offer"
-          embedUrl={ghlEmbedUrl}
-          embedRefreshKey={embedRefreshKey}
-          isUpdating={embedUpdating && Boolean(ghlEmbedUrl)}
-          className={embedCardClass}
-          placeholderClassName="bg-white"
-          waitingMessage="Loading your pre-filled email form…"
-        />
-      )}
+      <GhlNativeEmailCapture
+        className="rounded-[14px] border border-border bg-white px-4 py-4"
+        buttonLabel="Email me this offer"
+        successTitle="Offer saved — check your inbox."
+        successMessage="We emailed your offer summary with all the details you built above."
+        disabled={!clarity.ready}
+        disabledMessage="Complete all four offer clarity checks above to unlock the email form. Your answers will be included automatically."
+        onSubmit={async (email) =>
+          submitGhlContact({
+            email,
+            source: GHL_OFFER_BUILDER_SOURCE,
+            tags: [...GHL_OFFER_BUILDER_TAGS],
+            customFields: buildOfferBuilderFieldValues({
+              state,
+              pageUrl: typeof window !== "undefined" ? window.location.href : undefined,
+            }),
+          })
+        }
+      />
     </div>
   )
 }
@@ -179,36 +147,15 @@ function OfferBuilderEmailPanel({
 export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: boolean }) {
   const [state, setState] = useState<OfferBuilderState>(defaultOfferBuilderState)
   const [formKey, setFormKey] = useState(0)
-  const [ghlEmbedUrl, setGhlEmbedUrl] = useState<string | null>(null)
-  const [prefillSnapshot, setPrefillSnapshot] = useState<string | null>(null)
-  const [embedRefreshKey, setEmbedRefreshKey] = useState(0)
-  const [offerSettled, setOfferSettled] = useState(false)
 
   const formRef = useRef<HTMLDivElement>(null)
   const previewPanelRef = useRef<HTMLDivElement>(null)
-  const mobileEmbedRef = useRef<HTMLDivElement>(null)
-  const embedInitialized = useRef(false)
   const setStateRef = useRef(setState)
   setStateRef.current = setState
-
-  const formUrl = process.env.NEXT_PUBLIC_GHL_OFFER_BUILDER_FORM_URL
-  const submitMode = process.env.NEXT_PUBLIC_OFFER_BUILDER_SUBMIT_MODE ?? "embed"
-
-  const stateKey = offerBuilderStateKey(state)
-  const prefillIsStale = prefillSnapshot !== null && prefillSnapshot !== stateKey
 
   const clarity = useMemo(() => computeOfferClarity(state), [state])
   const preview = useMemo(() => computeOfferPreview(state), [state])
   const concern = effectiveConcern(state)
-  const embedUpdating = clarity.ready && !offerSettled && prefillSnapshot !== null
-
-  const buildEmbedUrl = useCallback(() => {
-    if (!formUrl) return null
-    return buildOfferBuilderGhlUrl(formUrl, {
-      state,
-      pageUrl: typeof window !== "undefined" ? window.location.href : undefined,
-    })
-  }, [formUrl, state])
 
   useLayoutEffect(() => {
     const applyPendingState = () => {
@@ -245,100 +192,14 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
     }
   }, [formKey])
 
-  useEffect(() => {
-    setOfferSettled(false)
-    const timer = window.setTimeout(() => setOfferSettled(true), OFFER_SETTLE_MS)
-    return () => window.clearTimeout(timer)
-  }, [stateKey])
-
-  const syncEmbed = useCallback(() => {
-    if (!clarity.ready || !offerSettled || !formUrl || submitMode === "redirect") return
-
-    const anchors = [previewPanelRef.current, mobileEmbedRef.current].filter(
-      Boolean,
-    ) as HTMLElement[]
-    const inView = anchors.some((node) => {
-      const rect = node.getBoundingClientRect()
-      return rect.top < window.innerHeight + 120 && rect.bottom > -120
-    })
-
-    // Below `md` the mobile panel is the visible one; it sits far enough down the
-    // page that the in-view check would otherwise never fire, so the embed is
-    // initialised eagerly. This must track the panel's own `md:` boundary.
-    const isMobile =
-      typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
-    if (!inView && !isMobile) return
-
-    const nextUrl = buildEmbedUrl()
-    if (!nextUrl) return
-
-    if (!embedInitialized.current) {
-      embedInitialized.current = true
-      setGhlEmbedUrl(nextUrl)
-      setPrefillSnapshot(stateKey)
-      return
-    }
-
-    if (prefillIsStale) {
-      setGhlEmbedUrl(nextUrl)
-      setPrefillSnapshot(stateKey)
-      setEmbedRefreshKey((current) => current + 1)
-    }
-  }, [buildEmbedUrl, clarity.ready, formUrl, offerSettled, prefillIsStale, stateKey, submitMode])
-
-  useEffect(() => {
-    syncEmbed()
-  }, [syncEmbed])
-
-  useEffect(() => {
-    if (!clarity.ready) {
-      if (embedInitialized.current) {
-        setGhlEmbedUrl(null)
-        embedInitialized.current = false
-        setPrefillSnapshot(null)
-      }
-      return
-    }
-  }, [clarity.ready])
-
-  useEffect(() => {
-    const nodes = [previewPanelRef.current, mobileEmbedRef.current].filter(Boolean) as HTMLElement[]
-    if (nodes.length === 0 || !formUrl || submitMode === "redirect") return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) syncEmbed()
-      },
-      { rootMargin: "120px" },
-    )
-
-    nodes.forEach((node) => observer.observe(node))
-    return () => observer.disconnect()
-  }, [formUrl, submitMode, syncEmbed, clarity.ready])
-
   function reset() {
-    embedInitialized.current = false
-    setGhlEmbedUrl(null)
-    setPrefillSnapshot(null)
     setState(defaultOfferBuilderState)
     setFormKey((current) => current + 1)
-  }
-
-  function handleRedirectSave() {
-    if (!formUrl) return
-    window.location.assign(
-      buildOfferBuilderGhlUrl(formUrl, {
-        state,
-        pageUrl: typeof window !== "undefined" ? window.location.href : undefined,
-      }),
-    )
   }
 
   return (
     <section
       id="offer-builder"
-      data-ob-form-url={formUrl ?? ""}
-      data-ob-submit-mode={submitMode}
       className={cn(embedded ? "bg-transparent" : "border-y border-border bg-white")}
     >
       <div className="mx-auto max-w-[1080px] px-6 py-14 md:py-16">
@@ -689,33 +550,16 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
             >
               <OfferBuilderClarityPanel clarity={clarity} />
 
-              <OfferBuilderEmailPanel
-                clarity={clarity}
-                formUrl={formUrl}
-                submitMode={submitMode}
-                ghlEmbedUrl={ghlEmbedUrl}
-                embedRefreshKey={embedRefreshKey}
-                embedUpdating={embedUpdating}
-                onRedirectSave={handleRedirectSave}
-              />
+              <OfferBuilderEmailPanel clarity={clarity} state={state} />
             </div>
           </div>
 
           <div
-            ref={mobileEmbedRef}
             data-lead-capture="offer-builder"
             className="offer-builder-mobile-panel space-y-4 md:hidden"
           >
             <OfferBuilderClarityPanel clarity={clarity} />
-            <OfferBuilderEmailPanel
-              clarity={clarity}
-              formUrl={formUrl}
-              submitMode={submitMode}
-              ghlEmbedUrl={ghlEmbedUrl}
-              embedRefreshKey={embedRefreshKey}
-              embedUpdating={embedUpdating}
-              onRedirectSave={handleRedirectSave}
-            />
+            <OfferBuilderEmailPanel clarity={clarity} state={state} />
           </div>
         </div>
 
