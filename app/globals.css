@@ -79,11 +79,19 @@
 
   /* Dark-section surfaces. The site runs light with dark bands; these are the
      bands. Names for values already in use — no value changes.
-     The two muted greys used for text on these surfaces are NOT here: which
-     two of the five in use should survive is still open. */
+
+     `--color-border-on-dark` is also applied to one deliberately light
+     surface: a white card wearing the dark-section border. That reads exactly
+     like a copy-paste error and is not one — it is a confirmed design choice,
+     and having a name for it is what stops it being tidied away. */
   --color-surface-dark: var(--surface-dark);
   --color-surface-dark-raised: var(--surface-dark-raised);
   --color-border-on-dark: var(--border-on-dark);
+
+  /* Text on dark surfaces. Two levels, approved 2026-08-13 out of the five
+     greys that were in use; the other three collapse into these. */
+  --color-foreground-on-dark: var(--foreground-on-dark);
+  --color-muted-foreground-on-dark: var(--muted-foreground-on-dark);
 
   /* The lighter of the two muted greys on light surfaces. The most-used
      hardcoded colour in the codebase (28 places) and previously unnamed. */
@@ -119,12 +127,39 @@
      body size is contradicted (15px vs "16pt") and unresolved.
      ------------------------------------------------------------------ */
   --text-micro: 11px; /* smallest label — collapses 10/11px */
+  --text-caption: 13px; /* collapses 13/13.5px */
   --text-eyebrow: 14px; /* section eyebrow */
+  --text-body: 16px; /* body copy — collapses 14/14.5/15px, 106 places */
   --text-body-lg: 17px; /* collapses 16/17px */
   --text-lead: 19px; /* collapses 18/19px */
   --text-title-sm: 22px; /* collapses 20/22px */
   --text-title: 26px; /* collapses 24/26/28px */
   --text-display: 40px; /* collapses 37.6/40/44px */
+
+  /* Letter-spacing and line-height. Approved 2026-08-13.
+
+     `--tracking-eyebrow` is worth a note: the eyebrow spec was answered
+     "don't know" when asked directly, but the same question appears in the
+     approved letter-spacing group as "eyebrow → 0.1em", and that group was
+     approved in full. Same question, asked twice, answered once. */
+  --tracking-display: -0.03em; /* headings — 39 places */
+  --tracking-eyebrow: 0.1em; /* eyebrows — 48 places */
+  --leading-display: 1.05; /* headings — 20 places */
+  --leading-body: 1.55; /* body copy — 6 places */
+
+  /* The one shadow. Approved 2026-08-13: all eight of the unique shadows
+     currently in the codebase collapse to this.
+
+     The geometry is the dominant existing shape — `0 4px 14px` is what three
+     of the eight already use. The colour is neutral ink rather than the brand
+     blue that three of them hardcoded, which is why those three ignore CMS
+     branding today. The opacity sits between the lightest (0.04) and the
+     heaviest (0.5) of what it replaces.
+
+     The decision to have one shadow is Pete's; this exact value is an
+     implementation choice and is flagged for confirmation. It is migrated in
+     its own pull request so the change is reviewable on its own. */
+  --shadow-raised: 0 4px 14px rgba(14, 23, 38, 0.12);
 
   /* Spacing — deliberately NOT re-declared here.
 
@@ -227,6 +262,10 @@
   --surface-dark-raised: #111B2E;
   --border-on-dark: #1F2E45;
   --muted-foreground-subtle: #9CA3AF;
+
+  /* The two greys that survived, of the five used for text on dark. */
+  --foreground-on-dark: #B9C2CF;
+  --muted-foreground-on-dark: #94A3B8;
 }
 
 @media (max-width: 1023px) {
