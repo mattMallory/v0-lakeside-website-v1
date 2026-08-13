@@ -1,0 +1,121 @@
+- generic [ref=e2]:
+  - heading "Group A — “show me an example”" [level=1] [ref=e3]
+  - paragraph [ref=e4]: You asked to see one of the “invisible” merges before approving the group. Here are the two biggest ones, at real size. Everything below is rendered live by your browser using the actual values from the site — not screenshots.
+  - heading "1 · The 0.8px radius — 16px vs 16.8px" [level=2] [ref=e5]
+  - paragraph [ref=e6]:
+    - text: These two sit
+    - strong [ref=e7]: directly above one another on the About page
+    - text: . The hero image panel is
+    - code [ref=e8]: 16px
+    - text: . The vision/mission grid immediately below it is
+    - code [ref=e9]: 16.8px
+    - text: ", because it uses the theme’s scale rather than a typed-in number."
+  - generic [ref=e10]:
+    - generic [ref=e11]:
+      - generic [ref=e12]: About hero — 16px
+      - generic [ref=e13]: hero image panel
+    - generic [ref=e14]:
+      - generic [ref=e15]: Vision & mission — 16.8px
+      - generic [ref=e16]: vision / mission grid
+  - paragraph [ref=e17]: "Same page, stacked vertically in the real layout. Difference: 0.8px."
+  - paragraph [ref=e18]:
+    - text: Magnified
+    - strong [ref=e19]: 8×
+    - text: "on the top-left corner:"
+  - generic [ref=e20]:
+    - generic [ref=e21]: 16px, at 8×
+    - generic [ref=e25]: 16.8px, at 8×
+  - paragraph [ref=e29]: At eight times magnification the curves are just about separable. At 1× they are not.
+  - generic [ref=e30]:
+    - strong [ref=e31]: "The proposal:"
+    - text: merge both to
+    - code [ref=e32]: 17px
+    - text: "— one radius token instead of two. Affects 17 places. Largest single move: 1px (the"
+    - code [ref=e33]: 18px
+    - text: outlier).
+  - heading "2 · The 1.6px radius — 20px vs 21.6px" [level=2] [ref=e34]
+  - paragraph [ref=e35]: The same situation one step up the scale, and the most common radius pair on the site — 21 places between them.
+  - generic [ref=e36]:
+    - generic [ref=e37]:
+      - generic [ref=e38]: 20px
+      - generic [ref=e39]: card
+    - generic [ref=e40]:
+      - generic [ref=e41]: 21.6px
+      - generic [ref=e42]: card
+  - generic [ref=e43]:
+    - strong [ref=e44]: "The proposal:"
+    - text: merge both to
+    - code [ref=e45]: 21px
+    - text: ". Affects 23 places. Largest move: 1.6px."
+  - heading "3 · The two near-whites" [level=2] [ref=e46]
+  - paragraph [ref=e47]: Three whites ship today. Two of them are used once each, and both sit on top of ordinary white elsewhere on the same pages.
+  - generic [ref=e48]:
+    - generic [ref=e49]: "#FFFFFF — the card token"
+    - generic [ref=e52]: "#F9FAFB — used once"
+    - generic [ref=e55]: "#FAFBFC — used once"
+  - generic [ref=e58]:
+    - strong [ref=e59]: "The proposal:"
+    - text: fold both into the existing white. Affects 2 places.
+  - heading "4 · Half-pixel text — 13px vs 13.5px" [level=2] [ref=e60]
+  - paragraph [ref=e61]: This paragraph is 13px. Small supporting copy, captions, meta lines.
+  - paragraph [ref=e62]: This paragraph is 13.5px. Same role, five places in the codebase, half a pixel larger.
+  - generic [ref=e63]:
+    - strong [ref=e64]: "The proposal:"
+    - text: merge to
+    - code [ref=e65]: 13px
+    - text: ". Affects 5 places. Move: 0.5px."
+  - heading "The whole of Group A" [level=2] [ref=e66]
+  - table [ref=e67]:
+    - rowgroup [ref=e68]:
+      - row [ref=e69]:
+        - columnheader "Merge" [ref=e70]
+        - columnheader "From → to" [ref=e71]
+        - columnheader "Places" [ref=e72]
+        - columnheader "Largest move" [ref=e73]
+      - row [ref=e74]:
+        - cell "Near-white backgrounds" [ref=e75]
+        - 'cell "#F9FAFB, #FAFBFC → #FFFFFF" [ref=e76]'
+        - cell "2" [ref=e77]
+        - cell "invisible" [ref=e78]
+      - row [ref=e79]:
+        - cell "Small text" [ref=e80]
+        - cell "13 / 13.5px → 13px" [ref=e81]
+        - cell "5" [ref=e82]
+        - cell "0.5px" [ref=e83]
+      - row [ref=e84]:
+        - cell "Small radii" [ref=e85]
+        - cell "7 / 7.2 / 8 / 9 / 9.6px → 8px" [ref=e86]
+        - cell "23" [ref=e87]
+        - cell "1.6px" [ref=e88]
+      - row [ref=e89]:
+        - cell "Square radii" [ref=e90]
+        - cell "10 / 11px → 10px" [ref=e91]
+        - cell "23" [ref=e92]
+        - cell "1px" [ref=e93]
+      - row [ref=e94]:
+        - cell "Large radii" [ref=e95]
+        - cell "16 / 16.8 / 18px → 17px" [ref=e96]
+        - cell "17" [ref=e97]
+        - cell "1px" [ref=e98]
+      - row [ref=e99]:
+        - cell "Extra-large radii" [ref=e100]
+        - cell "20 / 21.6px → 21px" [ref=e101]
+        - cell "23" [ref=e102]
+        - cell "1.6px" [ref=e103]
+      - row [ref=e104]:
+        - cell "Tiny padding" [ref=e105]
+        - cell "5 / 7px → 6px" [ref=e106]
+        - cell "3" [ref=e107]
+        - cell "1px" [ref=e108]
+      - row [ref=e109]:
+        - cell "Tap targets" [ref=e110]
+        - cell "42 / 46px → 44px" [ref=e111]
+        - cell "2" [ref=e112]
+        - cell "2px" [ref=e113]
+  - paragraph [ref=e114]:
+    - strong [ref=e115]: "The question is just: approve Group A?"
+    - text: Yes, no, or yes-except-one. If any single row above looks wrong to you, we keep that pair and merge the rest.
+  - paragraph [ref=e116]:
+    - text: Illustration only — this file is not part of the website and changes nothing about it. Rendered from the real values catalogued in
+    - code [ref=e117]: docs/token-proposal.md
+    - text: .
