@@ -44,7 +44,7 @@ function parseCustomFieldList(
       ? payload
       : []
 
-  const fields: Array<{ id: string; fieldKey: string }> = []
+  const fields: Array<{ id: string; fieldKey: string; name?: string }> = []
 
   for (const item of list) {
     if (!item || typeof item !== "object") continue

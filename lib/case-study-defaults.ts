@@ -51,28 +51,10 @@ export const defaultTuscolaCaseStudyMetrics: CaseStudyMetric[] = [
   },
 ]
 
-export const defaultTuscolaCaseStudy: CaseStudyPost = {
-  id: "default-tuscola",
-  title: "Local Healthcare Practice Grows Into a National Brand With Major Online Store Sales",
-  slug: "tuscola-pain-wellness-center-case-study",
-  excerpt:
-    "How Tuscola Pain & Wellness Center expanded from a central Illinois practice into a national wellness brand — with ecommerce, paid media, and creative working as one system.",
-  authorName: "Matt Mallory",
-  readTime: null,
-  publishedAt: "2026-03-20T10:00:00.000Z",
-  featuredImageUrl: "/why/ad-campaign-v2.jpg",
-  featuredImageAlt: "Digital marketing campaign driving ecommerce growth for a healthcare brand",
-  category: {
-    id: "case-studies",
-    name: "Case Studies",
-    slug: "case-studies",
-  },
-  tags: [
-    { id: "case-study", name: "Case Study", slug: CASE_STUDY_TAG_SLUG },
-    { id: "branding", name: "Branding", slug: "branding" },
-    { id: "google-ads", name: "Google Ads", slug: "google-ads" },
-  ],
-  content: createLexicalContent([
+// Extracted so the seed can use the precise Lexical shape this factory returns. Reading
+// it back off defaultTuscolaCaseStudy would widen it to Record<string, unknown> via
+// the CaseStudyPost annotation, which the posts schema does not accept.
+export const defaultTuscolaCaseStudyContent = createLexicalContent([
     {
       type: "p",
       text: "Tuscola Pain and Wellness Center was a successful local natural healthcare practice in central Illinois owned and run by Dr. Bill Hemmer. The practice had built strong patient trust locally, but Dr. Hemmer wanted to expand revenue beyond the clinic walls by investing in an ecommerce store and promoting the brand to a national audience.",
@@ -117,7 +99,30 @@ export const defaultTuscolaCaseStudy: CaseStudyPost = {
       type: "p",
       text: "Tuscola grew from a regional practice into a nationally recognized wellness brand. Online revenue scaled dramatically, products shipped across dozens of states, and paid media delivered strong, measurable returns — all managed as one connected system.",
     },
-  ]),
+])
+
+export const defaultTuscolaCaseStudy: CaseStudyPost = {
+  id: "default-tuscola",
+  title: "Local Healthcare Practice Grows Into a National Brand With Major Online Store Sales",
+  slug: "tuscola-pain-wellness-center-case-study",
+  excerpt:
+    "How Tuscola Pain & Wellness Center expanded from a central Illinois practice into a national wellness brand — with ecommerce, paid media, and creative working as one system.",
+  authorName: "Matt Mallory",
+  readTime: null,
+  publishedAt: "2026-03-20T10:00:00.000Z",
+  featuredImageUrl: "/why/ad-campaign-v2.jpg",
+  featuredImageAlt: "Digital marketing campaign driving ecommerce growth for a healthcare brand",
+  category: {
+    id: "case-studies",
+    name: "Case Studies",
+    slug: "case-studies",
+  },
+  tags: [
+    { id: "case-study", name: "Case Study", slug: CASE_STUDY_TAG_SLUG },
+    { id: "branding", name: "Branding", slug: "branding" },
+    { id: "google-ads", name: "Google Ads", slug: "google-ads" },
+  ],
+  content: defaultTuscolaCaseStudyContent,
   clientName: "Tuscola Pain & Wellness Center",
   clientLocation: "Tuscola, Illinois",
   practiceInfo: {

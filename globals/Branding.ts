@@ -1,10 +1,11 @@
-import type { GlobalConfig, TextField } from "payload"
+import type { GlobalConfig, TextField, TextFieldSingleValidation } from "payload"
 
 import { defaultBrandingContent } from "@/lib/branding-defaults"
-import { googleFontOptions } from "@/lib/google-fonts"
 import { revalidateSite } from "@/lib/revalidate-site"
 
-const hexColorValidate: TextField["validate"] = (value) => {
+// Typed as the single-value validation rather than TextField["validate"], which is a union
+// with the hasMany variant that a plain text field will not accept.
+const hexColorValidate: TextFieldSingleValidation = (value) => {
   if (!value) return true
   if (typeof value !== "string") return "Enter a valid hex color (e.g. #3B6FD8)"
   return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(value)
@@ -214,32 +215,44 @@ export const Branding: GlobalConfig = {
                 }),
               ],
             },
-          ],
-        },
-        {
-          label: "Typography",
-          fields: [
             {
-              name: "headingFont",
-              type: "select",
-              label: "Heading font",
-              options: [...googleFontOptions],
-              defaultValue: defaultBrandingContent.headingFont,
-              required: true,
-              admin: {
-                description: "Applied to all headings (h1–h6).",
-              },
-            },
-            {
-              name: "bodyFont",
-              type: "select",
-              label: "Body font",
-              options: [...googleFontOptions],
-              defaultValue: defaultBrandingContent.bodyFont,
-              required: true,
-              admin: {
-                description: "Applied to body copy and UI text.",
-              },
+              type: "collapsible",
+              label: "Surfaces & States",
+              admin: { initCollapsed: true },
+              // These were previously hardcoded inside the CSS generator, so a rebrand
+              // changed a button's background while its hover state stayed the old blue.
+              fields: [
+                hexColorField({
+                  name: "surfaceColor",
+                  label: "Card & popover surface",
+                  defaultValue: defaultBrandingContent.surfaceColor,
+                  description: "Background of cards, popovers, and the sidebar.",
+                }),
+                hexColorField({
+                  name: "mutedSurfaceColor",
+                  label: "Muted surface",
+                  defaultValue: defaultBrandingContent.mutedSurfaceColor,
+                  description: "Muted fills behind quiet UI areas.",
+                }),
+                hexColorField({
+                  name: "buttonHoverColor",
+                  label: "Button hover",
+                  defaultValue: defaultBrandingContent.buttonHoverColor,
+                  description: "Primary button background on hover.",
+                }),
+                hexColorField({
+                  name: "buttonActiveColor",
+                  label: "Button pressed",
+                  defaultValue: defaultBrandingContent.buttonActiveColor,
+                  description: "Primary button background while pressed.",
+                }),
+                hexColorField({
+                  name: "inkColor",
+                  label: "Ink",
+                  defaultValue: defaultBrandingContent.inkColor,
+                  description: "Darkest brand tone, used for deep panels and metric cards.",
+                }),
+              ],
             },
           ],
         },

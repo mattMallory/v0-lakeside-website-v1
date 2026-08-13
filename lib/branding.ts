@@ -1,20 +1,13 @@
 import { unstable_noStore as noStore } from "next/cache"
 
+import { resolveMediaUrl, withFallback, type MediaLike } from "@/lib/cms-mappers"
 import { defaultBrandingContent, type BrandingContent } from "@/lib/branding-defaults"
 import {
   bodyFontFamily,
   headingFontFamily,
   logoFontFamily,
 } from "@/lib/fonts"
-import type { GoogleFontName } from "@/lib/google-fonts"
-import { googleFontOptions } from "@/lib/google-fonts"
-
-type MediaLike = {
-  url?: string | null
-  filename?: string | null
-  alt?: string | null
-  updatedAt?: string | null
-}
+import type { Branding } from "@/payload-types"
 
 const colorKeys = [
   "primaryColor",
@@ -31,13 +24,12 @@ const colorKeys = [
   "mutedTextColor",
   "borderColor",
   "focusRingColor",
-] as const satisfies ReadonlyArray<keyof BrandingContent>
-
-function withFallback<T>(value: T | null | undefined, fallback: T): T {
-  if (value === null || value === undefined) return fallback
-  if (typeof value === "string" && value.trim() === "") return fallback
-  return value
-}
+  "surfaceColor",
+  "mutedSurfaceColor",
+  "buttonHoverColor",
+  "buttonActiveColor",
+  "inkColor",
+] as const satisfies ReadonlyArray<keyof BrandingContent & keyof Branding>
 
 function isHexColor(value: string): boolean {
   return /^#([0-9A-Fa-f]{3}|[0-9A-Fa-f]{6})$/.test(value)
@@ -49,12 +41,6 @@ function resolveHex(
 ): string {
   const resolved = withFallback(value, fallback)
   return isHexColor(resolved) ? resolved : fallback
-}
-
-function resolveFont(value: string | null | undefined, fallback: GoogleFontName): GoogleFontName {
-  if (!value) return fallback
-  const match = googleFontOptions.find((option) => option.value === value)
-  return match?.value ?? fallback
 }
 
 function resolveLogoHeight(value: unknown, fallback: number): number {
@@ -71,13 +57,15 @@ function withCacheBust(url: string, updatedAt?: string | null): string {
   return `${url}${separator}v=${stamp}`
 }
 
-function resolveMediaUrl(logo: number | MediaLike | null | undefined): string | null {
-  if (!logo || typeof logo === "number") return null
+// Branding is the one place a media URL is cache-busted: the logo must change in the
+// browser the moment it is replaced in the admin panel. The shared resolver supplies the
+// URL and the cache-busting stamp is composed on top of it here.
+function resolveLogoUrl(logo: number | MediaLike | null | undefined): string | undefined {
+  const rawUrl = resolveMediaUrl(logo)?.trim()
+  if (!rawUrl) return undefined
 
-  const rawUrl = typeof logo.url === "string" ? logo.url.trim() : ""
-  if (!rawUrl) return null
-
-  return withCacheBust(rawUrl, logo.updatedAt)
+  const updatedAt = typeof logo === "object" && logo ? logo.updatedAt : undefined
+  return withCacheBust(rawUrl, updatedAt)
 }
 
 export async function getBrandingContent(): Promise<BrandingContent> {
@@ -97,7 +85,7 @@ export async function getBrandingContent(): Promise<BrandingContent> {
       overrideAccess: true,
     })
 
-    let logo = branding.logo as number | MediaLike | null | undefined
+    let logo: number | MediaLike | null | undefined = branding.logo
 
     // If the relation id exists but depth did not populate, fetch media directly.
     if (typeof logo === "number") {
@@ -113,15 +101,9 @@ export async function getBrandingContent(): Promise<BrandingContent> {
       }
     }
 
-    const logoUrl = resolveMediaUrl(logo)
+    const logoUrl = resolveLogoUrl(logo)
     const colors = Object.fromEntries(
-      colorKeys.map((key) => [
-        key,
-        resolveHex(
-          (branding as Record<string, string | null | undefined>)[key],
-          defaultBrandingContent[key],
-        ),
-      ]),
+      colorKeys.map((key) => [key, resolveHex(branding[key], defaultBrandingContent[key])]),
     ) as Pick<BrandingContent, (typeof colorKeys)[number]>
 
     return {
@@ -130,13 +112,8 @@ export async function getBrandingContent(): Promise<BrandingContent> {
         branding.logoAlt || (typeof logo === "object" && logo?.alt) || null,
         defaultBrandingContent.logoAlt,
       ),
-      logoHeight: resolveLogoHeight(
-        (branding as { logoHeight?: number | null }).logoHeight,
-        defaultBrandingContent.logoHeight,
-      ),
+      logoHeight: resolveLogoHeight(branding.logoHeight, defaultBrandingContent.logoHeight),
       ...colors,
-      headingFont: resolveFont(branding.headingFont, defaultBrandingContent.headingFont),
-      bodyFont: resolveFont(branding.bodyFont, defaultBrandingContent.bodyFont),
     }
   } catch (error) {
     console.error("[payload] Failed to load branding content:", error)
@@ -151,33 +128,44 @@ export function buildBrandingCssVariables(branding: BrandingContent): string {
   --background: ${branding.backgroundColor};
   --foreground: ${branding.textColor};
   --heading: ${branding.headingColor};
-  --card: #FFFFFF;
+  --card: ${branding.surfaceColor};
   --card-foreground: ${branding.headingColor};
-  --popover: #FFFFFF;
+  --popover: ${branding.surfaceColor};
   --popover-foreground: ${branding.textColor};
   --primary: ${branding.primaryColor};
   --primary-foreground: ${branding.buttonTextColor};
   --icon: ${branding.iconColor};
   --button: ${branding.buttonColor};
   --button-foreground: ${branding.buttonTextColor};
-  --button-hover: #1D4F8A;
-  --button-active: #163D6E;
+  --button-hover: ${branding.buttonHoverColor};
+  --button-active: ${branding.buttonActiveColor};
   --secondary-button: ${branding.secondaryButtonColor};
   --secondary-button-foreground: ${branding.secondaryButtonTextColor};
   --secondary: ${branding.secondaryColor};
   --secondary-foreground: ${branding.textColor};
-  --muted: #F3F4F6;
+  --muted: ${branding.mutedSurfaceColor};
   --muted-foreground: ${branding.mutedTextColor};
   --accent: ${branding.accentColor};
   --accent-foreground: ${branding.primaryColor};
   --border: ${branding.borderColor};
   --input: ${branding.borderColor};
   --ring: ${branding.focusRingColor};
-  --ink: #0E1726;
-  --lake-pale: #EFF6FF;
-  --lake-light: #DBEAFE;
+  --ink: ${branding.inkColor};
+  --lake-pale: ${branding.secondaryColor};
+  --lake-light: ${branding.accentColor};
   --chart-1: ${branding.primaryColor};
+  --chart-2: ${branding.buttonHoverColor};
+  --chart-3: ${branding.accentColor};
+  --chart-4: ${branding.buttonActiveColor};
+  --chart-5: ${branding.inkColor};
+  --sidebar: ${branding.surfaceColor};
+  --sidebar-foreground: ${branding.headingColor};
   --sidebar-primary: ${branding.primaryColor};
+  --sidebar-primary-foreground: ${branding.buttonTextColor};
+  --sidebar-accent: ${branding.secondaryColor};
+  --sidebar-accent-foreground: ${branding.headingColor};
+  --sidebar-border: ${branding.borderColor};
+  --sidebar-ring: ${branding.focusRingColor};
   --font-heading: ${headingFontFamily};
   --font-sans: ${bodyFontFamily};
   --font-logo: ${logoFontFamily};

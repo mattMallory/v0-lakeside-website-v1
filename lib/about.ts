@@ -1,11 +1,7 @@
+import { mergeArray, resolveMediaUrl, withFallback, type MediaLike } from "@/lib/cms-mappers"
 import { defaultAboutContent, type AboutContent } from "@/lib/about-defaults"
 import { mapCaseStudyHighlight } from "@/lib/case-study-highlight"
 import { toImagePositionValue, type ImagePositionValue } from "@/lib/image-position"
-
-type MediaLike = {
-  url?: string | null
-  alt?: string | null
-}
 
 type TeamMemberDoc = {
   name?: string | null
@@ -19,22 +15,6 @@ type TeamMemberDoc = {
   instagramUrl?: string | null
   xUrl?: string | null
   facebookUrl?: string | null
-}
-
-function withFallback<T>(value: T | null | undefined, fallback: T): T {
-  if (value === null || value === undefined) return fallback
-  if (typeof value === "string" && value.trim() === "") return fallback
-  return value
-}
-
-function mergeArray<T>(value: T[] | null | undefined, fallback: T[]): T[] {
-  if (!value || value.length === 0) return fallback
-  return value
-}
-
-function resolveMediaUrl(media: number | MediaLike | null | undefined): string | undefined {
-  if (!media || typeof media === "number") return undefined
-  return typeof media.url === "string" && media.url.trim() ? media.url : undefined
 }
 
 function resolveSocialUrl(value: string | null | undefined): string | undefined {

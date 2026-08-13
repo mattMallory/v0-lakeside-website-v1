@@ -1,3 +1,5 @@
+import { withFallback } from "@/lib/cms-mappers"
+
 export type CaseStudyHighlightContent = {
   eyebrow: string
   headline: string
@@ -12,12 +14,6 @@ export const defaultCaseStudyHighlightContent: CaseStudyHighlightContent = {
 
 type FeaturedPostLike = {
   slug?: string | null
-}
-
-function withFallback<T>(value: T | null | undefined, fallback: T): T {
-  if (value === null || value === undefined) return fallback
-  if (typeof value === "string" && value.trim() === "") return fallback
-  return value
 }
 
 export function resolveFeaturedPostSlug(

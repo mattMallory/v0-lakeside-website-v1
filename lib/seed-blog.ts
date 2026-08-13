@@ -10,7 +10,11 @@ import {
 import { defaultChiropracticOfferBuilderPost } from "@/lib/chiropractic-offer-builder-defaults"
 import { defaultColdAdvertisingPost } from "@/lib/cold-advertising-defaults"
 import { defaultGoogleAdsBudgetPlannerPost } from "@/lib/google-ads-budget-planner-defaults"
-import { defaultTuscolaCaseStudy, defaultTuscolaCaseStudyMetrics } from "@/lib/case-study-defaults"
+import {
+  defaultTuscolaCaseStudy,
+  defaultTuscolaCaseStudyContent,
+  defaultTuscolaCaseStudyMetrics,
+} from "@/lib/case-study-defaults"
 
 async function ensureMediaFromPublicFile(
   payload: Payload,
@@ -115,7 +119,7 @@ export async function seedCaseStudyIfMissing(payload: Payload) {
     )
 
     if (existingPost?.id) {
-      const metrics = (existingPost as { caseStudyMetrics?: unknown[] }).caseStudyMetrics ?? []
+      const metrics = existingPost.caseStudyMetrics ?? []
       const existingCategoryId =
         typeof existingPost.category === "number" ? existingPost.category : existingPost.category?.id
       const needsBackfill =
@@ -179,7 +183,7 @@ export async function seedCaseStudyIfMissing(payload: Payload) {
         title: defaultTuscolaCaseStudy.title,
         slug: defaultTuscolaCaseStudy.slug,
         excerpt: defaultTuscolaCaseStudy.excerpt,
-        content: defaultTuscolaCaseStudy.content,
+        content: defaultTuscolaCaseStudyContent,
         authorName: defaultTuscolaCaseStudy.authorName,
         publishedAt: defaultTuscolaCaseStudy.publishedAt,
         status: "published",
@@ -214,6 +218,12 @@ export async function seedChiropracticOfferBuilderPostIfMissing(payload: Payload
       depth: 0,
     })
 
+    // Seeding creates this post once. onInit runs on every cold start, so updating an
+    // existing post here would silently revert whatever an author had edited.
+    if (existing.docs[0]?.id) {
+      return
+    }
+
     const categoryId = await ensureCategoryBySlug(
       payload,
       "Digital Marketing",
@@ -242,18 +252,10 @@ export async function seedChiropracticOfferBuilderPostIfMissing(payload: Payload
       readTime: defaultChiropracticOfferBuilderPost.readTime,
       publishedAt: defaultChiropracticOfferBuilderPost.publishedAt,
       status: "published" as const,
+      postType: "article" as const,
       category: categoryId,
       tags: tagIds,
       ...(featuredImageId ? { featuredImage: featuredImageId } : {}),
-    }
-
-    if (existing.docs[0]?.id) {
-      await payload.update({
-        collection: "posts",
-        id: existing.docs[0].id,
-        data: postData,
-      })
-      return
     }
 
     await payload.create({
@@ -277,6 +279,11 @@ export async function seedGoogleAdsBudgetPlannerPostIfMissing(payload: Payload) 
       limit: 1,
       depth: 0,
     })
+
+    // Create-only: see the note in seedChiropracticOfferBuilderPostIfMissing.
+    if (existing.docs[0]?.id) {
+      return
+    }
 
     const categoryId = await ensureCategoryBySlug(
       payload,
@@ -306,18 +313,10 @@ export async function seedGoogleAdsBudgetPlannerPostIfMissing(payload: Payload) 
       readTime: defaultGoogleAdsBudgetPlannerPost.readTime,
       publishedAt: defaultGoogleAdsBudgetPlannerPost.publishedAt,
       status: "published" as const,
+      postType: "article" as const,
       category: categoryId,
       tags: tagIds,
       ...(featuredImageId ? { featuredImage: featuredImageId } : {}),
-    }
-
-    if (existing.docs[0]?.id) {
-      await payload.update({
-        collection: "posts",
-        id: existing.docs[0].id,
-        data: postData,
-      })
-      return
     }
 
     await payload.create({
@@ -342,6 +341,12 @@ export async function seedColdAdvertisingPostIfMissing(payload: Payload) {
       depth: 0,
     })
 
+    // Create-only: see the note in seedChiropracticOfferBuilderPostIfMissing. This one
+    // previously rewrote content and readTime on every cold start.
+    if (existing.docs[0]?.id) {
+      return
+    }
+
     const categoryId = await ensureCategoryBySlug(
       payload,
       "Digital Marketing",
@@ -355,18 +360,6 @@ export async function seedColdAdvertisingPostIfMissing(payload: Payload) {
       }),
     )
 
-    if (existing.docs[0]?.id) {
-      await payload.update({
-        collection: "posts",
-        id: existing.docs[0].id,
-        data: {
-          content: defaultColdAdvertisingPost.content,
-          readTime: defaultColdAdvertisingPost.readTime,
-        },
-      })
-      return
-    }
-
     await payload.create({
       collection: "posts",
       data: {
@@ -378,6 +371,7 @@ export async function seedColdAdvertisingPostIfMissing(payload: Payload) {
         readTime: defaultColdAdvertisingPost.readTime,
         publishedAt: defaultColdAdvertisingPost.publishedAt,
         status: "published",
+        postType: "article",
         category: categoryId,
         tags: tagIds,
       },
@@ -422,6 +416,17 @@ export async function seedBlogIfEmpty(payload: Payload) {
     }
 
     for (const post of defaultBlogPosts) {
+      // category is required by the schema. Creating a post without one would rely on
+      // the default blog data being internally consistent; if it is not, skip the post
+      // and say so rather than writing a record the schema does not allow.
+      const categoryId = categoryIdBySlug.get(post.categorySlug)
+      if (categoryId === undefined) {
+        console.error(
+          `[seed] Skipping post "${post.slug}": no seeded category matches "${post.categorySlug}"`,
+        )
+        continue
+      }
+
       const featuredImageId = await ensureMediaFromPublicFile(
         payload,
         post.featuredImagePath,
@@ -438,7 +443,8 @@ export async function seedBlogIfEmpty(payload: Payload) {
           authorName: post.authorName,
           publishedAt: post.publishedAt,
           status: "published",
-          category: categoryIdBySlug.get(post.categorySlug),
+          postType: "article",
+          category: categoryId,
           tags: post.tagSlugs
             .map((slug) => tagIdBySlug.get(slug))
             .filter((id): id is number => typeof id === "number"),

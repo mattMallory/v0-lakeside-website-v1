@@ -1,8 +1,15 @@
 import type { CaseStudyHighlightContent } from "@/lib/case-study-highlight"
 import { defaultCaseStudyHighlightContent } from "@/lib/case-study-highlight"
+import type { ServicesPage } from "@/payload-types"
+
+// Derived from the schema rather than declared as `string`, so a seed cannot write an
+// icon name the CMS select does not offer — which would then fail to render.
+export type ServiceOfferingIcon = NonNullable<
+  NonNullable<ServicesPage["offeringsItems"]>[number]["icon"]
+>
 
 export type ServiceOffering = {
-  icon: string
+  icon: ServiceOfferingIcon
   title: string
   description: string
 }

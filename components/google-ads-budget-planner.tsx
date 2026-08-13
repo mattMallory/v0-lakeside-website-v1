@@ -298,13 +298,19 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
               </p>
             </div>
 
-            <div className="budget-planner-desktop-panel mt-auto hidden pt-6 md:block">
+            <div
+              data-lead-capture="budget-planner"
+              className="budget-planner-desktop-panel mt-auto hidden pt-6 md:block"
+            >
               {saveCopy}
               {emailPanel}
             </div>
           </div>
 
-          <div className="budget-planner-mobile-panel space-y-4 md:hidden">
+          <div
+            data-lead-capture="budget-planner"
+            className="budget-planner-mobile-panel space-y-4 md:hidden"
+          >
             {saveCopy}
             {emailPanel}
           </div>

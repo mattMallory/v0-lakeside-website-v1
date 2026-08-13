@@ -23,11 +23,11 @@ export function SiteHeader() {
   const ctaNavIndex = navItems.length
 
   useEffect(() => {
-    const toggle = document.getElementById(MOBILE_MENU_TOGGLE_ID)
+    const toggle = document.getElementById(MOBILE_MENU_TOGGLE_ID) as HTMLInputElement | null
     const overlay = document.querySelector(".site-mobile-nav-overlay")
     if (!toggle || !overlay) return
 
-    function syncAria() {
+    const syncAria = () => {
       overlay.setAttribute("aria-hidden", toggle.checked ? "false" : "true")
     }
 
@@ -80,7 +80,10 @@ export function SiteHeader() {
             src={branding.logoUrl}
             alt={branding.logoAlt}
             suppressHydrationWarning
-            className="h-[34px] w-auto max-w-[9.5rem] object-contain object-left"
+            // Height comes from Branding; resolveLogoHeight clamps it to 16-96px.
+            // max-width still bounds a wide logo independently of its height.
+            style={{ height: `${branding.logoHeight}px` }}
+            className="w-auto max-w-[9.5rem] object-contain object-left"
           />
         </Link>
 

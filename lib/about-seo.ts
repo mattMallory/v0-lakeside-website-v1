@@ -1,3 +1,4 @@
+import { resolveMediaAlt, resolveMediaUrl } from "@/lib/cms-mappers"
 import { defaultAboutSeo } from "@/lib/about-seo-defaults"
 
 export type AboutSeo = {
@@ -5,23 +6,6 @@ export type AboutSeo = {
   description: string
   imageUrl?: string
   imageAlt?: string
-}
-
-type MediaLike = {
-  url?: string | null
-  alt?: string | null
-}
-
-function mediaUrl(media: number | MediaLike | null | undefined): string | undefined {
-  if (!media || typeof media === "number") return undefined
-  if (typeof media.url === "string" && media.url.trim()) return media.url
-  return undefined
-}
-
-function mediaAlt(media: number | MediaLike | null | undefined): string | undefined {
-  if (!media || typeof media === "number") return undefined
-  if (typeof media.alt === "string" && media.alt.trim()) return media.alt
-  return undefined
 }
 
 export async function getAboutSeo(): Promise<AboutSeo> {
@@ -49,8 +33,8 @@ export async function getAboutSeo(): Promise<AboutSeo> {
     return {
       title,
       description,
-      imageUrl: mediaUrl(meta?.image),
-      imageAlt: mediaAlt(meta?.image),
+      imageUrl: resolveMediaUrl(meta?.image),
+      imageAlt: resolveMediaAlt(meta?.image),
     }
   } catch (error) {
     console.error("[payload] Failed to load about SEO:", error)

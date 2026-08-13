@@ -3,14 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.34.5",
   "scripts": {
-    "dev": "node scripts/sync-layout-scripts.mjs && cross-env PAYLOAD_DB_PUSH=false NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next dev --webpack",
-    "build": "node scripts/sync-layout-scripts.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next build --webpack",
+    "dev": "node scripts/sync-layout-scripts.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next dev --webpack",
+    "build": "node scripts/sync-layout-scripts.mjs && node scripts/check-payload-types.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node --import tsx scripts/check-schema-parity.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next build --webpack",
     "ci": "node scripts/vercel-build.mjs",
     "start": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" next start",
     "lint": "eslint .",
+    "test:e2e": "playwright test",
+    "test:e2e:report": "playwright show-report",
     "payload": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload",
+    "check:schema-parity": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node --import tsx scripts/check-schema-parity.mjs",
     "generate:types": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload generate:types",
+    "check:types": "node scripts/check-payload-types.mjs",
     "generate:importmap": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" payload generate:importmap",
     "migrate:create:vercel": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" POSTGRES_URL=${POSTGRES_URL:-postgresql://localhost:5432/payload} payload migrate:create",
     "reset:local-admin": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/reset-local-admin.mjs",
@@ -20,11 +25,12 @@
     "diagnose:production": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/diagnose-production.mjs",
     "reset:production-admin": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/reset-production-admin.mjs",
     "seed:about": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/seed-about.mjs",
-    "setup:services-global": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/migrate-services-global-sqlite.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/setup-services-global.mjs",
-    "setup:navigation-global": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/migrate-navigation-global-sqlite.mjs && cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/setup-navigation-global.mjs"
+    "setup:services-global": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/setup-services-global.mjs",
+    "setup:navigation-global": "cross-env NODE_OPTIONS=\"--no-deprecation --disable-warning=ExperimentalWarning\" node scripts/setup-navigation-global.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
+    "@libsql/client": "0.14.0",
     "@payloadcms/db-vercel-postgres": "3.85.1",
     "@payloadcms/next": "3.85.1",
     "@payloadcms/plugin-cloud-storage": "3.85.1",
@@ -52,12 +58,16 @@
   "devDependencies": {
     "@payloadcms/db-postgres": "3.85.1",
     "@payloadcms/db-sqlite": "3.85.1",
+    "@playwright/test": "^1.62.1",
     "@tailwindcss/postcss": "^4.2.0",
     "@types/node": "^24",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.0",
     "postcss": "^8.5",
     "tailwindcss": "^4.2.0",
+    "tsx": "4.22.4",
     "typescript": "5.7.3"
   },
   "overrides": {

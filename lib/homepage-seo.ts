@@ -1,3 +1,4 @@
+import { resolveMediaAlt, resolveMediaUrl } from "@/lib/cms-mappers"
 import { defaultHomepageSeo } from "@/lib/homepage-seo-defaults"
 
 export type HomepageSeo = {
@@ -5,23 +6,6 @@ export type HomepageSeo = {
   description: string
   imageUrl?: string
   imageAlt?: string
-}
-
-type MediaLike = {
-  url?: string | null
-  alt?: string | null
-}
-
-function mediaUrl(media: number | MediaLike | null | undefined): string | undefined {
-  if (!media || typeof media === "number") return undefined
-  if (typeof media.url === "string" && media.url.trim()) return media.url
-  return undefined
-}
-
-function mediaAlt(media: number | MediaLike | null | undefined): string | undefined {
-  if (!media || typeof media === "number") return undefined
-  if (typeof media.alt === "string" && media.alt.trim()) return media.alt
-  return undefined
 }
 
 export async function getHomepageSeo(): Promise<HomepageSeo> {
@@ -51,8 +35,8 @@ export async function getHomepageSeo(): Promise<HomepageSeo> {
     return {
       title,
       description,
-      imageUrl: mediaUrl(meta?.image),
-      imageAlt: mediaAlt(meta?.image),
+      imageUrl: resolveMediaUrl(meta?.image),
+      imageAlt: resolveMediaAlt(meta?.image),
     }
   } catch (error) {
     console.error("[payload] Failed to load homepage SEO:", error)

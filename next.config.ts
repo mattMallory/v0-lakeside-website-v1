@@ -8,7 +8,16 @@ import { shouldUsePostgresConfig } from "./lib/db-url"
 const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
+// Pages named `*.e2e.tsx` are viewport-test fixtures. They only become routes when
+// E2E_FIXTURES=1, so they are absent from a production build rather than merely
+// unreachable. See e2e/README.md.
+const pageExtensions = ["tsx", "ts", "jsx", "js"]
+if (process.env.E2E_FIXTURES === "1") {
+  pageExtensions.push("e2e.tsx")
+}
+
 const nextConfig: NextConfig = {
+  pageExtensions,
   serverExternalPackages: [
     "payload",
     "@payloadcms/db-vercel-postgres",
@@ -16,9 +25,6 @@ const nextConfig: NextConfig = {
     "@libsql/client",
     "libsql",
   ],
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
     localPatterns: [

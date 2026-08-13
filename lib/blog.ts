@@ -1,15 +1,6 @@
 import type { BlogCategory, BlogPost, BlogPostSummary, BlogTag, CaseStudyMetric, CaseStudyPost } from "@/lib/blog-types"
-import {
-  CASE_STUDY_TAG_SLUG,
-  defaultTuscolaCaseStudy,
-  defaultTuscolaCaseStudyMetrics,
-} from "@/lib/case-study-defaults"
-
-type MediaLike = {
-  url?: string | null
-  alt?: string | null
-  filename?: string | null
-}
+import { CASE_STUDY_TAG_SLUG, defaultTuscolaCaseStudy } from "@/lib/case-study-defaults"
+import { resolveMediaAlt, resolveMediaUrl, type MediaLike } from "@/lib/cms-mappers"
 
 type CategoryDoc = {
   id: string | number
@@ -58,16 +49,6 @@ type PostDoc = {
   caseStudyMetrics?: CaseStudyMetricDoc[] | null
 }
 
-function resolveMediaUrl(media: number | MediaLike | null | undefined): string | null {
-  if (!media || typeof media === "number") return null
-  return typeof media.url === "string" && media.url.trim() ? media.url : null
-}
-
-function resolveMediaAlt(media: number | MediaLike | null | undefined): string | null {
-  if (!media || typeof media === "number") return null
-  return typeof media.alt === "string" && media.alt.trim() ? media.alt : null
-}
-
 function mapCategory(doc: number | CategoryDoc | null | undefined): BlogCategory | null {
   if (!doc || typeof doc === "number") return null
   if (!doc.name || !doc.slug) return null
@@ -88,19 +69,22 @@ function mapTag(doc: number | TagDoc): BlogTag | null {
   }
 }
 
-function mapCaseStudyMetric(doc: CaseStudyMetricDoc, fallback: CaseStudyMetric): CaseStudyMetric | null {
+// Every default here is generic. A metric must never inherit a value, prefix, suffix or
+// decimal precision from another client's metric — that would publish one practice's
+// numbers under another practice's name.
+function mapCaseStudyMetric(doc: CaseStudyMetricDoc): CaseStudyMetric | null {
   if (!doc.eyebrow || !doc.description) return null
 
   return {
     eyebrow: doc.eyebrow,
-    value: doc.value ?? fallback.value ?? undefined,
-    prefix: doc.prefix ?? fallback.prefix ?? "",
-    suffix: doc.suffix ?? fallback.suffix ?? "",
-    decimals: doc.decimals ?? fallback.decimals ?? 0,
+    value: doc.value ?? undefined,
+    prefix: doc.prefix ?? "",
+    suffix: doc.suffix ?? "",
+    decimals: doc.decimals ?? 0,
     displayValue: doc.displayValue ?? undefined,
     description: doc.description,
     isHighlighted: Boolean(doc.isHighlighted),
-    highlightLabel: doc.highlightLabel ?? fallback.highlightLabel ?? "Featured Result",
+    highlightLabel: doc.highlightLabel ?? "Featured Result",
     spanFull: Boolean(doc.spanFull),
   }
 }
@@ -114,16 +98,13 @@ function isCaseStudyDoc(doc: PostDoc): boolean {
   })
 }
 
-function mapCaseStudyMetrics(
-  metrics: CaseStudyMetricDoc[] | null | undefined,
-  fallback: CaseStudyMetric[],
-): CaseStudyMetric[] {
-  const mapped =
+// Returns only the metrics this post actually carries. A post with none renders none.
+function mapCaseStudyMetrics(metrics: CaseStudyMetricDoc[] | null | undefined): CaseStudyMetric[] {
+  return (
     metrics
-      ?.map((metric, index) => mapCaseStudyMetric(metric, fallback[index] ?? fallback[0]))
+      ?.map((metric) => mapCaseStudyMetric(metric))
       .filter((metric): metric is CaseStudyMetric => Boolean(metric)) ?? []
-
-  return mapped.length > 0 ? mapped : fallback
+  )
 }
 
 function mapPostSummary(doc: PostDoc): BlogPostSummary | null {
@@ -137,8 +118,10 @@ function mapPostSummary(doc: PostDoc): BlogPostSummary | null {
     authorName: doc.authorName || "Lakeside Team",
     readTime: doc.readTime || null,
     publishedAt: doc.publishedAt,
-    featuredImageUrl: resolveMediaUrl(doc.featuredImage),
-    featuredImageAlt: resolveMediaAlt(doc.featuredImage),
+    // The shared resolvers report absence as undefined; BlogPostSummary reports it as
+    // null, so the two are reconciled here rather than widening the public type.
+    featuredImageUrl: resolveMediaUrl(doc.featuredImage) ?? null,
+    featuredImageAlt: resolveMediaAlt(doc.featuredImage) ?? null,
     category: mapCategory(doc.category),
     tags: (doc.tags || []).map(mapTag).filter((tag): tag is BlogTag => Boolean(tag)),
     isCaseStudy: isCaseStudyDoc(doc),
@@ -166,30 +149,28 @@ function mapPost(doc: PostDoc): BlogPost | null {
     clientName: doc.clientName,
     clientLocation: doc.clientLocation,
     practiceInfo: isCaseStudy ? mapCaseStudyPracticeInfo(doc) : undefined,
-    metrics: isCaseStudy
-      ? mapCaseStudyMetrics(doc.caseStudyMetrics, defaultTuscolaCaseStudyMetrics)
-      : undefined,
+    metrics: isCaseStudy ? mapCaseStudyMetrics(doc.caseStudyMetrics) : undefined,
     isCaseStudy,
   }
 }
 
+// Presents a post as a case study using only its own data. Fields the post does not
+// carry stay empty so consumers can omit them; they are never filled from another
+// client's case study.
 function toCaseStudyPost(post: BlogPost): CaseStudyPost | null {
   if (!post.isCaseStudy) return null
 
   return {
     ...post,
-    clientName: post.clientName || defaultTuscolaCaseStudy.clientName,
-    clientLocation: post.clientLocation || defaultTuscolaCaseStudy.clientLocation,
+    clientName: post.clientName?.trim() || null,
+    clientLocation: post.clientLocation?.trim() || null,
     practiceInfo: {
-      practiceType:
-        post.practiceInfo?.practiceType ?? defaultTuscolaCaseStudy.practiceInfo.practiceType,
-      services: post.practiceInfo?.services ?? defaultTuscolaCaseStudy.practiceInfo.services,
-      engagementFocus:
-        post.practiceInfo?.engagementFocus ?? defaultTuscolaCaseStudy.practiceInfo.engagementFocus,
-      marketReach:
-        post.practiceInfo?.marketReach ?? defaultTuscolaCaseStudy.practiceInfo.marketReach,
+      practiceType: post.practiceInfo?.practiceType ?? null,
+      services: post.practiceInfo?.services ?? null,
+      engagementFocus: post.practiceInfo?.engagementFocus ?? null,
+      marketReach: post.practiceInfo?.marketReach ?? null,
     },
-    metrics: post.metrics && post.metrics.length > 0 ? post.metrics : defaultTuscolaCaseStudyMetrics,
+    metrics: post.metrics ?? [],
     isCaseStudy: true,
   }
 }
