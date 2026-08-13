@@ -15,14 +15,14 @@ export function SectionEyebrow({
     <div
       className={cn(
         "mb-4 inline-flex items-center gap-2 font-brand-display text-[11px] font-semibold uppercase tracking-[0.14em]",
-        variant === "dark" ? "text-[#7CB0E8]" : "text-primary",
+        variant === "dark" ? "text-accent-on-dark" : "text-primary",
         className,
       )}
     >
       <span
         className={cn(
           "h-0.5 w-5 rounded",
-          variant === "dark" ? "bg-[#7CB0E8]" : "bg-primary",
+          variant === "dark" ? "bg-accent-on-dark" : "bg-primary",
         )}
       />
       {children}

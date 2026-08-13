@@ -8,7 +8,7 @@ function TeamCard({ member }: { member: AboutTeamMember }) {
 
   return (
     <article className="rounded-2xl border border-border bg-white p-7">
-      <div className="relative mb-[18px] aspect-square w-1/2 overflow-hidden rounded-full border border-border bg-[#EFF6FF]">
+      <div className="relative mb-[18px] aspect-square w-1/2 overflow-hidden rounded-full border border-border bg-lake-pale">
         {member.imageUrl ? (
           <CmsImage
             src={member.imageUrl}
@@ -22,7 +22,7 @@ function TeamCard({ member }: { member: AboutTeamMember }) {
             {member.initials}
           </div>
         ) : (
-          <div className="flex h-full w-full items-center justify-center font-mono text-[10px] text-[#9CA3AF]">
+          <div className="flex h-full w-full items-center justify-center font-mono text-[10px] text-muted-foreground-subtle">
             headshot
           </div>
         )}

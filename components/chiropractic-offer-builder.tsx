@@ -47,7 +47,7 @@ function StepCard({
     <div className="rounded-[14px] border border-border bg-white p-5 md:p-[22px]">
       <div className="mb-1.5 flex items-center gap-3">
         <span
-          className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-[#EFF6FF] font-brand-display text-sm font-bold text-primary"
+          className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-lake-pale font-brand-display text-sm font-bold text-primary"
         >
           {step}
         </span>
@@ -56,7 +56,7 @@ function StepCard({
         </label>
       </div>
       {hint ? (
-        <p className="mb-3.5 ml-10 text-[13px] leading-snug text-[#9CA3AF]">{hint}</p>
+        <p className="mb-3.5 ml-10 text-[13px] leading-snug text-muted-foreground-subtle">{hint}</p>
       ) : null}
       <div className="ml-0 md:ml-10">{children}</div>
     </div>
@@ -72,13 +72,13 @@ function OfferBuilderClarityPanel({ clarity }: { clarity: OfferBuilderClarity })
       className="offer-builder-clarity rounded-[14px] border border-border bg-white px-5 py-5 md:px-[22px]"
     >
       <div className="mb-3.5 flex items-center justify-between gap-3">
-        <span className="font-brand-display text-[11px] font-bold uppercase tracking-[0.08em] text-[#6B7280]">
+        <span className="font-brand-display text-[11px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
           Offer clarity
         </span>
         <span
           data-ob-clarity-badge
           data-ob-ready="false"
-          className="offer-builder-clarity-badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-brand-display text-xs font-bold bg-[#F3F4F6] text-[#9CA3AF]"
+          className="offer-builder-clarity-badge inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-brand-display text-xs font-bold bg-muted text-muted-foreground-subtle"
         >
           In progress
         </span>
@@ -93,13 +93,13 @@ function OfferBuilderClarityPanel({ clarity }: { clarity: OfferBuilderClarity })
           ] as const
         ).map(([label, key, ok]) => (
           <div key={label} className="flex items-center justify-between text-sm">
-            <span className="font-medium text-[#374151]">{label}</span>
+            <span className="font-medium text-secondary-button-foreground">{label}</span>
             <span
               data-ob-clarity-item={key}
               data-ob-clear={ok ? "true" : "false"}
               className={cn(
                 "offer-builder-clarity-status inline-flex items-center gap-1 text-[13px] font-bold",
-                ok ? "text-[#15803D]" : "text-[#9CA3AF]",
+                ok ? "text-[#15803D]" : "text-muted-foreground-subtle",
               )}
             >
               {ok ? (
@@ -217,22 +217,22 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
         </div>
 
         <div className="mb-8 flex flex-col items-center md:mb-[34px]">
-          <div className="relative w-full max-w-[360px] rounded-[14px] border-[1.5px] border-dashed border-[#D5D7DB] bg-[#F9F7F4] p-5 md:px-6 md:py-[22px]">
+          <div className="relative w-full max-w-[360px] rounded-[14px] border-[1.5px] border-dashed border-secondary-button bg-background p-5 md:px-6 md:py-[22px]">
             <span
               className="absolute right-4 top-3.5 rounded-full border border-[#F6D79E] bg-[#FDEBCB] px-2 py-0.5 font-brand-display text-[10px] font-bold uppercase tracking-[0.06em] text-[#B45309]"
             >
               Vague
             </span>
-            <p className="mb-2 font-brand-display text-[11px] font-semibold uppercase tracking-[0.08em] text-[#9CA3AF]">
+            <p className="mb-2 font-brand-display text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground-subtle">
               Starting point
             </p>
-            <p className="mb-3.5 font-brand-display text-2xl font-bold tracking-[-0.02em] text-[#6B7280]">
+            <p className="mb-3.5 font-brand-display text-2xl font-bold tracking-[-0.02em] text-muted-foreground">
               Free Consultation
             </p>
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.05em] text-[#B45309]">
               Why it feels weak
             </p>
-            <div className="flex flex-col gap-1 text-sm text-[#9CA3AF]">
+            <div className="flex flex-col gap-1 text-sm text-muted-foreground-subtle">
               <span>Who is it for?</span>
               <span>What happens?</span>
               <span>Why should someone respond?</span>
@@ -273,7 +273,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               <select
                 id="ob-audience"
                 defaultValue=""
-                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-[#D5D7DB] bg-white px-3.5 py-3 text-[15px] text-heading"
+                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-[15px] text-heading"
               >
                 <option value="">Select an audience</option>
                 {OFFER_BUILDER_AUDIENCES.map((option) => (
@@ -317,7 +317,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                 type="text"
                 defaultValue=""
                 placeholder="Or describe a specific concern…"
-                className="offer-builder-concern-custom w-full rounded-[10px] border-[1.5px] border-[#D5D7DB] bg-white px-3.5 py-3 text-[15px] text-heading placeholder:text-[#9CA3AF]"
+                className="offer-builder-concern-custom w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-[15px] text-heading placeholder:text-muted-foreground-subtle"
               />
             </StepCard>
 
@@ -329,7 +329,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               <select
                 id="ob-first-step"
                 defaultValue=""
-                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-[#D5D7DB] bg-white px-3.5 py-3 text-[15px] text-heading"
+                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-[15px] text-heading"
               >
                 <option value="">Select a first step</option>
                 {OFFER_BUILDER_FIRST_STEPS.map((option) => (
@@ -399,7 +399,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                         data-ob-value={option}
                         className="offer-builder-radio-label"
                       >
-                        <span className="offer-builder-radio-ring flex size-5 shrink-0 items-center justify-center rounded-full border-2 border-[#D5D7DB] bg-white">
+                        <span className="offer-builder-radio-ring flex size-5 shrink-0 items-center justify-center rounded-full border-2 border-secondary-button bg-white">
                           <span className="offer-builder-radio-dot size-2.5 rounded-full bg-transparent" />
                         </span>
                         {option}
@@ -440,7 +440,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                   )
                 })}
               </div>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.05em] text-[#9CA3AF]">
+              <p className="mb-2 text-xs font-bold uppercase tracking-[0.05em] text-muted-foreground-subtle">
                 Optional · price or commitment
               </p>
               <div className="flex flex-wrap gap-2">
@@ -477,7 +477,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
           >
             <div
               data-ob="offercard"
-              className="rounded-[18px] bg-[#0E1726] px-5 py-6 shadow-[0_20px_40px_-18px_rgba(14,23,38,0.5)] md:px-7 md:py-[30px]"
+              className="rounded-[18px] bg-ink px-5 py-6 shadow-[0_20px_40px_-18px_rgba(14,23,38,0.5)] md:px-7 md:py-[30px]"
             >
               <p className="offer-builder-card-label mb-[18px] font-brand-display text-[11px] font-semibold uppercase tracking-[0.14em]">
                 Your offer
@@ -509,12 +509,12 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                 {preview.priceShown ? (
                   <span
                     data-ob-preview-price
-                    className="offer-builder-price-pill inline-flex items-center rounded-full bg-[#7CB0E8]/14 px-4 py-2.5 font-brand-display text-sm font-bold"
+                    className="offer-builder-price-pill inline-flex items-center rounded-full bg-accent-on-dark/14 px-4 py-2.5 font-brand-display text-sm font-bold"
                   >
                     {preview.price}
                   </span>
                 ) : (
-                  <span data-ob-preview-price hidden className="offer-builder-price-pill inline-flex items-center rounded-full bg-[#7CB0E8]/14 px-4 py-2.5 font-brand-display text-sm font-bold" />
+                  <span data-ob-preview-price hidden className="offer-builder-price-pill inline-flex items-center rounded-full bg-accent-on-dark/14 px-4 py-2.5 font-brand-display text-sm font-bold" />
                 )}
               </div>
 
@@ -563,8 +563,8 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
           </div>
         </div>
 
-        <div className="mt-8 rounded-[14px] border border-border bg-[#F9F7F4] p-5 md:mt-10 md:p-6">
-          <p className="mb-3 font-brand-display text-[13px] font-bold uppercase tracking-[0.06em] text-[#9CA3AF]">
+        <div className="mt-8 rounded-[14px] border border-border bg-background p-5 md:mt-10 md:p-6">
+          <p className="mb-3 font-brand-display text-[13px] font-bold uppercase tracking-[0.06em] text-muted-foreground-subtle">
             Your offer in one sentence
           </p>
           <p className="text-[17px] leading-relaxed text-heading">
@@ -632,7 +632,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
           <button
             type="button"
             onClick={reset}
-            className="rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-[#6B7280] transition-colors hover:border-[#B8BBC2] hover:text-heading"
+            className="rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-muted-foreground transition-colors hover:border-[#B8BBC2] hover:text-heading"
           >
             Reset offer
           </button>

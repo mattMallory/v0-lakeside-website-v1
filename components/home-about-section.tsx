@@ -30,7 +30,7 @@ export function HomeAboutSection({
   return (
     <section
       id="about"
-      className={cn("py-20", isDark ? "bg-[#0E1726]" : undefined, className)}
+      className={cn("py-20", isDark ? "bg-ink" : undefined, className)}
       style={
         isDark
           ? {
@@ -72,7 +72,7 @@ export function HomeAboutSection({
             <p
               className={cn(
                 "mt-5 text-pretty text-lg leading-relaxed",
-                isDark ? "text-[#B9C2CF]" : "text-muted-foreground",
+                isDark ? "text-foreground-on-dark" : "text-muted-foreground",
               )}
             >
               {content.description}
@@ -84,7 +84,7 @@ export function HomeAboutSection({
               variant="outline"
               className={cn(
                 "mt-8 gap-2",
-                isDark && "border-white/25 bg-white text-[#0E1726] hover:bg-white/90 hover:text-[#0E1726]",
+                isDark && "border-white/25 bg-white text-ink hover:bg-white/90 hover:text-ink",
               )}
             >
               {content.cta}

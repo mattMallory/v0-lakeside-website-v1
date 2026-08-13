@@ -104,8 +104,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.excerpt}
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-3.5 gap-y-2 text-sm text-[#9CA3AF]">
-              <span className="font-semibold text-[#374151]">By {post.authorName}</span>
+            <div className="mt-8 flex flex-wrap items-center gap-x-3.5 gap-y-2 text-sm text-muted-foreground-subtle">
+              <span className="font-semibold text-secondary-button-foreground">By {post.authorName}</span>
               <span>·</span>
               <span>Lakeside Marketing</span>
               {post.readTime ? (

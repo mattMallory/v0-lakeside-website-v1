@@ -93,6 +93,14 @@
   --color-foreground-on-dark: var(--foreground-on-dark);
   --color-muted-foreground-on-dark: var(--muted-foreground-on-dark);
 
+  /* The accent blue used on dark surfaces — eyebrows, rules, decorative marks.
+     It needs its own name rather than borrowing `--chart-3`, which holds this
+     value statically but is overwritten at runtime with the CMS accent colour
+     (a much paler blue). Anything pointed at `chart-3` would therefore render
+     a different colour than it does today. This token is not CMS-driven, so
+     what it says is what renders. */
+  --color-accent-on-dark: var(--accent-on-dark);
+
   /* The lighter of the two muted greys on light surfaces. The most-used
      hardcoded colour in the codebase (28 places) and previously unnamed. */
   --color-muted-foreground-subtle: var(--muted-foreground-subtle);
@@ -266,6 +274,10 @@
   /* The two greys that survived, of the five used for text on dark. */
   --foreground-on-dark: #B9C2CF;
   --muted-foreground-on-dark: #94A3B8;
+
+  /* Accent blue on dark surfaces. Deliberately not `--chart-3` — see the
+     note in the theme block above. */
+  --accent-on-dark: #7CB0E8;
 }
 
 @media (max-width: 1023px) {

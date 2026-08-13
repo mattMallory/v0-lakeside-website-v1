@@ -10,7 +10,7 @@ type ServicesHeroProps = {
 export function ServicesHero({ content }: ServicesHeroProps) {
   return (
     <section
-      className="relative min-h-[30rem] overflow-hidden border-b border-[#1F2E45] bg-[#0B1220] md:min-h-[26rem]"
+      className="relative min-h-[30rem] overflow-hidden border-b border-border-on-dark bg-surface-dark md:min-h-[26rem]"
       style={{
         backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%), url('${growthSystemBackgrounds.hero}')`,
         backgroundSize: "cover",
@@ -25,7 +25,7 @@ export function ServicesHero({ content }: ServicesHeroProps) {
           <h1 className="font-brand-display mt-4 text-balance text-4xl font-bold tracking-[-0.03em] text-white sm:text-5xl md:text-6xl">
             {content.title}
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-[#B9C2CF]">
+          <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-foreground-on-dark">
             {content.description}
           </p>
         </div>
