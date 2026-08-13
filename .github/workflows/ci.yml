@@ -1,0 +1,155 @@
+name: CI
+
+# Runs the gates that until now only ran on someone's laptop.
+#
+# Job layout — three jobs in parallel rather than one sequential job.
+#
+# The cost of splitting is repeating `pnpm install` and, for two jobs, the
+# database setup. Both are cached or cheap, and the jobs run concurrently, so
+# wall-clock time is the slowest job rather than the sum of all gates.
+#
+# The benefit is signal. "checks failed" and "e2e failed" mean different things
+# and are fixed by different people; a single job would report only the first
+# failure and hide the rest behind it. `checks` needs no database and no browser,
+# so the cheapest failures also come back fastest.
+#
+# `build` and `e2e` both build, but not the same build: `build` compiles what
+# actually ships, while `e2e` compiles with E2E_FIXTURES=1 (see e2e/README.md),
+# which adds a fixture route. Running the shipped build under its own gate is the
+# point of keeping them apart.
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+# A new push to the same branch makes the previous run irrelevant.
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # A local SQLite file, created from scratch by scripts/setup-database.mjs.
+  # There is no production data in CI and none is wanted: the suite tests
+  # rendering, so a real credential would be a liability with no upside.
+  DATABASE_URL: "file:./payload.db"
+
+jobs:
+  checks:
+    name: Type check, lint, schema parity
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-project
+
+      - name: Generate a throwaway Payload secret
+        run: |
+          secret="$(openssl rand -hex 32)"
+          echo "::add-mask::$secret"
+          echo "PAYLOAD_SECRET=$secret" >> "$GITHUB_ENV"
+
+      # --incremental false so a stale tsconfig.tsbuildinfo can never mask an error.
+      - name: Type check
+        run: npx tsc --noEmit --incremental false
+
+      - name: Lint
+        run: pnpm lint
+
+      # Needs no database credential — it builds a throwaway schema from the
+      # Payload config and diffs it against migrations/. Runs here as well as
+      # inside `pnpm build` so a missing migration fails fast and reports clearly.
+      - name: Schema parity
+        run: pnpm check:schema-parity
+
+  build:
+    name: Production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-project
+
+      - name: Generate a throwaway Payload secret
+        run: |
+          secret="$(openssl rand -hex 32)"
+          echo "::add-mask::$secret"
+          echo "PAYLOAD_SECRET=$secret" >> "$GITHUB_ENV"
+
+      # Creates the schema and fails if the result is empty. `next build` does not
+      # create it — building from no database exits 0 with zero tables.
+      - name: Create and verify database
+        run: pnpm db:setup -- --fresh
+
+      - name: Build
+        run: |
+          set -o pipefail
+          pnpm build 2>&1 | tee build.log
+
+      # The build exits 0 against an empty database, so exit code alone proves
+      # nothing about whether content was present. These two checks do.
+      - name: Verify the build used a populated database
+        run: |
+          if grep -q "no such table" build.log; then
+            count="$(grep -c 'no such table' build.log)"
+            echo "::error::Build logged $count 'no such table' errors — it ran against an empty database and rendered from hardcoded defaults."
+            exit 1
+          fi
+
+          pages="$(grep -oE '\([0-9]+/[0-9]+\)' build.log | tail -1 | tr -d '()' | cut -d/ -f2)"
+          echo "Prerendered pages: ${pages:-none}"
+
+          # 21 with content, 12 without. 20 separates the two without breaking
+          # every time a blog post is added.
+          if [ -z "$pages" ] || [ "$pages" -lt 20 ]; then
+            echo "::error::Expected at least 20 prerendered pages, got ${pages:-none}. The database was probably empty."
+            exit 1
+          fi
+
+  e2e:
+    name: Viewport suite
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup-project
+
+      - name: Generate a throwaway Payload secret
+        run: |
+          secret="$(openssl rand -hex 32)"
+          echo "::add-mask::$secret"
+          echo "PAYLOAD_SECRET=$secret" >> "$GITHUB_ENV"
+
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: playwright-${{ runner.os }}-
+
+      # Without this every test fails at browser launch — loud, at least.
+      - name: Install Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      # The quiet failure: an empty database renders the site from hardcoded
+      # defaults, /blog shows no posts, and the blog assertions pass because
+      # there is nothing on the page to violate them.
+      - name: Create and verify database
+        run: pnpm db:setup -- --fresh
+
+      # Playwright builds and serves the app itself (see playwright.config.ts).
+      - name: Run viewport suite
+        run: pnpm test:e2e
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
+          if-no-files-found: ignore
