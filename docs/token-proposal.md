@@ -1,5 +1,11 @@
 # Lakeside token proposal
 
+> **Reviewing this? Start with [`token-decisions.md`](./token-decisions.md) instead.**
+>
+> That document leads with the 9 questions and 5 approvals actually needed from you, and
+> takes about ten minutes. This one is the full evidence base behind it — 68 tokens and 692
+> catalogued values — and is here to be checked against, not read front to back.
+
 **What this is.** An inventory of every styling value the live site actually uses, grouped
 into the token set those values are trying to be. It was mined out of the built code, not
 designed on a blank page — so everything here is a description of what ships today, and a
