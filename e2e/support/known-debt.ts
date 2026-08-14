@@ -19,8 +19,25 @@
 export type DebtEntry = {
   /** Route the control appears on, or "*" for site-wide chrome. */
   route: string
-  /** Substring matched against the selector the assertion generates. */
+  /**
+   * Substring matched against the offender's **stableId**, not its selector.
+   *
+   * stableId is class-free — an id, a test hook, an href, one of the project's
+   * own semantic classes, or a structural path. Matching on the selector meant
+   * every entry stopped matching the moment a utility class was renamed, and a
+   * styling migration resurfaced pre-existing debt as new failures.
+   */
   match: string
+  /**
+   * Which identity `match` is compared against.
+   *
+   * `stableId` is the default and the one to use: it is class-free, so it
+   * survives a styling rename. `selector` is the legacy form, kept only for
+   * controls that could not be re-measured because they do not render against
+   * the local database — blog pagination and search need posts to exist. Those
+   * should move to `stableId` the first time they are observed failing.
+   */
+  on?: "stableId" | "selector"
   /** Audit finding identifier, or NEW. */
   finding: string
   note: string
@@ -31,101 +48,113 @@ export type DebtEntry = {
  * control is visible.
  */
 export const TOUCH_TARGET_DEBT: DebtEntry[] = [
-  // --- Site-wide chrome (footer and header) ---
+  // --- Site-wide chrome (header and footer), identified by destination ---
   {
     route: "*",
-    match: "a.flex.items-center",
-    finding: "MOB-04",
-    note: "Footer navigation links, 34px tall.",
-  },
-  {
-    route: "*",
-    match: "a.flex.shrink-0.items-center",
+    match: "a[href=/]",
     finding: "MOB-04",
     note: "Footer brand link, 152x34px.",
   },
   {
     route: "*",
-    match: "a.font-brand-display.rounded-[7px].px-[11px]",
+    match: "a[href=/about]",
     finding: "MOB-04",
-    note: "Footer pill links, 38px tall.",
+    note: "Nav pill, 64x38px.",
   },
   {
     route: "*",
-    match: "a.text-sm.text-slate-500.hover:text-white",
+    match: "a[href=/services]",
     finding: "MOB-04",
-    note: "Footer legal links, 40x20px.",
+    note: "Nav pill, 81x38px.",
   },
   {
     route: "*",
-    match: "a.group/button.inline-flex.shrink-0",
+    match: "a[href=/blog]",
     finding: "MOB-04",
-    note: "Header CTA button, 204x42px — 2px short.",
+    note: "Nav pill, 54x38px. Also covers the homepage inline section link to the same destination, 141x24px.",
+  },
+  {
+    route: "*",
+    match: "a[href=/consultation]",
+    finding: "MOB-04",
+    note: "Nav pill, 78x38px. Also covers the header CTA button, 204x42px — 2px short.",
+  },
+  {
+    route: "*",
+    match: "a[href=/privacy]",
+    finding: "MOB-04",
+    note: "Footer legal link, 46x20px.",
+  },
+  {
+    route: "*",
+    match: "a[href=/terms]",
+    finding: "MOB-04",
+    note: "Footer legal link, 40x20px.",
   },
   {
     route: "/",
-    match: "a.font-brand-display.text-body.font-bold",
+    match: "a[href=https://www.linkedin.com/in/pete-wisniewski]",
     finding: "MOB-04",
-    note: "Homepage inline section link, 141x24px. Was 124x20px as text-sm; it grew with the body-text step to 16px and is still short of 44px.",
-  },
-  {
-    route: "/",
-    match: "a.mt-3.5.inline-block.font-brand-display",
-    finding: "MOB-04",
-    note: "Homepage card link, 73x23px.",
+    note: "Team profile link, 73x23px.",
   },
 
   // --- Blog index (MOB-04) ---
+  // These are repeated controls with no id, href or semantic class, so they fall
+  // back to a structural path. Matching the shared container rather than each
+  // child keeps it to one entry and survives a tag being added or removed.
   {
     route: "/blog",
-    match: "button.font-brand-display.flex.w-full",
+    match: "aside:nth-of-type(1)>section:nth-of-type(3)>div:nth-of-type(1)>button",
     finding: "MOB-04",
-    note: "Sidebar category filters, 36px tall.",
+    note: "Sidebar tag filter pills, 28px tall (47-106px wide). Nine of them; the match is their shared container.",
   },
   {
     route: "/blog",
-    match: "button.rounded-[8px].p-2.transition-colors",
+    match: "div:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(1)>button",
     finding: "MOB-04",
     note: "Grid/list view toggles, 32x32px.",
   },
   {
     route: "/blog",
+    match: "label:nth-of-type(1)>span:nth-of-type(1)>select:nth-of-type(1)",
+    finding: "MOB-04",
+    note: "Sort select, 105x42px.",
+  },
+  // Not re-measured: these need posts and tags in the database to render, and the
+  // local database has too few. Left on the legacy selector match until they are
+  // next observed failing, at which point they should move to a stable identity.
+  {
+    route: "/blog",
+    match: "button.font-brand-display.flex.w-full",
+    on: "selector",
+    finding: "MOB-04",
+    note: "Sidebar category filters, 36px tall.",
+  },
+  {
+    route: "/blog",
     match: "input.w-full.rounded-full.border",
+    on: "selector",
     finding: "MOB-04",
     note: "Article search input, 42px tall.",
   },
   {
     route: "/blog",
-    match: "select.appearance-none.rounded-[10px].border",
-    finding: "MOB-04",
-    note: "Sort select, 98x38px.",
-  },
-  // These two only render once the blog has posts and tags to show. The local database
-  // had neither until the schema work landed, so the suite could not see them before —
-  // the CSS is unchanged and predates that work. Measured on this branch at every width.
-  {
-    route: "/blog",
     match: "button.font-brand-display.min-w-10.rounded-[10px]",
+    on: "selector",
     finding: "MOB-04",
     note: "Pagination buttons in components/blog-roll.tsx, 40x36px and 44x38px. Only render with enough posts to paginate.",
-  },
-  {
-    route: "/blog",
-    match: "button.rounded-full.px-3.py-1.5",
-    finding: "MOB-04",
-    note: "Tag filter pills in components/blog-sidebar.tsx, 28px tall (47-106px wide). Only render when tags exist.",
   },
 
   // --- Budget planner ---
   {
     route: "/tools/google-ads-budget-planner",
-    match: "input#bp-lead-conversion",
+    match: "#bp-lead-conversion",
     finding: "MOB-02",
     note: "Range slider, 6px tall. The primary input of the lead-gen tool.",
   },
   {
     route: "/tools/google-ads-budget-planner",
-    match: "input#bp-patient-value",
+    match: "#bp-patient-value",
     finding: "MOB-02",
     note: "Range slider, 6px tall. The primary input of the lead-gen tool.",
   },
@@ -137,9 +166,15 @@ export const TOUCH_TARGET_DEBT: DebtEntry[] = [
   },
   {
     route: "/tools/google-ads-budget-planner",
-    match: "label.font-brand-display.text-body.font-bold",
+    match: "div:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(1)>label:nth-of-type(1)",
     finding: "NEW",
-    note: "Slider field labels, 24px tall. Not recorded in the audit. Was 26px as text-[15px]; the body-text step took the font to 16px and the leading to a paired 1.5, which is a net 2px shorter.",
+    note: "Slider field label, 224x24px. Not recorded in the audit.",
+  },
+  {
+    route: "/tools/google-ads-budget-planner",
+    match: "div:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(5)>div:nth-of-type(1)>label:nth-of-type(1)",
+    finding: "NEW",
+    note: "Slider field label, 332x24px. Not recorded in the audit.",
   },
 
   // --- Offer builder ---
@@ -152,6 +187,7 @@ export const TOUCH_TARGET_DEBT: DebtEntry[] = [
   {
     route: "/e2e-fixtures/offer-builder",
     match: "button.rounded-full.border.border-border",
+    on: "selector",
     finding: "MOB-04",
     note: '"Reset offer" button, 116x42px. Matches the audit exactly.',
   },
@@ -169,61 +205,77 @@ export const OVERFLOW_DEBT: DebtEntry[] = [
   {
     route: "/",
     match: "min-w-[300px]",
+    on: "selector",
     finding: "NEW",
     note: "Card with a 300px min-width overflows a 320px viewport by 5px once page gutters are applied.",
   },
   {
     route: "/about",
     match: "min-w-[300px]",
+    on: "selector",
     finding: "NEW",
     note: "Same 300px min-width card as the homepage.",
   },
   {
     route: "/tools/google-ads-budget-planner",
     match: "budget-planner-form",
+    on: "selector",
     finding: "NEW",
     note: "Form column overflows a 320px viewport by 46px.",
   },
   {
     route: "/tools/google-ads-budget-planner",
     match: "div.mb-3.flex.items-baseline",
+    on: "selector",
     finding: "NEW",
     note: "Slider label row, carried out by the overflowing form column.",
   },
   {
     route: "/tools/google-ads-budget-planner",
     match: "div.mt-2.flex.justify-between",
+    on: "selector",
     finding: "NEW",
     note: "Slider min/max row, carried out by the overflowing form column.",
   },
   {
     route: "/tools/google-ads-budget-planner",
     match: "input#bp-patient-value",
+    on: "selector",
     finding: "NEW",
     note: "Range input, carried out by the overflowing form column.",
   },
   {
     route: "/tools/google-ads-budget-planner",
     match: "span",
+    on: "selector",
     finding: "NEW",
     note: "Slider value readouts, carried out by the overflowing form column.",
   },
   {
     route: "/tools/google-ads-budget-planner",
     match: "div",
+    on: "selector",
     finding: "NEW",
     note: "Unclassed wrappers inside the overflowing form column.",
   },
 ]
 
-function matches(entries: DebtEntry[], route: string, selector: string): boolean {
-  return entries.some(
-    (entry) => (entry.route === "*" || entry.route === route) && selector.includes(entry.match),
-  )
+function matches(
+  entries: DebtEntry[],
+  route: string,
+  ids: { stableId: string; selector: string },
+): boolean {
+  return entries.some((entry) => {
+    if (entry.route !== "*" && entry.route !== route) return false
+    const against = entry.on === "selector" ? ids.selector : ids.stableId
+    return against.includes(entry.match)
+  })
 }
 
-export const isKnownTouchTargetDebt = (route: string, selector: string) =>
-  matches(TOUCH_TARGET_DEBT, route, selector)
+export const isKnownTouchTargetDebt = (
+  route: string,
+  ids: { stableId: string; selector: string },
+) => matches(TOUCH_TARGET_DEBT, route, ids)
 
-export const isKnownOverflowDebt = (route: string, selector: string) =>
-  matches(OVERFLOW_DEBT, route, selector)
+export const isKnownOverflowDebt = (route: string, ids: { stableId: string; selector: string }) =>
+  matches(OVERFLOW_DEBT, route, ids)
