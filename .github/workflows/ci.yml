@@ -64,6 +64,14 @@ jobs:
       - name: Schema parity
         run: pnpm check:schema-parity
 
+      # public/tokens.css is generated from the @theme block and committed. The
+      # site's designer imports the published stylesheet into mockups, so a stale
+      # one silently hands him last week's values. This is not hypothetical: a
+      # branch changed @theme while the generator ran on another, and the merge
+      # carried a stale tokens.css that only a manual rebuild caught.
+      - name: Design tokens up to date
+        run: pnpm check:tokens
+
   build:
     name: Production build
     runs-on: ubuntu-latest
