@@ -54,7 +54,7 @@ export function CaseStudyPracticeSidebar({ post }: CaseStudyPracticeSidebarProps
             <dt className="font-brand-display text-xs font-semibold uppercase tracking-[0.08em] text-heading">
               {item.label}
             </dt>
-            <dd className="mt-1 text-sm font-normal leading-relaxed text-muted-foreground">{item.value}</dd>
+            <dd className="mt-1 text-body font-normal leading-relaxed text-muted-foreground">{item.value}</dd>
           </div>
         ))}
       </dl>

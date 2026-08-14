@@ -56,7 +56,7 @@ export function BlogReferences({ label = "References", items }: BlogReferencesPr
           {label}
         </p>
       ) : null}
-      <ul className="flex list-none flex-col gap-2.5 text-sm leading-[1.55] text-muted-foreground">
+      <ul className="flex list-none flex-col gap-2.5 text-body leading-[1.55] text-muted-foreground">
         {items.map((item, index) => (
           <li key={`${item.text}-${index}`}>{renderCitation(item)}</li>
         ))}

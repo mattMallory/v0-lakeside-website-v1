@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const fieldClass =
-  "w-full rounded-xl border border-border bg-white px-4 py-3 text-[15px] text-heading outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+  "w-full rounded-xl border border-border bg-white px-4 py-3 text-body text-heading outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
 
 type GhlNativeEmailCaptureProps = {
   title?: string
@@ -43,7 +43,7 @@ export function GhlNativeEmailCapture({
   }, [])
 
   const titleClass =
-    tone === "dark" ? "text-sm font-medium text-muted-foreground-on-dark" : "text-sm font-medium text-muted-foreground"
+    tone === "dark" ? "text-body font-medium text-muted-foreground-on-dark" : "text-body font-medium text-muted-foreground"
   const descriptionClass =
     tone === "dark" ? "text-xs leading-relaxed text-[#64748B]" : "text-xs leading-relaxed text-muted-foreground"
   const waitingClass =
@@ -74,7 +74,7 @@ export function GhlNativeEmailCapture({
           {successTitle}
         </p>
         {successMessage ? (
-          <p className={cn("mt-2 text-sm", tone === "dark" ? "text-muted-foreground-on-dark" : "text-muted-foreground")}>
+          <p className={cn("mt-2 text-body", tone === "dark" ? "text-muted-foreground-on-dark" : "text-muted-foreground")}>
             {successMessage}
           </p>
         ) : null}
@@ -120,7 +120,7 @@ export function GhlNativeEmailCapture({
       />
 
       {status === "error" && errorMessage ? (
-        <p className="mt-2 text-sm text-destructive" role="alert">{errorMessage}</p>
+        <p className="mt-2 text-body text-destructive" role="alert">{errorMessage}</p>
       ) : null}
 
       <Button

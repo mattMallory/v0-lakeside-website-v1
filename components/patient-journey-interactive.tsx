@@ -138,7 +138,7 @@ export function PatientJourneyInteractive({
                       >
                         <span
                           className={cn(
-                            "relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition-colors",
+                            "relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-body font-semibold transition-colors",
                             isExplored
                               ? "bg-primary text-white"
                               : isActive
@@ -154,7 +154,7 @@ export function PatientJourneyInteractive({
                         </span>
                         <span
                           className={cn(
-                            "text-sm leading-snug",
+                            "text-body leading-snug",
                             isActive || isExplored
                               ? "font-semibold text-heading"
                               : "text-muted-foreground",
@@ -201,7 +201,7 @@ export function PatientJourneyInteractive({
                         <span className="font-brand-display block text-base font-bold tracking-[-0.01em] text-heading">
                           {index + 1} · {step.label}
                         </span>
-                        <span className="mt-0.5 block text-sm leading-snug text-muted-foreground">
+                        <span className="mt-0.5 block text-body leading-snug text-muted-foreground">
                           {step.teaser}
                         </span>
                       </span>
@@ -228,7 +228,7 @@ export function PatientJourneyInteractive({
                             <p className="font-brand-display mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#B45353]">
                               {step.badTitle || "Typical approach"}
                             </p>
-                            <p className="text-sm leading-relaxed text-[#7F1D1D]/80">
+                            <p className="text-body leading-relaxed text-[#7F1D1D]/80">
                               {step.badDescription}
                             </p>
                           </div>
@@ -236,12 +236,12 @@ export function PatientJourneyInteractive({
                             <p className="font-brand-display mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary">
                               {step.goodTitle}
                             </p>
-                            <p className="text-sm leading-relaxed text-heading/80">
+                            <p className="text-body leading-relaxed text-heading/80">
                               {step.goodDescription}
                             </p>
                           </div>
                         </div>
-                        <p className="mt-4 border-t border-border pt-4 text-sm font-medium italic text-heading">
+                        <p className="mt-4 border-t border-border pt-4 text-body font-medium italic text-heading">
                           {step.insight}
                         </p>
                       </div>
@@ -276,7 +276,7 @@ export function PatientJourneyInteractive({
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[9px] bg-lake-pale text-primary">
                     <card.icon className="h-[19px] w-[19px]" strokeWidth={1.8} />
                   </span>
-                  <span className="font-brand-display text-sm font-bold leading-snug text-heading">
+                  <span className="font-brand-display text-body font-bold leading-snug text-heading">
                     {card.text}
                   </span>
                 </div>
@@ -311,7 +311,7 @@ export function PatientJourneyInteractive({
               <button
                 type="button"
                 onClick={() => setShowCelebration(false)}
-                className="mt-3.5 text-sm font-semibold text-muted-foreground-subtle underline underline-offset-[3px] transition-colors hover:text-muted-foreground"
+                className="mt-3.5 text-body font-semibold text-muted-foreground-subtle underline underline-offset-[3px] transition-colors hover:text-muted-foreground"
               >
                 Keep exploring
               </button>

@@ -13,7 +13,7 @@ import { submitGhlContact } from "@/lib/submit-ghl-contact"
 import { cn } from "@/lib/utils"
 
 const fieldClass =
-  "w-full rounded-xl border border-border bg-white px-4 py-3 text-[15px] text-heading outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+  "w-full rounded-xl border border-border bg-white px-4 py-3 text-body text-heading outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
 
 function GhlEmbedConsultationForm() {
   return (
@@ -115,7 +115,7 @@ function NativeConsultationForm() {
     >
       <div className="grid gap-5 md:grid-cols-2">
         <div>
-          <label htmlFor="consult-first-name" className="mb-1.5 block text-sm font-medium text-heading">
+          <label htmlFor="consult-first-name" className="mb-1.5 block text-body font-medium text-heading">
             First name
           </label>
           <input
@@ -133,7 +133,7 @@ function NativeConsultationForm() {
         </div>
 
         <div>
-          <label htmlFor="consult-last-name" className="mb-1.5 block text-sm font-medium text-heading">
+          <label htmlFor="consult-last-name" className="mb-1.5 block text-body font-medium text-heading">
             Last name
           </label>
           <input
@@ -151,7 +151,7 @@ function NativeConsultationForm() {
         </div>
 
         <div>
-          <label htmlFor="consult-email" className="mb-1.5 block text-sm font-medium text-heading">
+          <label htmlFor="consult-email" className="mb-1.5 block text-body font-medium text-heading">
             Email
           </label>
           <input
@@ -169,7 +169,7 @@ function NativeConsultationForm() {
         </div>
 
         <div>
-          <label htmlFor="consult-phone" className="mb-1.5 block text-sm font-medium text-heading">
+          <label htmlFor="consult-phone" className="mb-1.5 block text-body font-medium text-heading">
             Phone
           </label>
           <input
@@ -186,7 +186,7 @@ function NativeConsultationForm() {
         </div>
 
         <div className="md:col-span-2">
-          <label htmlFor="consult-practice" className="mb-1.5 block text-sm font-medium text-heading">
+          <label htmlFor="consult-practice" className="mb-1.5 block text-body font-medium text-heading">
             Practice name
           </label>
           <input
@@ -200,7 +200,7 @@ function NativeConsultationForm() {
         </div>
 
         <div className="md:col-span-2">
-          <label htmlFor="consult-message" className="mb-1.5 block text-sm font-medium text-heading">
+          <label htmlFor="consult-message" className="mb-1.5 block text-body font-medium text-heading">
             What would you like help with?
           </label>
           <textarea
@@ -215,7 +215,7 @@ function NativeConsultationForm() {
       </div>
 
       {status === "error" && errorMessage ? (
-        <p className="mt-4 text-sm text-destructive" role="alert">{errorMessage}</p>
+        <p className="mt-4 text-body text-destructive" role="alert">{errorMessage}</p>
       ) : null}
 
       <Button type="submit" className="mt-6 w-full md:w-auto" disabled={status === "submitting"}>

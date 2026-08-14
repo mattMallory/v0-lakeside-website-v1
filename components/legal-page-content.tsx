@@ -13,7 +13,7 @@ export function LegalPageContent({ content }: LegalPageContentProps) {
       <h1 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
         {content.title}
       </h1>
-      <p className="mt-4 text-sm text-muted-foreground">Last updated: {content.lastUpdated}</p>
+      <p className="mt-4 text-body text-muted-foreground">Last updated: {content.lastUpdated}</p>
       <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">{content.intro}</p>
 
       <div className="mt-10 flex flex-col gap-8">

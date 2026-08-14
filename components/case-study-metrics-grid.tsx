@@ -36,7 +36,7 @@ function MetricCard({ metric }: { metric: CaseStudyMetric }) {
         />
       </p>
 
-      <p className="mt-4 text-sm leading-relaxed text-slate-400">{metric.description}</p>
+      <p className="mt-4 text-body leading-relaxed text-slate-400">{metric.description}</p>
     </article>
   )
 }

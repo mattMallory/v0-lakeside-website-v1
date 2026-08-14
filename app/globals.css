@@ -137,7 +137,14 @@
   --text-micro: 11px; /* smallest label — collapses 10/11px */
   --text-caption: 13px; /* collapses 13/13.5px */
   --text-eyebrow: 14px; /* section eyebrow */
-  --text-body: 16px; /* body copy — collapses 14/14.5/15px, 106 places */
+  --text-body: 16px; /* body copy — collapses 14/14.5/15px */
+  /* Body copy carries its own line-height, because Tailwind pairs one with
+     every size it defines and `text-sm` — which most body copy used — was
+     supplying 20px. A font-size-only token would drop that and inherit the
+     page's 1.72, which is a far larger change than the approved 2px. 1.5 is
+     the standard pairing for a 16px step, so 16/24 rather than an invented
+     number. */
+  --text-body--line-height: 1.5; /* 24px */
   --text-body-lg: 17px; /* collapses 16/17px */
   --text-lead: 19px; /* collapses 18/19px */
   --text-title-sm: 22px; /* collapses 20/22px */

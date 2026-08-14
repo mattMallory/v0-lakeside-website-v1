@@ -62,7 +62,7 @@ export function CaseStudyHighlight({
               </p>
             ) : null}
             {caseStudy.clientLocation ? (
-              <p className={cn("mt-1 text-sm", isDark ? "text-muted-foreground-on-dark" : "text-muted-foreground")}>
+              <p className={cn("mt-1 text-body", isDark ? "text-muted-foreground-on-dark" : "text-muted-foreground")}>
                 {caseStudy.clientLocation}
               </p>
             ) : null}

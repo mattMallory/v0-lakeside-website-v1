@@ -37,7 +37,7 @@ export function BlogSidebar({
               type="button"
               onClick={() => onCategorySelect(null)}
               className={cn(
-                "font-brand-display flex w-full items-center justify-between rounded-[8px] px-3 py-2 text-left text-sm transition-colors",
+                "font-brand-display flex w-full items-center justify-between rounded-[8px] px-3 py-2 text-left text-body transition-colors",
                 !activeCategorySlug
                   ? "bg-lake-pale font-medium text-primary"
                   : "text-muted-foreground hover:bg-muted hover:text-heading",
@@ -53,7 +53,7 @@ export function BlogSidebar({
                 type="button"
                 onClick={() => onCategorySelect(category.slug)}
                 className={cn(
-                  "font-brand-display flex w-full items-center justify-between rounded-[8px] px-3 py-2 text-left text-sm transition-colors",
+                  "font-brand-display flex w-full items-center justify-between rounded-[8px] px-3 py-2 text-left text-body transition-colors",
                   activeCategorySlug === category.slug
                     ? "bg-lake-pale font-medium text-primary"
                     : "text-muted-foreground hover:bg-muted hover:text-heading",
@@ -89,7 +89,7 @@ export function BlogSidebar({
                   )}
                 </div>
                 <div className="min-w-0">
-                  <p className="line-clamp-2 text-sm font-semibold text-heading transition-colors group-hover:text-primary">
+                  <p className="line-clamp-2 text-body font-semibold text-heading transition-colors group-hover:text-primary">
                     {post.title}
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">

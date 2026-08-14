@@ -40,13 +40,13 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           <div className="mt-9 flex flex-wrap gap-3.5">
             <Link
               href="#audit"
-              className="rounded-full bg-white px-[26px] py-[15px] font-brand-display text-[15px] font-bold text-ink no-underline"
+              className="rounded-full bg-white px-[26px] py-[15px] font-brand-display text-body font-bold text-ink no-underline"
             >
               {content.heroPrimaryCta}
             </Link>
             <Link
               href="#how-it-works"
-              className="rounded-lg border border-white/25 px-[26px] py-[15px] font-brand-display text-[15px] font-bold text-white no-underline"
+              className="rounded-lg border border-white/25 px-[26px] py-[15px] font-brand-display text-body font-bold text-white no-underline"
             >
               {content.heroSecondaryCta}
             </Link>
@@ -91,10 +91,10 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                     <div className="mb-3 flex h-[46px] w-[46px] items-center justify-center rounded-[11px] bg-lake-pale text-primary">
                       <Icon className="h-[22px] w-[22px]" strokeWidth={1.9} />
                     </div>
-                    <div className="font-brand-display text-[15px] font-bold text-heading">
+                    <div className="font-brand-display text-body font-bold text-heading">
                       {item.title}
                     </div>
-                    <div className="mt-1 text-sm leading-snug text-muted-foreground">
+                    <div className="mt-1 text-body leading-snug text-muted-foreground">
                       {item.description}
                     </div>
                   </div>
@@ -139,7 +139,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                   <h3 className="font-brand-display text-balance text-[19px] font-bold tracking-[-0.01em] text-white">
                     {pillar.title}
                   </h3>
-                  <p className="text-pretty text-[14.5px] leading-relaxed text-muted-foreground-on-dark">
+                  <p className="text-pretty text-body leading-relaxed text-muted-foreground-on-dark">
                     {pillar.body}
                   </p>
                 </div>
@@ -173,7 +173,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 <div className="font-brand-display text-base font-bold text-heading">
                   {item.title}
                 </div>
-                <p className="mt-2 text-pretty text-[14.5px] leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-pretty text-body leading-relaxed text-muted-foreground">
                   {item.body}
                 </p>
               </div>
@@ -227,7 +227,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 <p className="text-pretty text-[clamp(1.25rem,2.5vw,1.65rem)] font-medium leading-[1.45] text-heading">
                   &ldquo;{content.testimonials[0].quote}&rdquo;
                 </p>
-                <div className="mt-5 font-brand-display text-sm font-bold text-heading">
+                <div className="mt-5 font-brand-display text-body font-bold text-heading">
                   {content.testimonials[0].name}
                 </div>
                 <div className="text-[13.5px] text-muted-foreground">
@@ -280,7 +280,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 {member.name}
               </div>
               <div className="mt-1 text-[13.5px] font-semibold text-primary">{member.role}</div>
-              <p className="mt-3 text-pretty text-[15px] leading-relaxed text-muted-foreground">
+              <p className="mt-3 text-pretty text-body leading-relaxed text-muted-foreground">
                 {member.bio}
               </p>
               {member.linkedinUrl ? (
@@ -328,7 +328,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             </div>
             <Link
               href="/blog"
-              className="font-brand-display text-sm font-bold whitespace-nowrap text-accent-on-dark underline decoration-accent-on-dark/40 underline-offset-3"
+              className="font-brand-display text-body font-bold whitespace-nowrap text-accent-on-dark underline decoration-accent-on-dark/40 underline-offset-3"
             >
               {content.articlesLinkLabel}
             </Link>
@@ -362,7 +362,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                   <h3 className="font-brand-display text-base font-bold leading-snug tracking-[-0.015em] text-heading">
                     {post.title}
                   </h3>
-                  <span className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                  <span className="mt-auto inline-flex items-center gap-1.5 text-body font-semibold text-primary">
                     Read more
                     <ArrowRight className="h-[15px] w-[15px]" strokeWidth={2} />
                   </span>
@@ -387,7 +387,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 {index + 1}
               </div>
               <div className="font-brand-display text-base font-bold text-heading">{step.title}</div>
-              <p className="mt-2 text-pretty text-[14.5px] leading-relaxed text-muted-foreground">
+              <p className="mt-2 text-pretty text-body leading-relaxed text-muted-foreground">
                 {step.description}
               </p>
             </div>

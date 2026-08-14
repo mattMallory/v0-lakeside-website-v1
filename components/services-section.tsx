@@ -37,7 +37,7 @@ export function ServicesSection({
                 </div>
                 <div>
                   <h3 className="font-semibold text-card-foreground">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
+                  <p className="mt-2 text-body leading-relaxed text-muted-foreground">{service.description}</p>
                 </div>
               </div>
             )

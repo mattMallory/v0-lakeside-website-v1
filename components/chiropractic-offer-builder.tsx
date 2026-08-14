@@ -47,7 +47,7 @@ function StepCard({
     <div className="rounded-[14px] border border-border bg-white p-5 md:p-[22px]">
       <div className="mb-1.5 flex items-center gap-3">
         <span
-          className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-lake-pale font-brand-display text-sm font-bold text-primary"
+          className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-lake-pale font-brand-display text-body font-bold text-primary"
         >
           {step}
         </span>
@@ -92,7 +92,7 @@ function OfferBuilderClarityPanel({ clarity }: { clarity: OfferBuilderClarity })
             ["Next step", "nextStep", clarity.nextStep],
           ] as const
         ).map(([label, key, ok]) => (
-          <div key={label} className="flex items-center justify-between text-sm">
+          <div key={label} className="flex items-center justify-between text-body">
             <span className="font-medium text-secondary-button-foreground">{label}</span>
             <span
               data-ob-clarity-item={key}
@@ -232,7 +232,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
             <p className="mb-2 text-xs font-bold uppercase tracking-[0.05em] text-[#B45309]">
               Why it feels weak
             </p>
-            <div className="flex flex-col gap-1 text-sm text-muted-foreground-subtle">
+            <div className="flex flex-col gap-1 text-body text-muted-foreground-subtle">
               <span>Who is it for?</span>
               <span>What happens?</span>
               <span>Why should someone respond?</span>
@@ -273,7 +273,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               <select
                 id="ob-audience"
                 defaultValue=""
-                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-[15px] text-heading"
+                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading"
               >
                 <option value="">Select an audience</option>
                 {OFFER_BUILDER_AUDIENCES.map((option) => (
@@ -317,7 +317,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                 type="text"
                 defaultValue=""
                 placeholder="Or describe a specific concern…"
-                className="offer-builder-concern-custom w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-[15px] text-heading placeholder:text-muted-foreground-subtle"
+                className="offer-builder-concern-custom w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading placeholder:text-muted-foreground-subtle"
               />
             </StepCard>
 
@@ -329,7 +329,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               <select
                 id="ob-first-step"
                 defaultValue=""
-                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-[15px] text-heading"
+                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading"
               >
                 <option value="">Select a first step</option>
                 {OFFER_BUILDER_FIRST_STEPS.map((option) => (
@@ -493,7 +493,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               </p>
               <p
                 data-ob="pvbody"
-                className="offer-builder-preview-body mt-3.5 text-[15px] leading-relaxed"
+                className="offer-builder-preview-body mt-3.5 text-body leading-relaxed"
               >
                 {preview.body}
               </p>
@@ -501,7 +501,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               <div className="mt-5 flex flex-wrap items-center gap-3">
                 <span
                   data-ob-preview-action
-                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-[15px] font-semibold text-white"
+                  className="inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-body font-semibold text-white"
                 >
                   {preview.action}
                   <ArrowRight className="size-4 text-white" strokeWidth={2} />
@@ -509,12 +509,12 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                 {preview.priceShown ? (
                   <span
                     data-ob-preview-price
-                    className="offer-builder-price-pill inline-flex items-center rounded-full bg-accent-on-dark/14 px-4 py-2.5 font-brand-display text-sm font-bold"
+                    className="offer-builder-price-pill inline-flex items-center rounded-full bg-accent-on-dark/14 px-4 py-2.5 font-brand-display text-body font-bold"
                   >
                     {preview.price}
                   </span>
                 ) : (
-                  <span data-ob-preview-price hidden className="offer-builder-price-pill inline-flex items-center rounded-full bg-accent-on-dark/14 px-4 py-2.5 font-brand-display text-sm font-bold" />
+                  <span data-ob-preview-price hidden className="offer-builder-price-pill inline-flex items-center rounded-full bg-accent-on-dark/14 px-4 py-2.5 font-brand-display text-body font-bold" />
                 )}
               </div>
 
@@ -632,7 +632,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
           <button
             type="button"
             onClick={reset}
-            className="rounded-full border border-border bg-white px-5 py-2.5 text-sm font-semibold text-muted-foreground transition-colors hover:border-[#B8BBC2] hover:text-heading"
+            className="rounded-full border border-border bg-white px-5 py-2.5 text-body font-semibold text-muted-foreground transition-colors hover:border-[#B8BBC2] hover:text-heading"
           >
             Reset offer
           </button>

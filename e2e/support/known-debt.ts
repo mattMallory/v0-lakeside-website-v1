@@ -64,9 +64,9 @@ export const TOUCH_TARGET_DEBT: DebtEntry[] = [
   },
   {
     route: "/",
-    match: "a.font-brand-display.text-sm.font-bold",
+    match: "a.font-brand-display.text-body.font-bold",
     finding: "MOB-04",
-    note: "Homepage inline section link, 124x20px.",
+    note: "Homepage inline section link, 141x24px. Was 124x20px as text-sm; it grew with the body-text step to 16px and is still short of 44px.",
   },
   {
     route: "/",
@@ -137,9 +137,9 @@ export const TOUCH_TARGET_DEBT: DebtEntry[] = [
   },
   {
     route: "/tools/google-ads-budget-planner",
-    match: "label.font-brand-display.text-[15px].font-bold",
+    match: "label.font-brand-display.text-body.font-bold",
     finding: "NEW",
-    note: "Slider field labels, 26px tall. Not recorded in the audit.",
+    note: "Slider field labels, 24px tall. Not recorded in the audit. Was 26px as text-[15px]; the body-text step took the font to 16px and the leading to a paired 1.5, which is a net 2px shorter.",
   },
 
   // --- Offer builder ---

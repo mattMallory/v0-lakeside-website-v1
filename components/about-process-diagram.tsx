@@ -166,7 +166,7 @@ function ProcessTimelineStep({ item, index, scrollDirectionRef, onVisibilityChan
           <p className="font-brand-display text-base font-bold tracking-[-0.01em] text-heading sm:text-[17px]">
             {index + 1} • {label}
           </p>
-          <p className="mt-0.5 text-pretty text-sm leading-snug text-muted-foreground sm:text-[15px] sm:leading-relaxed">
+          <p className="mt-0.5 text-pretty text-body leading-snug text-muted-foreground sm:text-body sm:leading-relaxed">
             {item.description}
           </p>
         </div>
@@ -253,7 +253,7 @@ export function AboutProcessDiagram({ items }: AboutProcessDiagramProps) {
                 >
                   <span
                     className={cn(
-                      "relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-semibold transition-colors duration-350",
+                      "relative flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-body font-semibold transition-colors duration-350",
                       isRevealed
                         ? "bg-primary text-white"
                         : "bg-white text-muted-foreground ring-1 ring-border",
@@ -263,7 +263,7 @@ export function AboutProcessDiagram({ items }: AboutProcessDiagramProps) {
                   </span>
                   <span
                     className={cn(
-                      "text-sm leading-snug transition-colors duration-350",
+                      "text-body leading-snug transition-colors duration-350",
                       isRevealed ? "font-semibold text-heading" : "text-muted-foreground",
                     )}
                   >

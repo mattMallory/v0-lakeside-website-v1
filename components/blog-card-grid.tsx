@@ -19,8 +19,8 @@ export function BlogCardGrid({ cards }: BlogCardGridProps) {
           key={`${card.title}-${index}`}
           className="rounded-xl border border-border bg-white p-[22px]"
         >
-          <div className="mb-1.5 text-[15px] font-bold text-heading">{card.title}</div>
-          <div className="text-sm leading-[1.55] text-muted-foreground">{card.description}</div>
+          <div className="mb-1.5 text-body font-bold text-heading">{card.title}</div>
+          <div className="text-body leading-[1.55] text-muted-foreground">{card.description}</div>
         </div>
       ))}
     </div>

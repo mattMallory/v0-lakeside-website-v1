@@ -119,7 +119,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
                       setSort(event.target.value as SortOption)
                       resetPage()
                     }}
-                    className="appearance-none rounded-[10px] border border-border bg-card py-2 pl-3 pr-9 text-sm normal-case tracking-normal text-heading"
+                    className="appearance-none rounded-[10px] border border-border bg-card py-2 pl-3 pr-9 text-body normal-case tracking-normal text-heading"
                   >
                     <option value="newest">Newest</option>
                     <option value="oldest">Oldest</option>
@@ -142,7 +142,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
                     resetPage()
                   }}
                   placeholder="Search articles..."
-                  className="w-full rounded-full border border-border bg-card py-2.5 pr-4 pl-10 text-sm text-heading outline-none transition-colors focus:border-primary"
+                  className="w-full rounded-full border border-border bg-card py-2.5 pr-4 pl-10 text-body text-heading outline-none transition-colors focus:border-primary"
                 />
               </label>
             </div>
@@ -162,7 +162,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
           ) : (
             <div className="mt-12 rounded-[12px] border border-dashed border-border bg-card px-6 py-16 text-center">
               <p className="text-lg font-semibold text-heading">No articles found</p>
-              <p className="mt-2 text-sm text-muted-foreground">
+              <p className="mt-2 text-body text-muted-foreground">
                 Try adjusting your search, category, or tag filters.
               </p>
             </div>
@@ -180,7 +180,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
                     type="button"
                     onClick={() => setPage(pageNumber)}
                     className={cn(
-                      "font-brand-display min-w-10 rounded-[10px] px-3 py-2 text-sm font-medium transition-colors",
+                      "font-brand-display min-w-10 rounded-[10px] px-3 py-2 text-body font-medium transition-colors",
                       isActive
                         ? "bg-primary text-white"
                         : "border border-border bg-card text-muted-foreground hover:text-heading",
