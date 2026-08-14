@@ -25,6 +25,17 @@ const ENABLED = process.env.LAYOUT_SNAPSHOT === "1"
 const OUT = process.env.SNAPSHOT_OUT ?? ".layout/snapshot.json"
 
 type ElementBox = {
+  /**
+   * Class-free structural address, e.g. `body:nth-of-type(1)>main:nth-of-type(1)`.
+   *
+   * This is the identity the diff compares on. `selector` cannot be: it is built
+   * from class names, so migrating a class to a token renames it and the element
+   * reads as one deletion plus one addition. A batch that renamed classes without
+   * moving anything reported 196 changes that way, and a real regression hiding
+   * inside 196 false positives is a regression nobody reads.
+   */
+  path: string
+  /** Kept for human-readable output — it names the classes a reader can search for. */
   selector: string
   display: string
   position: string
@@ -63,6 +74,23 @@ test.describe("layout snapshot", () => {
             "section",
           ].join(", ")
 
+          // Structural address built only from tag names and sibling position, so
+          // it is unaffected by any class change.
+          const domPath = (el: HTMLElement): string => {
+            const parts: string[] = []
+            let node: HTMLElement | null = el
+            while (node && node !== document.documentElement) {
+              const parent: HTMLElement | null = node.parentElement
+              if (!parent) break
+              const sameTag = Array.from(parent.children).filter(
+                (child) => child.tagName === node!.tagName,
+              )
+              parts.unshift(`${node.tagName.toLowerCase()}:nth-of-type(${sameTag.indexOf(node) + 1})`)
+              node = parent
+            }
+            return parts.join(">")
+          }
+
           for (const el of Array.from(document.querySelectorAll<HTMLElement>(SELECTOR))) {
             const style = window.getComputedStyle(el)
             const rect = el.getBoundingClientRect()
@@ -71,6 +99,7 @@ test.describe("layout snapshot", () => {
                 ? el.className.trim().split(/\s+/).slice(0, 4).join(".")
                 : ""
             results.push({
+              path: domPath(el),
               selector: `${el.tagName.toLowerCase()}${cls ? "." + cls : ""}`,
               display: style.display,
               position: style.position,

@@ -13,6 +13,13 @@ const BASE_URL = process.env.E2E_BASE_URL ?? `http://127.0.0.1:${PORT}`
  */
 export default defineConfig({
   testDir: "./e2e",
+
+  // Refuses to measure a server that is not this build. Runs after webServer is
+  // up and before any test, because reusing an already-running server is only
+  // safe if something checks what is actually on the port — see
+  // e2e/support/served-app-identity.ts.
+  globalSetup: "./e2e/global-setup.ts",
+
   fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,

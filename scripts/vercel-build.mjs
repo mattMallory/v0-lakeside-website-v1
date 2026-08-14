@@ -121,11 +121,26 @@ if (missing.length > 0) {
 env.POSTGRES_URL = postgresUrl
 run("Running database migrations", "node ./node_modules/payload/bin.js migrate")
 
-// These three guards are the pre-build steps of the `build` script in package.json.
+// These four guards are the pre-build steps of the `build` script in package.json.
 // This script invokes `next build` directly rather than going through that script, so
 // without them a deploy would skip every check a local build performs: stale
-// public/scripts output, a drifted payload-types.ts, and a config field with no
-// migration would all ship green. Keep this list in step with package.json "build".
+// public/scripts output, a stale public/tokens.css, a drifted payload-types.ts, and a
+// config field with no migration would all ship green. Keep this list in step with
+// package.json "build".
+//
+// Replacing these four lines with `pnpm build` has been proposed twice as the way to
+// end the duplication permanently. Do not do it as stated — it would discard
+// NODE_OPTIONS. Lines 10-12 above deliberately *merge* `--no-deprecation` into
+// whatever Vercel supplies, whereas package.json's build script sets NODE_OPTIONS
+// through `cross-env`, which replaces the variable outright. Any memory setting
+// Vercel injects would be silently dropped, on the one path with no test coverage.
+//
+// If the duplication is to go, the safe shape is a single `scripts/prebuild-guards.mjs`
+// invoked as `node ./scripts/prebuild-guards.mjs` from both here and package.json:
+// same invocation style already used, no PATH dependency, no NODE_OPTIONS clobbering,
+// and ordering stated once. Note that pull request deploys currently exit at the
+// missing-environment check above, so no change to this file below that point can be
+// observed before a production deploy.
 run("Syncing inline layout scripts", "node ./scripts/sync-layout-scripts.mjs")
 run("Generating design tokens", "node ./scripts/generate-tokens-css.mjs")
 run("Verifying generated Payload types", "node ./scripts/check-payload-types.mjs")
