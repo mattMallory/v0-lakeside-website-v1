@@ -104,7 +104,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.excerpt}
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-3.5 gap-y-2 text-sm text-muted-foreground-subtle">
+            <div className="mt-8 flex flex-wrap items-center gap-x-3.5 gap-y-2 text-body text-muted-foreground-subtle">
               <span className="font-semibold text-secondary-button-foreground">By {post.authorName}</span>
               <span>·</span>
               <span>Lakeside Marketing</span>
@@ -139,7 +139,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           <div className="mt-10">
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-button-hover"
+              className="inline-flex items-center gap-2 text-body font-medium text-primary transition-colors hover:text-button-hover"
             >
               <ArrowLeft className="h-4 w-4" />
               Back to all articles

@@ -32,7 +32,7 @@ function TeamCard({ member }: { member: AboutTeamMember }) {
         {member.name}
       </h3>
       <p className="mt-1 text-[13.5px] font-semibold text-primary">{member.role}</p>
-      <p className="mt-3 text-pretty text-[15px] leading-relaxed text-muted-foreground">{member.bio}</p>
+      <p className="mt-3 text-pretty text-body leading-relaxed text-muted-foreground">{member.bio}</p>
       {linkedinUrl ? (
         <Link
           href={linkedinUrl}

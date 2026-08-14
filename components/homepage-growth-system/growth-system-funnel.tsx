@@ -172,7 +172,7 @@ export function GrowthSystemFunnel({ content }: GrowthSystemFunnelProps) {
                 )}
               >
                 <StepNumber index={index} isActive={isActive} />
-                <span className="min-w-0 font-brand-display text-[14.5px] font-semibold leading-snug tracking-[-0.01em]">
+                <span className="min-w-0 font-brand-display text-body font-semibold leading-snug tracking-[-0.01em]">
                   {step.buttonLabel}
                 </span>
               </button>

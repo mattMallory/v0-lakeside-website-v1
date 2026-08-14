@@ -31,7 +31,7 @@ export function CaseStudyPostPage({ post, relatedPosts }: CaseStudyPostPageProps
               {post.title}
             </h1>
 
-            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-muted-foreground">
+            <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-body text-muted-foreground">
               {post.clientName?.trim() ? (
                 <>
                   <span className="font-medium text-heading">{post.clientName.trim()}</span>
@@ -94,7 +94,7 @@ export function CaseStudyPostPage({ post, relatedPosts }: CaseStudyPostPageProps
               <div className="mt-10">
                 <Link
                   href="/blog"
-                  className="inline-flex items-center gap-2 text-sm font-medium text-primary transition-colors hover:text-button-hover"
+                  className="inline-flex items-center gap-2 text-body font-medium text-primary transition-colors hover:text-button-hover"
                 >
                   <ArrowLeft className="h-4 w-4" />
                   Back to all articles

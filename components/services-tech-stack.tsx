@@ -43,7 +43,7 @@ export function ServicesTechStack({ content }: ServicesTechStackProps) {
                   {category.items.map((item) => (
                     <li
                       key={item}
-                      className="rounded-full border border-border bg-white px-3.5 py-1.5 text-sm font-medium text-heading"
+                      className="rounded-full border border-border bg-white px-3.5 py-1.5 text-body font-medium text-heading"
                     >
                       {item}
                     </li>

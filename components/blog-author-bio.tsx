@@ -60,9 +60,9 @@ export function BlogAuthorBio({ photo, name, role, bio, linkedinUrl }: BlogAutho
           ) : null}
         </div>
         {role ? (
-          <p className="mb-2.5 text-sm font-semibold text-primary">{role}</p>
+          <p className="mb-2.5 text-body font-semibold text-primary">{role}</p>
         ) : null}
-        <p className="text-sm leading-relaxed text-muted-foreground">{bio}</p>
+        <p className="text-body leading-relaxed text-muted-foreground">{bio}</p>
       </div>
     </div>
   )

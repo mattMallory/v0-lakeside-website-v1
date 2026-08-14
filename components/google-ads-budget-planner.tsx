@@ -75,7 +75,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
 
   const saveCopy = (
     <>
-      <div className="budget-planner-save-label mb-3 text-sm font-medium text-muted-foreground-on-dark">
+      <div className="budget-planner-save-label mb-3 text-body font-medium text-muted-foreground-on-dark">
         Save your budget plan
       </div>
       <div className="budget-planner-save-desc mb-4 text-xs leading-relaxed text-[#64748B]">
@@ -120,7 +120,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
           <div className="budget-planner-form flex min-w-[min(100%,380px)] flex-1 flex-col gap-7">
             <div>
               <div className="mb-3 flex items-baseline justify-between gap-4">
-                <label htmlFor="bp-patient-value" className="font-brand-display text-[15px] font-bold text-heading">
+                <label htmlFor="bp-patient-value" className="font-brand-display text-body font-bold text-heading">
                   What is a new patient worth?
                 </label>
                 <span
@@ -148,7 +148,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             </div>
 
             <div>
-              <p className="mb-3 font-brand-display text-[15px] font-bold text-heading">
+              <p className="mb-3 font-brand-display text-body font-bold text-heading">
                 How competitive is your local market?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -164,7 +164,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             </div>
 
             <div>
-              <p className="mb-3 font-brand-display text-[15px] font-bold text-heading">
+              <p className="mb-3 font-brand-display text-body font-bold text-heading">
                 What are you promoting?
               </p>
               <div className="flex flex-wrap gap-2">
@@ -183,7 +183,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             </div>
 
             <div>
-              <p className="mb-1.5 font-brand-display text-[15px] font-bold text-heading">
+              <p className="mb-1.5 font-brand-display text-body font-bold text-heading">
                 How fast is your front-desk follow-up?
               </p>
               <p className="mb-3 text-[13px] leading-relaxed text-muted-foreground-subtle">
@@ -203,7 +203,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
 
             <div>
               <div className="mb-1.5 flex items-baseline justify-between gap-4">
-                <label htmlFor="bp-lead-conversion" className="font-brand-display text-[15px] font-bold text-heading">
+                <label htmlFor="bp-lead-conversion" className="font-brand-display text-body font-bold text-heading">
                   Of your leads, how many become patients?
                 </label>
                 <span
@@ -291,7 +291,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
               </p>
               <p
                 data-bp="next-step"
-                className="budget-planner-callout-text mt-1.5 text-[15px] leading-relaxed text-[#E2E8F0]"
+                className="budget-planner-callout-text mt-1.5 text-body leading-relaxed text-[#E2E8F0]"
                 suppressHydrationWarning
               >
                 {nextStep}

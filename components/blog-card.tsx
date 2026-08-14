@@ -41,10 +41,10 @@ export function BlogCard({ post, layout = "grid" }: BlogCardProps) {
       <h2 className="mt-2 text-balance text-xl font-bold tracking-[-0.02em] text-heading transition-colors group-hover:text-primary md:text-2xl">
         {post.title}
       </h2>
-      <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground md:text-[15px]">
+      <p className="mt-3 line-clamp-2 text-body leading-relaxed text-muted-foreground md:text-body">
         {post.excerpt}
       </p>
-      <p className="mt-4 text-sm text-muted-foreground">
+      <p className="mt-4 text-body text-muted-foreground">
         <span>{formatBlogDate(post.publishedAt)}</span>
         <span className="mx-2 text-border">·</span>
         <span>by {post.authorName}</span>
