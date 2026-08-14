@@ -29,13 +29,19 @@ export default defineConfig({
   reporter: process.env.CI
     ? [["github"], ["list"], ["html", { open: "never" }]]
     : [["list"]],
-  // Headroom on CI runners, which have far fewer cores than a development
-  // machine. This is not covering for a slow page: measured against the built
-  // server, /services returns in 30-230ms and media in ~19ms even under ten
-  // concurrent requests. The occasional 30s navigation timeout seen locally is
-  // the browser being starved of CPU, not the server being slow, and a slower
-  // runner has less CPU to go round.
-  timeout: process.env.CI ? 60_000 : 30_000,
+  // Headroom for CPU starvation, which is what a navigation timeout here
+  // actually means. This is not covering for a slow page: measured against the
+  // built server, /services returns in 30-230ms and media in ~19ms even under
+  // ten concurrent requests, and the whole /services spec passes 42/42 when run
+  // alone. A timeout is the browser being starved, not the server being slow.
+  //
+  // Originally 30s locally on the assumption that a development machine has
+  // cores to spare. It does not when it is also running builds, or a second
+  // project — which is the normal condition here. Local runs were failing 4-9
+  // navigation timeouts on /services, the heaviest route, with the failing set
+  // varying between runs; the same commits passed on CI at 60s. A suite that is
+  // red every run stops being read, which is a worse failure than a slow one.
+  timeout: 60_000,
   expect: { timeout: 5_000 },
 
   use: {
