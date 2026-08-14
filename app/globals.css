@@ -1405,7 +1405,7 @@
 
   .offer-builder-preview [data-ob="offercard"] {
     padding: 18px 20px !important;
-    box-shadow: 0 10px 24px -10px rgba(14, 23, 38, 0.55) !important;
+    box-shadow: var(--shadow-raised) !important;
   }
 
   .offer-builder-preview-title {

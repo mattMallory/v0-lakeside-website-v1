@@ -477,7 +477,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
           >
             <div
               data-ob="offercard"
-              className="rounded-[18px] bg-ink px-5 py-6 shadow-[0_20px_40px_-18px_rgba(14,23,38,0.5)] md:px-7 md:py-[30px]"
+              className="rounded-[18px] bg-ink px-5 py-6 shadow-raised md:px-7 md:py-[30px]"
             >
               <p className="offer-builder-card-label mb-[18px] font-brand-display text-[11px] font-semibold uppercase tracking-[0.14em]">
                 Your offer

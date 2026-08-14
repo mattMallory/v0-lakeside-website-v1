@@ -30,7 +30,7 @@ export function ServicesSection({
             return (
               <div
                 key={service.title}
-                className="flex gap-5 rounded-[12px] border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-lake-light hover:shadow-[0_4px_6px_-1px_rgba(16,23,38,0.07),0_2px_4px_-2px_rgba(16,23,38,0.05)]"
+                className="flex gap-5 rounded-[12px] border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-lake-light hover:shadow-raised"
               >
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-lake-pale text-icon">
                   <Icon className="h-[22px] w-[22px]" />

@@ -35,7 +35,7 @@ export function BlogArticleCta({
         {ctaLabel && ctaUrl ? (
           <Link
             href={ctaUrl}
-            className="blog-article-cta-button mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold shadow-[0_4px_14px_rgba(0,0,0,0.25)] transition-colors hover:bg-[#F9FAFB]"
+            className="blog-article-cta-button mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-4 text-base font-semibold shadow-raised transition-colors hover:bg-[#F9FAFB]"
           >
             {ctaLabel}
             <ArrowRight className="h-4 w-4" />

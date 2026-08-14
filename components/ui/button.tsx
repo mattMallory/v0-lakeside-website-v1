@@ -10,7 +10,7 @@ const buttonVariants = cva(
       variant: {
         // Primary — pill (Brand Guide)
         default:
-          'rounded-full bg-button text-button-foreground shadow-[0_1px_2px_rgba(37,99,168,0.2)] hover:bg-button-hover hover:-translate-y-px hover:shadow-[0_4px_14px_rgba(37,99,168,0.28)] active:bg-button-active active:translate-y-0',
+          'rounded-full bg-button text-button-foreground shadow-raised hover:bg-button-hover hover:-translate-y-px hover:shadow-raised active:bg-button-active active:translate-y-0',
         // Secondary — square (Brand Guide)
         outline:
           'rounded-[10px] border-[1.5px] border-secondary-button bg-white text-secondary-button-foreground hover:border-gray-400 hover:text-heading',
