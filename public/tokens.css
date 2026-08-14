@@ -1,0 +1,178 @@
+/* ------------------------------------------------------------------
+   Lakeside design tokens — the values the live site ships.
+
+   GENERATED FILE — do not edit.
+   Source:     app/globals.css  (the @theme block)
+   Regenerate: pnpm generate:tokens  (also runs on every build)
+
+   Edits here are overwritten by the next build. Change a value in
+   app/globals.css instead — that file is the source of truth.
+
+   Usage in a design mockup, with no build step and no Tailwind:
+     <link rel="stylesheet" href="tokens.css">
+     …or  @import url('tokens.css');
+   then reference them directly:
+     color: var(--color-heading);
+
+   The @theme source writes most colours as indirections such as
+   `var(--primary)`. Those are resolved to their literal values here so
+   this file stands alone. They are the site's defaults; a site owner can
+   override some colours at runtime through the CMS branding settings.
+
+   Comments below are copied from the source, because the reasoning
+   behind a token is usually worth more than the value.
+   ------------------------------------------------------------------ */
+
+:root {
+
+  /* Breakpoints — the canonical vocabulary, declared explicitly.
+
+     These are the Tailwind v4 defaults written out rather than inherited
+     silently, so every layer can see the same five numbers. The values and
+     units are identical to Tailwind's, so nothing compiles differently.
+
+     Hand-written media queries and matchMedia strings must use these values,
+     or one less for a `max-width`. See docs/breakpoints.md. */
+  --breakpoint-sm: 40rem; /* 640px */
+  --breakpoint-md: 48rem; /* 768px — single column → side by side */
+  --breakpoint-lg: 64rem; /* 1024px — stacked → multi-column */
+  --breakpoint-xl: 80rem; /* 1280px */
+  --breakpoint-2xl: 96rem; /* 1536px */
+  --font-mono: ui-monospace, monospace;
+  --color-sidebar-ring: #2563A8;
+  --color-sidebar-border: #E8E9EB;
+  --color-sidebar-accent-foreground: #111827;
+  --color-sidebar-accent: #EFF6FF;
+  --color-sidebar-primary-foreground: #FFFFFF;
+  --color-sidebar-primary: #2563A8;
+  --color-sidebar-foreground: #111827;
+  --color-sidebar: #FFFFFF;
+  --color-chart-5: #0E1726;
+  --color-chart-4: #163D6E;
+  --color-chart-3: #7CB0E8;
+  --color-chart-2: #1D4F8A;
+  --color-chart-1: #2563A8;
+  --color-ring: #2563A8;
+  --color-input: #E8E9EB;
+  --color-border: #E8E9EB;
+  --color-destructive: oklch(0.577 0.245 27.325);
+  --color-accent-foreground: #2563A8;
+  --color-accent: #DBEAFE;
+  --color-muted-foreground: #6B7280;
+  --color-muted: #F3F4F6;
+  --color-secondary-foreground: #111827;
+  --color-secondary: #EFF6FF;
+  --color-primary-foreground: #FFFFFF;
+  --color-primary: #2563A8;
+  --color-button-foreground: #FFFFFF;
+  --color-button: #2563A8;
+  --color-button-hover: #1D4F8A;
+  --color-button-active: #163D6E;
+  --color-secondary-button-foreground: #374151;
+  --color-secondary-button: #D5D7DB;
+  --color-icon: #2563A8;
+  --color-ink: #0E1726;
+  --color-lake-pale: #EFF6FF;
+  --color-lake-light: #DBEAFE;
+  --color-popover-foreground: #111827;
+  --color-popover: #FFFFFF;
+  --color-card-foreground: #111827;
+  --color-card: #FFFFFF;
+  --color-foreground: #111827;
+  --color-heading: #111827;
+  --color-background: #F9F7F4;
+
+  /* Status colours. Approved 2026-08-13. These name values already in the
+     codebase; only `danger` was chosen between competing values (three reds
+     shipped; #B45353 won). Not yet CMS-driven — see --destructive below. */
+  --color-success: #15803D;
+  --color-success-surface: #F0FDF4;
+  --color-success-border: #86EFAC;
+  --color-warning: #B45309;
+  --color-warning-surface: #FDEBCB;
+  --color-warning-border: #F6D79E;
+  --color-danger: #B45353;
+  --color-danger-surface: #FEF7F7;
+  --color-danger-border: #F3D0D0;
+  --color-info-border: #BFDBFE;
+
+  /* Dark-section surfaces. The site runs light with dark bands; these are the
+     bands. Names for values already in use — no value changes.
+     The two muted greys used for text on these surfaces are NOT here: which
+     two of the five in use should survive is still open. */
+  --color-surface-dark: #0B1220;
+  --color-surface-dark-raised: #111B2E;
+  --color-border-on-dark: #1F2E45;
+
+  /* The lighter of the two muted greys on light surfaces. The most-used
+     hardcoded colour in the codebase (28 places) and previously unnamed. */
+  --color-muted-foreground-subtle: #9CA3AF;
+  --radius-sm: calc(0.75rem * 0.6);
+  --radius-md: calc(0.75rem * 0.8);
+  --radius-lg: 0.75rem;
+  --radius-xl: calc(0.75rem * 1.4);
+  --radius-2xl: calc(0.75rem * 1.8);
+  --radius-3xl: calc(0.75rem * 2.2);
+  --radius-4xl: calc(0.75rem * 2.6);
+  --radius-pill: 999px;
+  --radius-sq: 0.625rem;
+
+  /* A card is 14px. Approved 2026-08-13, chosen between the 12px this token
+     used to hold, the 14px most cards were hand-written at, and the 21.6px of
+     the largest cluster. Nothing consumes `rounded-card` yet, so changing the
+     value here moves nothing; the call sites are migrated separately. */
+  --radius-card: 0.875rem; /* 14px */
+
+  /* ------------------------------------------------------------------
+     Typography — sizes only. Approved 2026-08-13.
+
+     Weight and letter-spacing are deliberately absent: both are still
+     open, and a value that looks decided is worse than an obvious gap.
+
+     The names are roles rather than t-shirt sizes on purpose. Tailwind
+     already defines text-sm (14px, 77 uses), text-lg (18px, 24 uses),
+     text-xl, text-2xl and text-3xl (30px, 12 uses). Redefining those
+     names would silently move several hundred elements; defining new
+     ones moves nothing.
+
+     Two steps are missing on purpose — 13px is pending review, and the
+     body size is contradicted (15px vs "16pt") and unresolved.
+     ------------------------------------------------------------------ */
+  --text-micro: 11px; /* smallest label — collapses 10/11px */
+  --text-eyebrow: 14px; /* section eyebrow */
+  --text-body-lg: 17px; /* collapses 16/17px */
+  --text-lead: 19px; /* collapses 18/19px */
+  --text-title-sm: 22px; /* collapses 20/22px */
+  --text-title: 26px; /* collapses 24/26/28px */
+  --text-display: 40px; /* collapses 37.6/40/44px */
+
+  /* Spacing — deliberately NOT re-declared here.
+
+     The approved scale is 16/20/24/28/32px, which is exactly Tailwind's
+     existing 4px grid: p-4, p-5, p-6, p-7, p-8. It already exists, driven
+     by `--spacing: 0.25rem`. Aliasing it under new names would create a
+     second vocabulary for the same five values.
+
+     It would also break the site. Naming them `--spacing-sm/md/xl` was
+     tried and measured: Tailwind resolves `max-w-<name>` against the
+     spacing namespace before the container namespace, so those keys
+     silently redefined `max-w-sm`, `max-w-md` and `max-w-xl` from
+     384/448/576px to 20/24/32px, across five live elements including the
+     About headline and the footer. Caught by diffing the compiled CSS.
+
+     The spacing decision is therefore a call-site migration, not a token. */
+
+  /* Icon sizes — names for the sizes already in use. No value changes.
+     Safe under the spacing namespace: no `--container-icon-*` key exists
+     for these to shadow. */
+  --spacing-icon-xs: 15px;
+  --spacing-icon-sm: 19px;
+  --spacing-icon-md: 22px;
+  --spacing-icon-lg: 30px;
+  --spacing-icon-xl: 46px;
+
+  /* Page container. Approved 2026-08-13 over the 1152px of `max-w-6xl`,
+     which ships alongside it today. */
+  --container-page: 70rem; /* 1120px */
+  --animate-step-bounce: step-number-bounce 0.45s ease-out both;
+}

@@ -127,6 +127,7 @@ run("Running database migrations", "node ./node_modules/payload/bin.js migrate")
 // public/scripts output, a drifted payload-types.ts, and a config field with no
 // migration would all ship green. Keep this list in step with package.json "build".
 run("Syncing inline layout scripts", "node ./scripts/sync-layout-scripts.mjs")
+run("Generating design tokens", "node ./scripts/generate-tokens-css.mjs")
 run("Verifying generated Payload types", "node ./scripts/check-payload-types.mjs")
 run("Checking schema parity", "node --import tsx ./scripts/check-schema-parity.mjs")
 
