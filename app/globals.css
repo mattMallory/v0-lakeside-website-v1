@@ -845,8 +845,8 @@
 
 @keyframes about-process-icon-reveal {
   0% {
-    background-color: #f9f7f4;
-    color: #6b7280;
+    background-color: var(--background);
+    color: var(--muted-foreground);
   }
 
   100% {
@@ -918,7 +918,7 @@
 }
 
 .prose-blog p {
-  color: #374151;
+  color: var(--secondary-button-foreground);
   text-wrap: pretty;
 }
 
@@ -931,7 +931,7 @@
 .prose-blog ul,
 .prose-blog ol {
   padding-left: 1.25rem;
-  color: #374151;
+  color: var(--secondary-button-foreground);
 }
 
 .prose-blog li + li {
@@ -946,39 +946,44 @@
 }
 
 .prose-blog .patient-journey-principle-eyebrow {
-  color: #7cb0e8;
+  color: var(--accent-on-dark);
 }
 
 .prose-blog .patient-journey-principle-headline {
-  color: #ffffff;
+  color: var(--card);
 }
 
 .prose-blog .blog-article-cta-eyebrow {
-  color: #7cb0e8;
+  color: var(--accent-on-dark);
 }
 
 .prose-blog .blog-article-cta-title {
   margin-top: 0;
   margin-bottom: 0;
-  color: #ffffff;
+  color: var(--card);
 }
 
 .prose-blog .blog-article-cta-description {
-  color: #94a3b8;
+  color: var(--muted-foreground-on-dark);
 }
 
 .prose-blog .blog-article-cta-button {
-  color: #2563a8;
+  color: var(--primary);
   text-decoration: none;
 }
 
 .prose-blog .blog-article-cta-button:hover {
-  color: #1d4f8a;
+  color: var(--button-hover);
   text-decoration: none;
 }
 
 .prose-blog .budget-planner-results-eyebrow,
 .prose-blog .budget-planner-metric-desc,
+/* Left as a literal deliberately. #64748b, #e2e8f0 and #cbd5e1 are three of the
+   five greys used for text on dark surfaces. Two were chosen to survive
+   (--foreground-on-dark, --muted-foreground-on-dark) and these collapse into
+   them — but that is an approved visual change, not a free adoption, so it is
+   made in its own change rather than smuggled in here. */
 .prose-blog .budget-planner-body-text,
 .prose-blog .budget-planner-save-desc {
   color: #64748b;
@@ -986,16 +991,16 @@
 
 .prose-blog .budget-planner-results-budget,
 .prose-blog .budget-planner-callout-label {
-  color: #7cb0e8;
+  color: var(--accent-on-dark);
 }
 
 .prose-blog .budget-planner-metric-label,
 .prose-blog .budget-planner-save-label {
-  color: #94a3b8;
+  color: var(--muted-foreground-on-dark);
 }
 
 .prose-blog .budget-planner-metric-value {
-  color: #ffffff;
+  color: var(--card);
 }
 
 .prose-blog .budget-planner-callout-text {
@@ -1007,11 +1012,11 @@
 }
 
 .prose-blog .offer-builder-card-eyebrow {
-  color: #7cb0e8;
+  color: var(--accent-on-dark);
 }
 
 .prose-blog .offer-builder-preview-title {
-  color: #ffffff;
+  color: var(--card);
 }
 
 .prose-blog .offer-builder-preview-body {
@@ -1019,15 +1024,15 @@
 }
 
 .prose-blog .offer-builder-status-done {
-  color: #86efac;
+  color: var(--success-border);
 }
 
 .prose-blog .offer-builder-status-pending {
-  color: #94a3b8;
+  color: var(--muted-foreground-on-dark);
 }
 
 .prose-blog .offer-builder-price-pill {
-  color: #7cb0e8;
+  color: var(--accent-on-dark);
 }
 
 .blog-rich-text-breakout {
@@ -1052,7 +1057,7 @@
 
 .blog-budget-planner-breakout {
   margin-top: 3.5rem;
-  background: #ffffff;
+  background: var(--card);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -1092,20 +1097,20 @@
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  border: 1.5px solid #d5d7db;
+  border: 1.5px solid var(--secondary-button);
   border-radius: 9999px;
-  background: #ffffff;
+  background: var(--card);
   padding: 0.625rem 1rem;
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.25rem;
-  color: #374151;
+  color: var(--secondary-button-foreground);
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
 .budget-planner-native-input:checked + .budget-planner-pill-label {
   border-color: var(--primary);
-  background: #eff6ff;
+  background: var(--lake-pale);
   color: var(--primary);
 }
 
@@ -1145,7 +1150,7 @@
 
 .blog-offer-builder-breakout {
   margin-top: 2.75rem;
-  background: #ffffff;
+  background: var(--card);
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
 }
@@ -1182,42 +1187,42 @@
 }
 
 .offer-builder-sentence-span[data-ob-filled="true"] {
-  border-color: #dbeafe;
-  background: #eff6ff;
+  border-color: var(--lake-light);
+  background: var(--lake-pale);
   color: var(--primary);
 }
 
 .offer-builder-sentence-span[data-ob-filled="false"] {
   border-color: var(--border);
-  background: #f3f4f6;
-  color: #9ca3af;
+  background: var(--muted);
+  color: var(--muted-foreground-subtle);
 }
 
 .offer-builder-clarity-badge[data-ob-ready="true"] {
-  background: #f0fdf4;
-  color: #15803d;
+  background: var(--success-surface);
+  color: var(--success);
 }
 
 .offer-builder-clarity-badge[data-ob-ready="false"] {
-  background: #f3f4f6;
-  color: #9ca3af;
+  background: var(--muted);
+  color: var(--muted-foreground-subtle);
 }
 
 .offer-builder-clarity-status[data-ob-clear="true"] {
-  color: #15803d;
+  color: var(--success);
 }
 
 .offer-builder-clarity-status[data-ob-clear="false"] {
-  color: #9ca3af;
+  color: var(--muted-foreground-subtle);
 }
 
 .offer-builder-email > div {
-  background-color: #fff;
+  background-color: var(--card);
 }
 
 .offer-builder-email [data-ob-embed-root],
 .offer-builder-email iframe {
-  background-color: #fff;
+  background-color: var(--card);
 }
 
 .offer-builder-select {
@@ -1264,14 +1269,14 @@
   display: inline-flex;
   align-items: center;
   gap: 0.375rem;
-  border: 1.5px solid #d5d7db;
+  border: 1.5px solid var(--secondary-button);
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--card);
   padding: 0.5rem 0.875rem;
   font-size: 0.875rem;
   font-weight: 600;
   line-height: 1.25rem;
-  color: #374151;
+  color: var(--secondary-button-foreground);
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
@@ -1281,7 +1286,7 @@
 
 .offer-builder-native-input:checked + .offer-builder-chip-label {
   border-color: var(--primary);
-  background: #eff6ff;
+  background: var(--lake-pale);
   color: var(--primary);
 }
 
@@ -1303,19 +1308,19 @@
   gap: 0.75rem;
   border: 1.5px solid var(--border);
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--card);
   padding: 0.875rem 1rem;
   text-align: left;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.4;
-  color: #374151;
+  color: var(--secondary-button-foreground);
   transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
 }
 
 .offer-builder-native-input:checked + .offer-builder-radio-label {
   border-color: var(--primary);
-  background: #eff6ff;
+  background: var(--lake-pale);
   color: var(--heading);
 }
 
@@ -1333,9 +1338,9 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid #d5d7db;
+  border: 1.5px solid var(--secondary-button);
   border-radius: 0.75rem;
-  background: #ffffff;
+  background: var(--card);
   padding: 0.875rem 1rem;
   text-align: center;
   font-size: 15px;
@@ -1348,7 +1353,7 @@
 .offer-builder-native-input:checked + .offer-builder-action-label {
   border-color: var(--primary);
   background: var(--primary);
-  color: #ffffff;
+  color: var(--card);
 }
 
 /* The sticky preview is expressed on the element itself as `md:sticky md:top-20
@@ -1533,9 +1538,9 @@
   #growth-funnel-mobile #growth-funnel-step-5:checked ~ .growth-funnel-mobile-tablist [data-funnel-tab="5"],
   #growth-funnel-mobile #growth-funnel-step-6:checked ~ .growth-funnel-mobile-tablist [data-funnel-tab="6"],
   #growth-funnel-mobile #growth-funnel-step-7:checked ~ .growth-funnel-mobile-tablist [data-funnel-tab="7"] {
-    border-color: #2563a8;
-    background-color: #eff6ff;
-    color: #111827;
+    border-color: var(--primary);
+    background-color: var(--lake-pale);
+    color: var(--foreground);
   }
 
   #growth-funnel-mobile #growth-funnel-step-0:checked ~ .growth-funnel-mobile-tablist [data-funnel-tab="0"] .growth-funnel-step-num,
@@ -1546,8 +1551,8 @@
   #growth-funnel-mobile #growth-funnel-step-5:checked ~ .growth-funnel-mobile-tablist [data-funnel-tab="5"] .growth-funnel-step-num,
   #growth-funnel-mobile #growth-funnel-step-6:checked ~ .growth-funnel-mobile-tablist [data-funnel-tab="6"] .growth-funnel-step-num,
   #growth-funnel-mobile #growth-funnel-step-7:checked ~ .growth-funnel-mobile-tablist [data-funnel-tab="7"] .growth-funnel-step-num {
-    background-color: #2563a8;
-    color: #ffffff;
+    background-color: var(--primary);
+    color: var(--card);
   }
 }
 
