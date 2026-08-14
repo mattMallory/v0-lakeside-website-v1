@@ -27,7 +27,7 @@ export function CaseStudyHighlight({
 
   return (
     <section
-      className={cn("py-20", isDark ? "bg-[#0E1726]" : "bg-white", className)}
+      className={cn("py-20", isDark ? "bg-ink" : "bg-white", className)}
       style={
         isDark
           ? {
@@ -62,14 +62,14 @@ export function CaseStudyHighlight({
               </p>
             ) : null}
             {caseStudy.clientLocation ? (
-              <p className={cn("mt-1 text-sm", isDark ? "text-[#94A3B8]" : "text-muted-foreground")}>
+              <p className={cn("mt-1 text-sm", isDark ? "text-muted-foreground-on-dark" : "text-muted-foreground")}>
                 {caseStudy.clientLocation}
               </p>
             ) : null}
             <p
               className={cn(
                 "mt-5 text-pretty text-base leading-relaxed",
-                isDark ? "text-[#B9C2CF]" : "text-muted-foreground",
+                isDark ? "text-foreground-on-dark" : "text-muted-foreground",
               )}
             >
               {caseStudy.excerpt}
@@ -82,7 +82,7 @@ export function CaseStudyHighlight({
               size="lg"
               className={cn(
                 "mt-8 gap-2",
-                isDark && "border-white/25 bg-white text-[#0E1726] hover:bg-white/90 hover:text-[#0E1726]",
+                isDark && "border-white/25 bg-white text-ink hover:bg-white/90 hover:text-ink",
               )}
             >
               Read the case study

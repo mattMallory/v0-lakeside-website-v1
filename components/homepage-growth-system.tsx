@@ -19,9 +19,9 @@ type HomepageGrowthSystemProps = {
 
 export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrowthSystemProps) {
   return (
-    <div className="w-full max-w-full overflow-x-hidden bg-[#F9F7F4]">
+    <div className="w-full max-w-full overflow-x-hidden bg-background">
       <header
-        className="relative overflow-hidden bg-[#0B1220]"
+        className="relative overflow-hidden bg-surface-dark"
         style={{
           backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%), url('${growthSystemBackgrounds.hero}')`,
           backgroundSize: "cover",
@@ -32,15 +32,15 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           <SectionEyebrow variant="dark">{content.heroEyebrow}</SectionEyebrow>
           <h1 className="font-brand-display max-w-[780px] text-balance text-[clamp(2rem,5.2vw,3.625rem)] font-bold leading-[1.28] tracking-[-0.03em] text-white">
             {content.heroHeadline}{" "}
-            <span className="text-[#7CB0E8]">{content.heroHeadlineAccent}</span>
+            <span className="text-accent-on-dark">{content.heroHeadlineAccent}</span>
           </h1>
-          <p className="mt-9 max-w-[600px] text-pretty text-[19px] leading-relaxed text-[#B9C2CF]">
+          <p className="mt-9 max-w-[600px] text-pretty text-[19px] leading-relaxed text-foreground-on-dark">
             {content.heroSubheadline}
           </p>
           <div className="mt-9 flex flex-wrap gap-3.5">
             <Link
               href="#audit"
-              className="rounded-full bg-white px-[26px] py-[15px] font-brand-display text-[15px] font-bold text-[#0E1726] no-underline"
+              className="rounded-full bg-white px-[26px] py-[15px] font-brand-display text-[15px] font-bold text-ink no-underline"
             >
               {content.heroPrimaryCta}
             </Link>
@@ -57,7 +57,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 <div className="font-brand-display text-[28px] font-bold text-white">
                   {stat.value}
                 </div>
-                <div className="text-[13px] text-[#94A3B8]">{stat.label}</div>
+                <div className="text-[13px] text-muted-foreground-on-dark">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -78,7 +78,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             <h2 className="font-brand-display text-balance text-[clamp(1.625rem,3.2vw,2.375rem)] font-bold leading-[1.06] tracking-[-0.03em] text-white">
               {content.whoHeadline}
             </h2>
-            <p className="mt-3.5 text-pretty text-base leading-relaxed text-[#94A3B8]">
+            <p className="mt-3.5 text-pretty text-base leading-relaxed text-muted-foreground-on-dark">
               {content.whoDescription}
             </p>
           </div>
@@ -88,7 +88,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 const Icon = getIcon(item.icon)
                 return (
                   <div key={item.title} className="bg-white p-5">
-                    <div className="mb-3 flex h-[46px] w-[46px] items-center justify-center rounded-[11px] bg-[#EFF6FF] text-primary">
+                    <div className="mb-3 flex h-[46px] w-[46px] items-center justify-center rounded-[11px] bg-lake-pale text-primary">
                       <Icon className="h-[22px] w-[22px]" strokeWidth={1.9} />
                     </div>
                     <div className="font-brand-display text-[15px] font-bold text-heading">
@@ -108,7 +108,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       <GrowthSystemFunnel content={content} />
 
       <section
-        className="bg-[#0E1726] py-[88px]"
+        className="bg-ink py-[88px]"
         style={{
           backgroundImage: `linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%), url('${growthSystemBackgrounds.pillars}')`,
           backgroundSize: "cover",
@@ -121,7 +121,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">
               {content.pillarsHeadline}
             </h2>
-            <p className="mt-3.5 text-pretty text-lg leading-relaxed text-[#94A3B8]">
+            <p className="mt-3.5 text-pretty text-lg leading-relaxed text-muted-foreground-on-dark">
               {content.pillarsDescription}
             </p>
           </div>
@@ -131,15 +131,15 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
               return (
                 <div
                   key={pillar.title}
-                  className="flex flex-col gap-3 rounded-2xl border border-[#1F2E45] bg-[#111B2E] p-7"
+                  className="flex flex-col gap-3 rounded-2xl border border-border-on-dark bg-surface-dark-raised p-7"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(37,99,168,.18)] text-[#7CB0E8]">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(37,99,168,.18)] text-accent-on-dark">
                     <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} />
                   </div>
                   <h3 className="font-brand-display text-balance text-[19px] font-bold tracking-[-0.01em] text-white">
                     {pillar.title}
                   </h3>
-                  <p className="text-pretty text-[14.5px] leading-relaxed text-[#94A3B8]">
+                  <p className="text-pretty text-[14.5px] leading-relaxed text-muted-foreground-on-dark">
                     {pillar.body}
                   </p>
                 </div>
@@ -163,7 +163,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             <h2 className="max-w-[600px] font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">
               {content.includedHeadline}
             </h2>
-            <p className="mt-3.5 max-w-[620px] text-pretty text-lg leading-relaxed text-[#B9C2CF]">
+            <p className="mt-3.5 max-w-[620px] text-pretty text-lg leading-relaxed text-foreground-on-dark">
               {content.includedDescription}
             </p>
           </div>
@@ -187,12 +187,12 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}
           caseStudy={caseStudy}
-          className="bg-[#F9F7F4] py-0 pt-[88px] pb-0"
+          className="bg-background py-0 pt-[88px] pb-0"
         />
       ) : null}
 
       <section
-        className="mt-[80px] bg-[#0B1220] py-[88px]"
+        className="mt-[80px] bg-surface-dark py-[88px]"
         style={{
           backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%), url('${growthSystemBackgrounds.hero}')`,
           backgroundSize: "cover",
@@ -207,7 +207,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             </h2>
           </div>
           {content.testimonials[0] ? (
-            <div className="grid overflow-hidden rounded-2xl border border-[#1F2E45] bg-white md:grid-cols-[clamp(220px,32%,340px)_1fr]">
+            <div className="grid overflow-hidden rounded-2xl border border-border-on-dark bg-white md:grid-cols-[clamp(220px,32%,340px)_1fr]">
               {content.testimonials[0].photoUrl ? (
                 <Image
                   src={content.testimonials[0].photoUrl}
@@ -218,7 +218,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 />
               ) : (
                 <div
-                  className="flex aspect-[4/3] w-full items-center justify-center bg-[#EFF6FF] font-mono text-[11px] text-[#9CA3AF] md:aspect-auto md:h-full md:rounded-l-2xl"
+                  className="flex aspect-[4/3] w-full items-center justify-center bg-lake-pale font-mono text-[11px] text-muted-foreground-subtle md:aspect-auto md:h-full md:rounded-l-2xl"
                 >
                   testimonial photo
                 </div>
@@ -261,7 +261,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
         <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
           {content.teamMembers.map((member) => (
             <div key={member.name} className="rounded-2xl border border-border bg-white p-7">
-              <div className="relative mb-[18px] aspect-square w-1/2 overflow-hidden rounded-full border border-border bg-[#EFF6FF]">
+              <div className="relative mb-[18px] aspect-square w-1/2 overflow-hidden rounded-full border border-border bg-lake-pale">
                 {member.photoUrl ? (
                   <Image
                     src={member.photoUrl}
@@ -271,7 +271,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                     className="object-cover object-top"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center font-mono text-[10px] text-[#9CA3AF]">
+                  <div className="flex h-full w-full items-center justify-center font-mono text-[10px] text-muted-foreground-subtle">
                     headshot
                   </div>
                 )}
@@ -311,7 +311,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       </section>
 
       <section
-        className="mt-[50px] bg-[#0E1726] py-[88px]"
+        className="mt-[50px] bg-ink py-[88px]"
         style={{
           backgroundImage: `linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%), url('${growthSystemBackgrounds.pillars}')`,
           backgroundSize: "cover",
@@ -328,7 +328,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             </div>
             <Link
               href="/blog"
-              className="font-brand-display text-sm font-bold whitespace-nowrap text-[#7CB0E8] underline decoration-[#7CB0E8]/40 underline-offset-3"
+              className="font-brand-display text-sm font-bold whitespace-nowrap text-accent-on-dark underline decoration-accent-on-dark/40 underline-offset-3"
             >
               {content.articlesLinkLabel}
             </Link>
@@ -340,7 +340,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 href={`/blog/${post.slug}`}
                 className="flex flex-col overflow-hidden rounded-2xl bg-white no-underline"
               >
-                <div className="relative aspect-video bg-[#EFF6FF]">
+                <div className="relative aspect-video bg-lake-pale">
                   {post.featuredImageUrl ? (
                     <Image
                       src={post.featuredImageUrl}
@@ -350,13 +350,13 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                       sizes="(max-width: 768px) 100vw, 25vw"
                     />
                   ) : (
-                    <div className="flex h-full items-center justify-center font-mono text-[11px] text-[#7CB0E8]">
+                    <div className="flex h-full items-center justify-center font-mono text-[11px] text-accent-on-dark">
                       article image · 16:9
                     </div>
                   )}
                 </div>
                 <div className="flex flex-1 flex-col gap-2.5 p-5">
-                  <span className="self-start rounded-full bg-[#EFF6FF] px-[11px] py-[5px] text-[11px] font-semibold uppercase tracking-[0.05em] text-primary">
+                  <span className="self-start rounded-full bg-lake-pale px-[11px] py-[5px] text-[11px] font-semibold uppercase tracking-[0.05em] text-primary">
                     {post.isCaseStudy ? "Case Study" : (post.category?.name ?? "Article")}
                   </span>
                   <h3 className="font-brand-display text-base font-bold leading-snug tracking-[-0.015em] text-heading">

@@ -34,7 +34,7 @@ export function BlogAuthorBio({ photo, name, role, bio, linkedinUrl }: BlogAutho
 
   return (
     <div className="my-8 flex items-start gap-5 rounded-2xl border border-border bg-white p-6 sm:gap-[22px] sm:p-7">
-      <div className="relative flex h-[76px] w-[76px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-[#EFF6FF]">
+      <div className="relative flex h-[76px] w-[76px] shrink-0 items-center justify-center overflow-hidden rounded-full border border-border bg-lake-pale">
         {photoUrl ? (
           <Image src={photoUrl} alt={photoAlt} fill className="object-cover object-top" sizes="76px" />
         ) : (
@@ -53,7 +53,7 @@ export function BlogAuthorBio({ photo, name, role, bio, linkedinUrl }: BlogAutho
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${name} on LinkedIn`}
-              className="inline-flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md bg-[#EFF6FF] text-primary transition-colors hover:bg-[#DBEAFE]"
+              className="inline-flex h-[26px] w-[26px] shrink-0 items-center justify-center rounded-md bg-lake-pale text-primary transition-colors hover:bg-lake-light"
             >
               <LinkedInIcon />
             </Link>

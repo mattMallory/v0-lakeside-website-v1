@@ -90,7 +90,7 @@ export function PatientJourneyInteractive({
         <div className="rounded-[20px] border border-border bg-white px-5 py-10 shadow-[0_4px_6px_-1px_rgba(16,23,38,0.05)] sm:px-8 md:px-11">
           <div className="mb-8 text-center md:mb-[30px]">
             {eyebrow ? (
-              <p className="font-brand-display mb-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#9CA3AF]">
+              <p className="font-brand-display mb-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground-subtle">
                 {eyebrow}
               </p>
             ) : null}
@@ -107,15 +107,15 @@ export function PatientJourneyInteractive({
           </div>
 
           <div className="flex flex-wrap items-start gap-6">
-            <aside className="sticky top-20 hidden w-[236px] shrink-0 self-start rounded-2xl border border-border bg-[#F9F7F4] p-5 lg:block">
-              <p className="font-brand-display mb-2.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#9CA3AF]">
+            <aside className="sticky top-20 hidden w-[236px] shrink-0 self-start rounded-2xl border border-border bg-background p-5 lg:block">
+              <p className="font-brand-display mb-2.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground-subtle">
                 Your progress
               </p>
               <div className="mb-0.5 flex items-baseline gap-1.5">
                 <span className="font-brand-display text-[40px] font-bold leading-none tracking-[-0.03em] text-primary">
                   {exploredCount}
                 </span>
-                <span className="font-brand-display text-lg font-bold text-[#9CA3AF]">
+                <span className="font-brand-display text-lg font-bold text-muted-foreground-subtle">
                   / {journeySteps.length}
                 </span>
               </div>
@@ -192,7 +192,7 @@ export function PatientJourneyInteractive({
                           "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-colors",
                           isOpen
                             ? "bg-primary text-white"
-                            : "bg-[#F9F7F4] text-muted-foreground",
+                            : "bg-background text-muted-foreground",
                         )}
                       >
                         <StepIcon className="h-[22px] w-[22px]" strokeWidth={1.8} />
@@ -232,7 +232,7 @@ export function PatientJourneyInteractive({
                               {step.badDescription}
                             </p>
                           </div>
-                          <div className="rounded-xl border border-[#BFDBFE] bg-[#EFF6FF] p-4">
+                          <div className="rounded-xl border border-[#BFDBFE] bg-lake-pale p-4">
                             <p className="font-brand-display mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-primary">
                               {step.goodTitle}
                             </p>
@@ -253,8 +253,8 @@ export function PatientJourneyInteractive({
           </div>
 
           <div className="mt-[26px]">
-            <div className="mb-[18px] flex items-center gap-4 rounded-[14px] bg-[#0E1726] px-7 py-[22px]">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[11px] bg-[rgba(124,176,232,0.15)] text-[#7CB0E8]">
+            <div className="mb-[18px] flex items-center gap-4 rounded-[14px] bg-ink px-7 py-[22px]">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[11px] bg-[rgba(124,176,232,0.15)] text-accent-on-dark">
                 <Zap className="h-6 w-6" strokeWidth={1.8} />
               </span>
               <div>
@@ -271,9 +271,9 @@ export function PatientJourneyInteractive({
               {principleCards.map((card) => (
                 <div
                   key={card.text}
-                  className="flex items-center gap-3 rounded-xl border border-border bg-[#F9F7F4] p-4"
+                  className="flex items-center gap-3 rounded-xl border border-border bg-background p-4"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[9px] bg-[#EFF6FF] text-primary">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[9px] bg-lake-pale text-primary">
                     <card.icon className="h-[19px] w-[19px]" strokeWidth={1.8} />
                   </span>
                   <span className="font-brand-display text-sm font-bold leading-snug text-heading">
@@ -285,7 +285,7 @@ export function PatientJourneyInteractive({
           </div>
 
           {showCelebration && allExplored ? (
-            <div className="mt-6 rounded-2xl border border-primary/20 bg-[#EFF6FF] px-6 py-8 text-center">
+            <div className="mt-6 rounded-2xl border border-primary/20 bg-lake-pale px-6 py-8 text-center">
               <p className="font-brand-display text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
                 All {journeySteps.length} moments explored
               </p>
@@ -311,7 +311,7 @@ export function PatientJourneyInteractive({
               <button
                 type="button"
                 onClick={() => setShowCelebration(false)}
-                className="mt-3.5 text-sm font-semibold text-[#9CA3AF] underline underline-offset-[3px] transition-colors hover:text-muted-foreground"
+                className="mt-3.5 text-sm font-semibold text-muted-foreground-subtle underline underline-offset-[3px] transition-colors hover:text-muted-foreground"
               >
                 Keep exploring
               </button>
@@ -319,7 +319,7 @@ export function PatientJourneyInteractive({
           ) : null}
         </div>
 
-        <figcaption className="mt-4 text-center text-[13px] text-[#9CA3AF]">
+        <figcaption className="mt-4 text-center text-[13px] text-muted-foreground-subtle">
           Lakeside Marketing · The Natural Practice Growth System
         </figcaption>
       </figure>

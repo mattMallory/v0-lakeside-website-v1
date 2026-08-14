@@ -151,7 +151,7 @@ function ProcessTimelineStep({ item, index, scrollDirectionRef, onVisibilityChan
         <span
           className={cn(
             "process-step-icon flex h-11 w-11 shrink-0 items-center justify-center rounded-xl transition-all duration-350 ease-out",
-            isVisible ? "bg-primary text-white" : "bg-[#F9F7F4] text-muted-foreground",
+            isVisible ? "bg-primary text-white" : "bg-background text-muted-foreground",
           )}
         >
           <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} />
@@ -227,15 +227,15 @@ export function AboutProcessDiagram({ items }: AboutProcessDiagramProps) {
 
   return (
     <div className="about-process-timeline mx-auto mt-12 flex max-w-4xl flex-wrap items-start gap-6 sm:mt-14">
-      <aside className="sticky top-20 hidden w-[236px] shrink-0 self-start rounded-2xl border border-border bg-[#F9F7F4] p-5 lg:block">
-        <p className="font-brand-display mb-2.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#9CA3AF]">
+      <aside className="sticky top-20 hidden w-[236px] shrink-0 self-start rounded-2xl border border-border bg-background p-5 lg:block">
+        <p className="font-brand-display mb-2.5 text-[11px] font-semibold uppercase tracking-[0.1em] text-muted-foreground-subtle">
           Our process
         </p>
         <div className="mb-0.5 flex items-baseline gap-1.5">
           <span className="font-brand-display text-[40px] font-bold leading-none tracking-[-0.03em] text-primary">
             {revealedCount}
           </span>
-          <span className="font-brand-display text-lg font-bold text-[#9CA3AF]">/ {stepCount}</span>
+          <span className="font-brand-display text-lg font-bold text-muted-foreground-subtle">/ {stepCount}</span>
         </div>
         <p className="mb-[18px] text-[13px] text-muted-foreground">steps complete</p>
 

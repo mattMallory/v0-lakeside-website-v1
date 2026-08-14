@@ -10,7 +10,7 @@ type AboutHeroProps = {
 export function AboutHero({ content }: AboutHeroProps) {
   return (
     <section
-      className="relative min-h-[30rem] overflow-hidden border-b border-[#1F2E45] bg-[#0B1220] md:min-h-[32rem]"
+      className="relative min-h-[30rem] overflow-hidden border-b border-border-on-dark bg-surface-dark md:min-h-[32rem]"
       style={{
         backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%), url('${growthSystemBackgrounds.hero}')`,
         backgroundSize: "cover",
@@ -24,12 +24,12 @@ export function AboutHero({ content }: AboutHeroProps) {
             <h1 className="font-brand-display mt-5 max-w-xl text-balance text-4xl font-bold leading-[1.05] tracking-[-0.026em] text-white sm:text-5xl md:text-6xl">
               {content.title}
             </h1>
-            <p className="mt-6 max-w-xl text-pretty text-lg leading-[1.55] text-[#B9C2CF] md:text-[19px]">
+            <p className="mt-6 max-w-xl text-pretty text-lg leading-[1.55] text-foreground-on-dark md:text-[19px]">
               {content.description}
             </p>
           </div>
 
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] border border-white/10 bg-[#111B2E] lg:aspect-[5/4]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] border border-white/10 bg-surface-dark-raised lg:aspect-[5/4]">
             <CmsImage
               src={content.imageUrl}
               alt={content.imageAlt}

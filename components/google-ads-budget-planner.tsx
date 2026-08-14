@@ -75,7 +75,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
 
   const saveCopy = (
     <>
-      <div className="budget-planner-save-label mb-3 text-sm font-medium text-[#94A3B8]">
+      <div className="budget-planner-save-label mb-3 text-sm font-medium text-muted-foreground-on-dark">
         Save your budget plan
       </div>
       <div className="budget-planner-save-desc mb-4 text-xs leading-relaxed text-[#64748B]">
@@ -140,7 +140,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                 defaultValue={defaultBudgetPlannerState.patientValue}
                 className="h-1.5 w-full cursor-pointer accent-primary"
               />
-              <div className="mt-2 flex justify-between font-brand-display text-xs text-[#9CA3AF]">
+              <div className="mt-2 flex justify-between font-brand-display text-xs text-muted-foreground-subtle">
                 <span>$500</span>
                 <span>Collected revenue per patient</span>
                 <span>$5,000</span>
@@ -186,7 +186,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
               <p className="mb-1.5 font-brand-display text-[15px] font-bold text-heading">
                 How fast is your front-desk follow-up?
               </p>
-              <p className="mb-3 text-[13px] leading-relaxed text-[#9CA3AF]">
+              <p className="mb-3 text-[13px] leading-relaxed text-muted-foreground-subtle">
                 How quickly and consistently your team responds to a new lead.
               </p>
               <div className="flex flex-wrap gap-2">
@@ -214,7 +214,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                   {`${defaultBudgetPlannerState.leadConversion}%`}
                 </span>
               </div>
-              <p className="mb-3 text-[13px] leading-relaxed text-[#9CA3AF]">
+              <p className="mb-3 text-[13px] leading-relaxed text-muted-foreground-subtle">
                 The follow-up presets above set a starting point — drag to match your own numbers.
               </p>
               <input
@@ -226,7 +226,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                 defaultValue={followupLeadConversionPresets[defaultBudgetPlannerState.followup as BudgetFollowup]}
                 className="h-1.5 w-full cursor-pointer accent-primary"
               />
-              <div className="mt-2 flex justify-between font-brand-display text-xs text-[#9CA3AF]">
+              <div className="mt-2 flex justify-between font-brand-display text-xs text-muted-foreground-subtle">
                 <span>3%</span>
                 <span>Lead → new patient</span>
                 <span>75%</span>
@@ -234,13 +234,13 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             </div>
           </div>
 
-          <div className="budget-planner-results flex min-w-[min(100%,320px)] flex-1 flex-col rounded-2xl bg-[#0E1726] p-8">
+          <div className="budget-planner-results flex min-w-[min(100%,320px)] flex-1 flex-col rounded-2xl bg-ink p-8">
             <p className="budget-planner-results-eyebrow text-[11px] font-medium uppercase tracking-[0.06em] text-[#64748B]">
               Recommended monthly ad spend
             </p>
             <p
               data-bp="budget-range"
-              className="budget-planner-results-budget font-brand-display mt-2 text-[44px] font-bold leading-none tracking-[-0.03em] text-[#7CB0E8]"
+              className="budget-planner-results-budget font-brand-display mt-2 text-[44px] font-bold leading-none tracking-[-0.03em] text-accent-on-dark"
               suppressHydrationWarning
             >
               {budgetLabel}
@@ -248,7 +248,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
 
             <div className="mt-6 flex gap-3">
               <div className="flex-1 rounded-[11px] border border-white/10 bg-white/[0.04] p-4">
-                <p className="budget-planner-metric-label text-[11px] uppercase tracking-[0.05em] text-[#94A3B8]">
+                <p className="budget-planner-metric-label text-[11px] uppercase tracking-[0.05em] text-muted-foreground-on-dark">
                   Cost per lead
                 </p>
                 <p
@@ -263,7 +263,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                 </p>
               </div>
               <div className="flex-1 rounded-[11px] border border-white/10 bg-white/[0.04] p-4">
-                <p className="budget-planner-metric-label text-[11px] uppercase tracking-[0.05em] text-[#94A3B8]">
+                <p className="budget-planner-metric-label text-[11px] uppercase tracking-[0.05em] text-muted-foreground-on-dark">
                   Cost per new patient
                 </p>
                 <p
@@ -285,8 +285,8 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
               lead. Compare it to what a patient is worth.
             </p>
 
-            <div className="mt-5 rounded-[11px] border border-[#7CB0E8]/25 bg-[#7CB0E8]/10 p-4">
-              <p className="budget-planner-callout-label text-[11px] font-semibold uppercase tracking-[0.06em] text-[#7CB0E8]">
+            <div className="mt-5 rounded-[11px] border border-accent-on-dark/25 bg-accent-on-dark/10 p-4">
+              <p className="budget-planner-callout-label text-[11px] font-semibold uppercase tracking-[0.06em] text-accent-on-dark">
                 Do this first
               </p>
               <p
@@ -316,7 +316,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
           </div>
         </div>
 
-        <p className="mt-4 max-w-[640px] text-[13px] leading-relaxed text-[#9CA3AF]">
+        <p className="mt-4 max-w-[640px] text-[13px] leading-relaxed text-muted-foreground-subtle">
           Estimates use a{" "}
           <span data-bp="landing-conversion-pct" suppressHydrationWarning>
             {landingConversionLabel}

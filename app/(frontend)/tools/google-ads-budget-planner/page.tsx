@@ -15,7 +15,7 @@ export default function GoogleAdsBudgetPlannerPage() {
     <>
       <SiteHeader />
       <main>
-        <section className="border-b border-border bg-[#F9F7F4]">
+        <section className="border-b border-border bg-background">
           <div className="mx-auto max-w-[720px] px-6 py-14 text-center md:py-16">
             <h1 className="font-brand-display text-balance text-[clamp(2rem,5vw,3rem)] font-bold leading-[1.05] tracking-[-0.03em] text-heading">
               How much should a chiropractic practice spend on{" "}

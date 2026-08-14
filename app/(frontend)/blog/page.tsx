@@ -28,7 +28,7 @@ export default async function BlogPage() {
       <SiteHeader />
 
       <section
-        className="relative min-h-[30rem] overflow-hidden border-b border-[#1F2E45] bg-[#0B1220] md:min-h-[26rem]"
+        className="relative min-h-[30rem] overflow-hidden border-b border-border-on-dark bg-surface-dark md:min-h-[26rem]"
         style={{
           backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.92) 0%, rgba(11,18,32,.72) 55%, rgba(11,18,32,.35) 100%), url('${growthSystemBackgrounds.hero}')`,
           backgroundSize: "cover",
@@ -43,7 +43,7 @@ export default async function BlogPage() {
             <h1 className="font-brand-display mt-4 text-balance text-4xl font-bold tracking-[-0.03em] text-white sm:text-5xl md:text-6xl">
               Ideas That Inspire Growth
             </h1>
-            <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-[#B9C2CF]">
+            <p className="mx-auto mt-5 max-w-2xl text-pretty text-lg leading-relaxed text-foreground-on-dark">
               Practical strategies for natural wellness clinics — from patient acquisition and digital marketing to
               operations that keep your schedule full.
             </p>

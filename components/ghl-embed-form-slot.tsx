@@ -53,11 +53,11 @@ export function GhlEmbedFormSlot({
           suppressHydrationWarning
           className={cn(
             "flex items-center justify-center px-4",
-            placeholderClassName ?? "bg-[#F9F7F4]",
+            placeholderClassName ?? "bg-background",
           )}
           style={{ minHeight: GHL_EMBED_MIN_HEIGHT }}
         >
-          <p className="text-center text-xs leading-relaxed text-[#94A3B8]">{waitingMessage}</p>
+          <p className="text-center text-xs leading-relaxed text-muted-foreground-on-dark">{waitingMessage}</p>
         </div>
       )}
     </div>

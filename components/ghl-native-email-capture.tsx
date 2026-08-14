@@ -43,7 +43,7 @@ export function GhlNativeEmailCapture({
   }, [])
 
   const titleClass =
-    tone === "dark" ? "text-sm font-medium text-[#94A3B8]" : "text-sm font-medium text-muted-foreground"
+    tone === "dark" ? "text-sm font-medium text-muted-foreground-on-dark" : "text-sm font-medium text-muted-foreground"
   const descriptionClass =
     tone === "dark" ? "text-xs leading-relaxed text-[#64748B]" : "text-xs leading-relaxed text-muted-foreground"
   const waitingClass =
@@ -74,7 +74,7 @@ export function GhlNativeEmailCapture({
           {successTitle}
         </p>
         {successMessage ? (
-          <p className={cn("mt-2 text-sm", tone === "dark" ? "text-[#94A3B8]" : "text-muted-foreground")}>
+          <p className={cn("mt-2 text-sm", tone === "dark" ? "text-muted-foreground-on-dark" : "text-muted-foreground")}>
             {successMessage}
           </p>
         ) : null}
