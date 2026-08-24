@@ -3,6 +3,7 @@ import { sqliteAdapter } from "@payloadcms/db-sqlite"
 import { ensureAboutGlobalSqlite } from "./lib/ensure-about-global-sqlite"
 import { ensureCalendarGlobalSqlite } from "./lib/ensure-calendar-global-sqlite"
 import { ensureCaseStudyHighlightGlobalsSqlite } from "./lib/ensure-case-study-highlight-globals-sqlite"
+import { ensureConsultationGlobalSqlite } from "./lib/ensure-consultation-global-sqlite"
 import { ensureHomepageGrowthSystemSqlite } from "./lib/ensure-homepage-growth-system-sqlite"
 import { ensureLegalGlobalSqlite } from "./lib/ensure-legal-global-sqlite"
 import { ensureNavigationGlobalSqlite } from "./lib/ensure-navigation-global-sqlite"
@@ -19,6 +20,7 @@ async function ensureSqliteGlobals() {
   await ensureAboutGlobalSqlite()
   await ensureCaseStudyHighlightGlobalsSqlite()
   await ensureCalendarGlobalSqlite()
+  await ensureConsultationGlobalSqlite()
 }
 
 export default createPayloadConfig(

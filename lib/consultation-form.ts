@@ -130,6 +130,10 @@ export type ConsultationFormState = {
   paidAdvertising: ConsultationPaidAdvertising[]
   marketingInvestment: ConsultationMarketingInvestment | ""
   acquisitionTimeline: ConsultationAcquisitionTimeline | ""
+  /** Optional SMS consent — transactional / non-marketing. */
+  smsNonMarketingConsent: boolean
+  /** Optional SMS consent — marketing / promotional. */
+  smsMarketingConsent: boolean
 }
 
 export const defaultConsultationFormState: ConsultationFormState = {
@@ -149,6 +153,8 @@ export const defaultConsultationFormState: ConsultationFormState = {
   paidAdvertising: [],
   marketingInvestment: "",
   acquisitionTimeline: "",
+  smsNonMarketingConsent: false,
+  smsMarketingConsent: false,
 }
 
 export const GHL_CONSULTATION_QUALIFIED_FIELD_KEYS = {
@@ -183,6 +189,8 @@ export function buildConsultationSummary(state: ConsultationFormState): string {
     `Monthly marketing investment: ${state.marketingInvestment || "—"}`,
     `Timeline: ${state.acquisitionTimeline || "—"}`,
     `Practice website: ${state.practiceWebsite.trim() || "—"}`,
+    `SMS non-marketing consent: ${state.smsNonMarketingConsent ? "Yes" : "No"}`,
+    `SMS marketing consent: ${state.smsMarketingConsent ? "Yes" : "No"}`,
   ]
 
   return lines.join("\n")

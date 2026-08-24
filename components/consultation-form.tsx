@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import Script from "next/script"
 import { useEffect, useRef, useState } from "react"
 
@@ -22,12 +23,24 @@ import {
   type ConsultationPaidAdvertising,
 } from "@/lib/consultation-form"
 import {
+  defaultConsultationPageContent,
+  type ConsultationPageContent,
+} from "@/lib/consultation-page-defaults"
+import {
   GHL_CONSULTATION_SOURCE,
   GHL_CONSULTATION_TAGS,
 } from "@/lib/ghl-consultation"
 import { isValidEmail } from "@/lib/ghl-form"
 import { submitGhlContact } from "@/lib/submit-ghl-contact"
 import { cn } from "@/lib/utils"
+
+type ConsultationConsentCopy = Pick<
+  ConsultationPageContent,
+  | "smsNonMarketingConsentLabel"
+  | "smsMarketingConsentLabel"
+  | "privacyLinkLabel"
+  | "termsLinkLabel"
+>
 
 const TOTAL_STEPS = 3
 
@@ -162,7 +175,7 @@ function CheckboxOptionList({
   )
 }
 
-function NativeConsultationForm() {
+function NativeConsultationForm({ consent }: { consent: ConsultationConsentCopy }) {
   const [mounted, setMounted] = useState(false)
   const [step, setStep] = useState(1)
   const [state, setState] = useState<ConsultationFormState>(defaultConsultationFormState)
@@ -617,6 +630,40 @@ function NativeConsultationForm() {
               }
             />
           </div>
+
+          <div className="flex flex-col gap-4 border-t border-border pt-6">
+            {consent.smsNonMarketingConsentLabel ? (
+              <label htmlFor="sms-non-marketing-consent" className="flex cursor-pointer items-start gap-3">
+                <input
+                  id="sms-non-marketing-consent"
+                  name="smsNonMarketingConsent"
+                  type="checkbox"
+                  checked={state.smsNonMarketingConsent}
+                  onChange={(e) => updateField("smsNonMarketingConsent", e.target.checked)}
+                  className="mt-1 size-4 shrink-0 accent-primary"
+                />
+                <span className="text-sm leading-relaxed text-muted-foreground">
+                  {consent.smsNonMarketingConsentLabel}
+                </span>
+              </label>
+            ) : null}
+
+            {consent.smsMarketingConsentLabel ? (
+              <label htmlFor="sms-marketing-consent" className="flex cursor-pointer items-start gap-3">
+                <input
+                  id="sms-marketing-consent"
+                  name="smsMarketingConsent"
+                  type="checkbox"
+                  checked={state.smsMarketingConsent}
+                  onChange={(e) => updateField("smsMarketingConsent", e.target.checked)}
+                  className="mt-1 size-4 shrink-0 accent-primary"
+                />
+                <span className="text-sm leading-relaxed text-muted-foreground">
+                  {consent.smsMarketingConsentLabel}
+                </span>
+              </label>
+            ) : null}
+          </div>
         </div>
       ) : null}
 
@@ -645,6 +692,20 @@ function NativeConsultationForm() {
           </Button>
         )}
       </div>
+
+      {step === TOTAL_STEPS ? (
+        <p className="mt-4 text-center text-sm text-muted-foreground">
+          <Link href="/privacy" className="text-primary underline underline-offset-2 hover:text-primary/80">
+            {consent.privacyLinkLabel}
+          </Link>
+          <span className="mx-2 text-border" aria-hidden>
+            |
+          </span>
+          <Link href="/terms" className="text-primary underline underline-offset-2 hover:text-primary/80">
+            {consent.termsLinkLabel}
+          </Link>
+        </p>
+      ) : null}
     </form>
   )
 }
@@ -653,9 +714,15 @@ function NativeConsultationForm() {
  * Consultation capture: native HTML form → Private Integration API, or legacy GHL iframe.
  * Mode is chosen on the server (see consultation/page.tsx).
  */
-export function ConsultationForm({ mode }: { mode: "native" | "embed" }) {
+export function ConsultationForm({
+  mode,
+  consent = defaultConsultationPageContent,
+}: {
+  mode: "native" | "embed"
+  consent?: ConsultationConsentCopy
+}) {
   if (mode === "native") {
-    return <NativeConsultationForm />
+    return <NativeConsultationForm consent={consent} />
   }
 
   return <GhlEmbedConsultationForm />
