@@ -15,6 +15,8 @@ export type GhlUpsertContactInput = {
   email?: string
   phone?: string
   companyName?: string
+  city?: string
+  state?: string
   source?: string
   tags?: string[]
   customFields?: GhlCustomField[]
@@ -83,6 +85,8 @@ export async function upsertGhlContact(input: GhlUpsertContactInput): Promise<un
     email: email || undefined,
     phone: phone || undefined,
     companyName: input.companyName?.trim() || undefined,
+    city: input.city?.trim() || undefined,
+    state: input.state?.trim() || undefined,
     source: input.source?.trim() || "Lakeside Website",
     tags: input.tags?.length ? input.tags : undefined,
     customFields: input.customFields?.length ? input.customFields : undefined,

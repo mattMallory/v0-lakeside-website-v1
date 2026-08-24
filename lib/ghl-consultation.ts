@@ -1,20 +1,29 @@
 import { getGhlConfig } from "@/lib/ghl-private-integration"
+import { GHL_CONSULTATION_QUALIFIED_FIELD_KEYS } from "@/lib/consultation-form"
 
 /**
  * Go High Level — consultation page (Private Integration)
  *
  * 1. Private Integration with contacts.write scope
  * 2. Server env: GHL_PRIVATE_INTEGRATION_TOKEN, GHL_LOCATION_ID
- * 3. Custom field for the message textarea:
- *    - Unique Key: what_would_you_like_help_with
- *    - Optional env override: GHL_CF_WHAT_WOULD_YOU_LIKE_HELP_WITH=<field id>
- * 4. Message is also saved as a contact Note (Notes tab) on every submission.
+ * 3. Create Contact custom fields with Unique Keys from
+ *    lib/consultation-form.ts (GHL_CONSULTATION_QUALIFIED_FIELD_KEYS)
+ * 4. Qualified answers are saved as custom fields + a contact Note
  */
 export const GHL_CONSULTATION_FIELD_KEYS = {
-  message: "what_would_you_like_help_with",
+  message: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.summary,
+  practiceWebsite: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.practiceWebsite,
+  practiceType: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.practiceType,
+  growthChallenge: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.growthChallenge,
+  growthChallengeOther: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.growthChallengeOther,
+  monthlyNewPatientLeads: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.monthlyNewPatientLeads,
+  newPatientCapacity: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.newPatientCapacity,
+  paidAdvertising: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.paidAdvertising,
+  marketingInvestment: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.marketingInvestment,
+  acquisitionTimeline: GHL_CONSULTATION_QUALIFIED_FIELD_KEYS.acquisitionTimeline,
 } as const
 
-/** Alternate GHL Unique Keys for the consultation message field. */
+/** Alternate GHL Unique Keys for the consultation summary / help field. */
 export const GHL_CONSULTATION_MESSAGE_ALIASES = [
   "what_would_you_like_help_with",
   "message",
@@ -33,9 +42,13 @@ export function getConsultationMessageFieldId(): string | undefined {
   )
 }
 
-export const GHL_CONSULTATION_NOTE_TITLE = "What would you like help with?"
+export const GHL_CONSULTATION_NOTE_TITLE = "Consultation qualification answers"
 
-export const GHL_CONSULTATION_TAGS = ["consultation-request", "website-lead"] as const
+export const GHL_CONSULTATION_TAGS = [
+  "Request Growth Consultation",
+  "consultation-request",
+  "website-lead",
+] as const
 
 export const GHL_CONSULTATION_SOURCE = "Consultation Page"
 

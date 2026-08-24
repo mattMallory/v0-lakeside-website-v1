@@ -16,19 +16,25 @@ export default function ConsultationPage() {
   return (
     <div className="min-h-screen bg-background">
       <SiteHeader />
-      <main className="mx-auto max-w-3xl px-6 py-16 md:py-20">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">Get Started</p>
-          <h1 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
-            Schedule a Consultation
-          </h1>
-          <p className="mt-4 text-pretty text-lg text-muted-foreground">
-            Tell us about your clinic and we&apos;ll map out a patient acquisition plan built for natural wellness
-            practices like yours.
-          </p>
-        </div>
-        <div className="mt-10">
-          <ConsultationForm mode={formMode} />
+      <main className="mx-auto max-w-6xl px-6 py-14 md:py-20">
+        <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">
+          <div className="lg:sticky lg:top-28 lg:pt-2">
+            <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">
+              Get Started
+            </p>
+            <h1 className="mt-3 max-w-[18ch] text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl lg:text-[2.75rem] lg:leading-[1.08]">
+              Let&apos;s Grow Your Practice
+            </h1>
+            <p className="mt-4 max-w-md text-pretty text-lg leading-relaxed text-muted-foreground">
+              Answer a few quick questions about your practice and goals. We&apos;ll use your answers to prepare for a
+              complimentary growth consultation — so we can talk specifically about how to attract more of the right
+              patients and build a patient-acquisition system that fits how you work.
+            </p>
+          </div>
+
+          <div className="min-w-0">
+            <ConsultationForm mode={formMode} />
+          </div>
         </div>
       </main>
       <SiteFooter />

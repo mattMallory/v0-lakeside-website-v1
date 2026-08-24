@@ -4,6 +4,8 @@ export type SubmitGhlContactPayload = {
   email?: string
   phone?: string
   companyName?: string
+  city?: string
+  state?: string
   source?: string
   tags?: string[]
   /** Plain-text note added on the GHL contact when custom field mapping is unavailable. */
