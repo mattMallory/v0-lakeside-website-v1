@@ -9,6 +9,7 @@ export async function revalidateSite() {
     revalidatePath("/blog", "page")
     revalidatePath("/privacy")
     revalidatePath("/terms")
+    revalidatePath("/schedule")
   } catch {
     // Outside Next.js request context (e.g. migrate CLI) — ignore.
   }

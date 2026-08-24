@@ -24,6 +24,8 @@ type ContactRequestBody = {
   email?: string
   phone?: string
   companyName?: string
+  city?: string
+  state?: string
   source?: string
   tags?: string[]
   note?: string
@@ -116,6 +118,8 @@ export async function POST(request: Request) {
       email: email || undefined,
       phone: phone || undefined,
       companyName: body.companyName,
+      city: body.city,
+      state: body.state,
       source: body.source,
       tags: parseTags(body.tags),
       customFields: customFields.length ? customFields : undefined,
