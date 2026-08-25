@@ -49,7 +49,7 @@ export async function SiteFooter() {
               />
             </Link>
             <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
-              Patient acquisition systems for natural wellness clinics. More appointments, less marketing guesswork.
+              {navigation.footerDescription}
             </p>
           </div>
 

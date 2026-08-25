@@ -70,6 +70,16 @@ export const Navigation: GlobalConfig = {
           label: "Footer",
           fields: [
             {
+              name: "footerDescription",
+              type: "textarea" as const,
+              label: "Description Under Logo",
+              defaultValue: defaultNavigationContent.footerDescription,
+              admin: {
+                description: "Short blurb shown under the Lakeside logo in the site footer.",
+                rows: 3,
+              },
+            },
+            {
               name: "footerNavItems",
               type: "array" as const,
               label: "Pages Column Links",

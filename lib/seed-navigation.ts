@@ -13,19 +13,30 @@ export async function seedNavigationIfEmpty(payload: Payload) {
       Array.isArray(navigation.headerNavItems) && navigation.headerNavItems.length > 0
     const hasFooterNavItems =
       Array.isArray(navigation.footerNavItems) && navigation.footerNavItems.length > 0
+    const hasFooterDescription =
+      typeof navigation.footerDescription === "string" &&
+      navigation.footerDescription.trim().length > 0
     const isNew = !navigation.id
 
-    if (!isNew && hasHeaderNavItems && hasFooterNavItems) {
+    if (!isNew && hasHeaderNavItems && hasFooterNavItems && hasFooterDescription) {
       return
     }
 
     await payload.updateGlobal({
       slug: "navigation",
       data: {
-        headerNavItems: defaultNavigationContent.headerNavItems,
-        headerCtaLabel: defaultNavigationContent.headerCtaLabel,
-        headerCtaHref: defaultNavigationContent.headerCtaHref,
-        footerNavItems: defaultNavigationContent.footerNavItems,
+        headerNavItems: hasHeaderNavItems
+          ? navigation.headerNavItems
+          : defaultNavigationContent.headerNavItems,
+        headerCtaLabel:
+          (navigation.headerCtaLabel as string) || defaultNavigationContent.headerCtaLabel,
+        headerCtaHref:
+          (navigation.headerCtaHref as string) || defaultNavigationContent.headerCtaHref,
+        footerDescription:
+          (navigation.footerDescription as string) || defaultNavigationContent.footerDescription,
+        footerNavItems: hasFooterNavItems
+          ? navigation.footerNavItems
+          : defaultNavigationContent.footerNavItems,
       },
     })
   } catch (error) {
