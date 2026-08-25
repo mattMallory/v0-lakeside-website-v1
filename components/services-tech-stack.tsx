@@ -26,7 +26,7 @@ export function ServicesTechStack({ content }: ServicesTechStackProps) {
           {content.categories.map((category) => (
             <div
               key={category.title}
-              className="overflow-hidden rounded-[12px] border border-border bg-card shadow-raised"
+              className="overflow-hidden rounded-lg border border-border bg-card shadow-raised"
             >
               <div className="relative aspect-[16/10] w-full bg-lake-pale">
                 <Image

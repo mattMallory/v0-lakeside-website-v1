@@ -13,8 +13,8 @@ export function BlogCard({ post, layout = "grid" }: BlogCardProps) {
     <div
       className={
         layout === "grid"
-          ? "relative aspect-[16/10] overflow-hidden rounded-[12px] bg-lake-pale"
-          : "relative h-28 w-36 shrink-0 overflow-hidden rounded-[10px] bg-lake-pale sm:h-32 sm:w-44"
+          ? "relative aspect-[16/10] overflow-hidden rounded-lg bg-lake-pale"
+          : "relative h-28 w-36 shrink-0 overflow-hidden rounded-sq bg-lake-pale sm:h-32 sm:w-44"
       }
     >
       {post.featuredImageUrl ? (
@@ -57,7 +57,7 @@ export function BlogCard({ post, layout = "grid" }: BlogCardProps) {
       <Link
         href={`/blog/${post.slug}`}
         className={
-          layout === "grid" ? "block rounded-[14px] p-1" : "flex gap-5 rounded-[14px] p-2"
+          layout === "grid" ? "block rounded-card p-1" : "flex gap-5 rounded-card p-2"
         }
       >
         {image}

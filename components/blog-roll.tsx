@@ -80,7 +80,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
         <div>
           <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center rounded-[10px] border border-border bg-card p-1">
+              <div className="flex items-center rounded-sq border border-border bg-card p-1">
                 <button
                   type="button"
                   aria-label="Grid view"
@@ -119,7 +119,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
                       setSort(event.target.value as SortOption)
                       resetPage()
                     }}
-                    className="appearance-none rounded-[10px] border border-border bg-card py-2 pl-3 pr-9 text-body normal-case tracking-normal text-heading"
+                    className="appearance-none rounded-sq border border-border bg-card py-2 pl-3 pr-9 text-body normal-case tracking-normal text-heading"
                   >
                     <option value="newest">Newest</option>
                     <option value="oldest">Oldest</option>
@@ -160,7 +160,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
               ))}
             </div>
           ) : (
-            <div className="mt-12 rounded-[12px] border border-dashed border-border bg-card px-6 py-16 text-center">
+            <div className="mt-12 rounded-lg border border-dashed border-border bg-card px-6 py-16 text-center">
               <p className="text-lg font-semibold text-heading">No articles found</p>
               <p className="mt-2 text-body text-muted-foreground">
                 Try adjusting your search, category, or tag filters.
@@ -180,7 +180,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
                     type="button"
                     onClick={() => setPage(pageNumber)}
                     className={cn(
-                      "font-brand-display min-w-10 rounded-[10px] px-3 py-2 text-body font-medium transition-colors",
+                      "font-brand-display min-w-10 rounded-sq px-3 py-2 text-body font-medium transition-colors",
                       isActive
                         ? "bg-primary text-white"
                         : "border border-border bg-card text-muted-foreground hover:text-heading",

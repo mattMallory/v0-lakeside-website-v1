@@ -180,7 +180,7 @@ export function PatientJourneyInteractive({
                 return (
                   <div
                     key={`${step.label}-panel-${index}`}
-                    className="overflow-hidden rounded-[14px] border border-border bg-white"
+                    className="overflow-hidden rounded-card border border-border bg-white"
                   >
                     <button
                       type="button"
@@ -253,7 +253,7 @@ export function PatientJourneyInteractive({
           </div>
 
           <div className="mt-[26px]">
-            <div className="mb-[18px] flex items-center gap-4 rounded-[14px] bg-ink px-7 py-[22px]">
+            <div className="mb-[18px] flex items-center gap-4 rounded-card bg-ink px-7 py-[22px]">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[11px] bg-[rgba(124,176,232,0.15)] text-accent-on-dark">
                 <Zap className="h-6 w-6" strokeWidth={1.8} />
               </span>
