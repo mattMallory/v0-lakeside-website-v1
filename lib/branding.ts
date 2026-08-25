@@ -122,7 +122,8 @@ export async function getBrandingContent(): Promise<BrandingContent> {
 }
 
 export function buildBrandingCssVariables(branding: BrandingContent): string {
-  // Brand Guide v20 type roles — always use self-hosted Satoshi + next/font Manrope.
+  // Brand Guide v20 type roles — always the brand faces, never a CMS choice.
+  // All three are self-hosted now, so none of them is fetched at build time.
   // Color tokens still come from the Branding CMS.
   return `:root {
   --background: ${branding.backgroundColor};

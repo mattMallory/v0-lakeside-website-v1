@@ -37,7 +37,7 @@ export default async function BlogPage() {
       >
         <BlogHeroBackground />
 
-        <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 md:py-20">
+        <div className="relative z-10 mx-auto max-w-page px-6 py-14 md:py-20">
           <div className="mx-auto max-w-4xl text-center">
             <SectionEyebrow variant="dark">Lakeside Blog</SectionEyebrow>
             <h1 className="font-brand-display mt-4 text-balance text-4xl font-bold tracking-display text-white sm:text-5xl md:text-6xl">

@@ -16,7 +16,7 @@ export function ServicesSection({
 }) {
   return (
     <section id={id} className="bg-white py-20">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-page px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">{content.eyebrow}</p>
           <h2 className="mt-3 text-balance text-3xl font-bold text-heading sm:text-4xl">

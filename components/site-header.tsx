@@ -74,7 +74,7 @@ export function SiteHeader() {
         aria-hidden="true"
       />
 
-      <div className="site-mobile-nav-bar mx-auto flex h-16 max-w-6xl items-center justify-between px-6">
+      <div className="site-mobile-nav-bar mx-auto flex h-16 max-w-page items-center justify-between px-6">
         <Link href="/" className="flex shrink-0 items-center">
           <img
             src={branding.logoUrl}
