@@ -25,6 +25,7 @@ import * as migration_20260824_calendar_global from './20260824_calendar_global'
 import * as migration_20260824_consultation_global from './20260824_consultation_global';
 import * as migration_20260825_navigation_footer_description from './20260825_navigation_footer_description';
 import * as migration_20260825_navigation_footer_contact from './20260825_navigation_footer_contact';
+import * as migration_20260825_fix_navigation_footer_address_columns from './20260825_fix_navigation_footer_address_columns';
 
 export const migrations = [
   {
@@ -156,5 +157,10 @@ export const migrations = [
     up: migration_20260825_navigation_footer_contact.up,
     down: migration_20260825_navigation_footer_contact.down,
     name: '20260825_navigation_footer_contact'
+  },
+  {
+    up: migration_20260825_fix_navigation_footer_address_columns.up,
+    down: migration_20260825_fix_navigation_footer_address_columns.down,
+    name: '20260825_fix_navigation_footer_address_columns'
   },
 ];
