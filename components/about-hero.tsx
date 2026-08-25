@@ -1,21 +1,22 @@
 import { CmsImage } from "@/components/cms-image"
 import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 import type { AboutContent } from "@/lib/about-defaults"
-import { growthSystemBackgrounds } from "@/lib/homepage-growth-system-defaults"
+import { layeredSectionBackground } from "@/lib/growth-system-backgrounds"
 
 type AboutHeroProps = {
   content: AboutContent["hero"]
+  backgroundImageUrl?: string
 }
 
-export function AboutHero({ content }: AboutHeroProps) {
+export function AboutHero({ content, backgroundImageUrl }: AboutHeroProps) {
   return (
     <section
       className="relative min-h-[30rem] overflow-hidden border-b border-[#1F2E45] bg-[#0B1220] md:min-h-[32rem]"
-      style={{
-        backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%), url('${growthSystemBackgrounds.hero}')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center right",
-      }}
+      style={layeredSectionBackground(
+        "linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%)",
+        backgroundImageUrl,
+        { backgroundPosition: "center right" },
+      )}
     >
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 md:py-20 lg:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">

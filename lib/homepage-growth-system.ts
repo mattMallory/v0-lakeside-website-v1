@@ -108,6 +108,21 @@ export function mapGrowthSystemContent(doc: HomepageDoc): GrowthSystemContent {
     .filter((step): step is NonNullable<typeof step> => Boolean(step))
 
   return {
+    backgrounds: {
+      hero:
+        resolveMediaUrl(doc.gsBgHero as number | MediaLike | null | undefined) ??
+        defaults.backgrounds.hero,
+      who:
+        resolveMediaUrl(doc.gsBgWho as number | MediaLike | null | undefined) ??
+        defaults.backgrounds.who,
+      pillars:
+        resolveMediaUrl(doc.gsBgPillars as number | MediaLike | null | undefined) ??
+        defaults.backgrounds.pillars,
+      included:
+        resolveMediaUrl(doc.gsBgIncluded as number | MediaLike | null | undefined) ??
+        defaults.backgrounds.included,
+    },
+
     heroEyebrow: withFallback(doc.gsHeroEyebrow as string, defaults.heroEyebrow),
     heroHeadline: withFallback(doc.gsHeroHeadline as string, defaults.heroHeadline),
     heroHeadlineAccent: withFallback(

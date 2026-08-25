@@ -1,21 +1,17 @@
 import type { GrowthSystemContent } from "@/lib/homepage-template"
 import { defaultCaseStudyHighlightContent } from "@/lib/case-study-highlight"
 
-const WAVE_BG =
-  "https://madebylakeside.com/wp-content/uploads/2025/07/Lakeside-Presentation-Background-Blue-Wave.jpg"
-const WAVE_BG_2 =
-  "https://madebylakeside.com/wp-content/uploads/2025/07/Lakeside-Presentation-Background-Blue-Wave-2.jpg"
-const WAVE_BG_3 =
-  "https://madebylakeside.com/wp-content/uploads/2025/07/Lakeside-Presentation-Background-Blue-Wave-3.jpg"
-
+/** Empty until uploaded in Payload → Homepage → Backgrounds. */
 export const growthSystemBackgrounds = {
-  hero: WAVE_BG,
-  who: WAVE_BG_2,
-  pillars: WAVE_BG_3,
-  included: WAVE_BG_2,
+  hero: "",
+  who: "",
+  pillars: "",
+  included: "",
 } as const
 
 export const defaultGrowthSystemContent: GrowthSystemContent = {
+  backgrounds: { ...growthSystemBackgrounds },
+
   heroEyebrow: "The Natural Practice Growth System",
   heroHeadline: "Stop wasting money on ad spend.",
   heroHeadlineAccent: "Build the system your clinic needs.",

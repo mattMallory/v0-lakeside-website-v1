@@ -1,21 +1,22 @@
 import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 import { ServicesHeroBackground } from "@/components/services-hero-background"
+import { layeredSectionBackground } from "@/lib/growth-system-backgrounds"
 import type { ServicesContent } from "@/lib/services-defaults"
-import { growthSystemBackgrounds } from "@/lib/homepage-growth-system-defaults"
 
 type ServicesHeroProps = {
   content: ServicesContent["hero"]
+  backgroundImageUrl?: string
 }
 
-export function ServicesHero({ content }: ServicesHeroProps) {
+export function ServicesHero({ content, backgroundImageUrl }: ServicesHeroProps) {
   return (
     <section
       className="relative min-h-[30rem] overflow-hidden border-b border-[#1F2E45] bg-[#0B1220] md:min-h-[26rem]"
-      style={{
-        backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%), url('${growthSystemBackgrounds.hero}')`,
-        backgroundSize: "cover",
-        backgroundPosition: "center right",
-      }}
+      style={layeredSectionBackground(
+        "linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%)",
+        backgroundImageUrl,
+        { backgroundPosition: "center right" },
+      )}
     >
       <ServicesHeroBackground variant="dark" />
 

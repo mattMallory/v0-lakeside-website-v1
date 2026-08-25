@@ -11,6 +11,7 @@ import { SiteHeader } from "@/components/site-header"
 import { getAboutContent } from "@/lib/about"
 import { getAboutSeo } from "@/lib/about-seo"
 import { getFeaturedCaseStudy } from "@/lib/blog"
+import { getGrowthSystemBackgrounds } from "@/lib/growth-system-backgrounds"
 
 export const revalidate = 60
 
@@ -38,7 +39,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function AboutPage() {
-  const content = await getAboutContent()
+  const [content, backgrounds] = await Promise.all([
+    getAboutContent(),
+    getGrowthSystemBackgrounds(),
+  ])
   const featuredCaseStudy = await getFeaturedCaseStudy(content.caseStudyHighlight.featuredPostSlug)
 
   return (
@@ -46,14 +50,18 @@ export default async function AboutPage() {
       <SiteHeader />
 
       <main>
-        <AboutHero content={content.hero} />
-        <AboutVisionMission content={content.visionMission} />
+        <AboutHero content={content.hero} backgroundImageUrl={backgrounds.hero} />
+        <AboutVisionMission
+          content={content.visionMission}
+          backgroundImageUrl={backgrounds.who}
+        />
         <AboutTeam content={content.team} />
         <AboutProcess content={content.process} />
         <CaseStudyHighlight
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}
           caseStudy={featuredCaseStudy}
+          backgroundImageUrl={backgrounds.pillars}
           className="bg-background"
         />
 
