@@ -11,7 +11,7 @@ type AboutProcessProps = {
 export function AboutProcess({ content }: AboutProcessProps) {
   return (
     <section className="border-b border-border bg-white">
-      <div className="mx-auto max-w-6xl px-6 py-20">
+      <div className="mx-auto max-w-page px-6 py-20">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
             {content.eyebrow}

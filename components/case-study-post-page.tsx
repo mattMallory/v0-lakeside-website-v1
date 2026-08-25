@@ -111,7 +111,7 @@ export function CaseStudyPostPage({ post, relatedPosts }: CaseStudyPostPageProps
 
       {relatedPosts.length > 0 ? (
         <section className="border-t border-border bg-white py-16">
-          <div className="mx-auto max-w-6xl px-6">
+          <div className="mx-auto max-w-page px-6">
             <div className="mb-8 text-center">
               <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
                 Keep Reading

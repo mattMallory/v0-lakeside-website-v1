@@ -10,7 +10,7 @@ type ServicesTechStackProps = {
 export function ServicesTechStack({ content }: ServicesTechStackProps) {
   return (
     <section className="border-t border-border bg-background py-20">
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-page px-6">
         <div className="mx-auto max-w-2xl text-center" data-tech-logos-section>
           <ServicesTechLogos logos={content.logos} />
           <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">

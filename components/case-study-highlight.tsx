@@ -38,7 +38,7 @@ export function CaseStudyHighlight({
           : undefined
       }
     >
-      <div className="mx-auto max-w-6xl px-6">
+      <div className="mx-auto max-w-page px-6">
         <div className="grid gap-10 lg:grid-cols-[minmax(0,0.72fr)_minmax(0,1.28fr)] lg:items-start lg:gap-10">
           <div>
             {isDark ? (

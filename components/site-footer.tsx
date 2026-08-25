@@ -38,7 +38,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="border-t border-[#1E293B] bg-ink text-slate-400">
-      <div className="mx-auto max-w-6xl px-6 py-14">
+      <div className="mx-auto max-w-page px-6 py-14">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-[45%_minmax(0,1fr)_minmax(0,1fr)_minmax(0,1fr)] lg:gap-8">
           <div className="min-w-0 sm:col-span-2 lg:col-span-1">
             <Link href="/" className="flex items-center">

@@ -75,7 +75,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
   }
 
   return (
-    <div className="mx-auto max-w-6xl px-6 pb-20">
+    <div className="mx-auto max-w-page px-6 pb-20">
       <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_320px]">
         <div>
           <div className="flex flex-col gap-4 border-b border-border pb-5 sm:flex-row sm:items-center sm:justify-between">

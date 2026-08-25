@@ -54,7 +54,7 @@ type AboutTeamProps = {
 export function AboutTeam({ content }: AboutTeamProps) {
   return (
     <section className="border-b border-border bg-background">
-      <div className="mx-auto max-w-6xl px-6 py-20">
+      <div className="mx-auto max-w-page px-6 py-20">
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex rounded-full border border-border bg-white px-4 py-1.5 text-xs font-medium text-muted-foreground">
             {content.eyebrow}

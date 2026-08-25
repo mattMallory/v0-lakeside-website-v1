@@ -17,7 +17,7 @@ export function AboutHero({ content }: AboutHeroProps) {
         backgroundPosition: "center right",
       }}
     >
-      <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 md:py-20 lg:py-24">
+      <div className="relative z-10 mx-auto max-w-page px-6 py-14 md:py-20 lg:py-24">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="text-left">
             <SectionEyebrow variant="dark">{content.eyebrow}</SectionEyebrow>
