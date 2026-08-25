@@ -48,9 +48,42 @@ export async function SiteFooter() {
                 className="h-[34px] w-auto max-w-[9.5rem] object-contain object-left brightness-0 invert"
               />
             </Link>
-            <p className="mt-4 max-w-md text-sm leading-relaxed text-slate-400">
-              {navigation.footerDescription}
-            </p>
+            <div className="mt-4 max-w-md space-y-3 text-sm leading-relaxed text-slate-400">
+              {navigation.footerDescription ? <p>{navigation.footerDescription}</p> : null}
+              {navigation.footerAddressLine1 || navigation.footerAddressLine2 ? (
+                <p>
+                  {navigation.footerAddressLine1 ? (
+                    <>
+                      {navigation.footerAddressLine1}
+                      {navigation.footerAddressLine2 ? <br /> : null}
+                    </>
+                  ) : null}
+                  {navigation.footerAddressLine2 || null}
+                </p>
+              ) : null}
+              {navigation.footerPhone ? (
+                <p>
+                  Phone:{" "}
+                  <a
+                    href={`tel:${navigation.footerPhone.replace(/[^\d+]/g, "")}`}
+                    className="transition-colors hover:text-white"
+                  >
+                    {navigation.footerPhone}
+                  </a>
+                </p>
+              ) : null}
+              {navigation.footerEmail ? (
+                <p>
+                  Email:{" "}
+                  <a
+                    href={`mailto:${navigation.footerEmail}`}
+                    className="transition-colors hover:text-white"
+                  >
+                    {navigation.footerEmail}
+                  </a>
+                </p>
+              ) : null}
+            </div>
           </div>
 
           <div className="min-w-0">

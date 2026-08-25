@@ -72,12 +72,36 @@ export const Navigation: GlobalConfig = {
             {
               name: "footerDescription",
               type: "textarea" as const,
-              label: "Description Under Logo",
+              label: "Description",
               defaultValue: defaultNavigationContent.footerDescription,
               admin: {
-                description: "Short blurb shown under the Lakeside logo in the site footer.",
+                description: "Blurb under the Lakeside logo. Keep address and phone in their own fields below.",
                 rows: 3,
               },
+            },
+            {
+              name: "footerAddressLine1",
+              type: "text" as const,
+              label: "Address Line 1",
+              defaultValue: defaultNavigationContent.footerAddressLine1,
+            },
+            {
+              name: "footerAddressLine2",
+              type: "text" as const,
+              label: "Address Line 2",
+              defaultValue: defaultNavigationContent.footerAddressLine2,
+            },
+            {
+              name: "footerPhone",
+              type: "text" as const,
+              label: "Phone Number",
+              defaultValue: defaultNavigationContent.footerPhone,
+            },
+            {
+              name: "footerEmail",
+              type: "text" as const,
+              label: "Email",
+              defaultValue: defaultNavigationContent.footerEmail,
             },
             {
               name: "footerNavItems",

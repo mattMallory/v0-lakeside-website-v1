@@ -17,6 +17,12 @@ function withFallback<T>(value: T | null | undefined, fallback: T): T {
   return value
 }
 
+/** Empty string hides the line; null/undefined uses the default. */
+function withOptionalText(value: string | null | undefined, fallback: string): string {
+  if (value === null || value === undefined) return fallback
+  return value.trim()
+}
+
 function mapNavItems(
   value: NavItemDoc[] | null | undefined,
   fallback: NavItem[],
@@ -50,9 +56,25 @@ function mapNavigationContent(doc: Record<string, unknown>): NavigationContent {
       doc.headerCtaHref as string,
       defaultNavigationContent.headerCtaHref,
     ),
-    footerDescription: withFallback(
+    footerDescription: withOptionalText(
       doc.footerDescription as string,
       defaultNavigationContent.footerDescription,
+    ),
+    footerAddressLine1: withOptionalText(
+      doc.footerAddressLine1 as string,
+      defaultNavigationContent.footerAddressLine1,
+    ),
+    footerAddressLine2: withOptionalText(
+      doc.footerAddressLine2 as string,
+      defaultNavigationContent.footerAddressLine2,
+    ),
+    footerPhone: withOptionalText(
+      doc.footerPhone as string,
+      defaultNavigationContent.footerPhone,
+    ),
+    footerEmail: withOptionalText(
+      doc.footerEmail as string,
+      defaultNavigationContent.footerEmail,
     ),
     footerNavItems: mapNavItems(
       doc.footerNavItems as NavItemDoc[] | undefined,
