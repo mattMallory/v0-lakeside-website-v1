@@ -8,6 +8,10 @@ export type NavigationContent = {
   headerCtaLabel: string
   headerCtaHref: string
   footerDescription: string
+  footerAddressLine1: string
+  footerAddressLine2: string
+  footerPhone: string
+  footerEmail: string
   footerNavItems: NavItem[]
 }
 
@@ -25,5 +29,9 @@ export const defaultNavigationContent: NavigationContent = {
   headerCtaHref: "/consultation",
   footerDescription:
     "Patient acquisition systems for natural wellness clinics. More appointments, less marketing guesswork.",
+  footerAddressLine1: "332 HIAWATHA DR",
+  footerAddressLine2: "LAKE IN THE HILLS, 60156",
+  footerPhone: "815-893-2976",
+  footerEmail: "sales@madebylakeside.com",
   footerNavItems: defaultNavItems,
 }

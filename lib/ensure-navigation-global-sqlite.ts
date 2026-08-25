@@ -12,6 +12,10 @@ const createStatements = [
     header_cta_label text DEFAULT 'Schedule a Consultation',
     header_cta_href text DEFAULT '/consultation',
     footer_description text,
+    footer_address_line_1 text,
+    footer_address_line_2 text,
+    footer_phone text,
+    footer_email text,
     updated_at text,
     created_at text
   )`,
@@ -32,6 +36,14 @@ const createStatements = [
     FOREIGN KEY (_parent_id) REFERENCES navigation(id) ON UPDATE no action ON DELETE cascade
   )`,
   "PRAGMA foreign_keys=ON",
+]
+
+const ensureColumns = [
+  { name: "footer_description", definition: "text" },
+  { name: "footer_address_line_1", definition: "text" },
+  { name: "footer_address_line_2", definition: "text" },
+  { name: "footer_phone", definition: "text" },
+  { name: "footer_email", definition: "text" },
 ]
 
 async function tableExists(client: ReturnType<typeof createClient>, name: string) {
@@ -67,8 +79,11 @@ export async function ensureNavigationGlobalSqlite() {
       return
     }
 
-    if (!(await columnExists(client, "navigation", "footer_description"))) {
-      await client.execute("ALTER TABLE navigation ADD COLUMN footer_description text")
+    for (const column of ensureColumns) {
+      if (await columnExists(client, "navigation", column.name)) continue
+      await client.execute(
+        `ALTER TABLE navigation ADD COLUMN ${column.name} ${column.definition}`,
+      )
     }
   } catch (error) {
     console.error("[payload] Failed to ensure navigation global tables:", error)
