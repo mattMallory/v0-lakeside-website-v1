@@ -87,7 +87,7 @@ export function PatientJourneyInteractive({
   return (
     <section className="my-14 md:my-20">
       <figure>
-        <div className="rounded-[20px] border border-border bg-white px-5 py-10 shadow-[0_4px_6px_-1px_rgba(16,23,38,0.05)] sm:px-8 md:px-11">
+        <div className="rounded-[20px] border border-border bg-white px-5 py-10 shadow-raised sm:px-8 md:px-11">
           <div className="mb-8 text-center md:mb-[30px]">
             {eyebrow ? (
               <p className="font-brand-display mb-3.5 text-[11px] font-semibold uppercase tracking-[0.14em] text-muted-foreground-subtle">
@@ -302,7 +302,7 @@ export function PatientJourneyInteractive({
               {ctaLabel && ctaUrl ? (
                 <Link
                   href={ctaUrl}
-                  className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-semibold text-white shadow-[0_4px_14px_rgba(37,99,168,0.3)] transition-colors hover:bg-button-hover sm:w-auto"
+                  className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-7 py-4 text-base font-semibold text-white shadow-raised transition-colors hover:bg-button-hover sm:w-auto"
                 >
                   {ctaLabel}
                   <ArrowRight className="h-4 w-4" />

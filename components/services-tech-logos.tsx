@@ -99,7 +99,7 @@ export function ServicesTechLogos({ logos }: ServicesTechLogosProps) {
         <div
           key={logo.id}
           className={cn(
-            "tech-logo-item flex h-12 w-12 items-center justify-center rounded-[12px] border border-border bg-white shadow-sm sm:h-16 sm:w-16",
+            "tech-logo-item flex h-12 w-12 items-center justify-center rounded-[12px] border border-border bg-white shadow-raised sm:h-16 sm:w-16",
           )}
           title={logo.name}
         >

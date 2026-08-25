@@ -136,7 +136,7 @@ export function SiteHeader() {
           role="dialog"
           aria-modal="true"
           aria-label="Navigation menu"
-          className="site-mobile-nav-panel fixed top-0 right-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-border bg-white shadow-xl"
+          className="site-mobile-nav-panel fixed top-0 right-0 flex h-full w-[min(100%,20rem)] flex-col border-l border-border bg-white shadow-raised"
         >
           <div className="flex h-16 shrink-0 items-center justify-end border-b border-border/60 px-6">
             <label

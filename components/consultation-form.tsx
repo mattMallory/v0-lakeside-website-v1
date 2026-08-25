@@ -18,7 +18,7 @@ const fieldClass =
 function GhlEmbedConsultationForm() {
   return (
     <>
-      <div className="min-h-[952px] w-full overflow-hidden rounded-2xl border border-border bg-card shadow-sm ring-1 ring-border">
+      <div className="min-h-[952px] w-full overflow-hidden rounded-2xl border border-border bg-card shadow-raised ring-1 ring-border">
         <iframe
           src="https://api.leadconnectorhq.com/widget/form/MyXndz0NrZDQljBcy9Xq"
           id="inline-MyXndz0NrZDQljBcy9Xq"
@@ -90,7 +90,7 @@ function NativeConsultationForm() {
   if (!mounted) {
     return (
       <div
-        className="rounded-2xl border border-border bg-card p-6 shadow-sm ring-1 ring-border md:p-8 min-h-[420px]"
+        className="rounded-2xl border border-border bg-card p-6 shadow-raised ring-1 ring-border md:p-8 min-h-[420px]"
         aria-busy="true"
         aria-label="Loading consultation form"
       />
@@ -99,7 +99,7 @@ function NativeConsultationForm() {
 
   if (status === "success") {
     return (
-      <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-sm ring-1 ring-border md:p-10">
+      <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-raised ring-1 ring-border md:p-10">
         <h2 className="font-brand-display text-2xl font-bold text-heading">Thanks — we&apos;ll be in touch.</h2>
         <p className="mt-3 text-muted-foreground">
           We received your consultation request and will reply within one business day.
@@ -111,7 +111,7 @@ function NativeConsultationForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="rounded-2xl border border-border bg-card p-6 shadow-sm ring-1 ring-border md:p-8"
+      className="rounded-2xl border border-border bg-card p-6 shadow-raised ring-1 ring-border md:p-8"
     >
       <div className="grid gap-5 md:grid-cols-2">
         <div>

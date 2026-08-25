@@ -24,7 +24,7 @@ type FunnelStep = GrowthSystemContent["funnelSteps"][number]
 
 function FunnelDetailCard({ step, priorityImage }: { step: FunnelStep; priorityImage?: boolean }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm">
+    <div className="flex flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-raised">
       {step.imageUrl ? (
         <div className="overflow-hidden border-b border-border bg-background">
           <Image
