@@ -10,7 +10,7 @@ export function LegalPageContent({ content }: LegalPageContentProps) {
       <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
         {content.eyebrow}
       </p>
-      <h1 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
+      <h1 className="mt-3 text-balance text-3xl font-bold text-heading sm:text-4xl">
         {content.title}
       </h1>
       <p className="mt-4 text-body text-muted-foreground">Last updated: {content.lastUpdated}</p>

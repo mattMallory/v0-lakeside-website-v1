@@ -290,7 +290,7 @@ export function PatientJourneyInteractive({
                 All {journeySteps.length} moments explored
               </p>
               {completionTitle ? (
-                <h3 className="font-brand-display mt-3 text-balance text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight tracking-[-0.026em] text-heading">
+                <h3 className="font-brand-display mt-3 text-balance text-[clamp(1.5rem,3vw,1.875rem)] font-bold leading-tight text-heading">
                   {completionTitle}
                 </h3>
               ) : null}

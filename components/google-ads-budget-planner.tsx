@@ -108,7 +108,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             Interactive planner
           </p>
         </div>
-        <h2 className="font-brand-display text-balance text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-display tracking-[-0.026em] text-heading">
+        <h2 className="font-brand-display text-balance text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-display text-heading">
           Find your starting number
         </h2>
         <p className="mt-3.5 max-w-[600px] text-pretty text-lg leading-relaxed text-muted-foreground">

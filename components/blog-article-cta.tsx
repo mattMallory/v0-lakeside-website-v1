@@ -24,7 +24,7 @@ export function BlogArticleCta({
             {eyebrow}
           </p>
         ) : null}
-        <h2 className="blog-article-cta-title font-brand-display mx-auto max-w-3xl text-balance text-[clamp(1.75rem,4vw,2.375rem)] font-bold leading-display tracking-[-0.026em]">
+        <h2 className="blog-article-cta-title font-brand-display mx-auto max-w-3xl text-balance text-[clamp(1.75rem,4vw,2.375rem)] font-bold leading-display">
           {title}
         </h2>
         {description ? (

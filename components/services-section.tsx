@@ -19,7 +19,7 @@ export function ServicesSection({
       <div className="mx-auto max-w-6xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">{content.eyebrow}</p>
-          <h2 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
+          <h2 className="mt-3 text-balance text-3xl font-bold text-heading sm:text-4xl">
             {content.headline}
           </h2>
         </div>

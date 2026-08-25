@@ -63,7 +63,7 @@ export function HomeAboutSection({
             )}
             <h2
               className={cn(
-                "mt-3 text-balance text-3xl font-bold tracking-[-0.026em] sm:text-4xl",
+                "mt-3 text-balance text-3xl font-bold sm:text-4xl",
                 isDark ? "text-white" : "text-heading",
               )}
             >
