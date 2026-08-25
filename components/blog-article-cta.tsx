@@ -20,11 +20,11 @@ export function BlogArticleCta({
     <section className="blog-article-cta-breakout my-14 md:my-20">
       <div className="rounded-[20px] bg-ink px-6 py-14 text-center sm:px-10 md:py-16">
         {eyebrow ? (
-          <p className="blog-article-cta-eyebrow font-brand-display mb-4 text-xs font-semibold uppercase tracking-[0.1em]">
+          <p className="blog-article-cta-eyebrow font-brand-display mb-4 text-xs font-semibold uppercase tracking-eyebrow">
             {eyebrow}
           </p>
         ) : null}
-        <h2 className="blog-article-cta-title font-brand-display mx-auto max-w-3xl text-balance text-[clamp(1.75rem,4vw,2.375rem)] font-bold leading-[1.1] tracking-[-0.026em]">
+        <h2 className="blog-article-cta-title font-brand-display mx-auto max-w-3xl text-balance text-[clamp(1.75rem,4vw,2.375rem)] font-bold leading-display tracking-[-0.026em]">
           {title}
         </h2>
         {description ? (

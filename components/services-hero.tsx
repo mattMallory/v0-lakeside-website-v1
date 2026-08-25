@@ -22,7 +22,7 @@ export function ServicesHero({ content }: ServicesHeroProps) {
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-14 md:py-20">
         <div className="mx-auto max-w-3xl text-center">
           <SectionEyebrow variant="dark">{content.eyebrow}</SectionEyebrow>
-          <h1 className="font-brand-display mt-4 text-balance text-4xl font-bold tracking-[-0.03em] text-white sm:text-5xl md:text-6xl">
+          <h1 className="font-brand-display mt-4 text-balance text-4xl font-bold tracking-display text-white sm:text-5xl md:text-6xl">
             {content.title}
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-foreground-on-dark">

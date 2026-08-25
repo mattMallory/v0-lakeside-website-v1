@@ -31,7 +31,7 @@ export function AboutVisionMission({ content }: AboutVisionMissionProps) {
             }}
           >
             <SectionEyebrow variant="dark">Our Foundation</SectionEyebrow>
-            <h2 className="font-brand-display text-balance text-[clamp(1.625rem,3.2vw,2.375rem)] font-bold leading-[1.06] tracking-[-0.03em] text-white">
+            <h2 className="font-brand-display text-balance text-[clamp(1.625rem,3.2vw,2.375rem)] font-bold leading-display tracking-display text-white">
               {content.headline}
             </h2>
             <p className="mt-3.5 text-pretty text-base leading-relaxed text-muted-foreground-on-dark">

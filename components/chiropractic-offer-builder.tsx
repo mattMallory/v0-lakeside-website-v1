@@ -72,7 +72,7 @@ function OfferBuilderClarityPanel({ clarity }: { clarity: OfferBuilderClarity })
       className="offer-builder-clarity rounded-[14px] border border-border bg-white px-5 py-5 md:px-[22px]"
     >
       <div className="mb-3.5 flex items-center justify-between gap-3">
-        <span className="font-brand-display text-[11px] font-bold uppercase tracking-[0.08em] text-muted-foreground">
+        <span className="font-brand-display text-[11px] font-bold uppercase tracking-eyebrow text-muted-foreground">
           Offer clarity
         </span>
         <span
@@ -204,10 +204,10 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
     >
       <div className="mx-auto max-w-[1080px] px-6 py-14 md:py-16">
         <div className="mb-8 text-center md:mb-[34px]">
-          <p className="font-brand-display text-[11px] font-semibold uppercase tracking-[0.14em] text-primary">
+          <p className="font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow text-primary">
             Interactive · Offer builder
           </p>
-          <h2 className="font-brand-display mt-3.5 text-balance text-[clamp(1.75rem,4vw,2.625rem)] font-bold leading-[1.04] tracking-[-0.03em] text-heading">
+          <h2 className="font-brand-display mt-3.5 text-balance text-[clamp(1.75rem,4vw,2.625rem)] font-bold leading-display tracking-display text-heading">
             Build a better chiropractic advertising offer
           </h2>
           <p className="mx-auto mt-3 max-w-[560px] text-pretty text-[17px] leading-normal text-muted-foreground">
@@ -219,17 +219,17 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
         <div className="mb-8 flex flex-col items-center md:mb-[34px]">
           <div className="relative w-full max-w-[360px] rounded-[14px] border-[1.5px] border-dashed border-secondary-button bg-background p-5 md:px-6 md:py-[22px]">
             <span
-              className="absolute right-4 top-3.5 rounded-full border border-[#F6D79E] bg-[#FDEBCB] px-2 py-0.5 font-brand-display text-[10px] font-bold uppercase tracking-[0.06em] text-[#B45309]"
+              className="absolute right-4 top-3.5 rounded-full border border-[#F6D79E] bg-[#FDEBCB] px-2 py-0.5 font-brand-display text-[10px] font-bold uppercase tracking-eyebrow text-[#B45309]"
             >
               Vague
             </span>
-            <p className="mb-2 font-brand-display text-[11px] font-semibold uppercase tracking-[0.08em] text-muted-foreground-subtle">
+            <p className="mb-2 font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
               Starting point
             </p>
-            <p className="mb-3.5 font-brand-display text-2xl font-bold tracking-[-0.02em] text-muted-foreground">
+            <p className="mb-3.5 font-brand-display text-2xl font-bold tracking-display text-muted-foreground">
               Free Consultation
             </p>
-            <p className="mb-2 text-xs font-bold uppercase tracking-[0.05em] text-[#B45309]">
+            <p className="mb-2 text-xs font-bold uppercase tracking-eyebrow text-[#B45309]">
               Why it feels weak
             </p>
             <div className="flex flex-col gap-1 text-body text-muted-foreground-subtle">
@@ -254,7 +254,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
             <path d="M13 2v30" />
             <path d="M5 25l8 9 8-9" />
           </svg>
-          <p className="font-brand-display text-[13px] font-bold tracking-[0.02em] text-primary">
+          <p className="font-brand-display text-[13px] font-bold tracking-eyebrow text-primary">
             Rebuild it below
           </p>
         </div>
@@ -440,7 +440,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                   )
                 })}
               </div>
-              <p className="mb-2 text-xs font-bold uppercase tracking-[0.05em] text-muted-foreground-subtle">
+              <p className="mb-2 text-xs font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
                 Optional · price or commitment
               </p>
               <div className="flex flex-wrap gap-2">
@@ -479,15 +479,15 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               data-ob="offercard"
               className="rounded-[18px] bg-ink px-5 py-6 shadow-raised md:px-7 md:py-[30px]"
             >
-              <p className="offer-builder-card-label mb-[18px] font-brand-display text-[11px] font-semibold uppercase tracking-[0.14em]">
+              <p className="offer-builder-card-label mb-[18px] font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow">
                 Your offer
               </p>
-              <p className="offer-builder-card-eyebrow font-brand-display text-xs font-bold uppercase tracking-[0.08em]" data-ob-preview-eyebrow>
+              <p className="offer-builder-card-eyebrow font-brand-display text-xs font-bold uppercase tracking-eyebrow" data-ob-preview-eyebrow>
                 {preview.eyebrow}
               </p>
               <p
                 data-ob="pvtitle"
-                className="offer-builder-preview-title mt-2 font-brand-display text-[22px] font-bold leading-[1.1] tracking-[-0.026em] md:text-[26px]"
+                className="offer-builder-preview-title mt-2 font-brand-display text-[22px] font-bold leading-display tracking-[-0.026em] md:text-[26px]"
               >
                 {preview.title}
               </p>
@@ -564,7 +564,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
         </div>
 
         <div className="mt-8 rounded-[14px] border border-border bg-background p-5 md:mt-10 md:p-6">
-          <p className="mb-3 font-brand-display text-[13px] font-bold uppercase tracking-[0.06em] text-muted-foreground-subtle">
+          <p className="mb-3 font-brand-display text-[13px] font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
             Your offer in one sentence
           </p>
           <p className="text-[17px] leading-relaxed text-heading">

@@ -28,7 +28,7 @@ function TeamCard({ member }: { member: AboutTeamMember }) {
         )}
       </div>
 
-      <h3 className="font-brand-display text-[19px] font-bold tracking-[-0.015em] text-heading">
+      <h3 className="font-brand-display text-[19px] font-bold tracking-display text-heading">
         {member.name}
       </h3>
       <p className="mt-1 text-[13.5px] font-semibold text-primary">{member.role}</p>
@@ -59,7 +59,7 @@ export function AboutTeam({ content }: AboutTeamProps) {
           <span className="inline-flex rounded-full border border-border bg-white px-4 py-1.5 text-xs font-medium text-muted-foreground">
             {content.eyebrow}
           </span>
-          <h2 className="mt-5 text-balance text-3xl font-bold tracking-[-0.02em] text-heading sm:text-4xl">
+          <h2 className="mt-5 text-balance text-3xl font-bold tracking-display text-heading sm:text-4xl">
             {content.title}
           </h2>
           <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">{content.description}</p>

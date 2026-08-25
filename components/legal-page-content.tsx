@@ -7,7 +7,7 @@ type LegalPageContentProps = {
 export function LegalPageContent({ content }: LegalPageContentProps) {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16 md:py-20">
-      <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">
+      <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
         {content.eyebrow}
       </p>
       <h1 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
@@ -19,7 +19,7 @@ export function LegalPageContent({ content }: LegalPageContentProps) {
       <div className="mt-10 flex flex-col gap-8">
         {content.sections.map((section) => (
           <section key={section.title}>
-            <h2 className="font-brand-display text-xl font-bold tracking-[-0.02em] text-heading">{section.title}</h2>
+            <h2 className="font-brand-display text-xl font-bold tracking-display text-heading">{section.title}</h2>
             <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">{section.body}</p>
           </section>
         ))}

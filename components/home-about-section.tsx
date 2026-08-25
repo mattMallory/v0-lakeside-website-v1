@@ -57,7 +57,7 @@ export function HomeAboutSection({
             {isDark ? (
               <SectionEyebrow variant="dark">{content.eyebrow}</SectionEyebrow>
             ) : (
-              <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">
+              <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
                 {content.eyebrow}
               </p>
             )}

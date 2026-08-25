@@ -13,10 +13,10 @@ export function AboutProcess({ content }: AboutProcessProps) {
     <section className="border-b border-border bg-white">
       <div className="mx-auto max-w-6xl px-6 py-20">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">
+          <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
             {content.eyebrow}
           </p>
-          <h2 className="mt-4 text-balance text-3xl font-bold tracking-[-0.02em] text-heading sm:text-4xl">
+          <h2 className="mt-4 text-balance text-3xl font-bold tracking-display text-heading sm:text-4xl">
             {content.title}
           </h2>
           <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">{content.description}</p>

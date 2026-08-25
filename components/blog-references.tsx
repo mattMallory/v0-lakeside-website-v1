@@ -52,11 +52,11 @@ export function BlogReferences({ label = "References", items }: BlogReferencesPr
   return (
     <div className="my-10 rounded-[14px] border border-border bg-white px-6 py-[22px]">
       {label ? (
-        <p className="font-brand-display mb-3.5 text-xs font-semibold uppercase tracking-[0.08em] text-muted-foreground-subtle">
+        <p className="font-brand-display mb-3.5 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
           {label}
         </p>
       ) : null}
-      <ul className="flex list-none flex-col gap-2.5 text-body leading-[1.55] text-muted-foreground">
+      <ul className="flex list-none flex-col gap-2.5 text-body leading-body text-muted-foreground">
         {items.map((item, index) => (
           <li key={`${item.text}-${index}`}>{renderCitation(item)}</li>
         ))}
