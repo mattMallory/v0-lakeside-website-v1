@@ -24,7 +24,7 @@ export function AboutHero({ content }: AboutHeroProps) {
             <h1 className="font-brand-display mt-5 max-w-xl text-balance text-4xl font-bold leading-display text-white sm:text-5xl md:text-6xl">
               {content.title}
             </h1>
-            <p className="mt-6 max-w-xl text-pretty text-lg leading-body text-foreground-on-dark md:text-[19px]">
+            <p className="mt-6 max-w-xl text-pretty text-lg leading-body text-foreground-on-dark md:text-lead">
               {content.description}
             </p>
           </div>

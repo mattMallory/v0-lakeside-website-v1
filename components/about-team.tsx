@@ -28,7 +28,7 @@ function TeamCard({ member }: { member: AboutTeamMember }) {
         )}
       </div>
 
-      <h3 className="font-brand-display text-[19px] font-bold tracking-display text-heading">
+      <h3 className="font-brand-display text-lead font-bold tracking-display text-heading">
         {member.name}
       </h3>
       <p className="mt-1 text-[13.5px] font-semibold text-primary">{member.role}</p>

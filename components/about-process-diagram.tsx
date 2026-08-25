@@ -163,7 +163,7 @@ function ProcessTimelineStep({ item, index, scrollDirectionRef, onVisibilityChan
             isVisible ? "translate-y-0 opacity-100" : "translate-y-2 opacity-0",
           )}
         >
-          <p className="font-brand-display text-base font-bold tracking-[-0.01em] text-heading sm:text-[17px]">
+          <p className="font-brand-display text-base font-bold tracking-[-0.01em] text-heading sm:text-body-lg">
             {index + 1} • {label}
           </p>
           <p className="mt-0.5 text-pretty text-body leading-snug text-muted-foreground sm:text-body sm:leading-relaxed">
@@ -228,16 +228,16 @@ export function AboutProcessDiagram({ items }: AboutProcessDiagramProps) {
   return (
     <div className="about-process-timeline mx-auto mt-12 flex max-w-4xl flex-wrap items-start gap-6 sm:mt-14">
       <aside className="sticky top-20 hidden w-[236px] shrink-0 self-start rounded-2xl border border-border bg-background p-5 lg:block">
-        <p className="font-brand-display mb-2.5 text-[11px] font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+        <p className="font-brand-display mb-2.5 text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
           Our process
         </p>
         <div className="mb-0.5 flex items-baseline gap-1.5">
-          <span className="font-brand-display text-[40px] font-bold leading-none tracking-display text-primary">
+          <span className="font-brand-display text-display font-bold leading-none tracking-display text-primary">
             {revealedCount}
           </span>
           <span className="font-brand-display text-lg font-bold text-muted-foreground-subtle">/ {stepCount}</span>
         </div>
-        <p className="mb-[18px] text-[13px] text-muted-foreground">steps complete</p>
+        <p className="mb-[18px] text-caption text-muted-foreground">steps complete</p>
 
         <div className="flex flex-col">
           {items.map((_, index) => {

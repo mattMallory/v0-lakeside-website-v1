@@ -14,7 +14,7 @@ export function SectionEyebrow({
   return (
     <div
       className={cn(
-        "mb-4 inline-flex items-center gap-2 font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow",
+        "mb-4 inline-flex items-center gap-2 font-brand-display text-micro font-semibold uppercase tracking-eyebrow",
         variant === "dark" ? "text-accent-on-dark" : "text-primary",
         className,
       )}
