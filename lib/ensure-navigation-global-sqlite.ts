@@ -12,8 +12,8 @@ const createStatements = [
     header_cta_label text DEFAULT 'Schedule a Consultation',
     header_cta_href text DEFAULT '/consultation',
     footer_description text,
-    footer_address_line_1 text,
-    footer_address_line_2 text,
+    footer_address_line1 text,
+    footer_address_line2 text,
     footer_phone text,
     footer_email text,
     updated_at text,
@@ -40,8 +40,8 @@ const createStatements = [
 
 const ensureColumns = [
   { name: "footer_description", definition: "text" },
-  { name: "footer_address_line_1", definition: "text" },
-  { name: "footer_address_line_2", definition: "text" },
+  { name: "footer_address_line1", definition: "text" },
+  { name: "footer_address_line2", definition: "text" },
   { name: "footer_phone", definition: "text" },
   { name: "footer_email", definition: "text" },
 ]
