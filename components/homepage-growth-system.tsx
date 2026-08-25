@@ -249,15 +249,6 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             {content.teamDescription}
           </p>
         </div>
-        {content.teamImageUrl ? (
-          <Image
-            src={content.teamImageUrl}
-            alt={content.teamImageAlt}
-            width={1120}
-            height={360}
-            className="mb-5 h-[clamp(240px,32vw,360px)] w-full rounded-2xl border border-border object-cover object-center"
-          />
-        ) : null}
         <div className="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
           {content.teamMembers.map((member) => (
             <div key={member.name} className="rounded-2xl border border-border bg-white p-7">
