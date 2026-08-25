@@ -30,7 +30,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       >
         <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-24 pb-[84px]">
           <SectionEyebrow variant="dark">{content.heroEyebrow}</SectionEyebrow>
-          <h1 className="font-brand-display max-w-[780px] text-balance text-[clamp(2rem,5.2vw,3.625rem)] font-bold leading-[1.28] tracking-[-0.03em] text-white">
+          <h1 className="font-brand-display max-w-[780px] text-balance text-[clamp(2rem,5.2vw,3.625rem)] font-bold leading-[1.28] tracking-display text-white">
             {content.heroHeadline}{" "}
             <span className="text-accent-on-dark">{content.heroHeadlineAccent}</span>
           </h1>
@@ -75,7 +75,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             }}
           >
             <SectionEyebrow variant="dark">{content.whoEyebrow}</SectionEyebrow>
-            <h2 className="font-brand-display text-balance text-[clamp(1.625rem,3.2vw,2.375rem)] font-bold leading-[1.06] tracking-[-0.03em] text-white">
+            <h2 className="font-brand-display text-balance text-[clamp(1.625rem,3.2vw,2.375rem)] font-bold leading-display tracking-display text-white">
               {content.whoHeadline}
             </h2>
             <p className="mt-3.5 text-pretty text-base leading-relaxed text-muted-foreground-on-dark">
@@ -118,7 +118,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
         <div className="mx-auto max-w-[1120px] px-6">
           <div className="mb-12 max-w-[640px]">
             <SectionEyebrow variant="dark">{content.pillarsEyebrow}</SectionEyebrow>
-            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">
+            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
               {content.pillarsHeadline}
             </h2>
             <p className="mt-3.5 text-pretty text-lg leading-relaxed text-muted-foreground-on-dark">
@@ -160,7 +160,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             }}
           >
             <SectionEyebrow variant="dark">{content.includedEyebrow}</SectionEyebrow>
-            <h2 className="max-w-[600px] font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">
+            <h2 className="max-w-[600px] font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
               {content.includedHeadline}
             </h2>
             <p className="mt-3.5 max-w-[620px] text-pretty text-lg leading-relaxed text-foreground-on-dark">
@@ -202,7 +202,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
         <div className="mx-auto max-w-[1120px] px-6">
           <div className="mb-9 max-w-[640px]">
             <SectionEyebrow variant="dark">{content.resultsEyebrow}</SectionEyebrow>
-            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">
+            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
               {content.resultsHeadline}
             </h2>
           </div>
@@ -224,7 +224,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 </div>
               )}
               <div className="min-w-[280px] flex-1 p-[clamp(32px,5vw,52px)]">
-                <p className="text-pretty text-[clamp(1.25rem,2.5vw,1.65rem)] font-medium leading-[1.45] text-heading">
+                <p className="text-pretty text-[clamp(1.25rem,2.5vw,1.65rem)] font-medium leading-body text-heading">
                   &ldquo;{content.testimonials[0].quote}&rdquo;
                 </p>
                 <div className="mt-5 font-brand-display text-body font-bold text-heading">
@@ -242,7 +242,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       <section className="mx-auto max-w-[1120px] px-6 pt-[88px]">
         <div className="mb-9 max-w-[640px]">
           <SectionEyebrow>{content.teamEyebrow}</SectionEyebrow>
-          <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-heading">
+          <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-heading">
             {content.teamHeadline}
           </h2>
           <p className="mt-3.5 text-pretty text-lg leading-relaxed text-muted-foreground">
@@ -276,7 +276,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                   </div>
                 )}
               </div>
-              <div className="font-brand-display text-[19px] font-bold tracking-[-0.015em] text-heading">
+              <div className="font-brand-display text-[19px] font-bold tracking-display text-heading">
                 {member.name}
               </div>
               <div className="mt-1 text-[13.5px] font-semibold text-primary">{member.role}</div>
@@ -322,7 +322,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           <div className="mb-9 flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-[600px]">
               <SectionEyebrow variant="dark">{content.articlesEyebrow}</SectionEyebrow>
-              <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.08] tracking-[-0.03em] text-white">
+              <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
                 {content.articlesHeadline}
               </h2>
             </div>
@@ -356,10 +356,10 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                   )}
                 </div>
                 <div className="flex flex-1 flex-col gap-2.5 p-5">
-                  <span className="self-start rounded-full bg-lake-pale px-[11px] py-[5px] text-[11px] font-semibold uppercase tracking-[0.05em] text-primary">
+                  <span className="self-start rounded-full bg-lake-pale px-[11px] py-[5px] text-[11px] font-semibold uppercase tracking-eyebrow text-primary">
                     {post.isCaseStudy ? "Case Study" : (post.category?.name ?? "Article")}
                   </span>
-                  <h3 className="font-brand-display text-base font-bold leading-snug tracking-[-0.015em] text-heading">
+                  <h3 className="font-brand-display text-base font-bold leading-snug tracking-display text-heading">
                     {post.title}
                   </h3>
                   <span className="mt-auto inline-flex items-center gap-1.5 text-body font-semibold text-primary">
@@ -376,7 +376,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       <section className="mx-auto max-w-[1120px] px-6 pt-[50px]">
         <div className="mb-7 max-w-[640px]">
           <SectionEyebrow>{content.nextEyebrow}</SectionEyebrow>
-          <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.08] tracking-[-0.03em] text-heading">
+          <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-heading">
             {content.nextHeadline}
           </h2>
         </div>
@@ -398,7 +398,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       <section id="audit" className="mx-auto max-w-[1120px] px-6 py-5 pb-24">
         <div className="flex flex-wrap items-center justify-between gap-8 rounded-2xl bg-[#3761a2] p-[clamp(36px,6vw,64px)]">
           <div className="max-w-[520px]">
-            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.1] tracking-[-0.03em] text-white">
+            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
               {content.auditHeadline}
             </h2>
             <p className="mt-3 text-pretty text-base leading-relaxed text-[#DCE8F6]">

@@ -17,16 +17,16 @@ function MetricCard({ metric }: { metric: CaseStudyMetric }) {
       )}
     >
       {metric.isHighlighted ? (
-        <span className="absolute -top-3 right-5 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.08em] text-white">
+        <span className="absolute -top-3 right-5 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-eyebrow text-white">
           {metric.highlightLabel || "Featured Result"}
         </span>
       ) : null}
 
-      <p className="font-brand-display text-[11px] font-semibold uppercase tracking-[0.12em] text-primary">
+      <p className="font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow text-primary">
         {metric.eyebrow}
       </p>
 
-      <p className="mt-4 text-3xl font-bold tracking-[-0.03em] whitespace-nowrap text-white md:text-[2.35rem] md:leading-none">
+      <p className="mt-4 text-3xl font-bold tracking-display whitespace-nowrap text-white md:text-[2.35rem] md:leading-none">
         <AnimatedMetricValue
           value={metric.value}
           prefix={metric.prefix}

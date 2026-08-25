@@ -44,13 +44,13 @@ export function CaseStudyHighlight({
             {isDark ? (
               <SectionEyebrow variant="dark">{eyebrow}</SectionEyebrow>
             ) : (
-              <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">
+              <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
                 {eyebrow}
               </p>
             )}
             <h2
               className={cn(
-                "mt-3 text-balance text-3xl font-bold tracking-[-0.026em] sm:text-4xl",
+                "mt-3 text-balance text-3xl font-bold sm:text-4xl",
                 isDark ? "text-white" : "text-heading",
               )}
             >

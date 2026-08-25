@@ -104,13 +104,13 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
                   <List className="h-4 w-4" />
                 </button>
               </div>
-              <p className="font-brand-display text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
+              <p className="font-brand-display text-xs font-medium uppercase tracking-eyebrow text-muted-foreground">
                 Showing {filteredPosts.length} result{filteredPosts.length === 1 ? "" : "s"}
               </p>
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
-              <label className="font-brand-display flex items-center gap-2 text-xs font-medium uppercase tracking-[0.1em] text-muted-foreground">
+              <label className="font-brand-display flex items-center gap-2 text-xs font-medium uppercase tracking-eyebrow text-muted-foreground">
                 Sort by
                 <span className="relative">
                   <select

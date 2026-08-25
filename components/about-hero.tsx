@@ -21,10 +21,10 @@ export function AboutHero({ content }: AboutHeroProps) {
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="text-left">
             <SectionEyebrow variant="dark">{content.eyebrow}</SectionEyebrow>
-            <h1 className="font-brand-display mt-5 max-w-xl text-balance text-4xl font-bold leading-[1.05] tracking-[-0.026em] text-white sm:text-5xl md:text-6xl">
+            <h1 className="font-brand-display mt-5 max-w-xl text-balance text-4xl font-bold leading-display text-white sm:text-5xl md:text-6xl">
               {content.title}
             </h1>
-            <p className="mt-6 max-w-xl text-pretty text-lg leading-[1.55] text-foreground-on-dark md:text-[19px]">
+            <p className="mt-6 max-w-xl text-pretty text-lg leading-body text-foreground-on-dark md:text-[19px]">
               {content.description}
             </p>
           </div>

@@ -38,10 +38,10 @@ function FunnelDetailCard({ step, priorityImage }: { step: FunnelStep; priorityI
         </div>
       ) : null}
       <div className="p-6 lg:p-9">
-        <span className="mb-3.5 font-brand-display text-[11px] font-bold uppercase tracking-[0.1em] text-primary">
+        <span className="mb-3.5 font-brand-display text-[11px] font-bold uppercase tracking-eyebrow text-primary">
           {step.tag}
         </span>
-        <h3 className="font-brand-display text-balance text-[22px] font-bold tracking-[-0.02em] text-heading lg:text-[26px]">
+        <h3 className="font-brand-display text-balance text-[22px] font-bold tracking-display text-heading lg:text-[26px]">
           {step.title}
         </h3>
         <p className="mt-3.5 text-pretty text-base leading-relaxed text-[#4B5563]">
@@ -85,7 +85,7 @@ export function GrowthSystemFunnel({ content }: GrowthSystemFunnelProps) {
     >
       <div className="mb-12 max-w-[640px]">
         <SectionEyebrow>{content.funnelEyebrow}</SectionEyebrow>
-        <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-heading">
+        <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-heading">
           {content.funnelHeadline}
         </h2>
         <p className="mt-3.5 text-pretty text-lg leading-relaxed text-muted-foreground">

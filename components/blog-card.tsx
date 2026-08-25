@@ -34,11 +34,11 @@ export function BlogCard({ post, layout = "grid" }: BlogCardProps) {
   const body = (
     <div className={layout === "list" ? "min-w-0 flex-1" : "mt-5"}>
       {post.isCaseStudy || post.category ? (
-        <p className="font-brand-display text-xs font-semibold uppercase tracking-[0.1em] text-primary">
+        <p className="font-brand-display text-xs font-semibold uppercase tracking-eyebrow text-primary">
           {post.isCaseStudy ? "Case Study" : post.category?.name}
         </p>
       ) : null}
-      <h2 className="mt-2 text-balance text-xl font-bold tracking-[-0.02em] text-heading transition-colors group-hover:text-primary md:text-2xl">
+      <h2 className="mt-2 text-balance text-xl font-bold tracking-display text-heading transition-colors group-hover:text-primary md:text-2xl">
         {post.title}
       </h2>
       <p className="mt-3 line-clamp-2 text-body leading-relaxed text-muted-foreground md:text-body">

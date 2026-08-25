@@ -90,17 +90,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <header className="border-b border-border bg-white">
           <div className="mx-auto max-w-[720px] px-6 py-12 md:py-16">
             {post.category ? (
-              <p className="font-brand-display flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.1em] text-primary">
+              <p className="font-brand-display flex items-center gap-2 text-sm font-semibold uppercase tracking-eyebrow text-primary">
                 <span className="h-0.5 w-5 rounded-full bg-primary" />
                 {post.category.name}
               </p>
             ) : null}
 
-            <h1 className="mt-5 text-balance text-[clamp(2.25rem,5.5vw,3.5rem)] font-bold leading-[1.04] tracking-[-0.026em] text-heading">
+            <h1 className="mt-5 text-balance text-[clamp(2.25rem,5.5vw,3.5rem)] font-bold leading-display text-heading">
               {post.title}
             </h1>
 
-            <p className="mt-5 text-pretty text-xl leading-[1.55] text-muted-foreground">
+            <p className="mt-5 text-pretty text-xl leading-body text-muted-foreground">
               {post.excerpt}
             </p>
 
@@ -152,10 +152,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section className="border-t border-border bg-white py-16">
           <div className="mx-auto max-w-6xl px-6">
             <div className="mb-8 text-center">
-              <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">
+              <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
                 Keep Reading
               </p>
-              <h2 className="mt-3 text-3xl font-bold tracking-[-0.02em] text-heading">Related Articles</h2>
+              <h2 className="mt-3 text-3xl font-bold tracking-display text-heading">Related Articles</h2>
             </div>
             <div className="grid gap-8 md:grid-cols-2">
               {relatedPosts.map((relatedPost) => (
