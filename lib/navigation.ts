@@ -50,6 +50,10 @@ function mapNavigationContent(doc: Record<string, unknown>): NavigationContent {
       doc.headerCtaHref as string,
       defaultNavigationContent.headerCtaHref,
     ),
+    footerDescription: withFallback(
+      doc.footerDescription as string,
+      defaultNavigationContent.footerDescription,
+    ),
     footerNavItems: mapNavItems(
       doc.footerNavItems as NavItemDoc[] | undefined,
       defaultNavigationContent.footerNavItems,

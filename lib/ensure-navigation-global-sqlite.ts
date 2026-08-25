@@ -11,6 +11,7 @@ const createStatements = [
     id integer PRIMARY KEY NOT NULL,
     header_cta_label text DEFAULT 'Schedule a Consultation',
     header_cta_href text DEFAULT '/consultation',
+    footer_description text,
     updated_at text,
     created_at text
   )`,
@@ -42,6 +43,15 @@ async function tableExists(client: ReturnType<typeof createClient>, name: string
   return result.rows.length > 0
 }
 
+async function columnExists(
+  client: ReturnType<typeof createClient>,
+  table: string,
+  column: string,
+) {
+  const result = await client.execute(`PRAGMA table_info(${table})`)
+  return result.rows.some((row) => row.name === column)
+}
+
 export async function ensureNavigationGlobalSqlite() {
   if (process.env.POSTGRES_URL || process.env.DATABASE_URL?.startsWith("postgres")) {
     return
@@ -50,12 +60,15 @@ export async function ensureNavigationGlobalSqlite() {
   const client = createClient({ url: `file:${dbPath}` })
 
   try {
-    if (await tableExists(client, "navigation")) {
+    if (!(await tableExists(client, "navigation"))) {
+      for (const statement of createStatements) {
+        await client.execute(statement)
+      }
       return
     }
 
-    for (const statement of createStatements) {
-      await client.execute(statement)
+    if (!(await columnExists(client, "navigation", "footer_description"))) {
+      await client.execute("ALTER TABLE navigation ADD COLUMN footer_description text")
     }
   } catch (error) {
     console.error("[payload] Failed to ensure navigation global tables:", error)

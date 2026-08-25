@@ -7,6 +7,7 @@ export type NavigationContent = {
   headerNavItems: NavItem[]
   headerCtaLabel: string
   headerCtaHref: string
+  footerDescription: string
   footerNavItems: NavItem[]
 }
 
@@ -22,5 +23,7 @@ export const defaultNavigationContent: NavigationContent = {
   headerNavItems: defaultNavItems,
   headerCtaLabel: "Schedule a Consultation",
   headerCtaHref: "/consultation",
+  footerDescription:
+    "Patient acquisition systems for natural wellness clinics. More appointments, less marketing guesswork.",
   footerNavItems: defaultNavItems,
 }
