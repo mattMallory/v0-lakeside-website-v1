@@ -20,7 +20,7 @@ export function AboutVisionMission({ content }: AboutVisionMissionProps) {
 
   return (
     <section className="border-b border-border bg-white">
-      <div className="mx-auto max-w-[1120px] px-6 py-20">
+      <div className="mx-auto max-w-page px-6 py-20">
         <div className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-white">
           <div
             className="flex min-w-[300px] flex-1 flex-col justify-center p-[clamp(28px,4vw,40px)]"

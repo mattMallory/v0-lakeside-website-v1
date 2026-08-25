@@ -14,7 +14,7 @@ type CtaSectionProps = {
 
 export function CtaSection({ content, className }: CtaSectionProps) {
   return (
-    <section id="contact" className={cn("mx-auto max-w-[1120px] px-6 pt-5 pb-24", className)}>
+    <section id="contact" className={cn("mx-auto max-w-page px-6 pt-5 pb-24", className)}>
       <div className="flex flex-wrap items-center justify-between gap-8 rounded-2xl bg-[#3761a2] p-[clamp(36px,6vw,64px)]">
         <div className="max-w-[520px]">
           <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">

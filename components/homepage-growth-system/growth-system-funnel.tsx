@@ -81,7 +81,7 @@ export function GrowthSystemFunnel({ content }: GrowthSystemFunnelProps) {
   return (
     <section
       id="how-it-works"
-      className="mx-auto w-full max-w-[1120px] min-w-0 overflow-hidden px-6 py-[88px] pb-[70px]"
+      className="mx-auto w-full max-w-page min-w-0 overflow-hidden px-6 py-[88px] pb-[70px]"
     >
       <div className="mb-12 max-w-[640px]">
         <SectionEyebrow>{content.funnelEyebrow}</SectionEyebrow>
