@@ -145,7 +145,7 @@ function ProcessTimelineStep({ item, index, scrollDirectionRef, onVisibilityChan
     <div
       ref={stepRef}
       data-visible={isVisible ? "true" : "false"}
-      className="process-step-card rounded-[14px] border border-border bg-white shadow-raised"
+      className="process-step-card rounded-card border border-border bg-white shadow-raised"
     >
       <div className="flex items-center gap-4 px-5 py-[18px] sm:px-6">
         <span

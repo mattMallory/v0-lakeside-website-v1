@@ -47,7 +47,7 @@ export function CaseStudyPracticeSidebar({ post }: CaseStudyPracticeSidebarProps
   const items = buildSidebarItems(post)
 
   return (
-    <aside className="rounded-[14px] border border-border bg-white p-5">
+    <aside className="rounded-card border border-border bg-white p-5">
       <dl className="space-y-4">
         {items.map((item) => (
           <div key={item.label}>

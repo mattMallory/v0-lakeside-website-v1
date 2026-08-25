@@ -27,7 +27,7 @@ export function BlogSidebar({
 }: BlogSidebarProps) {
   return (
     <aside className="space-y-8">
-      <section className="rounded-[12px] border border-border bg-card p-6">
+      <section className="rounded-lg border border-border bg-card p-6">
         <h2 className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-heading">
           All Categories
         </h2>
@@ -67,7 +67,7 @@ export function BlogSidebar({
         </ul>
       </section>
 
-      <section className="rounded-[12px] border border-border bg-card p-6">
+      <section className="rounded-lg border border-border bg-card p-6">
         <h2 className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-heading">
           Latest Posts
         </h2>
@@ -102,7 +102,7 @@ export function BlogSidebar({
         </ul>
       </section>
 
-      <section className="rounded-[12px] border border-border bg-card p-6">
+      <section className="rounded-lg border border-border bg-card p-6">
         <h2 className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-heading">
           Topics
         </h2>

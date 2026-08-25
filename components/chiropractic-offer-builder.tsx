@@ -44,7 +44,7 @@ function StepCard({
   children: React.ReactNode
 }) {
   return (
-    <div className="rounded-[14px] border border-border bg-white p-5 md:p-[22px]">
+    <div className="rounded-card border border-border bg-white p-5 md:p-[22px]">
       <div className="mb-1.5 flex items-center gap-3">
         <span
           className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-lake-pale font-brand-display text-body font-bold text-primary"
@@ -69,7 +69,7 @@ function OfferBuilderClarityPanel({ clarity }: { clarity: OfferBuilderClarity })
   return (
     <div
       data-ob="clarity"
-      className="offer-builder-clarity rounded-[14px] border border-border bg-white px-5 py-5 md:px-[22px]"
+      className="offer-builder-clarity rounded-card border border-border bg-white px-5 py-5 md:px-[22px]"
     >
       <div className="mb-3.5 flex items-center justify-between gap-3">
         <span className="font-brand-display text-[11px] font-bold uppercase tracking-eyebrow text-muted-foreground">
@@ -122,7 +122,7 @@ function OfferBuilderEmailPanel({ clarity, state }: { clarity: OfferBuilderClari
   return (
     <div className="offer-builder-email">
       <GhlNativeEmailCapture
-        className="rounded-[14px] border border-border bg-white px-4 py-4"
+        className="rounded-card border border-border bg-white px-4 py-4"
         buttonLabel="Email me this offer"
         successTitle="Offer saved — check your inbox."
         successMessage="We emailed your offer summary with all the details you built above."
@@ -217,7 +217,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
         </div>
 
         <div className="mb-8 flex flex-col items-center md:mb-[34px]">
-          <div className="relative w-full max-w-[360px] rounded-[14px] border-[1.5px] border-dashed border-secondary-button bg-background p-5 md:px-6 md:py-[22px]">
+          <div className="relative w-full max-w-[360px] rounded-card border-[1.5px] border-dashed border-secondary-button bg-background p-5 md:px-6 md:py-[22px]">
             <span
               className="absolute right-4 top-3.5 rounded-full border border-[#F6D79E] bg-[#FDEBCB] px-2 py-0.5 font-brand-display text-[10px] font-bold uppercase tracking-eyebrow text-[#B45309]"
             >
@@ -273,7 +273,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               <select
                 id="ob-audience"
                 defaultValue=""
-                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading"
+                className="offer-builder-select w-full rounded-sq border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading"
               >
                 <option value="">Select an audience</option>
                 {OFFER_BUILDER_AUDIENCES.map((option) => (
@@ -317,7 +317,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                 type="text"
                 defaultValue=""
                 placeholder="Or describe a specific concern…"
-                className="offer-builder-concern-custom w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading placeholder:text-muted-foreground-subtle"
+                className="offer-builder-concern-custom w-full rounded-sq border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading placeholder:text-muted-foreground-subtle"
               />
             </StepCard>
 
@@ -329,7 +329,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               <select
                 id="ob-first-step"
                 defaultValue=""
-                className="offer-builder-select w-full rounded-[10px] border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading"
+                className="offer-builder-select w-full rounded-sq border-[1.5px] border-secondary-button bg-white px-3.5 py-3 text-body text-heading"
               >
                 <option value="">Select a first step</option>
                 {OFFER_BUILDER_FIRST_STEPS.map((option) => (
@@ -563,7 +563,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
           </div>
         </div>
 
-        <div className="mt-8 rounded-[14px] border border-border bg-background p-5 md:mt-10 md:p-6">
+        <div className="mt-8 rounded-card border border-border bg-background p-5 md:mt-10 md:p-6">
           <p className="mb-3 font-brand-display text-[13px] font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
             Your offer in one sentence
           </p>
