@@ -317,147 +317,183 @@ function NativeConsultationForm({ consent }: { consent: ConsultationConsentCopy 
       <StepProgress step={step} />
 
       {step === 1 ? (
-        <div className="grid gap-5 md:grid-cols-2">
-          <div>
-            <label htmlFor="consult-first-name" className="mb-1.5 block text-sm font-medium text-heading">
-              First name
-            </label>
-            <input
-              id="consult-first-name"
-              name="firstName"
-              type="text"
-              required
-              autoComplete="given-name"
-              data-lpignore="true"
-              data-1p-ignore
-              className={fieldClass}
-              value={state.firstName}
-              onChange={(e) => updateField("firstName", e.target.value)}
-            />
+        <div className="flex flex-col gap-6">
+          <div className="grid gap-5 md:grid-cols-2">
+            <div>
+              <label htmlFor="consult-first-name" className="mb-1.5 block text-sm font-medium text-heading">
+                First name
+              </label>
+              <input
+                id="consult-first-name"
+                name="firstName"
+                type="text"
+                required
+                autoComplete="given-name"
+                data-lpignore="true"
+                data-1p-ignore
+                className={fieldClass}
+                value={state.firstName}
+                onChange={(e) => updateField("firstName", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="consult-last-name" className="mb-1.5 block text-sm font-medium text-heading">
+                Last name
+              </label>
+              <input
+                id="consult-last-name"
+                name="lastName"
+                type="text"
+                required
+                autoComplete="family-name"
+                data-lpignore="true"
+                data-1p-ignore
+                className={fieldClass}
+                value={state.lastName}
+                onChange={(e) => updateField("lastName", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="consult-email" className="mb-1.5 block text-sm font-medium text-heading">
+                Email
+              </label>
+              <input
+                id="consult-email"
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                data-lpignore="true"
+                data-1p-ignore
+                className={fieldClass}
+                value={state.email}
+                onChange={(e) => updateField("email", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="consult-phone" className="mb-1.5 block text-sm font-medium text-heading">
+                Phone number
+              </label>
+              <input
+                id="consult-phone"
+                name="phone"
+                type="tel"
+                required
+                autoComplete="tel"
+                data-lpignore="true"
+                data-1p-ignore
+                className={fieldClass}
+                value={state.phone}
+                onChange={(e) => updateField("phone", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="consult-practice" className="mb-1.5 block text-sm font-medium text-heading">
+                Practice name
+              </label>
+              <input
+                id="consult-practice"
+                name="companyName"
+                type="text"
+                required
+                className={fieldClass}
+                value={state.practiceName}
+                onChange={(e) => updateField("practiceName", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="consult-website" className="mb-1.5 block text-sm font-medium text-heading">
+                Practice website
+              </label>
+              <input
+                id="consult-website"
+                name="practiceWebsite"
+                type="url"
+                required
+                placeholder="https://"
+                autoComplete="url"
+                className={fieldClass}
+                value={state.practiceWebsite}
+                onChange={(e) => updateField("practiceWebsite", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="consult-city" className="mb-1.5 block text-sm font-medium text-heading">
+                City
+              </label>
+              <input
+                id="consult-city"
+                name="city"
+                type="text"
+                required
+                autoComplete="address-level2"
+                className={fieldClass}
+                value={state.city}
+                onChange={(e) => updateField("city", e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="consult-state" className="mb-1.5 block text-sm font-medium text-heading">
+                State
+              </label>
+              <select
+                id="consult-state"
+                name="state"
+                required
+                autoComplete="address-level1"
+                className={fieldClass}
+                value={state.state}
+                onChange={(e) => updateField("state", e.target.value)}
+              >
+                <option value="">Select a state</option>
+                {US_STATES.map((code) => (
+                  <option key={code} value={code}>
+                    {code}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
 
-          <div>
-            <label htmlFor="consult-last-name" className="mb-1.5 block text-sm font-medium text-heading">
-              Last name
-            </label>
-            <input
-              id="consult-last-name"
-              name="lastName"
-              type="text"
-              required
-              autoComplete="family-name"
-              data-lpignore="true"
-              data-1p-ignore
-              className={fieldClass}
-              value={state.lastName}
-              onChange={(e) => updateField("lastName", e.target.value)}
-            />
-          </div>
+          <div className="flex flex-col gap-4 border-t border-border pt-6">
+            {consent.smsNonMarketingConsentLabel ? (
+              <label htmlFor="sms-non-marketing-consent" className="flex cursor-pointer items-start gap-3">
+                <input
+                  id="sms-non-marketing-consent"
+                  name="smsNonMarketingConsent"
+                  type="checkbox"
+                  checked={state.smsNonMarketingConsent}
+                  onChange={(e) => updateField("smsNonMarketingConsent", e.target.checked)}
+                  className="mt-1 size-4 shrink-0 accent-primary"
+                />
+                <span className="text-sm leading-relaxed text-muted-foreground">
+                  {consent.smsNonMarketingConsentLabel}
+                </span>
+              </label>
+            ) : null}
 
-          <div>
-            <label htmlFor="consult-email" className="mb-1.5 block text-sm font-medium text-heading">
-              Email
-            </label>
-            <input
-              id="consult-email"
-              name="email"
-              type="email"
-              required
-              autoComplete="email"
-              data-lpignore="true"
-              data-1p-ignore
-              className={fieldClass}
-              value={state.email}
-              onChange={(e) => updateField("email", e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="consult-phone" className="mb-1.5 block text-sm font-medium text-heading">
-              Phone number
-            </label>
-            <input
-              id="consult-phone"
-              name="phone"
-              type="tel"
-              required
-              autoComplete="tel"
-              data-lpignore="true"
-              data-1p-ignore
-              className={fieldClass}
-              value={state.phone}
-              onChange={(e) => updateField("phone", e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="consult-practice" className="mb-1.5 block text-sm font-medium text-heading">
-              Practice name
-            </label>
-            <input
-              id="consult-practice"
-              name="companyName"
-              type="text"
-              required
-              className={fieldClass}
-              value={state.practiceName}
-              onChange={(e) => updateField("practiceName", e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="consult-website" className="mb-1.5 block text-sm font-medium text-heading">
-              Practice website
-            </label>
-            <input
-              id="consult-website"
-              name="practiceWebsite"
-              type="url"
-              required
-              placeholder="https://"
-              autoComplete="url"
-              className={fieldClass}
-              value={state.practiceWebsite}
-              onChange={(e) => updateField("practiceWebsite", e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="consult-city" className="mb-1.5 block text-sm font-medium text-heading">
-              City
-            </label>
-            <input
-              id="consult-city"
-              name="city"
-              type="text"
-              required
-              autoComplete="address-level2"
-              className={fieldClass}
-              value={state.city}
-              onChange={(e) => updateField("city", e.target.value)}
-            />
-          </div>
-
-          <div>
-            <label htmlFor="consult-state" className="mb-1.5 block text-sm font-medium text-heading">
-              State
-            </label>
-            <select
-              id="consult-state"
-              name="state"
-              required
-              autoComplete="address-level1"
-              className={fieldClass}
-              value={state.state}
-              onChange={(e) => updateField("state", e.target.value)}
-            >
-              <option value="">Select a state</option>
-              {US_STATES.map((code) => (
-                <option key={code} value={code}>
-                  {code}
-                </option>
-              ))}
-            </select>
+            {consent.smsMarketingConsentLabel ? (
+              <label htmlFor="sms-marketing-consent" className="flex cursor-pointer items-start gap-3">
+                <input
+                  id="sms-marketing-consent"
+                  name="smsMarketingConsent"
+                  type="checkbox"
+                  checked={state.smsMarketingConsent}
+                  onChange={(e) => updateField("smsMarketingConsent", e.target.checked)}
+                  className="mt-1 size-4 shrink-0 accent-primary"
+                />
+                <span className="text-sm leading-relaxed text-muted-foreground">
+                  {consent.smsMarketingConsentLabel}
+                </span>
+              </label>
+            ) : null}
           </div>
         </div>
       ) : null}
@@ -630,40 +666,6 @@ function NativeConsultationForm({ consent }: { consent: ConsultationConsentCopy 
               }
             />
           </div>
-
-          <div className="flex flex-col gap-4 border-t border-border pt-6">
-            {consent.smsNonMarketingConsentLabel ? (
-              <label htmlFor="sms-non-marketing-consent" className="flex cursor-pointer items-start gap-3">
-                <input
-                  id="sms-non-marketing-consent"
-                  name="smsNonMarketingConsent"
-                  type="checkbox"
-                  checked={state.smsNonMarketingConsent}
-                  onChange={(e) => updateField("smsNonMarketingConsent", e.target.checked)}
-                  className="mt-1 size-4 shrink-0 accent-primary"
-                />
-                <span className="text-sm leading-relaxed text-muted-foreground">
-                  {consent.smsNonMarketingConsentLabel}
-                </span>
-              </label>
-            ) : null}
-
-            {consent.smsMarketingConsentLabel ? (
-              <label htmlFor="sms-marketing-consent" className="flex cursor-pointer items-start gap-3">
-                <input
-                  id="sms-marketing-consent"
-                  name="smsMarketingConsent"
-                  type="checkbox"
-                  checked={state.smsMarketingConsent}
-                  onChange={(e) => updateField("smsMarketingConsent", e.target.checked)}
-                  className="mt-1 size-4 shrink-0 accent-primary"
-                />
-                <span className="text-sm leading-relaxed text-muted-foreground">
-                  {consent.smsMarketingConsentLabel}
-                </span>
-              </label>
-            ) : null}
-          </div>
         </div>
       ) : null}
 
@@ -693,19 +695,17 @@ function NativeConsultationForm({ consent }: { consent: ConsultationConsentCopy 
         )}
       </div>
 
-      {step === TOTAL_STEPS ? (
-        <p className="mt-4 text-center text-sm text-muted-foreground">
-          <Link href="/privacy" className="text-primary underline underline-offset-2 hover:text-primary/80">
-            {consent.privacyLinkLabel}
-          </Link>
-          <span className="mx-2 text-border" aria-hidden>
-            |
-          </span>
-          <Link href="/terms" className="text-primary underline underline-offset-2 hover:text-primary/80">
-            {consent.termsLinkLabel}
-          </Link>
-        </p>
-      ) : null}
+      <p className="mt-4 text-center text-sm text-muted-foreground">
+        <Link href="/privacy" className="text-primary underline underline-offset-2 hover:text-primary/80">
+          {consent.privacyLinkLabel}
+        </Link>
+        <span className="mx-2 text-border" aria-hidden>
+          |
+        </span>
+        <Link href="/terms" className="text-primary underline underline-offset-2 hover:text-primary/80">
+          {consent.termsLinkLabel}
+        </Link>
+      </p>
     </form>
   )
 }
