@@ -139,10 +139,9 @@ export const TOUCH_TARGET_DEBT: DebtEntry[] = [
   },
   {
     route: "/blog",
-    match: "button.font-brand-display.min-w-10.rounded-[10px]",
-    on: "selector",
+    match: "div:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(3)>button",
     finding: "MOB-04",
-    note: "Pagination buttons in components/blog-roll.tsx, 40x36px and 44x38px. Only render with enough posts to paginate.",
+    note: "Pagination buttons in components/blog-roll.tsx, 42x40px and 47x42px, measured once they became visible to the suite. The match is their shared container, so adding a page does not break it. Previously matched on class names and stopped matching when the radius token was adopted — this is that entry converted.",
   },
 
   // --- Budget planner ---
