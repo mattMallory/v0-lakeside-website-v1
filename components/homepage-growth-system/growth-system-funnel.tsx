@@ -38,10 +38,10 @@ function FunnelDetailCard({ step, priorityImage }: { step: FunnelStep; priorityI
         </div>
       ) : null}
       <div className="p-6 lg:p-9">
-        <span className="mb-3.5 font-brand-display text-[11px] font-bold uppercase tracking-eyebrow text-primary">
+        <span className="mb-3.5 font-brand-display text-micro font-bold uppercase tracking-eyebrow text-primary">
           {step.tag}
         </span>
-        <h3 className="font-brand-display text-balance text-[22px] font-bold tracking-display text-heading lg:text-[26px]">
+        <h3 className="font-brand-display text-balance text-title-sm font-bold tracking-display text-heading lg:text-title">
           {step.title}
         </h3>
         <p className="mt-3.5 text-pretty text-base leading-relaxed text-[#4B5563]">
@@ -65,7 +65,7 @@ function StepNumber({
     <span
       className={cn(
         "growth-funnel-step-num flex shrink-0 items-center justify-center rounded-full font-brand-display font-bold",
-        compact ? "h-6 w-6 text-xs lg:h-[30px] lg:w-[30px] lg:text-[13px]" : "h-[30px] w-[30px] text-[13px]",
+        compact ? "h-6 w-6 text-xs lg:h-[30px] lg:w-[30px] lg:text-caption" : "h-[30px] w-[30px] text-caption",
         isActive ? "bg-primary text-white" : "bg-muted text-muted-foreground",
       )}
     >
@@ -126,7 +126,7 @@ export function GrowthSystemFunnel({ content }: GrowthSystemFunnelProps) {
               className="growth-funnel-mobile-tab flex min-w-0 cursor-pointer touch-manipulation items-center gap-2 rounded-xl border border-border bg-white px-3 py-3 text-left text-secondary-button-foreground"
             >
               <StepNumber index={index} compact />
-              <span className="min-w-0 font-brand-display text-[13px] font-semibold leading-snug tracking-[-0.01em]">
+              <span className="min-w-0 font-brand-display text-caption font-semibold leading-snug tracking-[-0.01em]">
                 {step.buttonLabel}
               </span>
             </label>

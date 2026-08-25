@@ -90,7 +90,7 @@ export function PatientJourneyInteractive({
         <div className="rounded-[20px] border border-border bg-white px-5 py-10 shadow-raised sm:px-8 md:px-11">
           <div className="mb-8 text-center md:mb-[30px]">
             {eyebrow ? (
-              <p className="font-brand-display mb-3.5 text-[11px] font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+              <p className="font-brand-display mb-3.5 text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
                 {eyebrow}
               </p>
             ) : null}
@@ -100,7 +100,7 @@ export function PatientJourneyInteractive({
               </h2>
             ) : null}
             {description ? (
-              <p className="mx-auto mt-3 max-w-[540px] text-pretty text-[17px] leading-relaxed text-muted-foreground">
+              <p className="mx-auto mt-3 max-w-[540px] text-pretty text-body-lg leading-relaxed text-muted-foreground">
                 {description}
               </p>
             ) : null}
@@ -108,18 +108,18 @@ export function PatientJourneyInteractive({
 
           <div className="flex flex-wrap items-start gap-6">
             <aside className="sticky top-20 hidden w-[236px] shrink-0 self-start rounded-2xl border border-border bg-background p-5 lg:block">
-              <p className="font-brand-display mb-2.5 text-[11px] font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+              <p className="font-brand-display mb-2.5 text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
                 Your progress
               </p>
               <div className="mb-0.5 flex items-baseline gap-1.5">
-                <span className="font-brand-display text-[40px] font-bold leading-none tracking-display text-primary">
+                <span className="font-brand-display text-display font-bold leading-none tracking-display text-primary">
                   {exploredCount}
                 </span>
                 <span className="font-brand-display text-lg font-bold text-muted-foreground-subtle">
                   / {journeySteps.length}
                 </span>
               </div>
-              <p className="mb-[18px] text-[13px] text-muted-foreground">moments explored</p>
+              <p className="mb-[18px] text-caption text-muted-foreground">moments explored</p>
 
               <div className="flex flex-col">
                 {journeySteps.map((step, index) => {
@@ -225,7 +225,7 @@ export function PatientJourneyInteractive({
                       <div className="border-t border-border px-5 pb-5 pt-4">
                         <div className="grid gap-3 md:grid-cols-2">
                           <div className="rounded-xl border border-[#F3D0D0] bg-[#FEF7F7] p-4">
-                            <p className="font-brand-display mb-2 text-[11px] font-semibold uppercase tracking-eyebrow text-[#B45353]">
+                            <p className="font-brand-display mb-2 text-micro font-semibold uppercase tracking-eyebrow text-[#B45353]">
                               {step.badTitle || "Typical approach"}
                             </p>
                             <p className="text-body leading-relaxed text-[#7F1D1D]/80">
@@ -233,7 +233,7 @@ export function PatientJourneyInteractive({
                             </p>
                           </div>
                           <div className="rounded-xl border border-[#BFDBFE] bg-lake-pale p-4">
-                            <p className="font-brand-display mb-2 text-[11px] font-semibold uppercase tracking-eyebrow text-primary">
+                            <p className="font-brand-display mb-2 text-micro font-semibold uppercase tracking-eyebrow text-primary">
                               {step.goodTitle}
                             </p>
                             <p className="text-body leading-relaxed text-heading/80">
@@ -258,7 +258,7 @@ export function PatientJourneyInteractive({
                 <Zap className="h-6 w-6" strokeWidth={1.8} />
               </span>
               <div>
-                <p className="patient-journey-principle-eyebrow font-brand-display mb-1 text-[11px] font-semibold uppercase tracking-eyebrow">
+                <p className="patient-journey-principle-eyebrow font-brand-display mb-1 text-micro font-semibold uppercase tracking-eyebrow">
                   The principle
                 </p>
                 <p className="patient-journey-principle-headline font-brand-display text-balance text-[clamp(1.1875rem,2.4vw,1.5rem)] font-bold leading-display tracking-display">
@@ -286,7 +286,7 @@ export function PatientJourneyInteractive({
 
           {showCelebration && allExplored ? (
             <div className="mt-6 rounded-2xl border border-primary/20 bg-lake-pale px-6 py-8 text-center">
-              <p className="font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow text-primary">
+              <p className="font-brand-display text-micro font-semibold uppercase tracking-eyebrow text-primary">
                 All {journeySteps.length} moments explored
               </p>
               {completionTitle ? (
@@ -319,7 +319,7 @@ export function PatientJourneyInteractive({
           ) : null}
         </div>
 
-        <figcaption className="mt-4 text-center text-[13px] text-muted-foreground-subtle">
+        <figcaption className="mt-4 text-center text-caption text-muted-foreground-subtle">
           Lakeside Marketing · The Natural Practice Growth System
         </figcaption>
       </figure>
