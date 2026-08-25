@@ -29,4 +29,13 @@ export const caseStudyHighlightFields: Field[] = [
       },
     },
   },
+  {
+    name: "caseStudyBackground",
+    type: "upload",
+    relationTo: "media",
+    label: "Section background",
+    admin: {
+      description: "Background for the dark case study highlight band.",
+    },
+  },
 ]

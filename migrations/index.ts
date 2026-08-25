@@ -27,6 +27,7 @@ import * as migration_20260825_navigation_footer_description from './20260825_na
 import * as migration_20260825_navigation_footer_contact from './20260825_navigation_footer_contact';
 import * as migration_20260825_fix_navigation_footer_address_columns from './20260825_fix_navigation_footer_address_columns';
 import * as migration_20260825_homepage_section_backgrounds from './20260825_homepage_section_backgrounds';
+import * as migration_20260825_page_section_backgrounds from './20260825_page_section_backgrounds';
 
 export const migrations = [
   {
@@ -168,5 +169,10 @@ export const migrations = [
     up: migration_20260825_homepage_section_backgrounds.up,
     down: migration_20260825_homepage_section_backgrounds.down,
     name: '20260825_homepage_section_backgrounds'
+  },
+  {
+    up: migration_20260825_page_section_backgrounds.up,
+    down: migration_20260825_page_section_backgrounds.down,
+    name: '20260825_page_section_backgrounds'
   },
 ];

@@ -32,20 +32,25 @@ export default async function ServicesPage() {
       <SiteHeader />
 
       <main>
-        <ServicesHero content={content.hero} backgroundImageUrl={backgrounds.hero} />
+        <ServicesHero
+          content={content.hero}
+          backgroundImageUrl={content.hero.backgroundImageUrl || backgrounds.hero}
+        />
         <ServicesSection id="services" content={content.offerings} />
         <ServicesTechStack content={content.technology} />
         <CaseStudyHighlight
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}
           caseStudy={featuredCaseStudy}
-          backgroundImageUrl={backgrounds.pillars}
+          backgroundImageUrl={
+            content.caseStudyHighlight.backgroundImageUrl || backgrounds.pillars
+          }
           className="bg-white"
         />
         <HomeAboutSection
           content={content.about}
           variant="dark"
-          backgroundImageUrl={backgrounds.pillars}
+          backgroundImageUrl={content.about.backgroundImageUrl || backgrounds.pillars}
         />
         <CtaSection
           className="pt-[84px]"

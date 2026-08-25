@@ -43,6 +43,22 @@ export function createPayloadConfig(
   return buildConfig({
     admin: {
       user: Users.slug,
+      meta: {
+        titleSuffix: "— Lakeside",
+        icons: [
+          {
+            rel: "icon",
+            type: "image/svg+xml",
+            url: "/lakeside-logo.svg",
+          },
+        ],
+      },
+      components: {
+        graphics: {
+          Logo: "@/components/payload/LakesideAdminLogo#LakesideAdminLogo",
+          Icon: "@/components/payload/LakesideAdminIcon#LakesideAdminIcon",
+        },
+      },
       importMap: {
         baseDir: path.resolve(dirname, ".."),
       },

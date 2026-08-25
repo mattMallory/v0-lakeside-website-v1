@@ -2,12 +2,14 @@ export type CaseStudyHighlightContent = {
   eyebrow: string
   headline: string
   featuredPostSlug: string | null
+  backgroundImageUrl: string
 }
 
 export const defaultCaseStudyHighlightContent: CaseStudyHighlightContent = {
   eyebrow: "Client Results",
   headline: "From Local Practice To National Growth",
   featuredPostSlug: "tuscola-pain-wellness-center-case-study",
+  backgroundImageUrl: "",
 }
 
 type FeaturedPostLike = {
@@ -36,12 +38,22 @@ export function mapCaseStudyHighlight(
     caseStudyEyebrow?: string | null
     caseStudyHeadline?: string | null
     caseStudyFeaturedPost?: number | FeaturedPostLike | null
+    caseStudyBackground?: number | { url?: string | null } | null
   },
   fallback: CaseStudyHighlightContent = defaultCaseStudyHighlightContent,
 ): CaseStudyHighlightContent {
+  const background =
+    typeof doc.caseStudyBackground === "object" &&
+    doc.caseStudyBackground &&
+    typeof doc.caseStudyBackground.url === "string" &&
+    doc.caseStudyBackground.url.trim()
+      ? doc.caseStudyBackground.url
+      : undefined
+
   return {
     eyebrow: withFallback(doc.caseStudyEyebrow, fallback.eyebrow),
     headline: withFallback(doc.caseStudyHeadline, fallback.headline),
     featuredPostSlug: resolveFeaturedPostSlug(doc.caseStudyFeaturedPost, fallback.featuredPostSlug),
+    backgroundImageUrl: background ?? fallback.backgroundImageUrl,
   }
 }

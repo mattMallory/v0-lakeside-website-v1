@@ -19,6 +19,7 @@ export type ServicesContent = {
     eyebrow: string
     title: string
     description: string
+    backgroundImageUrl: string
   }
   offerings: {
     eyebrow: string
@@ -39,6 +40,7 @@ export type ServicesContent = {
     cta: string
     imageUrl: string
     imageAlt: string
+    backgroundImageUrl: string
   }
   caseStudyHighlight: CaseStudyHighlightContent
   cta: {
@@ -54,6 +56,7 @@ export const defaultServicesContent: ServicesContent = {
     title: "A Full-Stack Lead Generation System",
     description:
       "We build and operate the complete infrastructure behind predictable growth — paid acquisition, conversion systems, creative, and CRM — so your team can focus on closing, not chasing.",
+    backgroundImageUrl: "",
   },
   offerings: {
     eyebrow: "What We Deliver",
@@ -129,6 +132,7 @@ export const defaultServicesContent: ServicesContent = {
     cta: "Learn About Lakeside",
     imageUrl: "/about/lakeside-meeting-lake-geneva.jpg",
     imageAlt: "The Lakeside team collaborating in Lake Geneva",
+    backgroundImageUrl: "",
   },
   caseStudyHighlight: defaultCaseStudyHighlightContent,
   cta: {

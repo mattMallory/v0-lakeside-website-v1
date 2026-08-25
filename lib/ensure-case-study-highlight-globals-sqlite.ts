@@ -11,7 +11,10 @@ const caseStudyColumns = [
   "case_study_eyebrow",
   "case_study_headline",
   "case_study_featured_post_id",
+  "case_study_background_id",
 ] as const
+
+const servicesBackgroundColumns = ["hero_background_id", "about_background_id"] as const
 
 async function columnExists(client: ReturnType<typeof createClient>, table: string, column: string) {
   const result = await client.execute(`PRAGMA table_info(${table})`)
@@ -43,6 +46,20 @@ export async function ensureCaseStudyHighlightGlobalsSqlite() {
           const columnType = column.endsWith("_id") ? "INTEGER" : "TEXT"
           await client.execute(`ALTER TABLE ${table} ADD COLUMN ${column} ${columnType}`)
         }
+      }
+    }
+
+    if (await tableExists(client, "services_page")) {
+      for (const column of servicesBackgroundColumns) {
+        if (!(await columnExists(client, "services_page", column))) {
+          await client.execute(`ALTER TABLE services_page ADD COLUMN ${column} INTEGER`)
+        }
+      }
+    }
+
+    if (await tableExists(client, "homepage")) {
+      if (!(await columnExists(client, "homepage", "case_study_background_id"))) {
+        await client.execute(`ALTER TABLE homepage ADD COLUMN case_study_background_id INTEGER`)
       }
     }
   } catch (error) {

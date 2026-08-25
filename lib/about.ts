@@ -131,12 +131,19 @@ export async function getAboutContent(): Promise<AboutContent> {
           about.heroImagePosition as string | null | undefined,
           defaultAboutContent.hero.imagePosition,
         ),
+        backgroundImageUrl:
+          resolveMediaUrl(about.heroBackground as number | MediaLike | null | undefined) ??
+          defaultAboutContent.hero.backgroundImageUrl,
       },
       visionMission: {
         headline: withFallback(
           about.visionMissionHeadline,
           defaultAboutContent.visionMission.headline,
         ),
+        backgroundImageUrl:
+          resolveMediaUrl(
+            about.visionMissionBackground as number | MediaLike | null | undefined,
+          ) ?? defaultAboutContent.visionMission.backgroundImageUrl,
         vision: {
           label: withFallback(about.visionLabel, defaultAboutContent.visionMission.vision.label),
           text: withFallback(about.visionText, defaultAboutContent.visionMission.vision.text),
