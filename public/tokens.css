@@ -222,8 +222,9 @@
   --spacing-icon-lg: 30px;
   --spacing-icon-xl: 46px;
 
-  /* Page container. Approved 2026-08-13 over the 1152px of `max-w-6xl`,
-     which ships alongside it today. */
+  /* Page container. Approved 2026-08-13 over the 1152px of `max-w-6xl`, which
+     used to ship alongside it. There is now one page width: every container
+     uses this token and `max-w-6xl` appears nowhere in the markup. */
   --container-page: 70rem; /* 1120px */
   --animate-step-bounce: step-number-bounce 0.45s ease-out both;
 }
