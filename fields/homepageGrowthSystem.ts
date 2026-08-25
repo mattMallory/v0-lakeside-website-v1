@@ -17,47 +17,17 @@ const homepageTab = (label: string, fields: Field[]): Tab => ({
 })
 
 export const homepageGrowthSystemTabs: Tab[] = [
-  homepageTab("Backgrounds", [
+  homepageTab("Hero", [
     {
       name: "gsBgHero",
       type: "upload",
       relationTo: "media",
-      label: "Hero background",
+      label: "Section background",
       admin: {
         description:
-          "Used on the homepage hero and audit CTA, plus About / Services / Blog heroes.",
+          "Background for this hero, the Results band, and the Blog hero when Blog doesn’t set its own.",
       },
     },
-    {
-      name: "gsBgWho",
-      type: "upload",
-      relationTo: "media",
-      label: "Who It's For background",
-      admin: {
-        description: "Used on the Who It's For panel and the About vision panel.",
-      },
-    },
-    {
-      name: "gsBgPillars",
-      type: "upload",
-      relationTo: "media",
-      label: "What We Build background",
-      admin: {
-        description:
-          "Used on What We Build / next-steps panels and other dark section backgrounds.",
-      },
-    },
-    {
-      name: "gsBgIncluded",
-      type: "upload",
-      relationTo: "media",
-      label: "What's Included background",
-      admin: {
-        description: "Used on the What's Included section. Can reuse the Who It's For image.",
-      },
-    },
-  ]),
-  homepageTab("Hero", [
     {
       name: "gsHeroEyebrow",
       type: "text",
@@ -106,6 +76,15 @@ export const homepageGrowthSystemTabs: Tab[] = [
     },
   ]),
   homepageTab("Who It's For", [
+    {
+      name: "gsBgWho",
+      type: "upload",
+      relationTo: "media",
+      label: "Section background",
+      admin: {
+        description: "Background for the Who It's For panel.",
+      },
+    },
     {
       name: "gsWhoEyebrow",
       type: "text",
@@ -204,6 +183,16 @@ export const homepageGrowthSystemTabs: Tab[] = [
   ]),
   homepageTab("Pillars", [
     {
+      name: "gsBgPillars",
+      type: "upload",
+      relationTo: "media",
+      label: "Section background",
+      admin: {
+        description:
+          "Background for What We Build. Also used by the Articles (Go Deeper) band on the homepage.",
+      },
+    },
+    {
       name: "gsPillarsEyebrow",
       type: "text",
       label: "Eyebrow",
@@ -234,6 +223,15 @@ export const homepageGrowthSystemTabs: Tab[] = [
     },
   ]),
   homepageTab("Included", [
+    {
+      name: "gsBgIncluded",
+      type: "upload",
+      relationTo: "media",
+      label: "Section background",
+      admin: {
+        description: "Background for the What’s Included header band.",
+      },
+    },
     {
       name: "gsIncludedEyebrow",
       type: "text",

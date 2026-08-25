@@ -184,7 +184,9 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}
           caseStudy={caseStudy}
-          backgroundImageUrl={content.backgrounds.pillars}
+          backgroundImageUrl={
+            content.caseStudyHighlight.backgroundImageUrl || content.backgrounds.pillars
+          }
           className="bg-[#F9F7F4] py-0 pt-[88px] pb-0"
         />
       ) : null}

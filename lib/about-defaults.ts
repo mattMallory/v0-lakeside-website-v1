@@ -48,9 +48,11 @@ export type AboutContent = {
     imageUrl: string
     imageAlt: string
     imagePosition: ImagePositionValue
+    backgroundImageUrl: string
   }
   visionMission: {
     headline: string
+    backgroundImageUrl: string
     vision: {
       label: string
       text: string
@@ -91,9 +93,11 @@ export const defaultAboutContent: AboutContent = {
     imageUrl: "/about/hero.jpg",
     imageAlt: "The Lakeside Marketing team collaborating",
     imagePosition: "center",
+    backgroundImageUrl: "",
   },
   visionMission: {
     headline: "Marketing strategies built to weather any storm.",
+    backgroundImageUrl: "",
     vision: {
       label: "Our Vision",
       text: "To build a company that delivers effective, lasting marketing strategies — helping businesses grow quickly and steadily no matter the economic conditions.",

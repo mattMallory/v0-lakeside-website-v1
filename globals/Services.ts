@@ -51,6 +51,15 @@ export const Services: GlobalConfig = {
               label: "Description",
               defaultValue: defaultServicesContent.hero.description,
             },
+            {
+              name: "heroBackground",
+              type: "upload",
+              relationTo: "media",
+              label: "Section background",
+              admin: {
+                description: "Full-bleed background behind the Services hero.",
+              },
+            },
           ],
         },
         {
@@ -127,6 +136,15 @@ export const Services: GlobalConfig = {
               type: "text",
               label: "Image Alt Text",
               defaultValue: defaultServicesContent.about.imageAlt,
+            },
+            {
+              name: "aboutBackground",
+              type: "upload",
+              relationTo: "media",
+              label: "Section background",
+              admin: {
+                description: "Background for the dark About band on the Services page.",
+              },
             },
           ],
         },

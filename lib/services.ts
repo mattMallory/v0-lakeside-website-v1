@@ -121,6 +121,9 @@ export async function getServicesContent(): Promise<ServicesContent> {
         eyebrow: withFallback(services.heroEyebrow, defaultServicesContent.hero.eyebrow),
         title: withFallback(services.heroTitle, defaultServicesContent.hero.title),
         description: withFallback(services.heroDescription, defaultServicesContent.hero.description),
+        backgroundImageUrl:
+          resolveMediaUrl(services.heroBackground as number | MediaLike | null | undefined) ??
+          defaultServicesContent.hero.backgroundImageUrl,
       },
       offerings: {
         eyebrow: withFallback(services.offeringsEyebrow, defaultServicesContent.offerings.eyebrow),
@@ -147,6 +150,9 @@ export async function getServicesContent(): Promise<ServicesContent> {
           services.aboutImageAlt ?? resolveMediaAlt(services.aboutImage),
           defaultServicesContent.about.imageAlt,
         ),
+        backgroundImageUrl:
+          resolveMediaUrl(services.aboutBackground as number | MediaLike | null | undefined) ??
+          defaultServicesContent.about.backgroundImageUrl,
       },
       caseStudyHighlight: mapCaseStudyHighlight(
         services,

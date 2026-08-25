@@ -260,5 +260,5 @@ export const defaultGrowthSystemContent: GrowthSystemContent = {
   auditDescription:
     "A free growth audit of your ads, landing page, show rate, and close rate — with a plan for what to fix first.",
   auditButtonLabel: "Request My Free Audit",
-  auditButtonUrl: "mailto:hello@lakesidemarketing.com?subject=Growth%20Audit%20Request",
+  auditButtonUrl: "/consultation",
 }

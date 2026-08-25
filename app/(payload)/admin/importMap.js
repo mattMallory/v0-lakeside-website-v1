@@ -29,6 +29,8 @@ import { MetaDescriptionComponent as MetaDescriptionComponent_a8a977ebc872c5d5ea
 import { MetaImageComponent as MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { PreviewComponent as PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860 } from '@payloadcms/plugin-seo/client'
 import { ImagePositionField as ImagePositionField_ad484934edc7a50c460276ddb6ec5a85 } from '@/components/payload/ImagePositionField'
+import { LakesideAdminIcon as LakesideAdminIcon_3bcb1e4926f23d2d81c2b90af3dada71 } from '@/components/payload/LakesideAdminIcon'
+import { LakesideAdminLogo as LakesideAdminLogo_a14819b7488ea7424f3794896b78c33f } from '@/components/payload/LakesideAdminLogo'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -64,5 +66,7 @@ export const importMap = {
   "@payloadcms/plugin-seo/client#MetaImageComponent": MetaImageComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@payloadcms/plugin-seo/client#PreviewComponent": PreviewComponent_a8a977ebc872c5d5ea7ee689724c0860,
   "@/components/payload/ImagePositionField#ImagePositionField": ImagePositionField_ad484934edc7a50c460276ddb6ec5a85,
+  "@/components/payload/LakesideAdminIcon#LakesideAdminIcon": LakesideAdminIcon_3bcb1e4926f23d2d81c2b90af3dada71,
+  "@/components/payload/LakesideAdminLogo#LakesideAdminLogo": LakesideAdminLogo_a14819b7488ea7424f3794896b78c33f,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

@@ -232,6 +232,9 @@ export function mapGrowthSystemContent(doc: HomepageDoc): GrowthSystemContent {
     auditHeadline: withFallback(doc.gsAuditHeadline as string, defaults.auditHeadline),
     auditDescription: withFallback(doc.gsAuditDescription as string, defaults.auditDescription),
     auditButtonLabel: withFallback(doc.gsAuditButtonLabel as string, defaults.auditButtonLabel),
-    auditButtonUrl: withFallback(doc.gsAuditButtonUrl as string, defaults.auditButtonUrl),
+    auditButtonUrl: (() => {
+      const url = withFallback(doc.gsAuditButtonUrl as string, defaults.auditButtonUrl)
+      return url.toLowerCase().startsWith("mailto:") ? defaults.auditButtonUrl : url
+    })(),
   }
 }

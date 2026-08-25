@@ -50,10 +50,13 @@ export default async function AboutPage() {
       <SiteHeader />
 
       <main>
-        <AboutHero content={content.hero} backgroundImageUrl={backgrounds.hero} />
+        <AboutHero
+          content={content.hero}
+          backgroundImageUrl={content.hero.backgroundImageUrl || backgrounds.hero}
+        />
         <AboutVisionMission
           content={content.visionMission}
-          backgroundImageUrl={backgrounds.who}
+          backgroundImageUrl={content.visionMission.backgroundImageUrl || backgrounds.who}
         />
         <AboutTeam content={content.team} />
         <AboutProcess content={content.process} />
@@ -61,7 +64,9 @@ export default async function AboutPage() {
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}
           caseStudy={featuredCaseStudy}
-          backgroundImageUrl={backgrounds.pillars}
+          backgroundImageUrl={
+            content.caseStudyHighlight.backgroundImageUrl || backgrounds.pillars
+          }
           className="bg-background"
         />
 

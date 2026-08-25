@@ -69,11 +69,29 @@ export const About: GlobalConfig = {
                 }),
               ],
             },
+            {
+              name: "heroBackground",
+              type: "upload",
+              relationTo: "media",
+              label: "Section background",
+              admin: {
+                description: "Full-bleed background behind the About hero.",
+              },
+            },
           ],
         },
         {
           label: "Vision & Mission",
           fields: [
+            {
+              name: "visionMissionBackground",
+              type: "upload",
+              relationTo: "media",
+              label: "Section background",
+              admin: {
+                description: "Background for the dark Vision & Mission panel.",
+              },
+            },
             {
               name: "visionMissionHeadline",
               type: "text",
