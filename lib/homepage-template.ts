@@ -53,7 +53,16 @@ export type GrowthSystemNextStep = {
   description: string
 }
 
+export type GrowthSystemBackgrounds = {
+  hero: string
+  who: string
+  pillars: string
+  included: string
+}
+
 export type GrowthSystemContent = {
+  backgrounds: GrowthSystemBackgrounds
+
   heroEyebrow: string
   heroHeadline: string
   heroHeadlineAccent: string

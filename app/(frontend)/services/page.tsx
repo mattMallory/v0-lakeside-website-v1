@@ -9,6 +9,7 @@ import { ServicesTechStack } from "@/components/services-tech-stack"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { getFeaturedCaseStudy } from "@/lib/blog"
+import { getGrowthSystemBackgrounds } from "@/lib/growth-system-backgrounds"
 import { getServicesContent } from "@/lib/services"
 
 export const metadata: Metadata = {
@@ -20,7 +21,10 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function ServicesPage() {
-  const content = await getServicesContent()
+  const [content, backgrounds] = await Promise.all([
+    getServicesContent(),
+    getGrowthSystemBackgrounds(),
+  ])
   const featuredCaseStudy = await getFeaturedCaseStudy(content.caseStudyHighlight.featuredPostSlug)
 
   return (
@@ -28,16 +32,21 @@ export default async function ServicesPage() {
       <SiteHeader />
 
       <main>
-        <ServicesHero content={content.hero} />
+        <ServicesHero content={content.hero} backgroundImageUrl={backgrounds.hero} />
         <ServicesSection id="services" content={content.offerings} />
         <ServicesTechStack content={content.technology} />
         <CaseStudyHighlight
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}
           caseStudy={featuredCaseStudy}
+          backgroundImageUrl={backgrounds.pillars}
           className="bg-white"
         />
-        <HomeAboutSection content={content.about} variant="dark" />
+        <HomeAboutSection
+          content={content.about}
+          variant="dark"
+          backgroundImageUrl={backgrounds.pillars}
+        />
         <CtaSection
           className="pt-[84px]"
           content={{

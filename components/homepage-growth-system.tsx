@@ -7,7 +7,7 @@ import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyeb
 import { CaseStudyHighlight } from "@/components/case-study-highlight"
 import { Button } from "@/components/ui/button"
 import type { BlogPostSummary, CaseStudyPost } from "@/lib/blog-types"
-import { growthSystemBackgrounds } from "@/lib/homepage-growth-system-defaults"
+import { layeredSectionBackground } from "@/lib/growth-system-backgrounds"
 import type { GrowthSystemContent } from "@/lib/homepage-template"
 import { getIcon } from "@/lib/icons"
 
@@ -22,11 +22,11 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
     <div className="w-full max-w-full overflow-x-hidden bg-[#F9F7F4]">
       <header
         className="relative overflow-hidden bg-[#0B1220]"
-        style={{
-          backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%), url('${growthSystemBackgrounds.hero}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center right",
-        }}
+        style={layeredSectionBackground(
+          "linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%)",
+          content.backgrounds.hero,
+          { backgroundPosition: "center right" },
+        )}
       >
         <div className="relative z-10 mx-auto max-w-[1120px] px-6 py-24 pb-[84px]">
           <SectionEyebrow variant="dark">{content.heroEyebrow}</SectionEyebrow>
@@ -68,11 +68,10 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
         <div className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-white">
           <div
             className="flex min-w-[300px] flex-1 flex-col justify-center p-[clamp(28px,4vw,40px)]"
-            style={{
-              backgroundImage: `linear-gradient(160deg, rgba(14,23,38,.9), rgba(14,23,38,.5)), url('${growthSystemBackgrounds.who}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+            style={layeredSectionBackground(
+              "linear-gradient(160deg, rgba(14,23,38,.9), rgba(14,23,38,.5))",
+              content.backgrounds.who,
+            )}
           >
             <SectionEyebrow variant="dark">{content.whoEyebrow}</SectionEyebrow>
             <h2 className="font-brand-display text-balance text-[clamp(1.625rem,3.2vw,2.375rem)] font-bold leading-[1.06] tracking-[-0.03em] text-white">
@@ -109,11 +108,10 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
 
       <section
         className="bg-[#0E1726] py-[88px]"
-        style={{
-          backgroundImage: `linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%), url('${growthSystemBackgrounds.pillars}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={layeredSectionBackground(
+          "linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%)",
+          content.backgrounds.pillars,
+        )}
       >
         <div className="mx-auto max-w-[1120px] px-6">
           <div className="mb-12 max-w-[640px]">
@@ -153,11 +151,10 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
         <div className="overflow-hidden rounded-2xl border border-border">
           <div
             className="p-[clamp(30px,4vw,44px)]"
-            style={{
-              backgroundImage: `linear-gradient(105deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.55) 55%, rgba(14,23,38,.2) 100%), url('${growthSystemBackgrounds.included}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+            style={layeredSectionBackground(
+              "linear-gradient(105deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.55) 55%, rgba(14,23,38,.2) 100%)",
+              content.backgrounds.included,
+            )}
           >
             <SectionEyebrow variant="dark">{content.includedEyebrow}</SectionEyebrow>
             <h2 className="max-w-[600px] font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">
@@ -187,17 +184,18 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}
           caseStudy={caseStudy}
+          backgroundImageUrl={content.backgrounds.pillars}
           className="bg-[#F9F7F4] py-0 pt-[88px] pb-0"
         />
       ) : null}
 
       <section
         className="mt-[80px] bg-[#0B1220] py-[88px]"
-        style={{
-          backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%), url('${growthSystemBackgrounds.hero}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center right",
-        }}
+        style={layeredSectionBackground(
+          "linear-gradient(100deg, rgba(11,18,32,.88) 0%, rgba(11,18,32,.55) 55%, rgba(11,18,32,.15) 100%)",
+          content.backgrounds.hero,
+          { backgroundPosition: "center right" },
+        )}
       >
         <div className="mx-auto max-w-[1120px] px-6">
           <div className="mb-9 max-w-[640px]">
@@ -303,11 +301,10 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
 
       <section
         className="mt-[50px] bg-[#0E1726] py-[88px]"
-        style={{
-          backgroundImage: `linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%), url('${growthSystemBackgrounds.pillars}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
+        style={layeredSectionBackground(
+          "linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%)",
+          content.backgrounds.pillars,
+        )}
       >
         <div className="mx-auto max-w-[1120px] px-6">
           <div className="mb-9 flex flex-wrap items-end justify-between gap-4">

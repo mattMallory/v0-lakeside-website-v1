@@ -6,7 +6,7 @@ import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyeb
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { getBlogCategories, getBlogTags, getPublishedPosts } from "@/lib/blog"
-import { growthSystemBackgrounds } from "@/lib/homepage-growth-system-defaults"
+import { getGrowthSystemBackgrounds, layeredSectionBackground } from "@/lib/growth-system-backgrounds"
 
 export const metadata: Metadata = {
   title: "Blog | Lakeside",
@@ -17,10 +17,11 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function BlogPage() {
-  const [posts, categories, tags] = await Promise.all([
+  const [posts, categories, tags, backgrounds] = await Promise.all([
     getPublishedPosts(),
     getBlogCategories(),
     getBlogTags(),
+    getGrowthSystemBackgrounds(),
   ])
 
   return (
@@ -29,11 +30,11 @@ export default async function BlogPage() {
 
       <section
         className="relative min-h-[30rem] overflow-hidden border-b border-[#1F2E45] bg-[#0B1220] md:min-h-[26rem]"
-        style={{
-          backgroundImage: `linear-gradient(100deg, rgba(11,18,32,.92) 0%, rgba(11,18,32,.72) 55%, rgba(11,18,32,.35) 100%), url('${growthSystemBackgrounds.hero}')`,
-          backgroundSize: "cover",
-          backgroundPosition: "center right",
-        }}
+        style={layeredSectionBackground(
+          "linear-gradient(100deg, rgba(11,18,32,.92) 0%, rgba(11,18,32,.72) 55%, rgba(11,18,32,.35) 100%)",
+          backgrounds.hero,
+          { backgroundPosition: "center right" },
+        )}
       >
         <BlogHeroBackground />
 

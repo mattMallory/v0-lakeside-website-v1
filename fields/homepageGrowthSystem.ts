@@ -17,6 +17,46 @@ const homepageTab = (label: string, fields: Field[]): Tab => ({
 })
 
 export const homepageGrowthSystemTabs: Tab[] = [
+  homepageTab("Backgrounds", [
+    {
+      name: "gsBgHero",
+      type: "upload",
+      relationTo: "media",
+      label: "Hero background",
+      admin: {
+        description:
+          "Used on the homepage hero and audit CTA, plus About / Services / Blog heroes.",
+      },
+    },
+    {
+      name: "gsBgWho",
+      type: "upload",
+      relationTo: "media",
+      label: "Who It's For background",
+      admin: {
+        description: "Used on the Who It's For panel and the About vision panel.",
+      },
+    },
+    {
+      name: "gsBgPillars",
+      type: "upload",
+      relationTo: "media",
+      label: "What We Build background",
+      admin: {
+        description:
+          "Used on What We Build / next-steps panels and other dark section backgrounds.",
+      },
+    },
+    {
+      name: "gsBgIncluded",
+      type: "upload",
+      relationTo: "media",
+      label: "What's Included background",
+      admin: {
+        description: "Used on the What's Included section. Can reuse the Who It's For image.",
+      },
+    },
+  ]),
   homepageTab("Hero", [
     {
       name: "gsHeroEyebrow",

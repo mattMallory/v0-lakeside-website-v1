@@ -5,7 +5,7 @@ import { CaseStudyMetricsGrid } from "@/components/case-study-metrics-grid"
 import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 import { Button } from "@/components/ui/button"
 import type { CaseStudyPost } from "@/lib/blog-types"
-import { growthSystemBackgrounds } from "@/lib/homepage-growth-system-defaults"
+import { layeredSectionBackground } from "@/lib/growth-system-backgrounds"
 import { cn } from "@/lib/utils"
 
 type CaseStudyHighlightProps = {
@@ -13,6 +13,7 @@ type CaseStudyHighlightProps = {
   headline: string
   caseStudy: CaseStudyPost
   variant?: "light" | "dark"
+  backgroundImageUrl?: string
   className?: string
 }
 
@@ -21,6 +22,7 @@ export function CaseStudyHighlight({
   headline,
   caseStudy,
   variant = "light",
+  backgroundImageUrl,
   className,
 }: CaseStudyHighlightProps) {
   const isDark = variant === "dark"
@@ -30,11 +32,10 @@ export function CaseStudyHighlight({
       className={cn("py-20", isDark ? "bg-[#0E1726]" : "bg-white", className)}
       style={
         isDark
-          ? {
-              backgroundImage: `linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%), url('${growthSystemBackgrounds.pillars}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }
+          ? layeredSectionBackground(
+              "linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%)",
+              backgroundImageUrl,
+            )
           : undefined
       }
     >

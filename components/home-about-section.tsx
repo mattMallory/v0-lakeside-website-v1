@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react"
 
 import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 import { Button } from "@/components/ui/button"
-import { growthSystemBackgrounds } from "@/lib/homepage-growth-system-defaults"
+import { layeredSectionBackground } from "@/lib/growth-system-backgrounds"
 import { cn } from "@/lib/utils"
 
 type HomeAboutContent = {
@@ -19,10 +19,12 @@ type HomeAboutContent = {
 export function HomeAboutSection({
   content,
   variant = "light",
+  backgroundImageUrl,
   className,
 }: {
   content: HomeAboutContent
   variant?: "light" | "dark"
+  backgroundImageUrl?: string
   className?: string
 }) {
   const isDark = variant === "dark"
@@ -33,11 +35,10 @@ export function HomeAboutSection({
       className={cn("py-20", isDark ? "bg-[#0E1726]" : undefined, className)}
       style={
         isDark
-          ? {
-              backgroundImage: `linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%), url('${growthSystemBackgrounds.pillars}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }
+          ? layeredSectionBackground(
+              "linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%)",
+              backgroundImageUrl,
+            )
           : undefined
       }
     >
