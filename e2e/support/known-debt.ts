@@ -201,62 +201,40 @@ export const TOUCH_TARGET_DEBT: DebtEntry[] = [
  * than a scrollbar, which is why this went unnoticed.
  */
 export const OVERFLOW_DEBT: DebtEntry[] = [
+  // The same 300px-min-width card on two pages: at a 320px viewport it is wider
+  // than the space left after the page gutters. Identified structurally, so a
+  // styling rename cannot make these stop matching.
   {
     route: "/",
-    match: "min-w-[300px]",
-    on: "selector",
+    match: "main:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(1)",
     finding: "NEW",
     note: "Card with a 300px min-width overflows a 320px viewport by 5px once page gutters are applied.",
   },
   {
+    route: "/",
+    match: "main:nth-of-type(1)>div:nth-of-type(1)>section:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(2)",
+    finding: "NEW",
+    note: "Its sibling card, same 300px min-width, same 5px overflow.",
+  },
+  {
     route: "/about",
-    match: "min-w-[300px]",
-    on: "selector",
+    match: "main:nth-of-type(1)>section:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(1)",
     finding: "NEW",
     note: "Same 300px min-width card as the homepage.",
   },
   {
-    route: "/tools/google-ads-budget-planner",
-    match: "budget-planner-form",
-    on: "selector",
+    route: "/about",
+    match: "main:nth-of-type(1)>section:nth-of-type(2)>div:nth-of-type(1)>div:nth-of-type(1)>div:nth-of-type(2)",
     finding: "NEW",
-    note: "Form column overflows a 320px viewport by 46px.",
+    note: "Its sibling card, same 300px min-width, same 5px overflow.",
   },
-  {
-    route: "/tools/google-ads-budget-planner",
-    match: "div.mb-3.flex.items-baseline",
-    on: "selector",
-    finding: "NEW",
-    note: "Slider label row, carried out by the overflowing form column.",
-  },
-  {
-    route: "/tools/google-ads-budget-planner",
-    match: "div.mt-2.flex.justify-between",
-    on: "selector",
-    finding: "NEW",
-    note: "Slider min/max row, carried out by the overflowing form column.",
-  },
-  {
-    route: "/tools/google-ads-budget-planner",
-    match: "input#bp-patient-value",
-    on: "selector",
-    finding: "NEW",
-    note: "Range input, carried out by the overflowing form column.",
-  },
-  {
-    route: "/tools/google-ads-budget-planner",
-    match: "span",
-    on: "selector",
-    finding: "NEW",
-    note: "Slider value readouts, carried out by the overflowing form column.",
-  },
-  {
-    route: "/tools/google-ads-budget-planner",
-    match: "div",
-    on: "selector",
-    finding: "NEW",
-    note: "Unclassed wrappers inside the overflowing form column.",
-  },
+  // The budget planner's six entries were deleted rather than converted. Emptying
+  // this ledger and re-running showed all 14 of its overflow assertions passing at
+  // every width: the form column no longer overflows, so the entries described
+  // something that no longer happens. Two of them — a bare "span" and a bare "div"
+  // — were also broad enough to permit any overflow on that route, which is
+  // exactly what this ledger must not do.
+
 ]
 
 function matches(

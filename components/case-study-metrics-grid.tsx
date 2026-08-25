@@ -17,12 +17,12 @@ function MetricCard({ metric }: { metric: CaseStudyMetric }) {
       )}
     >
       {metric.isHighlighted ? (
-        <span className="absolute -top-3 right-5 rounded-full bg-primary px-3 py-1 text-[11px] font-semibold uppercase tracking-eyebrow text-white">
+        <span className="absolute -top-3 right-5 rounded-full bg-primary px-3 py-1 text-micro font-semibold uppercase tracking-eyebrow text-white">
           {metric.highlightLabel || "Featured Result"}
         </span>
       ) : null}
 
-      <p className="font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow text-primary">
+      <p className="font-brand-display text-micro font-semibold uppercase tracking-eyebrow text-primary">
         {metric.eyebrow}
       </p>
 

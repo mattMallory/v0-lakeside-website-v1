@@ -51,12 +51,12 @@ function StepCard({
         >
           {step}
         </span>
-        <label className="font-brand-display text-[17px] font-bold tracking-[-0.01em] text-heading">
+        <label className="font-brand-display text-body-lg font-bold tracking-[-0.01em] text-heading">
           {title}
         </label>
       </div>
       {hint ? (
-        <p className="mb-3.5 ml-10 text-[13px] leading-snug text-muted-foreground-subtle">{hint}</p>
+        <p className="mb-3.5 ml-10 text-caption leading-snug text-muted-foreground-subtle">{hint}</p>
       ) : null}
       <div className="ml-0 md:ml-10">{children}</div>
     </div>
@@ -72,7 +72,7 @@ function OfferBuilderClarityPanel({ clarity }: { clarity: OfferBuilderClarity })
       className="offer-builder-clarity rounded-card border border-border bg-white px-5 py-5 md:px-[22px]"
     >
       <div className="mb-3.5 flex items-center justify-between gap-3">
-        <span className="font-brand-display text-[11px] font-bold uppercase tracking-eyebrow text-muted-foreground">
+        <span className="font-brand-display text-micro font-bold uppercase tracking-eyebrow text-muted-foreground">
           Offer clarity
         </span>
         <span
@@ -98,7 +98,7 @@ function OfferBuilderClarityPanel({ clarity }: { clarity: OfferBuilderClarity })
               data-ob-clarity-item={key}
               data-ob-clear={ok ? "true" : "false"}
               className={cn(
-                "offer-builder-clarity-status inline-flex items-center gap-1 text-[13px] font-bold",
+                "offer-builder-clarity-status inline-flex items-center gap-1 text-caption font-bold",
                 ok ? "text-[#15803D]" : "text-muted-foreground-subtle",
               )}
             >
@@ -204,13 +204,13 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
     >
       <div className="mx-auto max-w-[1080px] px-6 py-14 md:py-16">
         <div className="mb-8 text-center md:mb-[34px]">
-          <p className="font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow text-primary">
+          <p className="font-brand-display text-micro font-semibold uppercase tracking-eyebrow text-primary">
             Interactive · Offer builder
           </p>
           <h2 className="font-brand-display mt-3.5 text-balance text-[clamp(1.75rem,4vw,2.625rem)] font-bold leading-display tracking-display text-heading">
             Build a better chiropractic advertising offer
           </h2>
-          <p className="mx-auto mt-3 max-w-[560px] text-pretty text-[17px] leading-normal text-muted-foreground">
+          <p className="mx-auto mt-3 max-w-[560px] text-pretty text-body-lg leading-normal text-muted-foreground">
             Make six clear choices. Turn a vague promotion into an offer patients can understand — it
             updates live as you go.
           </p>
@@ -223,7 +223,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
             >
               Vague
             </span>
-            <p className="mb-2 font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+            <p className="mb-2 font-brand-display text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
               Starting point
             </p>
             <p className="mb-3.5 font-brand-display text-2xl font-bold tracking-display text-muted-foreground">
@@ -254,7 +254,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
             <path d="M13 2v30" />
             <path d="M5 25l8 9 8-9" />
           </svg>
-          <p className="font-brand-display text-[13px] font-bold tracking-eyebrow text-primary">
+          <p className="font-brand-display text-caption font-bold tracking-eyebrow text-primary">
             Rebuild it below
           </p>
         </div>
@@ -479,7 +479,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               data-ob="offercard"
               className="rounded-[18px] bg-ink px-5 py-6 shadow-raised md:px-7 md:py-[30px]"
             >
-              <p className="offer-builder-card-label mb-[18px] font-brand-display text-[11px] font-semibold uppercase tracking-eyebrow">
+              <p className="offer-builder-card-label mb-[18px] font-brand-display text-micro font-semibold uppercase tracking-eyebrow">
                 Your offer
               </p>
               <p className="offer-builder-card-eyebrow font-brand-display text-xs font-bold uppercase tracking-eyebrow" data-ob-preview-eyebrow>
@@ -487,7 +487,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               </p>
               <p
                 data-ob="pvtitle"
-                className="offer-builder-preview-title mt-2 font-brand-display text-[22px] font-bold leading-display tracking-[-0.026em] md:text-[26px]"
+                className="offer-builder-preview-title mt-2 font-brand-display text-title-sm font-bold leading-display tracking-[-0.026em] md:text-title"
               >
                 {preview.title}
               </p>
@@ -533,7 +533,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                   <span
                     key={label}
                     className={cn(
-                      "inline-flex items-center gap-1.5 text-[13px] font-semibold transition-colors",
+                      "inline-flex items-center gap-1.5 text-caption font-semibold transition-colors",
                       ok ? "offer-builder-status-done" : "offer-builder-status-pending",
                     )}
                   >
@@ -564,10 +564,10 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
         </div>
 
         <div className="mt-8 rounded-card border border-border bg-background p-5 md:mt-10 md:p-6">
-          <p className="mb-3 font-brand-display text-[13px] font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
+          <p className="mb-3 font-brand-display text-caption font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
             Your offer in one sentence
           </p>
-          <p className="text-[17px] leading-relaxed text-heading">
+          <p className="text-body-lg leading-relaxed text-heading">
             For{" "}
             <span
               data-ob-sentence="audience"
