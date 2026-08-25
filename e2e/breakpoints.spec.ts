@@ -41,26 +41,26 @@ for (const route of ACTIVE_ROUTES) {
 
         test("does not overflow horizontally", async ({ page }) => {
           const all = await horizontalOverflow(page)
-          const offenders = all.filter((o) => !isKnownOverflowDebt(route.path, o.selector))
+          const offenders = all.filter((o) => !isKnownOverflowDebt(route.path, o))
 
           expect(
             offenders,
             `Content extends past ${viewport.width}px on ${route.path}. The root layout's ` +
               `overflow-x-clip hides this from the user as a scrollbar, but the content is ` +
               `still cut off:\n` +
-              offenders.map((o) => `  ${o.selector} — ${o.detail}`).join("\n"),
+              offenders.map((o) => `  ${o.selector} — ${o.detail}\n      match: ${o.stableId}`).join("\n"),
           ).toEqual([])
         })
 
         test("meets the 44px touch target minimum", async ({ page }) => {
           const offenders = await smallTouchTargets(page)
-          const unexpected = offenders.filter((o) => !isKnownTouchTargetDebt(route.path, o.selector))
+          const unexpected = offenders.filter((o) => !isKnownTouchTargetDebt(route.path, o))
 
           expect(
             unexpected,
             `Controls below 44px on ${route.path} at ${viewport.width}px:\n` +
-              unexpected.map((o) => `  ${o.selector} — ${o.detail}`).join("\n") +
-              `\n\nIf these are pre-existing, record them in e2e/support/touch-target-debt.ts ` +
+              unexpected.map((o) => `  ${o.selector} — ${o.detail}\n      match: ${o.stableId}`).join("\n") +
+              `\n\nIf these are pre-existing, add the quoted match line to e2e/support/known-debt.ts ` +
               `with the audit finding they belong to. Do not widen the tolerance.`,
           ).toEqual([])
         })
