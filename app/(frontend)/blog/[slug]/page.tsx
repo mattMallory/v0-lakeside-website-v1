@@ -96,7 +96,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </p>
             ) : null}
 
-            <h1 className="mt-5 text-balance text-[clamp(2.25rem,5.5vw,3.5rem)] font-bold leading-display tracking-[-0.026em] text-heading">
+            <h1 className="mt-5 text-balance text-[clamp(2.25rem,5.5vw,3.5rem)] font-bold leading-display text-heading">
               {post.title}
             </h1>
 
