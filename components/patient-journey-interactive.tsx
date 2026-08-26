@@ -87,7 +87,7 @@ export function PatientJourneyInteractive({
   return (
     <section className="my-14 md:my-20">
       <figure>
-        <div className="rounded-[20px] border border-border bg-white px-5 py-10 shadow-raised sm:px-8 md:px-11">
+        <div className="rounded-2xl border border-border bg-white px-5 py-10 shadow-raised sm:px-8 md:px-11">
           <div className="mb-8 text-center md:mb-[30px]">
             {eyebrow ? (
               <p className="font-brand-display mb-3.5 text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
@@ -132,7 +132,7 @@ export function PatientJourneyInteractive({
                         type="button"
                         onClick={() => toggleStep(index)}
                         className={cn(
-                          "flex w-full items-center gap-3 rounded-[9px] px-1.5 py-[7px] text-left transition-colors hover:bg-white",
+                          "flex w-full items-center gap-3 rounded-sm px-1.5 py-[7px] text-left transition-colors hover:bg-white",
                           isActive && "bg-white",
                         )}
                       >
@@ -254,7 +254,7 @@ export function PatientJourneyInteractive({
 
           <div className="mt-[26px]">
             <div className="mb-[18px] flex items-center gap-4 rounded-card bg-ink px-7 py-[22px]">
-              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[11px] bg-[rgba(124,176,232,0.15)] text-accent-on-dark">
+              <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg bg-[rgba(124,176,232,0.15)] text-accent-on-dark">
                 <Zap className="h-6 w-6" strokeWidth={1.8} />
               </span>
               <div>
@@ -273,7 +273,7 @@ export function PatientJourneyInteractive({
                   key={card.text}
                   className="flex items-center gap-3 rounded-xl border border-border bg-background p-4"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[9px] bg-lake-pale text-primary">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-lake-pale text-primary">
                     <card.icon className="h-[19px] w-[19px]" strokeWidth={1.8} />
                   </span>
                   <span className="font-brand-display text-body font-bold leading-snug text-heading">

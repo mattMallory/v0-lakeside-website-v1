@@ -249,7 +249,7 @@ export function AboutProcessDiagram({ items }: AboutProcessDiagramProps) {
                 <button
                   type="button"
                   onClick={() => scrollToStep(index)}
-                  className="flex w-full items-center gap-3 rounded-[9px] px-1.5 py-[7px] text-left transition-colors hover:bg-white"
+                  className="flex w-full items-center gap-3 rounded-sm px-1.5 py-[7px] text-left transition-colors hover:bg-white"
                 >
                   <span
                     className={cn(

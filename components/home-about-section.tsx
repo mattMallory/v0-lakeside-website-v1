@@ -43,7 +43,7 @@ export function HomeAboutSection({
     >
       <div className="mx-auto max-w-page px-6">
         <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] bg-lake-pale lg:aspect-[5/4]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl bg-lake-pale lg:aspect-[5/4]">
             <Image
               src={content.imageUrl}
               alt={content.imageAlt}

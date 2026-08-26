@@ -86,7 +86,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
                   aria-label="Grid view"
                   onClick={() => setLayout("grid")}
                   className={cn(
-                    "rounded-[8px] p-2 transition-colors",
+                    "rounded-sm p-2 transition-colors",
                     layout === "grid" ? "bg-lake-pale text-primary" : "text-muted-foreground hover:text-heading",
                   )}
                 >
@@ -97,7 +97,7 @@ export function BlogRoll({ posts, categories, tags }: BlogRollProps) {
                   aria-label="List view"
                   onClick={() => setLayout("list")}
                   className={cn(
-                    "rounded-[8px] p-2 transition-colors",
+                    "rounded-sm p-2 transition-colors",
                     layout === "list" ? "bg-lake-pale text-primary" : "text-muted-foreground hover:text-heading",
                   )}
                 >
