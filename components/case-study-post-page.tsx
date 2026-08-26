@@ -49,7 +49,7 @@ export function CaseStudyPostPage({ post, relatedPosts }: CaseStudyPostPageProps
 
           {post.featuredImageUrl ? (
             <div className="mx-auto max-w-5xl px-6 pb-12">
-              <div className="relative aspect-[16/8] overflow-hidden rounded-[16px] bg-lake-pale">
+              <div className="relative aspect-[16/8] overflow-hidden rounded-xl bg-lake-pale">
                 <Image
                   src={post.featuredImageUrl}
                   alt={post.featuredImageAlt || post.title}

@@ -52,7 +52,7 @@ export function GhlNativeEmailCapture({
   if (!mounted) {
     return (
       <div
-        className={cn("min-h-[216px] rounded-[11px]", className)}
+        className={cn("min-h-[216px] rounded-lg", className)}
         aria-busy="true"
         aria-label="Loading email form"
       />
@@ -61,7 +61,7 @@ export function GhlNativeEmailCapture({
 
   if (disabled && disabledMessage) {
     return (
-      <div className={cn("rounded-[11px] px-2 py-4", className)}>
+      <div className={cn("rounded-lg px-2 py-4", className)}>
         <p className={cn("text-center", waitingClass)}>{disabledMessage}</p>
       </div>
     )
@@ -69,7 +69,7 @@ export function GhlNativeEmailCapture({
 
   if (status === "success") {
     return (
-      <div className={cn("rounded-[11px] px-2 py-4 text-center", className)}>
+      <div className={cn("rounded-lg px-2 py-4 text-center", className)}>
         <p className={cn("font-semibold", tone === "dark" ? "text-white" : "text-heading")}>
           {successTitle}
         </p>
@@ -99,7 +99,7 @@ export function GhlNativeEmailCapture({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={cn("rounded-[11px]", className)}>
+    <form onSubmit={handleSubmit} className={cn("rounded-lg", className)}>
       {title ? <div className={cn("mb-3", titleClass)}>{title}</div> : null}
       {description ? <p className={cn("mb-4", descriptionClass)}>{description}</p> : null}
 

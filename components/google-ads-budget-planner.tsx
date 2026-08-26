@@ -87,7 +87,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
   const emailPanel = (
     <GhlNativeEmailCapture
       tone="dark"
-      className="bg-white rounded-[11px] px-4 py-4"
+      className="bg-white rounded-lg px-4 py-4"
       buttonLabel="Save your plan"
       successTitle="Plan saved — check your inbox."
       successMessage="We emailed your personalized budget plan with the numbers from this calculator."
@@ -247,7 +247,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             </p>
 
             <div className="mt-6 flex gap-3">
-              <div className="flex-1 rounded-[11px] border border-white/10 bg-white/[0.04] p-4">
+              <div className="flex-1 rounded-lg border border-white/10 bg-white/[0.04] p-4">
                 <p className="budget-planner-metric-label text-micro uppercase tracking-eyebrow text-muted-foreground-on-dark">
                   Cost per lead
                 </p>
@@ -262,7 +262,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                   Ad spend per person who inquires
                 </p>
               </div>
-              <div className="flex-1 rounded-[11px] border border-white/10 bg-white/[0.04] p-4">
+              <div className="flex-1 rounded-lg border border-white/10 bg-white/[0.04] p-4">
                 <p className="budget-planner-metric-label text-micro uppercase tracking-eyebrow text-muted-foreground-on-dark">
                   Cost per new patient
                 </p>
@@ -285,7 +285,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
               lead. Compare it to what a patient is worth.
             </p>
 
-            <div className="mt-5 rounded-[11px] border border-accent-on-dark/25 bg-accent-on-dark/10 p-4">
+            <div className="mt-5 rounded-lg border border-accent-on-dark/25 bg-accent-on-dark/10 p-4">
               <p className="budget-planner-callout-label text-micro font-semibold uppercase tracking-eyebrow text-accent-on-dark">
                 Do this first
               </p>

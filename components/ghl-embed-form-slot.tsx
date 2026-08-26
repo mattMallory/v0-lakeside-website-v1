@@ -23,7 +23,7 @@ export function GhlEmbedFormSlot({
 }: GhlEmbedFormSlotProps) {
   return (
     <div
-      className={cn("relative overflow-hidden rounded-[11px]", className)}
+      className={cn("relative overflow-hidden rounded-lg", className)}
       style={{ minHeight: GHL_EMBED_MIN_HEIGHT }}
     >
       {embedUrl ? (

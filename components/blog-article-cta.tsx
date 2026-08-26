@@ -18,7 +18,7 @@ export function BlogArticleCta({
 }: BlogArticleCtaProps) {
   return (
     <section className="blog-article-cta-breakout my-14 md:my-20">
-      <div className="rounded-[20px] bg-ink px-6 py-14 text-center sm:px-10 md:py-16">
+      <div className="rounded-2xl bg-ink px-6 py-14 text-center sm:px-10 md:py-16">
         {eyebrow ? (
           <p className="blog-article-cta-eyebrow font-brand-display mb-4 text-xs font-semibold uppercase tracking-eyebrow">
             {eyebrow}
