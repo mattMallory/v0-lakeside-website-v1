@@ -204,7 +204,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
     >
       <div className="mx-auto max-w-[1080px] px-6 py-14 md:py-16">
         <div className="mb-8 text-center md:mb-[34px]">
-          <p className="font-brand-display text-micro font-semibold uppercase tracking-eyebrow text-primary">
+          <p className="font-brand-display text-micro font-bold uppercase tracking-eyebrow text-primary">
             Interactive · Offer builder
           </p>
           <h2 className="font-brand-display mt-3.5 text-balance text-[clamp(1.75rem,4vw,2.625rem)] font-bold leading-display tracking-display text-heading">
@@ -223,7 +223,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
             >
               Vague
             </span>
-            <p className="mb-2 font-brand-display text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+            <p className="mb-2 font-brand-display text-micro font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
               Starting point
             </p>
             <p className="mb-3.5 font-brand-display text-2xl font-bold tracking-display text-muted-foreground">
@@ -479,7 +479,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
               data-ob="offercard"
               className="rounded-xl bg-ink px-5 py-6 shadow-raised md:px-7 md:py-[30px]"
             >
-              <p className="offer-builder-card-label mb-[18px] font-brand-display text-micro font-semibold uppercase tracking-eyebrow">
+              <p className="offer-builder-card-label mb-[18px] font-brand-display text-micro font-bold uppercase tracking-eyebrow">
                 Your offer
               </p>
               <p className="offer-builder-card-eyebrow font-brand-display text-xs font-bold uppercase tracking-eyebrow" data-ob-preview-eyebrow>

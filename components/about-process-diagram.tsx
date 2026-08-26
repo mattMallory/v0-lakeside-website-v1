@@ -228,7 +228,7 @@ export function AboutProcessDiagram({ items }: AboutProcessDiagramProps) {
   return (
     <div className="about-process-timeline mx-auto mt-12 flex max-w-4xl flex-wrap items-start gap-6 sm:mt-14">
       <aside className="sticky top-20 hidden w-[236px] shrink-0 self-start rounded-2xl border border-border bg-background p-5 lg:block">
-        <p className="font-brand-display mb-2.5 text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+        <p className="font-brand-display mb-2.5 text-micro font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
           Our process
         </p>
         <div className="mb-0.5 flex items-baseline gap-1.5">

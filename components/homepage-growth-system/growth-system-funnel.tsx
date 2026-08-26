@@ -126,7 +126,7 @@ export function GrowthSystemFunnel({ content }: GrowthSystemFunnelProps) {
               className="growth-funnel-mobile-tab flex min-w-0 cursor-pointer touch-manipulation items-center gap-2 rounded-xl border border-border bg-white px-3 py-3 text-left text-secondary-button-foreground"
             >
               <StepNumber index={index} compact />
-              <span className="min-w-0 font-brand-display text-caption font-semibold leading-snug tracking-[-0.01em]">
+              <span className="min-w-0 font-brand-display text-caption font-bold leading-snug tracking-[-0.01em]">
                 {step.buttonLabel}
               </span>
             </label>
@@ -172,7 +172,7 @@ export function GrowthSystemFunnel({ content }: GrowthSystemFunnelProps) {
                 )}
               >
                 <StepNumber index={index} isActive={isActive} />
-                <span className="min-w-0 font-brand-display text-body font-semibold leading-snug tracking-[-0.01em]">
+                <span className="min-w-0 font-brand-display text-body font-bold leading-snug tracking-[-0.01em]">
                   {step.buttonLabel}
                 </span>
               </button>
