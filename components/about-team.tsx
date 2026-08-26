@@ -22,7 +22,7 @@ function TeamCard({ member }: { member: AboutTeamMember }) {
             {member.initials}
           </div>
         ) : (
-          <div className="flex h-full w-full items-center justify-center font-mono text-[10px] text-muted-foreground-subtle">
+          <div className="flex h-full w-full items-center justify-center font-mono text-micro text-muted-foreground-subtle">
             headshot
           </div>
         )}
@@ -31,14 +31,14 @@ function TeamCard({ member }: { member: AboutTeamMember }) {
       <h3 className="font-brand-display text-lead font-bold tracking-display text-heading">
         {member.name}
       </h3>
-      <p className="mt-1 text-[13.5px] font-semibold text-primary">{member.role}</p>
+      <p className="mt-1 text-caption font-semibold text-primary">{member.role}</p>
       <p className="mt-3 text-pretty text-body leading-relaxed text-muted-foreground">{member.bio}</p>
       {linkedinUrl ? (
         <Link
           href={linkedinUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3.5 inline-block font-brand-display text-[13.5px] font-bold text-primary underline decoration-primary/40 underline-offset-3"
+          className="mt-3.5 inline-block font-brand-display text-caption font-bold text-primary underline decoration-primary/40 underline-offset-3"
         >
           LinkedIn →
         </Link>

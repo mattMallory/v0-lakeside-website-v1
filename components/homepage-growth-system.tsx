@@ -54,7 +54,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           <div className="mt-14 grid max-w-[760px] grid-cols-[repeat(auto-fit,minmax(140px,1fr))] gap-5 border-t border-white/15 pt-7">
             {content.heroStats.map((stat) => (
               <div key={stat.label}>
-                <div className="font-brand-display text-[28px] font-bold text-white">
+                <div className="font-brand-display text-title font-bold text-white">
                   {stat.value}
                 </div>
                 <div className="text-caption text-muted-foreground-on-dark">{stat.label}</div>
@@ -230,7 +230,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 <div className="mt-5 font-brand-display text-body font-bold text-heading">
                   {content.testimonials[0].name}
                 </div>
-                <div className="text-[13.5px] text-muted-foreground">
+                <div className="text-caption text-muted-foreground">
                   {content.testimonials[0].practice}
                 </div>
               </div>
@@ -271,7 +271,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                     className="object-cover object-top"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center font-mono text-[10px] text-muted-foreground-subtle">
+                  <div className="flex h-full w-full items-center justify-center font-mono text-micro text-muted-foreground-subtle">
                     headshot
                   </div>
                 )}
@@ -279,7 +279,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
               <div className="font-brand-display text-lead font-bold tracking-display text-heading">
                 {member.name}
               </div>
-              <div className="mt-1 text-[13.5px] font-semibold text-primary">{member.role}</div>
+              <div className="mt-1 text-caption font-semibold text-primary">{member.role}</div>
               <p className="mt-3 text-pretty text-body leading-relaxed text-muted-foreground">
                 {member.bio}
               </p>
@@ -288,7 +288,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                   href={member.linkedinUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-3.5 inline-block font-brand-display text-[13.5px] font-bold text-primary underline decoration-primary/40 underline-offset-3"
+                  className="mt-3.5 inline-block font-brand-display text-caption font-bold text-primary underline decoration-primary/40 underline-offset-3"
                 >
                   LinkedIn →
                 </Link>
