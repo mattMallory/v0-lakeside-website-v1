@@ -29,7 +29,7 @@ export function AboutHero({ content }: AboutHeroProps) {
             </p>
           </div>
 
-          <div className="relative aspect-[4/3] overflow-hidden rounded-[16px] border border-white/10 bg-surface-dark-raised lg:aspect-[5/4]">
+          <div className="relative aspect-[4/3] overflow-hidden rounded-xl border border-white/10 bg-surface-dark-raised lg:aspect-[5/4]">
             <CmsImage
               src={content.imageUrl}
               alt={content.imageAlt}

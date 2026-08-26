@@ -12,7 +12,7 @@ function MetricCard({ metric }: { metric: CaseStudyMetric }) {
   return (
     <article
       className={cn(
-        "relative flex h-full min-w-0 flex-col rounded-[16px] bg-ink p-5 md:p-6",
+        "relative flex h-full min-w-0 flex-col rounded-xl bg-ink p-5 md:p-6",
         metric.isHighlighted && "ring-2 ring-primary",
       )}
     >

@@ -37,7 +37,7 @@ export function BlogSidebar({
               type="button"
               onClick={() => onCategorySelect(null)}
               className={cn(
-                "font-brand-display flex w-full items-center justify-between rounded-[8px] px-3 py-2 text-left text-body transition-colors",
+                "font-brand-display flex w-full items-center justify-between rounded-sm px-3 py-2 text-left text-body transition-colors",
                 !activeCategorySlug
                   ? "bg-lake-pale font-medium text-primary"
                   : "text-muted-foreground hover:bg-muted hover:text-heading",
@@ -53,7 +53,7 @@ export function BlogSidebar({
                 type="button"
                 onClick={() => onCategorySelect(category.slug)}
                 className={cn(
-                  "font-brand-display flex w-full items-center justify-between rounded-[8px] px-3 py-2 text-left text-body transition-colors",
+                  "font-brand-display flex w-full items-center justify-between rounded-sm px-3 py-2 text-left text-body transition-colors",
                   activeCategorySlug === category.slug
                     ? "bg-lake-pale font-medium text-primary"
                     : "text-muted-foreground hover:bg-muted hover:text-heading",
@@ -75,7 +75,7 @@ export function BlogSidebar({
           {latestPosts.slice(0, 4).map((post) => (
             <li key={post.id}>
               <Link href={`/blog/${post.slug}`} className="group flex gap-3">
-                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-[8px] bg-lake-pale">
+                <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-sm bg-lake-pale">
                   {post.featuredImageUrl ? (
                     <Image
                       src={post.featuredImageUrl}
