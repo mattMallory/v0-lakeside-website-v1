@@ -35,6 +35,8 @@ const twMerge = extendTailwindMerge({
             'title-sm',
             'title',
             'display',
+            'display-lg',
+            'display-md',
           ],
         },
       ],

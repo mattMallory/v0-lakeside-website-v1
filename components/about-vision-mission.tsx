@@ -23,7 +23,7 @@ export function AboutVisionMission({ content }: AboutVisionMissionProps) {
       <div className="mx-auto max-w-page px-6 py-20">
         <div className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-white">
           <div
-            className="flex min-w-[300px] flex-1 flex-col justify-center p-[clamp(28px,4vw,40px)]"
+            className="flex min-w-[300px] flex-1 flex-col justify-center p-panel-md"
             style={{
               backgroundImage: `linear-gradient(160deg, rgba(14,23,38,.9), rgba(14,23,38,.5)), url('${growthSystemBackgrounds.who}')`,
               backgroundSize: "cover",
@@ -31,7 +31,7 @@ export function AboutVisionMission({ content }: AboutVisionMissionProps) {
             }}
           >
             <SectionEyebrow variant="dark">Our Foundation</SectionEyebrow>
-            <h2 className="font-brand-display text-balance text-[clamp(1.625rem,3.2vw,2.375rem)] font-bold leading-display tracking-display text-white">
+            <h2 className="font-brand-display text-balance text-display-md font-bold leading-display tracking-display text-white">
               {content.headline}
             </h2>
             <p className="mt-3.5 text-pretty text-base leading-relaxed text-muted-foreground-on-dark">
@@ -39,7 +39,7 @@ export function AboutVisionMission({ content }: AboutVisionMissionProps) {
             </p>
           </div>
 
-          <div className="min-w-[300px] flex-[1.3] p-[clamp(24px,3vw,32px)]">
+          <div className="min-w-[300px] flex-[1.3] p-panel-sm">
             <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-px overflow-hidden rounded-xl border border-border bg-border">
               {cards.map((card) => {
                 const Icon = getIcon(card.icon)
