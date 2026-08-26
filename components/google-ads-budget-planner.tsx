@@ -104,7 +104,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
       <div className="mx-auto max-w-[980px] px-6 py-14 md:py-16">
         <div className="mb-3.5 flex items-center gap-2">
           <span className="h-0.5 w-5 rounded bg-primary" />
-          <p className="font-brand-display text-xs font-semibold uppercase tracking-eyebrow text-primary">
+          <p className="font-brand-display text-xs font-bold uppercase tracking-eyebrow text-primary">
             Interactive planner
           </p>
         </div>
@@ -253,7 +253,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                 </p>
                 <p
                   data-bp="cost-per-lead"
-                  className="budget-planner-metric-value font-brand-display mt-1.5 text-title font-semibold tracking-display text-white"
+                  className="budget-planner-metric-value font-brand-display mt-1.5 text-title font-bold tracking-display text-white"
                   suppressHydrationWarning
                 >
                   {formatBudgetCurrency(result.costPerLead)}
@@ -268,7 +268,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                 </p>
                 <p
                   data-bp="cost-per-patient"
-                  className="budget-planner-metric-value font-brand-display mt-1.5 text-title font-semibold tracking-display text-white"
+                  className="budget-planner-metric-value font-brand-display mt-1.5 text-title font-bold tracking-display text-white"
                   suppressHydrationWarning
                 >
                   {formatBudgetCurrency(result.costPerPatient)}

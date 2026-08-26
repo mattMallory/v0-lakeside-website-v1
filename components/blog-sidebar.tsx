@@ -28,7 +28,7 @@ export function BlogSidebar({
   return (
     <aside className="space-y-8">
       <section className="rounded-lg border border-border bg-card p-6">
-        <h2 className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-heading">
+        <h2 className="font-brand-display text-sm font-bold uppercase tracking-eyebrow text-heading">
           All Categories
         </h2>
         <ul className="mt-4 space-y-1">
@@ -68,7 +68,7 @@ export function BlogSidebar({
       </section>
 
       <section className="rounded-lg border border-border bg-card p-6">
-        <h2 className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-heading">
+        <h2 className="font-brand-display text-sm font-bold uppercase tracking-eyebrow text-heading">
           Latest Posts
         </h2>
         <ul className="mt-4 space-y-4">
@@ -103,7 +103,7 @@ export function BlogSidebar({
       </section>
 
       <section className="rounded-lg border border-border bg-card p-6">
-        <h2 className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-heading">
+        <h2 className="font-brand-display text-sm font-bold uppercase tracking-eyebrow text-heading">
           Topics
         </h2>
         <div className="mt-4 flex flex-wrap gap-2">

@@ -52,7 +52,7 @@ export function BlogReferences({ label = "References", items }: BlogReferencesPr
   return (
     <div className="my-10 rounded-card border border-border bg-white px-6 py-[22px]">
       {label ? (
-        <p className="font-brand-display mb-3.5 text-xs font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+        <p className="font-brand-display mb-3.5 text-xs font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
           {label}
         </p>
       ) : null}

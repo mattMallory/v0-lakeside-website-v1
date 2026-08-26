@@ -90,7 +90,7 @@ export function PatientJourneyInteractive({
         <div className="rounded-2xl border border-border bg-white px-5 py-10 shadow-raised sm:px-8 md:px-11">
           <div className="mb-8 text-center md:mb-[30px]">
             {eyebrow ? (
-              <p className="font-brand-display mb-3.5 text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+              <p className="font-brand-display mb-3.5 text-micro font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
                 {eyebrow}
               </p>
             ) : null}
@@ -108,7 +108,7 @@ export function PatientJourneyInteractive({
 
           <div className="flex flex-wrap items-start gap-6">
             <aside className="sticky top-20 hidden w-[236px] shrink-0 self-start rounded-2xl border border-border bg-background p-5 lg:block">
-              <p className="font-brand-display mb-2.5 text-micro font-semibold uppercase tracking-eyebrow text-muted-foreground-subtle">
+              <p className="font-brand-display mb-2.5 text-micro font-bold uppercase tracking-eyebrow text-muted-foreground-subtle">
                 Your progress
               </p>
               <div className="mb-0.5 flex items-baseline gap-1.5">
@@ -225,7 +225,7 @@ export function PatientJourneyInteractive({
                       <div className="border-t border-border px-5 pb-5 pt-4">
                         <div className="grid gap-3 md:grid-cols-2">
                           <div className="rounded-xl border border-[#F3D0D0] bg-[#FEF7F7] p-4">
-                            <p className="font-brand-display mb-2 text-micro font-semibold uppercase tracking-eyebrow text-[#B45353]">
+                            <p className="font-brand-display mb-2 text-micro font-bold uppercase tracking-eyebrow text-[#B45353]">
                               {step.badTitle || "Typical approach"}
                             </p>
                             <p className="text-body leading-relaxed text-[#7F1D1D]/80">
@@ -233,7 +233,7 @@ export function PatientJourneyInteractive({
                             </p>
                           </div>
                           <div className="rounded-xl border border-[#BFDBFE] bg-lake-pale p-4">
-                            <p className="font-brand-display mb-2 text-micro font-semibold uppercase tracking-eyebrow text-primary">
+                            <p className="font-brand-display mb-2 text-micro font-bold uppercase tracking-eyebrow text-primary">
                               {step.goodTitle}
                             </p>
                             <p className="text-body leading-relaxed text-heading/80">
@@ -258,7 +258,7 @@ export function PatientJourneyInteractive({
                 <Zap className="h-6 w-6" strokeWidth={1.8} />
               </span>
               <div>
-                <p className="patient-journey-principle-eyebrow font-brand-display mb-1 text-micro font-semibold uppercase tracking-eyebrow">
+                <p className="patient-journey-principle-eyebrow font-brand-display mb-1 text-micro font-bold uppercase tracking-eyebrow">
                   The principle
                 </p>
                 <p className="patient-journey-principle-headline font-brand-display text-balance text-[clamp(1.1875rem,2.4vw,1.5rem)] font-bold leading-display tracking-display">
@@ -286,7 +286,7 @@ export function PatientJourneyInteractive({
 
           {showCelebration && allExplored ? (
             <div className="mt-6 rounded-2xl border border-primary/20 bg-lake-pale px-6 py-8 text-center">
-              <p className="font-brand-display text-micro font-semibold uppercase tracking-eyebrow text-primary">
+              <p className="font-brand-display text-micro font-bold uppercase tracking-eyebrow text-primary">
                 All {journeySteps.length} moments explored
               </p>
               {completionTitle ? (

@@ -91,7 +91,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <header className="border-b border-border bg-white">
           <div className="mx-auto max-w-[720px] px-6 py-12 md:py-16">
             {post.category ? (
-              <p className="font-brand-display flex items-center gap-2 text-sm font-semibold uppercase tracking-eyebrow text-primary">
+              <p className="font-brand-display flex items-center gap-2 text-sm font-bold uppercase tracking-eyebrow text-primary">
                 <span className="h-0.5 w-5 rounded-full bg-primary" />
                 {post.category.name}
               </p>

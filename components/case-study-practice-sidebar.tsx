@@ -51,7 +51,7 @@ export function CaseStudyPracticeSidebar({ post }: CaseStudyPracticeSidebarProps
       <dl className="space-y-4">
         {items.map((item) => (
           <div key={item.label}>
-            <dt className="font-brand-display text-xs font-semibold uppercase tracking-eyebrow text-heading">
+            <dt className="font-brand-display text-xs font-bold uppercase tracking-eyebrow text-heading">
               {item.label}
             </dt>
             <dd className="mt-1 text-body font-normal leading-relaxed text-muted-foreground">{item.value}</dd>

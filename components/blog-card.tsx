@@ -34,7 +34,7 @@ export function BlogCard({ post, layout = "grid" }: BlogCardProps) {
   const body = (
     <div className={layout === "list" ? "min-w-0 flex-1" : "mt-5"}>
       {post.isCaseStudy || post.category ? (
-        <p className="font-brand-display text-xs font-semibold uppercase tracking-eyebrow text-primary">
+        <p className="font-brand-display text-xs font-bold uppercase tracking-eyebrow text-primary">
           {post.isCaseStudy ? "Case Study" : post.category?.name}
         </p>
       ) : null}

@@ -22,7 +22,7 @@ function MetricCard({ metric }: { metric: CaseStudyMetric }) {
         </span>
       ) : null}
 
-      <p className="font-brand-display text-micro font-semibold uppercase tracking-eyebrow text-primary">
+      <p className="font-brand-display text-micro font-bold uppercase tracking-eyebrow text-primary">
         {metric.eyebrow}
       </p>
 
