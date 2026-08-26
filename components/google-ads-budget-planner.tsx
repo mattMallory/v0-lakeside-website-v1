@@ -78,7 +78,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
       <div className="budget-planner-save-label mb-3 text-body font-medium text-muted-foreground-on-dark">
         Save your budget plan
       </div>
-      <div className="budget-planner-save-desc mb-4 text-xs leading-relaxed text-[#64748B]">
+      <div className="budget-planner-save-desc mb-4 text-xs leading-relaxed text-muted-foreground-on-dark">
         Enter your email below. Your calculator answers are included automatically.
       </div>
     </>
@@ -235,7 +235,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
           </div>
 
           <div className="budget-planner-results flex min-w-[min(100%,320px)] flex-1 flex-col rounded-2xl bg-ink p-8">
-            <p className="budget-planner-results-eyebrow text-micro font-medium uppercase tracking-eyebrow text-[#64748B]">
+            <p className="budget-planner-results-eyebrow text-micro font-medium uppercase tracking-eyebrow text-muted-foreground-on-dark">
               Recommended monthly ad spend
             </p>
             <p
@@ -258,7 +258,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                 >
                   {formatBudgetCurrency(result.costPerLead)}
                 </p>
-                <p className="budget-planner-metric-desc mt-1.5 text-xs leading-snug text-[#64748B]">
+                <p className="budget-planner-metric-desc mt-1.5 text-xs leading-snug text-muted-foreground-on-dark">
                   Ad spend per person who inquires
                 </p>
               </div>
@@ -273,13 +273,13 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
                 >
                   {formatBudgetCurrency(result.costPerPatient)}
                 </p>
-                <p className="budget-planner-metric-desc mt-1.5 text-xs leading-snug text-[#64748B]">
+                <p className="budget-planner-metric-desc mt-1.5 text-xs leading-snug text-muted-foreground-on-dark">
                   Ad spend for each patient who actually starts care
                 </p>
               </div>
             </div>
 
-            <p className="budget-planner-body-text mt-5 text-xs leading-relaxed text-[#64748B]">
+            <p className="budget-planner-body-text mt-5 text-xs leading-relaxed text-muted-foreground-on-dark">
               Not every lead becomes a patient — some don&apos;t answer, book, or start care. Cost per
               new patient reflects the full funnel, so it&apos;s usually several times your cost per
               lead. Compare it to what a patient is worth.
@@ -291,7 +291,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
               </p>
               <p
                 data-bp="next-step"
-                className="budget-planner-callout-text mt-1.5 text-body leading-relaxed text-[#E2E8F0]"
+                className="budget-planner-callout-text mt-1.5 text-body leading-relaxed text-foreground-on-dark"
                 suppressHydrationWarning
               >
                 {nextStep}

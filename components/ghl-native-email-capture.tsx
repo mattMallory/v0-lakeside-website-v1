@@ -45,9 +45,9 @@ export function GhlNativeEmailCapture({
   const titleClass =
     tone === "dark" ? "text-body font-medium text-muted-foreground-on-dark" : "text-body font-medium text-muted-foreground"
   const descriptionClass =
-    tone === "dark" ? "text-xs leading-relaxed text-[#64748B]" : "text-xs leading-relaxed text-muted-foreground"
+    tone === "dark" ? "text-xs leading-relaxed text-muted-foreground-on-dark" : "text-xs leading-relaxed text-muted-foreground"
   const waitingClass =
-    tone === "dark" ? "text-xs leading-relaxed text-[#64748B]" : "text-xs leading-relaxed text-muted-foreground"
+    tone === "dark" ? "text-xs leading-relaxed text-muted-foreground-on-dark" : "text-xs leading-relaxed text-muted-foreground"
 
   if (!mounted) {
     return (

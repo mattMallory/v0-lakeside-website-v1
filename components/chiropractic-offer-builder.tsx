@@ -632,7 +632,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
           <button
             type="button"
             onClick={reset}
-            className="rounded-full border border-border bg-white px-5 py-2.5 text-body font-semibold text-muted-foreground transition-colors hover:border-[#B8BBC2] hover:text-heading"
+            className="rounded-full border border-border bg-white px-5 py-2.5 text-body font-semibold text-muted-foreground transition-colors hover:border-foreground-on-dark hover:text-heading"
           >
             Reset offer
           </button>
