@@ -240,7 +240,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
             </p>
             <p
               data-bp="budget-range"
-              className="budget-planner-results-budget font-brand-display mt-2 text-[44px] font-bold leading-none tracking-display text-accent-on-dark"
+              className="budget-planner-results-budget font-brand-display mt-2 text-display font-bold leading-none tracking-display text-accent-on-dark"
               suppressHydrationWarning
             >
               {budgetLabel}

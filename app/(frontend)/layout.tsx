@@ -77,7 +77,7 @@ export default async function RootLayout({
       <head>
         <style dangerouslySetInnerHTML={{ __html: buildBrandingCssVariables(branding) }} />
       </head>
-      <body className={`${manrope.variable} overflow-x-clip antialiased bg-background text-[18px] leading-[1.72]`}>
+      <body className={`${manrope.variable} overflow-x-clip antialiased bg-background text-lead leading-[1.72]`}>
         <BrandingProvider value={branding}>
           <NavigationProvider value={navigation}>{children}</NavigationProvider>
         </BrandingProvider>

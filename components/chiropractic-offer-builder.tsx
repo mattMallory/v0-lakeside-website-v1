@@ -219,7 +219,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
         <div className="mb-8 flex flex-col items-center md:mb-[34px]">
           <div className="relative w-full max-w-[360px] rounded-card border-[1.5px] border-dashed border-secondary-button bg-background p-5 md:px-6 md:py-[22px]">
             <span
-              className="absolute right-4 top-3.5 rounded-full border border-[#F6D79E] bg-[#FDEBCB] px-2 py-0.5 font-brand-display text-[10px] font-bold uppercase tracking-eyebrow text-[#B45309]"
+              className="absolute right-4 top-3.5 rounded-full border border-[#F6D79E] bg-[#FDEBCB] px-2 py-0.5 font-brand-display text-micro font-bold uppercase tracking-eyebrow text-[#B45309]"
             >
               Vague
             </span>
