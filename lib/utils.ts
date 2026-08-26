@@ -37,6 +37,7 @@ const twMerge = extendTailwindMerge({
             'display',
             'display-lg',
             'display-md',
+            'control',
           ],
         },
       ],
