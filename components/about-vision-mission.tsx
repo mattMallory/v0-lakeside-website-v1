@@ -46,8 +46,8 @@ export function AboutVisionMission({ content }: AboutVisionMissionProps) {
 
                 return (
                   <div key={card.label} className="bg-white p-5">
-                    <div className="mb-3 flex h-[46px] w-[46px] items-center justify-center rounded-lg bg-lake-pale text-primary">
-                      <Icon className="h-[22px] w-[22px]" strokeWidth={1.9} />
+                    <div className="mb-3 flex h-icon-xl w-icon-xl items-center justify-center rounded-lg bg-lake-pale text-primary">
+                      <Icon className="h-icon-md w-icon-md" strokeWidth={1.9} />
                     </div>
                     <div className="font-brand-display text-body font-bold text-heading">{card.label}</div>
                     <div className="mt-1 text-body leading-snug text-muted-foreground">{card.text}</div>

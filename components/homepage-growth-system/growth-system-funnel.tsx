@@ -65,7 +65,7 @@ function StepNumber({
     <span
       className={cn(
         "growth-funnel-step-num flex shrink-0 items-center justify-center rounded-full font-brand-display font-bold",
-        compact ? "h-6 w-6 text-xs lg:h-[30px] lg:w-[30px] lg:text-caption" : "h-[30px] w-[30px] text-caption",
+        compact ? "h-6 w-6 text-xs lg:h-icon-lg lg:w-icon-lg lg:text-caption" : "h-icon-lg w-icon-lg text-caption",
         isActive ? "bg-primary text-white" : "bg-muted text-muted-foreground",
       )}
     >

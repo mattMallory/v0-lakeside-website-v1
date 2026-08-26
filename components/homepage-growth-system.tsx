@@ -88,8 +88,8 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                 const Icon = getIcon(item.icon)
                 return (
                   <div key={item.title} className="bg-white p-5">
-                    <div className="mb-3 flex h-[46px] w-[46px] items-center justify-center rounded-lg bg-lake-pale text-primary">
-                      <Icon className="h-[22px] w-[22px]" strokeWidth={1.9} />
+                    <div className="mb-3 flex h-icon-xl w-icon-xl items-center justify-center rounded-lg bg-lake-pale text-primary">
+                      <Icon className="h-icon-md w-icon-md" strokeWidth={1.9} />
                     </div>
                     <div className="font-brand-display text-body font-bold text-heading">
                       {item.title}
@@ -134,7 +134,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                   className="flex flex-col gap-3 rounded-2xl border border-border-on-dark bg-surface-dark-raised p-7"
                 >
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(37,99,168,.18)] text-accent-on-dark">
-                    <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} />
+                    <Icon className="h-icon-md w-icon-md" strokeWidth={1.8} />
                   </div>
                   <h3 className="font-brand-display text-balance text-lead font-bold tracking-[-0.01em] text-white">
                     {pillar.title}
@@ -364,7 +364,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
                   </h3>
                   <span className="mt-auto inline-flex items-center gap-1.5 text-body font-semibold text-primary">
                     Read more
-                    <ArrowRight className="h-[15px] w-[15px]" strokeWidth={2} />
+                    <ArrowRight className="h-icon-xs w-icon-xs" strokeWidth={2} />
                   </span>
                 </div>
               </Link>
@@ -383,7 +383,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
         <div className="grid grid-cols-[repeat(auto-fit,minmax(260px,1fr))] gap-5">
           {content.nextSteps.map((step, index) => (
             <div key={step.title} className="rounded-2xl border border-border bg-white p-[26px]">
-              <div className="mb-3.5 flex h-[30px] w-[30px] items-center justify-center rounded-full bg-primary font-brand-display text-caption font-bold text-white">
+              <div className="mb-3.5 flex h-icon-lg w-icon-lg items-center justify-center rounded-full bg-primary font-brand-display text-caption font-bold text-white">
                 {index + 1}
               </div>
               <div className="font-brand-display text-base font-bold text-heading">{step.title}</div>

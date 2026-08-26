@@ -26,7 +26,7 @@ const buttonVariants = cva(
           'h-auto min-h-0 rounded-none border-0 bg-transparent p-0 text-[15px] font-medium text-primary underline decoration-[1.5px] underline-offset-4 [text-decoration-color:rgba(37,99,168,0.4)] hover:bg-transparent hover:text-button-hover hover:[text-decoration-color:var(--button-hover)]',
       },
       size: {
-        default: 'min-h-[46px] px-[26px] text-[15px]',
+        default: 'min-h-icon-xl px-[26px] text-[15px]',
         xs: 'min-h-8 px-3 text-xs',
         sm: 'min-h-[42px] px-5 text-sm',
         lg: 'min-h-14 px-8 text-base',

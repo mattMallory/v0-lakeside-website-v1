@@ -537,7 +537,7 @@ export function ChiropracticOfferBuilder({ embedded = false }: { embedded?: bool
                       ok ? "offer-builder-status-done" : "offer-builder-status-pending",
                     )}
                   >
-                    <Check className="size-[15px]" strokeWidth={2.4} />
+                    <Check className="size-icon-xs" strokeWidth={2.4} />
                     {label}
                   </span>
                 ))}
