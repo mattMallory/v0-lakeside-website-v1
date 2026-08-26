@@ -1,4 +1,5 @@
 import type { LegalPageContent } from "@/lib/legal-defaults"
+import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 
 type LegalPageContentProps = {
   content: LegalPageContent
@@ -7,9 +8,9 @@ type LegalPageContentProps = {
 export function LegalPageContent({ content }: LegalPageContentProps) {
   return (
     <main className="mx-auto max-w-3xl px-6 py-16 md:py-20">
-      <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
+      <SectionEyebrow className="mb-0">
         {content.eyebrow}
-      </p>
+      </SectionEyebrow>
       <h1 className="mt-3 text-balance text-3xl font-bold text-heading sm:text-4xl">
         {content.title}
       </h1>

@@ -2,6 +2,7 @@ import Image from "next/image"
 
 import type { ServicesContent } from "@/lib/services-defaults"
 import { ServicesTechLogos } from "@/components/services-tech-logos"
+import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 
 type ServicesTechStackProps = {
   content: ServicesContent["technology"]
@@ -13,9 +14,9 @@ export function ServicesTechStack({ content }: ServicesTechStackProps) {
       <div className="mx-auto max-w-page px-6">
         <div className="mx-auto max-w-2xl text-center" data-tech-logos-section>
           <ServicesTechLogos logos={content.logos} />
-          <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
+          <SectionEyebrow className="mb-0">
             {content.eyebrow}
-          </p>
+          </SectionEyebrow>
           <h2 className="mt-3 text-balance text-3xl font-bold text-heading sm:text-4xl">
             {content.headline}
           </h2>

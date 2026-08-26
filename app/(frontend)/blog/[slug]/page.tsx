@@ -10,6 +10,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { formatBlogDate, getCaseStudyBySlug, getPostBySlug, getPublishedPosts } from "@/lib/blog"
 import { defaultTuscolaCaseStudy } from "@/lib/case-study-defaults"
+import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 
 type BlogPostPageProps = {
   params: Promise<{
@@ -152,9 +153,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <section className="border-t border-border bg-white py-16">
           <div className="mx-auto max-w-page px-6">
             <div className="mb-8 text-center">
-              <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
+              <SectionEyebrow className="mb-0">
                 Keep Reading
-              </p>
+              </SectionEyebrow>
               <h2 className="mt-3 text-3xl font-bold tracking-display text-heading">Related Articles</h2>
             </div>
             <div className="grid gap-8 md:grid-cols-2">
