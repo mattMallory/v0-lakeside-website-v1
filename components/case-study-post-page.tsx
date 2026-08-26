@@ -9,6 +9,7 @@ import { CaseStudyPracticeSidebar } from "@/components/case-study-practice-sideb
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { formatBlogDate, type BlogPostSummary, type CaseStudyPost } from "@/lib/blog"
+import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 
 type CaseStudyPostPageProps = {
   post: CaseStudyPost
@@ -23,9 +24,9 @@ export function CaseStudyPostPage({ post, relatedPosts }: CaseStudyPostPageProps
       <article>
         <header className="border-b border-border bg-white">
           <div className="mx-auto max-w-4xl px-6 py-12 md:py-16">
-            <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
+            <SectionEyebrow className="mb-0">
               Case Study
-            </p>
+            </SectionEyebrow>
 
             <h1 className="mt-4 text-balance text-4xl font-bold tracking-display text-heading sm:text-5xl">
               {post.title}
@@ -64,9 +65,9 @@ export function CaseStudyPostPage({ post, relatedPosts }: CaseStudyPostPageProps
 
         <div className="mx-auto max-w-5xl px-6 py-12 md:py-16">
           <div className="mb-12">
-            <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
+            <SectionEyebrow className="mb-0">
               Key Results
-            </p>
+            </SectionEyebrow>
             <h2 className="mt-3 text-2xl font-bold tracking-display text-heading sm:text-3xl">
               Measurable outcomes from the engagement
             </h2>
@@ -113,9 +114,9 @@ export function CaseStudyPostPage({ post, relatedPosts }: CaseStudyPostPageProps
         <section className="border-t border-border bg-white py-16">
           <div className="mx-auto max-w-page px-6">
             <div className="mb-8 text-center">
-              <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
+              <SectionEyebrow className="mb-0">
                 Keep Reading
-              </p>
+              </SectionEyebrow>
               <h2 className="mt-3 text-3xl font-bold tracking-display text-heading">Related Articles</h2>
             </div>
             <div className="grid gap-8 md:grid-cols-2">

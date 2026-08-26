@@ -44,9 +44,9 @@ export function CaseStudyHighlight({
             {isDark ? (
               <SectionEyebrow variant="dark">{eyebrow}</SectionEyebrow>
             ) : (
-              <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">
+              <SectionEyebrow className="mb-0">
                 {eyebrow}
-              </p>
+              </SectionEyebrow>
             )}
             <h2
               className={cn(

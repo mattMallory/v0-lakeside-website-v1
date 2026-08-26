@@ -3,6 +3,7 @@ import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
 import { ConsultationForm } from "@/components/consultation-form"
 import { resolveConsultationFormMode } from "@/lib/ghl-consultation"
+import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 
 export const metadata: Metadata = {
   title: "Schedule a Consultation | Lakeside",
@@ -18,7 +19,7 @@ export default function ConsultationPage() {
       <SiteHeader />
       <main className="mx-auto max-w-3xl px-6 py-16 md:py-20">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-brand-display text-sm font-semibold uppercase tracking-eyebrow text-primary">Get Started</p>
+          <SectionEyebrow className="mb-0">Get Started</SectionEyebrow>
           <h1 className="mt-3 text-balance text-3xl font-bold text-heading sm:text-4xl">
             Schedule a Consultation
           </h1>
