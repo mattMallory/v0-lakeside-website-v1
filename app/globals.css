@@ -104,10 +104,21 @@
   /* The lighter of the two muted greys on light surfaces. The most-used
      hardcoded colour in the codebase (28 places) and previously unnamed. */
   --color-muted-foreground-subtle: var(--muted-foreground-subtle);
-  --radius-sm: calc(var(--radius) * 0.6);
+  /* Two steps are literals rather than multiples of --radius, and that is the
+     point: they are the values Pete approved.
+
+     The multiplier scale came from shadcn and was never designed around this
+     site's radii. It put `sm` at 7.2px and `xl` at 16.8px, while the approved
+     collapses target 8px and 17px — so every adoption would have been an
+     approximation of a decision rather than the decision. Making them literal
+     costs 15 existing usages a sub-pixel shift once (+0.8px on two `rounded-sm`,
+     +0.2px on thirteen `rounded-xl`) and makes the target real.
+
+     Do not restore the multipliers. */
+  --radius-sm: 0.5rem; /* 8px */
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-xl: 1.0625rem; /* 17px */
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
