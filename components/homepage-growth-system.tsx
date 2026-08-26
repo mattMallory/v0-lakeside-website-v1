@@ -67,7 +67,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       <section className="mx-auto max-w-page px-6 pt-20">
         <div className="flex flex-wrap overflow-hidden rounded-2xl border border-border bg-white">
           <div
-            className="flex min-w-[300px] flex-1 flex-col justify-center p-[clamp(28px,4vw,40px)]"
+            className="flex min-w-[300px] flex-1 flex-col justify-center p-panel-md"
             style={{
               backgroundImage: `linear-gradient(160deg, rgba(14,23,38,.9), rgba(14,23,38,.5)), url('${growthSystemBackgrounds.who}')`,
               backgroundSize: "cover",
@@ -75,14 +75,14 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             }}
           >
             <SectionEyebrow variant="dark">{content.whoEyebrow}</SectionEyebrow>
-            <h2 className="font-brand-display text-balance text-[clamp(1.625rem,3.2vw,2.375rem)] font-bold leading-display tracking-display text-white">
+            <h2 className="font-brand-display text-balance text-display-md font-bold leading-display tracking-display text-white">
               {content.whoHeadline}
             </h2>
             <p className="mt-3.5 text-pretty text-base leading-relaxed text-muted-foreground-on-dark">
               {content.whoDescription}
             </p>
           </div>
-          <div className="min-w-[300px] flex-[1.3] p-[clamp(24px,3vw,32px)]">
+          <div className="min-w-[300px] flex-[1.3] p-panel-sm">
             <div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-px overflow-hidden rounded-xl border border-border bg-border">
               {content.whoCriteria.map((item) => {
                 const Icon = getIcon(item.icon)
@@ -118,7 +118,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
         <div className="mx-auto max-w-page px-6">
           <div className="mb-12 max-w-[640px]">
             <SectionEyebrow variant="dark">{content.pillarsEyebrow}</SectionEyebrow>
-            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
+            <h2 className="font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-white">
               {content.pillarsHeadline}
             </h2>
             <p className="mt-3.5 text-pretty text-lg leading-relaxed text-muted-foreground-on-dark">
@@ -160,7 +160,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
             }}
           >
             <SectionEyebrow variant="dark">{content.includedEyebrow}</SectionEyebrow>
-            <h2 className="max-w-[600px] font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
+            <h2 className="max-w-[600px] font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-white">
               {content.includedHeadline}
             </h2>
             <p className="mt-3.5 max-w-[620px] text-pretty text-lg leading-relaxed text-foreground-on-dark">
@@ -202,7 +202,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
         <div className="mx-auto max-w-page px-6">
           <div className="mb-9 max-w-[640px]">
             <SectionEyebrow variant="dark">{content.resultsEyebrow}</SectionEyebrow>
-            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
+            <h2 className="font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-white">
               {content.resultsHeadline}
             </h2>
           </div>
@@ -242,7 +242,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       <section className="mx-auto max-w-page px-6 pt-[88px]">
         <div className="mb-9 max-w-[640px]">
           <SectionEyebrow>{content.teamEyebrow}</SectionEyebrow>
-          <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-heading">
+          <h2 className="font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-heading">
             {content.teamHeadline}
           </h2>
           <p className="mt-3.5 text-pretty text-lg leading-relaxed text-muted-foreground">
@@ -322,7 +322,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           <div className="mb-9 flex flex-wrap items-end justify-between gap-4">
             <div className="max-w-[600px]">
               <SectionEyebrow variant="dark">{content.articlesEyebrow}</SectionEyebrow>
-              <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
+              <h2 className="font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-white">
                 {content.articlesHeadline}
               </h2>
             </div>
@@ -376,7 +376,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       <section className="mx-auto max-w-page px-6 pt-[50px]">
         <div className="mb-7 max-w-[640px]">
           <SectionEyebrow>{content.nextEyebrow}</SectionEyebrow>
-          <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-heading">
+          <h2 className="font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-heading">
             {content.nextHeadline}
           </h2>
         </div>
@@ -396,9 +396,9 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       </section>
 
       <section id="audit" className="mx-auto max-w-page px-6 py-5 pb-24">
-        <div className="flex flex-wrap items-center justify-between gap-8 rounded-2xl bg-[#3761a2] p-[clamp(36px,6vw,64px)]">
+        <div className="flex flex-wrap items-center justify-between gap-8 rounded-2xl bg-[#3761a2] p-panel-lg">
           <div className="max-w-[520px]">
-            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-white">
+            <h2 className="font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-white">
               {content.auditHeadline}
             </h2>
             <p className="mt-3 text-pretty text-base leading-relaxed text-[#DCE8F6]">

@@ -186,6 +186,21 @@
   --text-title: 26px; /* collapses 24/26/28px */
   --text-display: 40px; /* collapses 37.6/40/44px */
 
+  /* Fluid display sizes. These stay fluid: a clamp encodes a responsive intent
+     that a fixed token would throw away, and collapsing the display scale was
+     put to Pete as part of Group E and rejected.
+
+     Only the repeated ones are named. A clamp written nine times is duplication
+     whether or not it is fluid; a clamp written once is a one-off and stays
+     inline, recorded as intentional rather than missed. */
+  --text-display-lg: clamp(1.75rem, 3.6vw, 2.625rem); /* 28 -> 42px, 9 uses */
+  --text-display-md: clamp(1.625rem, 3.2vw, 2.375rem); /* 26 -> 38px, 2 uses */
+
+  /* Fluid panel padding, same rule: named where repeated. */
+  --spacing-panel-lg: clamp(36px, 6vw, 64px);
+  --spacing-panel-md: clamp(28px, 4vw, 40px);
+  --spacing-panel-sm: clamp(24px, 3vw, 32px);
+
   /* Letter-spacing and line-height. Approved 2026-08-13.
 
      `--tracking-eyebrow` is worth a note: the eyebrow spec was answered

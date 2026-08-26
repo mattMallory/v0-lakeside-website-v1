@@ -85,7 +85,7 @@ export function GrowthSystemFunnel({ content }: GrowthSystemFunnelProps) {
     >
       <div className="mb-12 max-w-[640px]">
         <SectionEyebrow>{content.funnelEyebrow}</SectionEyebrow>
-        <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-display tracking-display text-heading">
+        <h2 className="font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-heading">
           {content.funnelHeadline}
         </h2>
         <p className="mt-3.5 text-pretty text-lg leading-relaxed text-muted-foreground">
