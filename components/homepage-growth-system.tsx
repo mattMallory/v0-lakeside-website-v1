@@ -396,7 +396,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
       </section>
 
       <section id="audit" className="mx-auto max-w-page px-6 py-5 pb-24">
-        <div className="flex flex-wrap items-center justify-between gap-8 rounded-2xl bg-[#3761a2] p-panel-lg">
+        <div className="flex flex-wrap items-center justify-between gap-8 rounded-2xl bg-primary p-panel-lg">
           <div className="max-w-[520px]">
             <h2 className="font-brand-display text-balance text-display-lg font-bold leading-display tracking-display text-white">
               {content.auditHeadline}
@@ -407,7 +407,7 @@ export function HomepageGrowthSystem({ content, posts, caseStudy }: HomepageGrow
           </div>
           <Link
             href={content.auditButtonUrl}
-            className="rounded-full bg-white px-[30px] py-4 font-brand-display text-base font-bold whitespace-nowrap text-[#3761a2] no-underline"
+            className="rounded-full bg-white px-[30px] py-4 font-brand-display text-base font-bold whitespace-nowrap text-primary no-underline"
           >
             {content.auditButtonLabel}
           </Link>
