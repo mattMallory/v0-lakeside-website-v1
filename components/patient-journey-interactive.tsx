@@ -195,7 +195,7 @@ export function PatientJourneyInteractive({
                             : "bg-background text-muted-foreground",
                         )}
                       >
-                        <StepIcon className="h-[22px] w-[22px]" strokeWidth={1.8} />
+                        <StepIcon className="h-icon-md w-icon-md" strokeWidth={1.8} />
                       </span>
                       <span className="min-w-0 flex-1">
                         <span className="font-brand-display block text-base font-bold tracking-[-0.01em] text-heading">
@@ -274,7 +274,7 @@ export function PatientJourneyInteractive({
                   className="flex items-center gap-3 rounded-xl border border-border bg-background p-4"
                 >
                   <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-sm bg-lake-pale text-primary">
-                    <card.icon className="h-[19px] w-[19px]" strokeWidth={1.8} />
+                    <card.icon className="h-icon-sm w-icon-sm" strokeWidth={1.8} />
                   </span>
                   <span className="font-brand-display text-body font-bold leading-snug text-heading">
                     {card.text}

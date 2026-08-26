@@ -154,7 +154,7 @@ function ProcessTimelineStep({ item, index, scrollDirectionRef, onVisibilityChan
             isVisible ? "bg-primary text-white" : "bg-background text-muted-foreground",
           )}
         >
-          <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} />
+          <Icon className="h-icon-md w-icon-md" strokeWidth={1.8} />
         </span>
 
         <div
