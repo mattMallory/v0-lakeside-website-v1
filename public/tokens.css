@@ -157,6 +157,21 @@
   --text-micro: 11px; /* smallest label — collapses 10/11px */
   --text-caption: 13px; /* collapses 13/13.5px */
   --text-eyebrow: 14px; /* section eyebrow */
+
+  /* The only size token here that carries a line-height, and deliberately so.
+     The others set font-size alone, which is correct: every one of them
+     replaced an arbitrary bracket value, and an arbitrary value sets font-size
+     alone too — so nothing changed when they were adopted.
+
+     This one is different because the eyebrow replaced Tailwind's `text-sm` in
+     a shared component, and `text-sm` supplies a 1.25rem line-height. Without
+     the pair the eyebrow inherits from its parent and hand-written copies
+     cannot be folded into the component without shifting the page.
+
+     Do not "fix" the others to match. Pairing them was measured and would move
+     2093 elements for `micro` and 1837 for `caption`, to correct nothing —
+     see docs/eyebrow-classification.md and the Stage 3 log. */
+  --text-eyebrow--line-height: calc(1.25 / 0.875); /* 20px, matching text-sm */
   --text-body: 16px; /* body copy — collapses 14/14.5/15px */
 
   /* Body copy carries its own line-height, because Tailwind pairs one with
