@@ -155,6 +155,17 @@
      body size is contradicted (15px vs "16pt") and unresolved.
      ------------------------------------------------------------------ */
   --text-micro: 11px; /* smallest label — collapses 10/11px */
+
+  /* Same size as --text-micro, and a different thing. A field label names a
+     value — a stat, a form input, a metric readout. An eyebrow introduces a
+     heading. They look alike and are not interchangeable: the eyebrow is 14px
+     and grew there by decision, while a field label sits beside a large numeric
+     readout, where 14px would compete with the number it describes.
+
+     Two names for one size is deliberate. The alternative is a reader finding
+     small uppercase labels at two sizes with no way to tell which is which.
+     Unpaired, like every size token here except --text-eyebrow. */
+  --text-field-label: 11px;
   --text-caption: 13px; /* collapses 13/13.5px */
   --text-eyebrow: 14px; /* section eyebrow */
   --text-body: 16px; /* body copy — collapses 14/14.5/15px */
