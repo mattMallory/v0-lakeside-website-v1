@@ -181,6 +181,20 @@
   --text-caption: 13px; /* collapses 13/13.5px */
   --text-eyebrow: 14px; /* section eyebrow */
 
+  /* Chrome controls — the header nav link and the button labels.
+
+     This names what ships; it does not settle anything. **Chrome type sizing is
+     an open design question.** The site currently runs chrome at both 14px and
+     15px, and nobody has been asked which is right: the body decision (16px)
+     explicitly excluded chrome, and "chrome stays at 14px" described elements
+     that already were 14px rather than a rule that all chrome must be.
+
+     Three controls agree on 15px, which is a token rather than three one-offs.
+     Pointing them at a name removes the duplication without borrowing a
+     decision from a neighbouring question. When chrome is decided, this is the
+     one value to change. */
+  --text-control: 15px;
+
   /* The only size token here that carries a line-height, and deliberately so.
      The others set font-size alone, which is correct: every one of them
      replaced an arbitrary bracket value, and an arbitrary value sets font-size
