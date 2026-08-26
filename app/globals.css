@@ -924,14 +924,14 @@
 
 .prose-blog .budget-planner-results-eyebrow,
 .prose-blog .budget-planner-metric-desc,
-/* Left as a literal deliberately. #64748b, #e2e8f0 and #cbd5e1 are three of the
+/* Left as a literal deliberately. var(--muted-foreground-on-dark), var(--foreground-on-dark) and #cbd5e1 are three of the
    five greys used for text on dark surfaces. Two were chosen to survive
    (--foreground-on-dark, --muted-foreground-on-dark) and these collapse into
    them — but that is an approved visual change, not a free adoption, so it is
    made in its own change rather than smuggled in here. */
 .prose-blog .budget-planner-body-text,
 .prose-blog .budget-planner-save-desc {
-  color: #64748b;
+  color: var(--muted-foreground-on-dark);
 }
 
 .prose-blog .budget-planner-results-budget,
@@ -949,11 +949,11 @@
 }
 
 .prose-blog .budget-planner-callout-text {
-  color: #e2e8f0;
+  color: var(--foreground-on-dark);
 }
 
 .prose-blog .offer-builder-card-label {
-  color: #64748b;
+  color: var(--muted-foreground-on-dark);
 }
 
 .prose-blog .offer-builder-card-eyebrow {

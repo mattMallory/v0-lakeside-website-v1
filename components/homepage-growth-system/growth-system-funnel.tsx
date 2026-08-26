@@ -168,7 +168,7 @@ export function GrowthSystemFunnel({ content }: GrowthSystemFunnelProps) {
                   "relative z-10 flex w-full min-w-0 cursor-pointer touch-manipulation items-center gap-3.5 rounded-xl border px-[18px] py-4 text-left transition-colors",
                   isActive
                     ? "border-primary bg-lake-pale text-heading"
-                    : "border-border bg-white text-secondary-button-foreground hover:border-[#B8BBC2]",
+                    : "border-border bg-white text-secondary-button-foreground hover:border-foreground-on-dark",
                 )}
               >
                 <StepNumber index={index} isActive={isActive} />

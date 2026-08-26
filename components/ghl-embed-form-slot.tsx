@@ -33,7 +33,7 @@ export function GhlEmbedFormSlot({
               className="absolute inset-0 z-10 flex items-center justify-center bg-white/90"
               aria-live="polite"
             >
-              <p className="px-4 text-center text-xs font-medium leading-relaxed text-[#64748B]">
+              <p className="px-4 text-center text-xs font-medium leading-relaxed text-muted-foreground-on-dark">
                 Updating pre-filled values…
               </p>
             </div>
