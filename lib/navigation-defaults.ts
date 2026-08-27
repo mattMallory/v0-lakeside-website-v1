@@ -19,7 +19,7 @@ const defaultNavItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
-  { label: "Blog", href: "/blog" },
+  { label: "Articles", href: "/blog" },
   { label: "Demo The System", href: "/demo" },
 ]
 
@@ -49,6 +49,11 @@ export function isDemoSystemNavItem(item: Pick<NavItem, "label" | "href">): bool
 export function normalizeDemoSystemNavItem(label: string, href: string): NavItem {
   if (isLegacyDemoNavLabel(label) || href === "/demo") {
     return { label: "Demo The System", href: "/demo" }
+  }
+
+  // Repair truncated Articles label from CMS
+  if (href === "/blog" && (label.toLowerCase() === "art" || label.toLowerCase() === "artic")) {
+    return { label: "Articles", href: "/blog" }
   }
 
   return { label, href }
