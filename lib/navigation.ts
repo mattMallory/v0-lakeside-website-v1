@@ -2,6 +2,7 @@ import { cache } from "react"
 
 import {
   defaultNavigationContent,
+  normalizeDemoSystemNavItem,
   type NavItem,
   type NavigationContent,
 } from "@/lib/navigation-defaults"
@@ -23,19 +24,6 @@ function withOptionalText(value: string | null | undefined, fallback: string): s
   return value.trim()
 }
 
-function isLegacyDemoNavLabel(label: string): boolean {
-  const lower = label.toLowerCase()
-  return lower === "contact" || lower === "demo" || lower === "demo the system"
-}
-
-function normalizeNavItem(label: string, href: string): NavItem {
-  if (isLegacyDemoNavLabel(label) || href === "/demo") {
-    return { label: "Demo The System", href: "/demo" }
-  }
-
-  return { label, href }
-}
-
 function mapNavItems(
   value: NavItemDoc[] | null | undefined,
   fallback: NavItem[],
@@ -48,7 +36,7 @@ function mapNavItems(
       const href = item.href?.trim()
       if (!rawLabel || !href) return null
 
-      return normalizeNavItem(rawLabel, href)
+      return normalizeDemoSystemNavItem(rawLabel, href)
     })
     .filter((item): item is NavItem => Boolean(item))
 
@@ -115,10 +103,6 @@ async function fetchNavigationContent(): Promise<NavigationContent> {
     console.error("[payload] Failed to load navigation content:", error)
     return defaultNavigationContent
   }
-}
-
-export function isDemoSystemNavItem(item: Pick<NavItem, "label" | "href">): boolean {
-  return isLegacyDemoNavLabel(item.label) || item.href === "/demo"
 }
 
 export const getNavigationContent = cache(fetchNavigationContent)

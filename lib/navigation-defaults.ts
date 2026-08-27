@@ -35,3 +35,21 @@ export const defaultNavigationContent: NavigationContent = {
   footerEmail: "sales@madebylakeside.com",
   footerNavItems: defaultNavItems,
 }
+
+function isLegacyDemoNavLabel(label: string): boolean {
+  const lower = label.toLowerCase()
+  return lower === "contact" || lower === "demo" || lower === "demo the system"
+}
+
+/** Client-safe helper — keep out of modules that import Payload. */
+export function isDemoSystemNavItem(item: Pick<NavItem, "label" | "href">): boolean {
+  return isLegacyDemoNavLabel(item.label) || item.href === "/demo"
+}
+
+export function normalizeDemoSystemNavItem(label: string, href: string): NavItem {
+  if (isLegacyDemoNavLabel(label) || href === "/demo") {
+    return { label: "Demo The System", href: "/demo" }
+  }
+
+  return { label, href }
+}

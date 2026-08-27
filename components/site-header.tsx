@@ -7,7 +7,7 @@ import { Menu, X } from "lucide-react"
 import { useBranding } from "@/components/branding-provider"
 import { useNavigation } from "@/components/navigation-provider"
 import { Button } from "@/components/ui/button"
-import { isDemoSystemNavItem } from "@/lib/navigation"
+import { isDemoSystemNavItem } from "@/lib/navigation-defaults"
 
 const MOBILE_MENU_TOGGLE_ID = "site-mobile-menu-toggle"
 
