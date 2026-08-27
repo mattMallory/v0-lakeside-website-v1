@@ -37,7 +37,10 @@ export default async function ServicesPage() {
           backgroundImageUrl={content.hero.backgroundImageUrl || backgrounds.hero}
         />
         <ServicesSection id="services" content={content.offerings} />
-        <ServicesTechStack content={content.technology} />
+        <ServicesTechStack
+          content={content.technology}
+          backgroundImageUrl={backgrounds.pillars}
+        />
         <CaseStudyHighlight
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}

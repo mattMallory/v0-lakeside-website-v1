@@ -201,25 +201,35 @@ export const Services: GlobalConfig = {
               type: "array",
               label: "Platform Cards",
               admin: {
-                description: "Each card shows a platform image, title, and list of tools.",
+                description: "Each card shows an icon, title, and list of tools in the dark tech grid.",
               },
               defaultValue: defaultServicesContent.technology.categories.map((category) => ({
+                icon: category.icon,
                 title: category.title,
                 imageAlt: category.imageAlt,
                 items: category.items.map((label) => ({ label })),
               })),
               fields: [
                 {
+                  name: "icon",
+                  type: "select",
+                  label: "Icon",
+                  options: iconOptions,
+                  required: true,
+                },
+                {
                   name: "image",
                   type: "upload",
                   relationTo: "media",
-                  label: "Card Image",
+                  label: "Card Image (optional)",
+                  admin: {
+                    description: "Optional. The live section uses icons; image is kept for legacy content.",
+                  },
                 },
                 {
                   name: "imageAlt",
                   type: "text",
                   label: "Image Alt Text",
-                  required: true,
                 },
                 {
                   name: "title",

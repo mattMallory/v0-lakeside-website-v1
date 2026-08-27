@@ -17,6 +17,7 @@ type TechCategoryItemDoc = {
 
 type TechCategoryDoc = {
   title?: string | null
+  icon?: string | null
   image?: number | MediaLike | null
   imageAlt?: string | null
   items?: TechCategoryItemDoc[] | null
@@ -67,6 +68,7 @@ function mapTechCategory(doc: TechCategoryDoc, fallback: TechCategory): TechCate
   const imageUrl = resolveMediaUrl(doc.image) ?? fallback.imageUrl
 
   return {
+    icon: withFallback(doc.icon, fallback.icon),
     title: doc.title,
     items: mapTechCategoryItems(doc.items, fallback.items),
     imageUrl,
@@ -75,6 +77,26 @@ function mapTechCategory(doc: TechCategoryDoc, fallback: TechCategory): TechCate
       fallback.imageAlt ?? doc.title,
     ),
   }
+}
+
+function mergeTechCategories(
+  value: unknown[] | null | undefined,
+  fallback: TechCategory[],
+): TechCategory[] {
+  const mapped = mergeArray(value, fallback)
+    .map((category, index) =>
+      mapTechCategory(category as TechCategoryDoc, fallback[index] ?? fallback[0]),
+    )
+    .filter((category): category is TechCategory => Boolean(category))
+
+  const byTitle = new Map(mapped.map((category) => [category.title.toLowerCase(), category]))
+
+  const ordered = fallback.map((item) => byTitle.get(item.title.toLowerCase()) ?? item)
+  const extras = mapped.filter(
+    (category) => !fallback.some((item) => item.title.toLowerCase() === category.title.toLowerCase()),
+  )
+
+  return [...ordered, ...extras]
 }
 
 function mapOfferingItem(doc: OfferingItemDoc, fallback: ServiceOffering): ServiceOffering | null {
@@ -102,11 +124,7 @@ export async function getServicesContent(): Promise<ServicesContent> {
     })
 
     const fallbackCategories = defaultServicesContent.technology.categories
-    const categories = mergeArray(services.technologyCategories, fallbackCategories)
-      .map((category, index) =>
-        mapTechCategory(category as TechCategoryDoc, fallbackCategories[index] ?? fallbackCategories[0]),
-      )
-      .filter((category): category is TechCategory => Boolean(category))
+    const categories = mergeTechCategories(services.technologyCategories, fallbackCategories)
 
     const fallbackOfferings = defaultServicesContent.offerings.items
     const offeringsItems = mergeArray(services.offeringsItems, fallbackOfferings)
