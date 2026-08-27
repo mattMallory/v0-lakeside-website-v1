@@ -2,36 +2,59 @@ import type { Payload } from "payload"
 
 import { defaultNavigationContent } from "@/lib/navigation-defaults"
 
+type NavItemLike = {
+  id?: string | null
+  label?: string | null
+  href?: string | null
+}
+
 function isBlank(value: unknown): boolean {
   return typeof value !== "string" || value.trim().length === 0
 }
 
-function withDemoSystemNavItem(
-  items: Array<{ label?: string | null; href?: string | null }> | null | undefined,
-) {
-  if (!Array.isArray(items)) return items
-  return items.map((item) => {
-    const label = typeof item.label === "string" ? item.label.trim().toLowerCase() : ""
-    if (label === "contact" || label === "demo" || label === "demo the system" || item.href === "/demo") {
-      return { ...item, label: "Demo The System", href: "/demo" }
+function repairNavItem(item: NavItemLike): { item: NavItemLike; changed: boolean } {
+  const label = typeof item.label === "string" ? item.label.trim() : ""
+  const href = typeof item.href === "string" ? item.href.trim() : ""
+  const lower = label.toLowerCase()
+
+  // Legacy Contact / DEMO → Demo The System
+  if (
+    lower === "contact" ||
+    lower === "demo" ||
+    (lower === "demo the system" && href !== "/demo") ||
+    (href === "/consultation" && (lower === "demo" || lower === "contact"))
+  ) {
+    return {
+      item: { ...item, label: "Demo The System", href: "/demo" },
+      changed: true,
     }
-    return item
-  })
+  }
+
+  // Repair truncated "Articles" label that got saved as "Art"
+  if (href === "/blog" && (lower === "art" || lower === "artic")) {
+    return {
+      item: { ...item, label: "Articles", href: "/blog" },
+      changed: true,
+    }
+  }
+
+  return { item, changed: false }
 }
 
-function needsDemoSystemNavUpdate(
-  items: Array<{ label?: string | null; href?: string | null }> | null | undefined,
-): boolean {
-  if (!Array.isArray(items)) return false
-  return items.some((item) => {
-    const label = typeof item.label === "string" ? item.label.trim().toLowerCase() : ""
-    return (
-      label === "contact" ||
-      label === "demo" ||
-      (label === "demo the system" && item.href !== "/demo") ||
-      item.href === "/consultation" && (label === "demo" || label === "contact")
-    )
+function repairNavItems(items: NavItemLike[] | null | undefined): {
+  items: NavItemLike[] | null | undefined
+  changed: boolean
+} {
+  if (!Array.isArray(items)) return { items, changed: false }
+
+  let changed = false
+  const next = items.map((item) => {
+    const repaired = repairNavItem(item)
+    if (repaired.changed) changed = true
+    return repaired.item
   })
+
+  return { items: next, changed }
 }
 
 export async function seedNavigationIfEmpty(payload: Payload) {
@@ -53,25 +76,22 @@ export async function seedNavigationIfEmpty(payload: Payload) {
       !isBlank(navigation.footerEmail)
     const isNew = !navigation.id
 
-    const headerNavItems = hasHeaderNavItems
-      ? withDemoSystemNavItem(navigation.headerNavItems)
-      : defaultNavigationContent.headerNavItems
-    const footerNavItems = hasFooterNavItems
-      ? withDemoSystemNavItem(navigation.footerNavItems)
-      : defaultNavigationContent.footerNavItems
+    const headerRepair = repairNavItems(navigation.headerNavItems as NavItemLike[] | undefined)
+    const footerRepair = repairNavItems(navigation.footerNavItems as NavItemLike[] | undefined)
 
-    const needsNavRename =
-      needsDemoSystemNavUpdate(navigation.headerNavItems) ||
-      needsDemoSystemNavUpdate(navigation.footerNavItems)
+    // Existing nav: only patch known bad/legacy labels. Never rewrite CMS edits.
+    if (!isNew && hasHeaderNavItems && hasFooterNavItems) {
+      if (!headerRepair.changed && !footerRepair.changed) {
+        return
+      }
 
-    if (
-      !isNew &&
-      hasHeaderNavItems &&
-      hasFooterNavItems &&
-      hasFooterDescription &&
-      hasFooterContact &&
-      !needsNavRename
-    ) {
+      await payload.updateGlobal({
+        slug: "navigation",
+        data: {
+          ...(headerRepair.changed ? { headerNavItems: headerRepair.items } : {}),
+          ...(footerRepair.changed ? { footerNavItems: footerRepair.items } : {}),
+        },
+      })
       return
     }
 
@@ -86,7 +106,9 @@ export async function seedNavigationIfEmpty(payload: Payload) {
     await payload.updateGlobal({
       slug: "navigation",
       data: {
-        headerNavItems,
+        headerNavItems: hasHeaderNavItems
+          ? headerRepair.items
+          : defaultNavigationContent.headerNavItems,
         headerCtaLabel:
           (navigation.headerCtaLabel as string) || defaultNavigationContent.headerCtaLabel,
         headerCtaHref:
@@ -107,7 +129,9 @@ export async function seedNavigationIfEmpty(payload: Payload) {
         footerEmail: !isBlank(navigation.footerEmail)
           ? (navigation.footerEmail as string)
           : defaultNavigationContent.footerEmail,
-        footerNavItems,
+        footerNavItems: hasFooterNavItems
+          ? footerRepair.items
+          : defaultNavigationContent.footerNavItems,
       },
     })
   } catch (error) {

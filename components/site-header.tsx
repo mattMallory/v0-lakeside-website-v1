@@ -85,7 +85,7 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-[9px] md:flex" aria-label="Main navigation">
+        <nav className="hidden min-w-0 items-center gap-[9px] md:flex" aria-label="Main navigation">
           {navItems.map((item) => (
             <Link
               key={`${item.href}-${item.label}`}
@@ -93,8 +93,8 @@ export function SiteHeader() {
               onClick={(event) => handleNavClick(event, item.href)}
               className={
                 isDemoSystemNavItem(item)
-                  ? "font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-semibold text-primary transition-colors hover:bg-muted"
-                  : "font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-medium text-heading transition-colors hover:bg-muted hover:text-primary"
+                  ? "shrink-0 whitespace-nowrap font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-semibold text-primary transition-colors hover:bg-muted"
+                  : "shrink-0 whitespace-nowrap font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-medium text-heading transition-colors hover:bg-muted hover:text-primary"
               }
             >
               {item.label}
@@ -102,7 +102,7 @@ export function SiteHeader() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
+        <div className="hidden shrink-0 md:block">
           <Button
             render={<Link href={navigation.headerCtaHref} />}
             nativeButton={false}
