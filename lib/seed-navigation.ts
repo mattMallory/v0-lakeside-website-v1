@@ -6,15 +6,31 @@ function isBlank(value: unknown): boolean {
   return typeof value !== "string" || value.trim().length === 0
 }
 
-function withDemoLabel(
+function withDemoSystemNavItem(
   items: Array<{ label?: string | null; href?: string | null }> | null | undefined,
 ) {
   if (!Array.isArray(items)) return items
   return items.map((item) => {
-    if (typeof item.label === "string" && item.label.trim().toLowerCase() === "contact") {
-      return { ...item, label: "DEMO" }
+    const label = typeof item.label === "string" ? item.label.trim().toLowerCase() : ""
+    if (label === "contact" || label === "demo" || label === "demo the system" || item.href === "/demo") {
+      return { ...item, label: "Demo The System", href: "/demo" }
     }
     return item
+  })
+}
+
+function needsDemoSystemNavUpdate(
+  items: Array<{ label?: string | null; href?: string | null }> | null | undefined,
+): boolean {
+  if (!Array.isArray(items)) return false
+  return items.some((item) => {
+    const label = typeof item.label === "string" ? item.label.trim().toLowerCase() : ""
+    return (
+      label === "contact" ||
+      label === "demo" ||
+      (label === "demo the system" && item.href !== "/demo") ||
+      item.href === "/consultation" && (label === "demo" || label === "contact")
+    )
   })
 }
 
@@ -38,21 +54,15 @@ export async function seedNavigationIfEmpty(payload: Payload) {
     const isNew = !navigation.id
 
     const headerNavItems = hasHeaderNavItems
-      ? withDemoLabel(navigation.headerNavItems)
+      ? withDemoSystemNavItem(navigation.headerNavItems)
       : defaultNavigationContent.headerNavItems
     const footerNavItems = hasFooterNavItems
-      ? withDemoLabel(navigation.footerNavItems)
+      ? withDemoSystemNavItem(navigation.footerNavItems)
       : defaultNavigationContent.footerNavItems
 
-    const needsContactRename =
-      (Array.isArray(navigation.headerNavItems) &&
-        navigation.headerNavItems.some(
-          (item) => typeof item.label === "string" && item.label.trim().toLowerCase() === "contact",
-        )) ||
-      (Array.isArray(navigation.footerNavItems) &&
-        navigation.footerNavItems.some(
-          (item) => typeof item.label === "string" && item.label.trim().toLowerCase() === "contact",
-        ))
+    const needsNavRename =
+      needsDemoSystemNavUpdate(navigation.headerNavItems) ||
+      needsDemoSystemNavUpdate(navigation.footerNavItems)
 
     if (
       !isNew &&
@@ -60,7 +70,7 @@ export async function seedNavigationIfEmpty(payload: Payload) {
       hasFooterNavItems &&
       hasFooterDescription &&
       hasFooterContact &&
-      !needsContactRename
+      !needsNavRename
     ) {
       return
     }

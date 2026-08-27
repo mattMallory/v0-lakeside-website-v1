@@ -2,7 +2,7 @@ import Link from "next/link"
 
 import { getBlogTags, getPublishedPosts } from "@/lib/blog"
 import { getBrandingContent } from "@/lib/branding"
-import { getNavigationContent } from "@/lib/navigation"
+import { getNavigationContent, isDemoSystemNavItem } from "@/lib/navigation"
 
 const RECENT_POST_LIMIT = 3
 const TOPIC_LIMIT = 5
@@ -90,16 +90,16 @@ export async function SiteFooter() {
             <h3 className="text-sm font-semibold text-white/85">Pages</h3>
             <ul className="mt-4 flex flex-col gap-3">
               {navigation.footerNavItems.map((item) => (
-                <li key={item.href}>
+                <li key={`${item.href}-${item.label}`}>
                   <Link
                     href={item.href}
                     className={
-                      item.label.toUpperCase() === "DEMO"
-                        ? "text-sm font-semibold uppercase tracking-[0.06em] text-[#7CB0E8] transition-colors hover:text-white"
+                      isDemoSystemNavItem(item)
+                        ? "text-sm font-semibold text-[#7CB0E8] transition-colors hover:text-white"
                         : "text-sm text-slate-400 transition-colors hover:text-white"
                     }
                   >
-                    {item.label.toUpperCase() === "DEMO" ? "DEMO" : item.label}
+                    {item.label}
                   </Link>
                 </li>
               ))}

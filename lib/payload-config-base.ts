@@ -14,6 +14,7 @@ import { About } from "../globals/About"
 import { Branding } from "../globals/Branding"
 import { Calendar } from "../globals/Calendar"
 import { Consultation } from "../globals/Consultation"
+import { DemoSystem } from "../globals/DemoSystem"
 import { Homepage } from "../globals/Homepage"
 import { Legal } from "../globals/Legal"
 import { Navigation } from "../globals/Navigation"
@@ -25,6 +26,7 @@ import { seedBrandingIfEmpty } from "./seed-branding"
 import { seedCalendarIfEmpty } from "./seed-calendar"
 import { seedCaseStudyHighlightGlobal } from "./seed-case-study-highlight"
 import { seedConsultationIfEmpty } from "./seed-consultation"
+import { seedDemoSystemIfEmpty } from "./seed-demo-system"
 import { seedLegalIfEmpty } from "./seed-legal"
 import { seedNavigationIfEmpty } from "./seed-navigation"
 import { seedHomepageIfEmpty } from "./seed-homepage"
@@ -64,7 +66,7 @@ export function createPayloadConfig(
       },
     },
     collections: [Users, Media, Categories, Tags, Posts],
-    globals: [Branding, Homepage, About, Services, Legal, Navigation, Calendar, Consultation],
+    globals: [Branding, Homepage, About, Services, Legal, Navigation, Calendar, Consultation, DemoSystem],
     editor: lexicalEditor(),
     secret: process.env.PAYLOAD_SECRET || "",
     typescript: {
@@ -86,6 +88,7 @@ export function createPayloadConfig(
         await seedNavigationIfEmpty(payload)
         await seedCalendarIfEmpty(payload)
         await seedConsultationIfEmpty(payload)
+        await seedDemoSystemIfEmpty(payload)
         await seedBlogIfEmpty(payload)
         await seedCaseStudyHighlightGlobal(payload, "homepage")
         await seedCaseStudyHighlightGlobal(payload, "about")

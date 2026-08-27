@@ -3,6 +3,7 @@ export async function revalidateSite() {
     const { revalidatePath } = await import("next/cache")
     revalidatePath("/", "layout")
     revalidatePath("/consultation")
+    revalidatePath("/demo")
     revalidatePath("/about")
     revalidatePath("/services")
     revalidatePath("/blog")
