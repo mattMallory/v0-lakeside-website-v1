@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import { ArrowLeft } from "lucide-react"
@@ -117,6 +118,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <span>·</span>
               <span>{formatBlogDate(post.publishedAt)}</span>
             </div>
+
+            {post.featuredImageUrl ? (
+              <div className="relative mt-10 aspect-[16/10] overflow-hidden rounded-[16px] bg-lake-pale">
+                <Image
+                  src={post.featuredImageUrl}
+                  alt={post.featuredImageAlt || post.title}
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 720px"
+                />
+              </div>
+            ) : null}
           </div>
         </header>
 
