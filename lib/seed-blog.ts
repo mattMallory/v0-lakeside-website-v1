@@ -214,6 +214,11 @@ export async function seedChiropracticOfferBuilderPostIfMissing(payload: Payload
       depth: 0,
     })
 
+    // Never overwrite CMS edits (featured image, body, etc.) after first create.
+    if (existing.docs[0]?.id) {
+      return
+    }
+
     const categoryId = await ensureCategoryBySlug(
       payload,
       "Digital Marketing",
@@ -233,32 +238,21 @@ export async function seedChiropracticOfferBuilderPostIfMissing(payload: Payload
       defaultChiropracticOfferBuilderPost.featuredImageAlt,
     )
 
-    const postData = {
-      title: defaultChiropracticOfferBuilderPost.title,
-      slug: defaultChiropracticOfferBuilderPost.slug,
-      excerpt: defaultChiropracticOfferBuilderPost.excerpt,
-      content: defaultChiropracticOfferBuilderPost.content,
-      authorName: defaultChiropracticOfferBuilderPost.authorName,
-      readTime: defaultChiropracticOfferBuilderPost.readTime,
-      publishedAt: defaultChiropracticOfferBuilderPost.publishedAt,
-      status: "published" as const,
-      category: categoryId,
-      tags: tagIds,
-      ...(featuredImageId ? { featuredImage: featuredImageId } : {}),
-    }
-
-    if (existing.docs[0]?.id) {
-      await payload.update({
-        collection: "posts",
-        id: existing.docs[0].id,
-        data: postData,
-      })
-      return
-    }
-
     await payload.create({
       collection: "posts",
-      data: postData,
+      data: {
+        title: defaultChiropracticOfferBuilderPost.title,
+        slug: defaultChiropracticOfferBuilderPost.slug,
+        excerpt: defaultChiropracticOfferBuilderPost.excerpt,
+        content: defaultChiropracticOfferBuilderPost.content,
+        authorName: defaultChiropracticOfferBuilderPost.authorName,
+        readTime: defaultChiropracticOfferBuilderPost.readTime,
+        publishedAt: defaultChiropracticOfferBuilderPost.publishedAt,
+        status: "published",
+        category: categoryId,
+        tags: tagIds,
+        ...(featuredImageId ? { featuredImage: featuredImageId } : {}),
+      },
     })
   } catch (error) {
     console.error("[seed] Failed to seed chiropractic offer builder post:", error)
@@ -277,6 +271,11 @@ export async function seedGoogleAdsBudgetPlannerPostIfMissing(payload: Payload) 
       limit: 1,
       depth: 0,
     })
+
+    // Never overwrite CMS edits (featured image, body, etc.) after first create.
+    if (existing.docs[0]?.id) {
+      return
+    }
 
     const categoryId = await ensureCategoryBySlug(
       payload,
@@ -297,32 +296,21 @@ export async function seedGoogleAdsBudgetPlannerPostIfMissing(payload: Payload) 
       defaultGoogleAdsBudgetPlannerPost.featuredImageAlt,
     )
 
-    const postData = {
-      title: defaultGoogleAdsBudgetPlannerPost.title,
-      slug: defaultGoogleAdsBudgetPlannerPost.slug,
-      excerpt: defaultGoogleAdsBudgetPlannerPost.excerpt,
-      content: defaultGoogleAdsBudgetPlannerPost.content,
-      authorName: defaultGoogleAdsBudgetPlannerPost.authorName,
-      readTime: defaultGoogleAdsBudgetPlannerPost.readTime,
-      publishedAt: defaultGoogleAdsBudgetPlannerPost.publishedAt,
-      status: "published" as const,
-      category: categoryId,
-      tags: tagIds,
-      ...(featuredImageId ? { featuredImage: featuredImageId } : {}),
-    }
-
-    if (existing.docs[0]?.id) {
-      await payload.update({
-        collection: "posts",
-        id: existing.docs[0].id,
-        data: postData,
-      })
-      return
-    }
-
     await payload.create({
       collection: "posts",
-      data: postData,
+      data: {
+        title: defaultGoogleAdsBudgetPlannerPost.title,
+        slug: defaultGoogleAdsBudgetPlannerPost.slug,
+        excerpt: defaultGoogleAdsBudgetPlannerPost.excerpt,
+        content: defaultGoogleAdsBudgetPlannerPost.content,
+        authorName: defaultGoogleAdsBudgetPlannerPost.authorName,
+        readTime: defaultGoogleAdsBudgetPlannerPost.readTime,
+        publishedAt: defaultGoogleAdsBudgetPlannerPost.publishedAt,
+        status: "published",
+        category: categoryId,
+        tags: tagIds,
+        ...(featuredImageId ? { featuredImage: featuredImageId } : {}),
+      },
     })
   } catch (error) {
     console.error("[seed] Failed to seed Google Ads budget planner post:", error)
@@ -342,6 +330,11 @@ export async function seedColdAdvertisingPostIfMissing(payload: Payload) {
       depth: 0,
     })
 
+    // Never overwrite CMS edits after first create.
+    if (existing.docs[0]?.id) {
+      return
+    }
+
     const categoryId = await ensureCategoryBySlug(
       payload,
       "Digital Marketing",
@@ -354,18 +347,6 @@ export async function seedColdAdvertisingPostIfMissing(payload: Payload) {
         return ensureTagBySlug(payload, tag?.name || slug, slug)
       }),
     )
-
-    if (existing.docs[0]?.id) {
-      await payload.update({
-        collection: "posts",
-        id: existing.docs[0].id,
-        data: {
-          content: defaultColdAdvertisingPost.content,
-          readTime: defaultColdAdvertisingPost.readTime,
-        },
-      })
-      return
-    }
 
     await payload.create({
       collection: "posts",
