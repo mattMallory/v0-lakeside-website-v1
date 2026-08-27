@@ -2,7 +2,8 @@ import Link from "next/link"
 
 import { getBlogTags, getPublishedPosts } from "@/lib/blog"
 import { getBrandingContent } from "@/lib/branding"
-import { getNavigationContent, isDemoSystemNavItem } from "@/lib/navigation"
+import { getNavigationContent } from "@/lib/navigation"
+import { isDemoSystemNavItem } from "@/lib/navigation-defaults"
 
 const RECENT_POST_LIMIT = 3
 const TOPIC_LIMIT = 5
