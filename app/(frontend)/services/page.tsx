@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 
 import { CaseStudyHighlight } from "@/components/case-study-highlight"
 import { CtaSection } from "@/components/cta-section"
+import { GrowthSystemFunnel } from "@/components/homepage-growth-system/growth-system-funnel"
 import { HomeAboutSection } from "@/components/home-about-section"
 import { ServicesHero } from "@/components/services-hero"
 import { ServicesSection } from "@/components/services-section"
@@ -10,6 +11,7 @@ import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
 import { getFeaturedCaseStudy } from "@/lib/blog"
 import { getGrowthSystemBackgrounds } from "@/lib/growth-system-backgrounds"
+import { getHomepageContent } from "@/lib/payload"
 import { getServicesContent } from "@/lib/services"
 
 export const metadata: Metadata = {
@@ -21,9 +23,10 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function ServicesPage() {
-  const [content, backgrounds] = await Promise.all([
+  const [content, backgrounds, homepage] = await Promise.all([
     getServicesContent(),
     getGrowthSystemBackgrounds(),
+    getHomepageContent(),
   ])
   const featuredCaseStudy = await getFeaturedCaseStudy(content.caseStudyHighlight.featuredPostSlug)
 
@@ -41,6 +44,9 @@ export default async function ServicesPage() {
           content={content.technology}
           backgroundImageUrl={backgrounds.pillars}
         />
+        <div className="bg-[#F9F7F4]">
+          <GrowthSystemFunnel content={homepage} />
+        </div>
         <CaseStudyHighlight
           eyebrow={content.caseStudyHighlight.eyebrow}
           headline={content.caseStudyHighlight.headline}
