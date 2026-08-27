@@ -207,10 +207,10 @@ export const defaultColdAdvertisingPost = {
       type: "articleCta",
       eyebrow: "Ready to generate more qualified consultations?",
       title:
-        "The best advertising doesn't convince people to become patients — it gives the right people a reason to start the conversation.",
+        "The best advertising doesn't convince people to become patients. It gives the right people a reason to start the conversation.",
       description:
-        "Serving chiropractic, functional medicine, and natural-health practices across Chicagoland, Northern Illinois, and Southeast Wisconsin. We'll review your marketing, evaluate your creative, and see whether a patient-acquisition system fits your practice.",
-      ctaLabel: "Schedule a conversation",
+        "We serve chiropractic and natural-health practices across the United States. Let's review your marketing and see if a patient-acquisition system fits.",
+      ctaLabel: "DEMO",
       ctaUrl: "/consultation",
     },
   ]),

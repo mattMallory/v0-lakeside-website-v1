@@ -20,7 +20,7 @@ const defaultNavItems: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/consultation" },
+  { label: "DEMO", href: "/consultation" },
 ]
 
 export const defaultNavigationContent: NavigationContent = {

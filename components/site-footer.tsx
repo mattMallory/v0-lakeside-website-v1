@@ -93,9 +93,13 @@ export async function SiteFooter() {
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="text-sm text-slate-400 transition-colors hover:text-white"
+                    className={
+                      item.label.toUpperCase() === "DEMO"
+                        ? "text-sm font-semibold uppercase tracking-[0.06em] text-[#7CB0E8] transition-colors hover:text-white"
+                        : "text-sm text-slate-400 transition-colors hover:text-white"
+                    }
                   >
-                    {item.label}
+                    {item.label.toUpperCase() === "DEMO" ? "DEMO" : item.label}
                   </Link>
                 </li>
               ))}
