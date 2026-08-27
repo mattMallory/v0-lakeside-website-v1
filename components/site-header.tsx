@@ -7,6 +7,7 @@ import { Menu, X } from "lucide-react"
 import { useBranding } from "@/components/branding-provider"
 import { useNavigation } from "@/components/navigation-provider"
 import { Button } from "@/components/ui/button"
+import { isDemoSystemNavItem } from "@/lib/navigation"
 
 const MOBILE_MENU_TOGGLE_ID = "site-mobile-menu-toggle"
 
@@ -84,19 +85,19 @@ export function SiteHeader() {
           />
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Main navigation">
+        <nav className="hidden items-center gap-[9px] md:flex" aria-label="Main navigation">
           {navItems.map((item) => (
             <Link
-              key={item.href}
+              key={`${item.href}-${item.label}`}
               href={item.href}
               onClick={(event) => handleNavClick(event, item.href)}
               className={
-                item.label.toUpperCase() === "DEMO"
-                  ? "font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-bold uppercase tracking-[0.06em] text-primary transition-colors hover:bg-muted"
+                isDemoSystemNavItem(item)
+                  ? "font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-semibold text-primary transition-colors hover:bg-muted"
                   : "font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-medium text-heading transition-colors hover:bg-muted hover:text-primary"
               }
             >
-              {item.label.toUpperCase() === "DEMO" ? "DEMO" : item.label}
+              {item.label}
             </Link>
           ))}
         </nav>
@@ -155,7 +156,7 @@ export function SiteHeader() {
           >
             {navItems.map((item, index) => (
               <Link
-                key={item.href}
+                key={`${item.href}-${item.label}`}
                 href={item.href}
                 style={{ "--nav-index": index } as CSSProperties}
                 onClick={(event) => {
@@ -163,12 +164,12 @@ export function SiteHeader() {
                   closeMobileMenu()
                 }}
                 className={
-                  item.label.toUpperCase() === "DEMO"
-                    ? "site-mobile-nav-link font-brand-display rounded-md px-2 py-2 text-base font-bold uppercase tracking-[0.06em] text-primary hover:bg-muted"
+                  isDemoSystemNavItem(item)
+                    ? "site-mobile-nav-link font-brand-display rounded-md px-2 py-2 text-base font-semibold text-primary hover:bg-muted"
                     : "site-mobile-nav-link font-brand-display rounded-md px-2 py-2 text-base font-medium text-heading hover:bg-muted hover:text-primary"
                 }
               >
-                {item.label.toUpperCase() === "DEMO" ? "DEMO" : item.label}
+                {item.label}
               </Link>
             ))}
             <div
