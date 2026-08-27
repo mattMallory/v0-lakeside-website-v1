@@ -8,6 +8,7 @@ export type ServiceOffering = {
 }
 
 export type TechCategory = {
+  icon: string
   title: string
   items: string[]
   imageUrl: string
@@ -105,22 +106,32 @@ export const defaultServicesContent: ServicesContent = {
     ],
     categories: [
       {
+        icon: "megaphone",
         title: "Ad Platforms",
         items: ["Google Ads", "Meta Ads", "YouTube Ads", "Microsoft Ads"],
         imageUrl: "/services/ad-platforms.svg",
         imageAlt: "Paid advertising campaign dashboard across Google, Meta, YouTube, and Microsoft",
       },
       {
+        icon: "zap",
         title: "CRM & Automation",
         items: ["Go High Level", "Zapier", "Make", "Calendly"],
         imageUrl: "/services/crm-automation.svg",
         imageAlt: "CRM pipeline and marketing automation workflow",
       },
       {
+        icon: "bar-chart-3",
         title: "Analytics & Tracking",
         items: ["Google Analytics 4", "Google Tag Manager", "Call Tracking", "Conversion APIs"],
         imageUrl: "/services/analytics-tracking.svg",
         imageAlt: "Analytics dashboard with conversion tracking and performance metrics",
+      },
+      {
+        icon: "layout-template",
+        title: "Websites",
+        items: ["Landing Pages", "Practice Sites", "Offer Pages", "Conversion UX"],
+        imageUrl: "/services/ad-platforms.svg",
+        imageAlt: "Website and landing page systems built for conversion",
       },
     ],
   },

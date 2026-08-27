@@ -7,6 +7,8 @@ export type TechLogo = {
 
 type ServicesTechLogosProps = {
   logos: TechLogo[]
+  variant?: "light" | "dark"
+  align?: "center" | "start"
 }
 
 function PlatformLogo({ id }: { id: string }) {
@@ -89,17 +91,29 @@ function PlatformLogo({ id }: { id: string }) {
   }
 }
 
-export function ServicesTechLogos({ logos }: ServicesTechLogosProps) {
+export function ServicesTechLogos({
+  logos,
+  variant = "light",
+  align = "center",
+}: ServicesTechLogosProps) {
+  const isDark = variant === "dark"
+
   return (
     <div
       data-tech-logos
-      className="mb-10 grid max-w-sm grid-cols-4 gap-2 justify-items-center mx-auto sm:max-w-none sm:flex sm:flex-nowrap sm:items-center sm:justify-center sm:gap-4"
+      className={cn(
+        "grid max-w-sm grid-cols-4 gap-2 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:gap-3",
+        align === "center" ? "mb-10 justify-items-center mx-auto sm:justify-center" : "justify-items-start",
+      )}
     >
       {logos.map((logo) => (
         <div
           key={logo.id}
           className={cn(
-            "tech-logo-item flex h-12 w-12 items-center justify-center rounded-[12px] border border-border bg-white shadow-sm sm:h-16 sm:w-16",
+            "tech-logo-item flex h-12 w-12 items-center justify-center rounded-[12px] sm:h-14 sm:w-14",
+            isDark
+              ? "border border-[#1F2E45] bg-[#111B2E]"
+              : "border border-border bg-white shadow-sm sm:h-16 sm:w-16",
           )}
           title={logo.name}
         >

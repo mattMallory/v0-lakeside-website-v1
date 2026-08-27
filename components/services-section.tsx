@@ -30,15 +30,13 @@ export function ServicesSection({
             return (
               <div
                 key={service.title}
-                className="flex gap-5 rounded-[12px] border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-lake-light hover:shadow-[0_4px_6px_-1px_rgba(16,23,38,0.07),0_2px_4px_-2px_rgba(16,23,38,0.05)]"
+                className="flex flex-col gap-3 rounded-[12px] border border-border bg-card p-7 transition-all hover:-translate-y-0.5 hover:border-lake-light hover:shadow-[0_4px_6px_-1px_rgba(16,23,38,0.07),0_2px_4px_-2px_rgba(16,23,38,0.05)]"
               >
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-[10px] bg-lake-pale text-icon">
+                <div className="flex h-11 w-11 items-center justify-center rounded-[10px] bg-lake-pale text-icon">
                   <Icon className="h-[22px] w-[22px]" />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-card-foreground">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{service.description}</p>
-                </div>
+                <h3 className="font-semibold text-card-foreground">{service.title}</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">{service.description}</p>
               </div>
             )
           })}

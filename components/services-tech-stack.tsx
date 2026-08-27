@@ -1,57 +1,63 @@
-import Image from "next/image"
-
-import type { ServicesContent } from "@/lib/services-defaults"
+import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 import { ServicesTechLogos } from "@/components/services-tech-logos"
+import { layeredSectionBackground } from "@/lib/growth-system-backgrounds"
+import { getIcon } from "@/lib/icons"
+import type { ServicesContent } from "@/lib/services-defaults"
 
 type ServicesTechStackProps = {
   content: ServicesContent["technology"]
+  backgroundImageUrl?: string
 }
 
-export function ServicesTechStack({ content }: ServicesTechStackProps) {
+export function ServicesTechStack({ content, backgroundImageUrl }: ServicesTechStackProps) {
   return (
-    <section className="border-t border-border bg-background py-20">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="mx-auto max-w-2xl text-center" data-tech-logos-section>
-          <ServicesTechLogos logos={content.logos} />
-          <p className="font-brand-display text-sm font-semibold uppercase tracking-[0.1em] text-primary">
-            {content.eyebrow}
-          </p>
-          <h2 className="mt-3 text-balance text-3xl font-bold tracking-[-0.026em] text-heading sm:text-4xl">
-            {content.headline}
-          </h2>
-          <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">{content.description}</p>
-        </div>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
-          {content.categories.map((category) => (
-            <div
-              key={category.title}
-              className="overflow-hidden rounded-[12px] border border-border bg-card shadow-sm"
-            >
-              <div className="relative aspect-[16/10] w-full bg-lake-pale">
-                <Image
-                  src={category.imageUrl}
-                  alt={category.imageAlt}
-                  fill
-                  className="object-cover"
-                  sizes="(min-width: 768px) 33vw, 100vw"
-                />
-              </div>
-              <div className="p-7">
-                <h3 className="font-semibold text-card-foreground">{category.title}</h3>
-                <ul className="mt-5 flex flex-wrap gap-2">
-                  {category.items.map((item) => (
-                    <li
-                      key={item}
-                      className="rounded-full border border-border bg-white px-3.5 py-1.5 text-sm font-medium text-heading"
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
+    <section
+      className="bg-[#0E1726] py-[88px]"
+      style={layeredSectionBackground(
+        "linear-gradient(180deg, rgba(14,23,38,.9) 0%, rgba(14,23,38,.62) 45%, rgba(14,23,38,.9) 100%)",
+        backgroundImageUrl,
+      )}
+    >
+      <div className="mx-auto max-w-[1120px] px-6">
+        <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:gap-12 xl:gap-16">
+          <div data-tech-logos-section>
+            <SectionEyebrow variant="dark">{content.eyebrow}</SectionEyebrow>
+            <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.05] tracking-[-0.03em] text-white">
+              {content.headline}
+            </h2>
+            <p className="mt-3.5 max-w-[34rem] text-pretty text-lg leading-relaxed text-[#94A3B8]">
+              {content.description}
+            </p>
+            <div className="mt-8">
+              <ServicesTechLogos logos={content.logos} variant="dark" align="start" />
             </div>
-          ))}
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            {content.categories.map((category) => {
+              const Icon = getIcon(category.icon)
+              return (
+                <div
+                  key={category.title}
+                  className="flex flex-col gap-3 rounded-2xl border border-[#1F2E45] bg-[#111B2E] p-7"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[rgba(37,99,168,.18)] text-[#7CB0E8]">
+                    <Icon className="h-[22px] w-[22px]" strokeWidth={1.8} />
+                  </div>
+                  <h3 className="font-brand-display text-balance text-[19px] font-bold tracking-[-0.01em] text-white">
+                    {category.title}
+                  </h3>
+                  <ul className="flex flex-col gap-1.5">
+                    {category.items.map((item) => (
+                      <li key={item} className="text-[14.5px] leading-relaxed text-[#94A3B8]">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>
