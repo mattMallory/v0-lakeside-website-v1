@@ -31,11 +31,14 @@ function mapNavItems(
 
   const mapped = value
     .map((item) => {
-      const label = item.label?.trim()
+      const rawLabel = item.label?.trim()
       const href = item.href?.trim()
-      if (!label || !href) return null
+      if (!rawLabel || !href) return null
 
-      return { label, href }
+      return {
+        label: rawLabel.toLowerCase() === "contact" ? "DEMO" : rawLabel,
+        href,
+      }
     })
     .filter((item): item is NavItem => item !== null)
 

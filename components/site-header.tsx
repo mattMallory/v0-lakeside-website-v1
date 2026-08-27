@@ -90,9 +90,13 @@ export function SiteHeader() {
               key={item.href}
               href={item.href}
               onClick={(event) => handleNavClick(event, item.href)}
-              className="font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-medium text-heading transition-colors hover:bg-muted hover:text-primary"
+              className={
+                item.label.toUpperCase() === "DEMO"
+                  ? "font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-bold uppercase tracking-[0.06em] text-primary transition-colors hover:bg-muted"
+                  : "font-brand-display rounded-[7px] px-[11px] py-1.5 text-[15px] font-medium text-heading transition-colors hover:bg-muted hover:text-primary"
+              }
             >
-              {item.label}
+              {item.label.toUpperCase() === "DEMO" ? "DEMO" : item.label}
             </Link>
           ))}
         </nav>
@@ -158,9 +162,13 @@ export function SiteHeader() {
                   handleNavClick(event, item.href)
                   closeMobileMenu()
                 }}
-                className="site-mobile-nav-link font-brand-display rounded-md px-2 py-2 text-base font-medium text-heading hover:bg-muted hover:text-primary"
+                className={
+                  item.label.toUpperCase() === "DEMO"
+                    ? "site-mobile-nav-link font-brand-display rounded-md px-2 py-2 text-base font-bold uppercase tracking-[0.06em] text-primary hover:bg-muted"
+                    : "site-mobile-nav-link font-brand-display rounded-md px-2 py-2 text-base font-medium text-heading hover:bg-muted hover:text-primary"
+                }
               >
-                {item.label}
+                {item.label.toUpperCase() === "DEMO" ? "DEMO" : item.label}
               </Link>
             ))}
             <div

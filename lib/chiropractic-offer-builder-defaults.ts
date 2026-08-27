@@ -201,8 +201,8 @@ export const defaultChiropracticOfferBuilderPost = {
       eyebrow: "Turn your offer into a system",
       title: "Let's turn your offer into a patient-acquisition system.",
       description:
-        "We connect the offer, advertising, landing page, follow-up, scheduling, and lead tracking into one measurable system — built for chiropractic and natural-health practices.",
-      ctaLabel: "Book a call with Lakeside",
+        "We connect the offer, ads, landing page, follow-up, and tracking into one measurable system for practices across the United States.",
+      ctaLabel: "DEMO",
       ctaUrl: "/consultation",
     },
   ]),

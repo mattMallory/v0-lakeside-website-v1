@@ -240,10 +240,10 @@ export const defaultGoogleAdsBudgetPlannerPost = {
     {
       type: "articleCta",
       eyebrow: "Build the system before scaling the spend",
-      title: "Google Ads shouldn't be measured by clicks — but by new-patient relationships.",
+      title: "Google Ads shouldn't be measured by clicks, but by new-patient relationships.",
       description:
-        "Our Natural Practice Growth System connects the search, the ad, the offer, the landing page, lead response, booking, follow-up, and reporting — one system, measured by ROI. Serving practices across Chicagoland, Northern Illinois, and Southeast Wisconsin.",
-      ctaLabel: "Book a call with Lakeside",
+        "Our Natural Practice Growth System connects ads, landing pages, follow-up, and reporting into one system measured by ROI. Serving practices across the United States.",
+      ctaLabel: "DEMO",
       ctaUrl: "/consultation",
     },
   ]),

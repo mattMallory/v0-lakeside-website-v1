@@ -6,6 +6,18 @@ function isBlank(value: unknown): boolean {
   return typeof value !== "string" || value.trim().length === 0
 }
 
+function withDemoLabel(
+  items: Array<{ label?: string | null; href?: string | null }> | null | undefined,
+) {
+  if (!Array.isArray(items)) return items
+  return items.map((item) => {
+    if (typeof item.label === "string" && item.label.trim().toLowerCase() === "contact") {
+      return { ...item, label: "DEMO" }
+    }
+    return item
+  })
+}
+
 export async function seedNavigationIfEmpty(payload: Payload) {
   try {
     const navigation = await payload.findGlobal({
@@ -25,7 +37,31 @@ export async function seedNavigationIfEmpty(payload: Payload) {
       !isBlank(navigation.footerEmail)
     const isNew = !navigation.id
 
-    if (!isNew && hasHeaderNavItems && hasFooterNavItems && hasFooterDescription && hasFooterContact) {
+    const headerNavItems = hasHeaderNavItems
+      ? withDemoLabel(navigation.headerNavItems)
+      : defaultNavigationContent.headerNavItems
+    const footerNavItems = hasFooterNavItems
+      ? withDemoLabel(navigation.footerNavItems)
+      : defaultNavigationContent.footerNavItems
+
+    const needsContactRename =
+      (Array.isArray(navigation.headerNavItems) &&
+        navigation.headerNavItems.some(
+          (item) => typeof item.label === "string" && item.label.trim().toLowerCase() === "contact",
+        )) ||
+      (Array.isArray(navigation.footerNavItems) &&
+        navigation.footerNavItems.some(
+          (item) => typeof item.label === "string" && item.label.trim().toLowerCase() === "contact",
+        ))
+
+    if (
+      !isNew &&
+      hasHeaderNavItems &&
+      hasFooterNavItems &&
+      hasFooterDescription &&
+      hasFooterContact &&
+      !needsContactRename
+    ) {
       return
     }
 
@@ -40,9 +76,7 @@ export async function seedNavigationIfEmpty(payload: Payload) {
     await payload.updateGlobal({
       slug: "navigation",
       data: {
-        headerNavItems: hasHeaderNavItems
-          ? navigation.headerNavItems
-          : defaultNavigationContent.headerNavItems,
+        headerNavItems,
         headerCtaLabel:
           (navigation.headerCtaLabel as string) || defaultNavigationContent.headerCtaLabel,
         headerCtaHref:
@@ -63,9 +97,7 @@ export async function seedNavigationIfEmpty(payload: Payload) {
         footerEmail: !isBlank(navigation.footerEmail)
           ? (navigation.footerEmail as string)
           : defaultNavigationContent.footerEmail,
-        footerNavItems: hasFooterNavItems
-          ? navigation.footerNavItems
-          : defaultNavigationContent.footerNavItems,
+        footerNavItems,
       },
     })
   } catch (error) {
