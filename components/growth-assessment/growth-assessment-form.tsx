@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { useEffect, useMemo, useState } from "react"
 import { Lock } from "lucide-react"
 
@@ -11,11 +12,19 @@ import {
 import { submitGhlContact } from "@/lib/submit-ghl-contact"
 import { cn } from "@/lib/utils"
 
+export type GrowthAssessmentConsentCopy = {
+  smsNonMarketingConsentLabel: string
+  smsMarketingConsentLabel: string
+  privacyLinkLabel: string
+  termsLinkLabel: string
+}
+
 type GrowthAssessmentFormProps = {
   ctaLabel: string
   showInvestmentStep: boolean
   investmentOptions: string[]
   processingSteps: string[]
+  consent: GrowthAssessmentConsentCopy
 }
 
 type FormFields = {
@@ -109,6 +118,7 @@ export function GrowthAssessmentForm({
   showInvestmentStep,
   investmentOptions,
   processingSteps,
+  consent,
 }: GrowthAssessmentFormProps) {
   const totalSteps = showInvestmentStep ? 5 : 4
   const lastRequiredStep = 3
@@ -117,6 +127,8 @@ export function GrowthAssessmentForm({
   const [submitted, setSubmitted] = useState(false)
   const [done, setDone] = useState(0)
   const [fields, setFields] = useState<FormFields>(emptyFields)
+  const [smsNonMarketingConsent, setSmsNonMarketingConsent] = useState(false)
+  const [smsMarketingConsent, setSmsMarketingConsent] = useState(false)
   const [errors, setErrors] = useState<Partial<Record<keyof FormFields, string>>>({})
   const [submitError, setSubmitError] = useState<string | null>(null)
 
@@ -180,7 +192,10 @@ export function GrowthAssessmentForm({
     persist(next, step)
   }
 
-  async function submitAssessment(override?: Partial<FormFields>) {
+  async function submitAssessment(override?: Partial<FormFields> & {
+    smsNonMarketingConsent?: boolean
+    smsMarketingConsent?: boolean
+  }) {
     setSubmitError(null)
     const payloadFields = { ...fields, ...override }
 
@@ -191,6 +206,8 @@ export function GrowthAssessmentForm({
       `New patients goal: ${payloadFields.goal}/mo`,
       `New patient value: ${payloadFields.value}`,
       payloadFields.invest ? `Investment range: ${payloadFields.invest}` : null,
+      `SMS non-marketing consent: ${(override?.smsNonMarketingConsent ?? smsNonMarketingConsent) ? "Yes" : "No"}`,
+      `SMS marketing consent: ${(override?.smsMarketingConsent ?? smsMarketingConsent) ? "Yes" : "No"}`,
     ]
       .filter(Boolean)
       .join("\n")
@@ -490,6 +507,40 @@ export function GrowthAssessmentForm({
           <p className="min-h-5 text-sm text-destructive" role="alert">
             {errors.phone}
           </p>
+
+          <div className="mt-6 flex flex-col gap-4 border-t border-border pt-6">
+            {consent.smsNonMarketingConsentLabel ? (
+              <label htmlFor="bga-sms-non-marketing-consent" className="flex cursor-pointer items-start gap-3">
+                <input
+                  id="bga-sms-non-marketing-consent"
+                  name="smsNonMarketingConsent"
+                  type="checkbox"
+                  checked={smsNonMarketingConsent}
+                  onChange={(event) => setSmsNonMarketingConsent(event.target.checked)}
+                  className="mt-1 size-4 shrink-0 accent-primary"
+                />
+                <span className="text-sm leading-relaxed text-muted-foreground">
+                  {consent.smsNonMarketingConsentLabel}
+                </span>
+              </label>
+            ) : null}
+
+            {consent.smsMarketingConsentLabel ? (
+              <label htmlFor="bga-sms-marketing-consent" className="flex cursor-pointer items-start gap-3">
+                <input
+                  id="bga-sms-marketing-consent"
+                  name="smsMarketingConsent"
+                  type="checkbox"
+                  checked={smsMarketingConsent}
+                  onChange={(event) => setSmsMarketingConsent(event.target.checked)}
+                  className="mt-1 size-4 shrink-0 accent-primary"
+                />
+                <span className="text-sm leading-relaxed text-muted-foreground">
+                  {consent.smsMarketingConsentLabel}
+                </span>
+              </label>
+            ) : null}
+          </div>
         </div>
       ) : null}
 
@@ -552,6 +603,18 @@ export function GrowthAssessmentForm({
 
       <p className="mt-4 text-center text-sm text-muted-foreground">
         {onFinalStep ? "Submitting begins your assessment." : "Your progress is saved on this device."}
+      </p>
+
+      <p className="mt-4 text-center text-sm text-muted-foreground">
+        <Link href="/privacy" className="text-primary underline underline-offset-2 hover:text-primary/80">
+          {consent.privacyLinkLabel}
+        </Link>
+        <span className="mx-2 text-border" aria-hidden>
+          |
+        </span>
+        <Link href="/terms" className="text-primary underline underline-offset-2 hover:text-primary/80">
+          {consent.termsLinkLabel}
+        </Link>
       </p>
     </div>
   )

@@ -233,6 +233,7 @@ function mapGrowthAssessmentContent(doc: Record<string, unknown>): GrowthAssessm
     ),
     formQuote: withFallback(doc.formQuote as string, defaults.formQuote),
     formCtaLabel: withFallback(doc.formCtaLabel as string, defaults.formCtaLabel),
+    sectionCtaLabel: withFallback(doc.sectionCtaLabel as string, defaults.sectionCtaLabel),
     formShowInvestmentStep:
       typeof doc.formShowInvestmentStep === "boolean"
         ? doc.formShowInvestmentStep
