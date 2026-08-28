@@ -1,12 +1,28 @@
 import Link from "next/link"
 import { ArrowRight, Check } from "lucide-react"
 
-import { GrowthAssessmentForm, GrowthAssessmentHowNote } from "@/components/growth-assessment/growth-assessment-form"
+import { GrowthAssessmentForm, GrowthAssessmentHowNote, type GrowthAssessmentConsentCopy } from "@/components/growth-assessment/growth-assessment-form"
 import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 import { layeredSectionBackground } from "@/lib/growth-system-backgrounds"
 import type { GrowthAssessmentContent } from "@/lib/growth-assessment-defaults"
 import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
+
+function SectionFormCta({ label, variant = "light" }: { label: string; variant?: "light" | "dark" }) {
+  return (
+    <div className="mt-10">
+      <Link
+        href="#assessment"
+        className={cn(
+          "inline-flex rounded-full px-[26px] py-[15px] font-brand-display text-[15px] font-bold no-underline transition-opacity hover:opacity-90",
+          variant === "dark" ? "bg-white text-[#0E1726]" : "bg-primary text-white",
+        )}
+      >
+        {label}
+      </Link>
+    </div>
+  )
+}
 
 const SCORECARD_ITEMS = [
   { label: "Market Opportunity", width: 80, tone: "strong", badge: "Verified", score: 80 },
@@ -43,12 +59,14 @@ function toneStyles(tone: (typeof SCORECARD_ITEMS)[number]["tone"]) {
 
 type GrowthAssessmentPageProps = {
   content: GrowthAssessmentContent
+  consent: GrowthAssessmentConsentCopy
   heroBackgroundUrl?: string
   whyBackgroundUrl?: string
 }
 
 export function GrowthAssessmentPage({
   content,
+  consent,
   heroBackgroundUrl,
   whyBackgroundUrl,
 }: GrowthAssessmentPageProps) {
@@ -198,6 +216,7 @@ export function GrowthAssessmentPage({
           </div>
           <p className="mt-4 text-[14.5px] text-muted-foreground">{content.problemFootnote}</p>
         </div>
+        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section id="assess" className="mx-auto max-w-[1120px] px-6 pt-[88px]">
@@ -226,6 +245,7 @@ export function GrowthAssessmentPage({
             )
           })}
         </div>
+        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section id="how-it-works" className="mx-auto max-w-[1120px] px-6 pt-[88px]">
@@ -249,6 +269,7 @@ export function GrowthAssessmentPage({
           ))}
         </div>
         <GrowthAssessmentHowNote note={content.howNote} />
+        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section id="report" className="mx-auto max-w-[1120px] px-6 pt-[88px]">
@@ -326,6 +347,7 @@ export function GrowthAssessmentPage({
             </p>
           </div>
         </div>
+        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section className="mx-auto max-w-[1120px] px-6 pt-[88px]">
@@ -409,6 +431,7 @@ export function GrowthAssessmentPage({
         <p className="max-w-[760px] text-[13.5px] leading-relaxed text-[#9CA3AF]">
           {content.financialDisclaimer}
         </p>
+        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section className="mx-auto max-w-[1120px] px-6 pt-[88px]">
@@ -449,6 +472,7 @@ export function GrowthAssessmentPage({
             </p>
           </div>
         </div>
+        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section
@@ -476,6 +500,7 @@ export function GrowthAssessmentPage({
               </div>
             ))}
           </div>
+          <SectionFormCta label={content.sectionCtaLabel} variant="dark" />
         </div>
       </section>
 
@@ -513,6 +538,7 @@ export function GrowthAssessmentPage({
             </div>
           ))}
         </div>
+        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section className="mx-auto max-w-[820px] px-6 pt-[88px]">
@@ -538,6 +564,7 @@ export function GrowthAssessmentPage({
             </details>
           ))}
         </div>
+        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section id="assessment" className="mx-auto max-w-6xl px-6 pb-14 pt-[88px] md:pb-20">
@@ -570,6 +597,7 @@ export function GrowthAssessmentPage({
               showInvestmentStep={content.formShowInvestmentStep}
               investmentOptions={content.formInvestmentOptions}
               processingSteps={content.formProcessingSteps}
+              consent={consent}
             />
           </div>
         </div>

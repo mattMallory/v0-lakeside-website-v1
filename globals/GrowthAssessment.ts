@@ -197,6 +197,7 @@ export const GrowthAssessment: GlobalConfig = {
             stringListField("formBullets", "Form Bullets", defaultGrowthAssessmentContent.formBullets),
             { name: "formQuote", type: "textarea", defaultValue: defaultGrowthAssessmentContent.formQuote },
             { name: "formCtaLabel", type: "text", defaultValue: defaultGrowthAssessmentContent.formCtaLabel },
+            { name: "sectionCtaLabel", type: "text", label: "Section CTA Label", defaultValue: defaultGrowthAssessmentContent.sectionCtaLabel },
             { name: "formShowInvestmentStep", type: "checkbox", defaultValue: defaultGrowthAssessmentContent.formShowInvestmentStep },
             stringListField(
               "formInvestmentOptions",

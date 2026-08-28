@@ -92,6 +92,7 @@ export type GrowthAssessmentContent = {
   formBullets: string[]
   formQuote: string
   formCtaLabel: string
+  sectionCtaLabel: string
   formShowInvestmentStep: boolean
   formInvestmentOptions: string[]
   formProcessingSteps: string[]
@@ -364,6 +365,7 @@ export const defaultGrowthAssessmentContent: GrowthAssessmentContent = {
   formQuote:
     'And if the honest answer is "don\'t advertise yet," that\'s what your plan will say. No gimmicks.',
   formCtaLabel: "Get My Free Growth Plan",
+  sectionCtaLabel: "Get Your Free Growth Plan",
   formShowInvestmentStep: true,
   formInvestmentOptions: [
     "Under $1,500",

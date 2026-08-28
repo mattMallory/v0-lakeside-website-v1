@@ -64,6 +64,7 @@ export function growthAssessmentToPayloadData(content: GrowthAssessmentContent) 
     formBullets: content.formBullets.map((label) => ({ label })),
     formQuote: content.formQuote,
     formCtaLabel: content.formCtaLabel,
+    sectionCtaLabel: content.sectionCtaLabel,
     formShowInvestmentStep: content.formShowInvestmentStep,
     formInvestmentOptions: content.formInvestmentOptions.map((label) => ({ label })),
     formProcessingSteps: content.formProcessingSteps.map((label) => ({ label })),
