@@ -17,15 +17,17 @@ function repairNavItem(item: NavItemLike): { item: NavItemLike; changed: boolean
   const href = typeof item.href === "string" ? item.href.trim() : ""
   const lower = label.toLowerCase()
 
-  // Legacy Contact / DEMO → Demo The System
+  // Legacy Contact / DEMO / Demo The System → Get Your Growth Plan
   if (
     lower === "contact" ||
     lower === "demo" ||
-    (lower === "demo the system" && href !== "/demo") ||
+    lower === "demo the system" ||
+    (lower === "get your growth plan" && href !== "/growth-plan") ||
+    (href === "/demo" || href === "/growth-plan") ||
     (href === "/consultation" && (lower === "demo" || lower === "contact"))
   ) {
     return {
-      item: { ...item, label: "Demo The System", href: "/demo" },
+      item: { ...item, label: "Get Your Growth Plan", href: "/growth-plan" },
       changed: true,
     }
   }

@@ -20,7 +20,7 @@ const defaultNavItems: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Services", href: "/services" },
   { label: "Articles", href: "/blog" },
-  { label: "Demo The System", href: "/demo" },
+  { label: "Get Your Growth Plan", href: "/growth-plan" },
 ]
 
 export const defaultNavigationContent: NavigationContent = {
@@ -36,19 +36,28 @@ export const defaultNavigationContent: NavigationContent = {
   footerNavItems: defaultNavItems,
 }
 
-function isLegacyDemoNavLabel(label: string): boolean {
+function isLegacyGrowthPlanNavLabel(label: string): boolean {
   const lower = label.toLowerCase()
-  return lower === "contact" || lower === "demo" || lower === "demo the system"
+  return (
+    lower === "contact" ||
+    lower === "demo" ||
+    lower === "demo the system" ||
+    lower === "get your growth plan" ||
+    lower === "get your growth pla"
+  )
 }
 
 /** Client-safe helper — keep out of modules that import Payload. */
-export function isDemoSystemNavItem(item: Pick<NavItem, "label" | "href">): boolean {
-  return isLegacyDemoNavLabel(item.label) || item.href === "/demo"
+export function isGrowthPlanNavItem(item: Pick<NavItem, "label" | "href">): boolean {
+  return isLegacyGrowthPlanNavLabel(item.label) || item.href === "/demo" || item.href === "/growth-plan"
 }
 
-export function normalizeDemoSystemNavItem(label: string, href: string): NavItem {
-  if (isLegacyDemoNavLabel(label) || href === "/demo") {
-    return { label: "Demo The System", href: "/demo" }
+/** @deprecated Use isGrowthPlanNavItem */
+export const isDemoSystemNavItem = isGrowthPlanNavItem
+
+export function normalizeGrowthPlanNavItem(label: string, href: string): NavItem {
+  if (isLegacyGrowthPlanNavLabel(label) || href === "/demo" || href === "/growth-plan") {
+    return { label: "Get Your Growth Plan", href: "/growth-plan" }
   }
 
   // Repair truncated Articles label from CMS
@@ -58,3 +67,6 @@ export function normalizeDemoSystemNavItem(label: string, href: string): NavItem
 
   return { label, href }
 }
+
+/** @deprecated Use normalizeGrowthPlanNavItem */
+export const normalizeDemoSystemNavItem = normalizeGrowthPlanNavItem
