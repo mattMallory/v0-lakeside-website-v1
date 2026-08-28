@@ -9,6 +9,15 @@ const __filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(__filename)
 
 const nextConfig: NextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/demo",
+        destination: "/growth-plan",
+        permanent: false,
+      },
+    ]
+  },
   serverExternalPackages: [
     "payload",
     "@payloadcms/db-vercel-postgres",
