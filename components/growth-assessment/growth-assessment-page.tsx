@@ -8,9 +8,17 @@ import type { GrowthAssessmentContent } from "@/lib/growth-assessment-defaults"
 import { getIcon } from "@/lib/icons"
 import { cn } from "@/lib/utils"
 
-function SectionFormCta({ label, variant = "light" }: { label: string; variant?: "light" | "dark" }) {
+function SectionFormCta({
+  label,
+  variant = "light",
+  centered = false,
+}: {
+  label: string
+  variant?: "light" | "dark"
+  centered?: boolean
+}) {
   return (
-    <div className="mt-10">
+    <div className={cn("mt-10", centered && "text-center")}>
       <Link
         href="#assessment"
         className={cn(
@@ -244,7 +252,7 @@ export function GrowthAssessmentPage({
             )
           })}
         </div>
-        <SectionFormCta label={content.sectionCtaLabel} />
+        <SectionFormCta label={content.sectionCtaLabel} centered />
       </section>
 
       <section id="how-it-works" className="mx-auto max-w-[1120px] px-6 pt-[88px]">
@@ -345,7 +353,6 @@ export function GrowthAssessmentPage({
             </p>
           </div>
         </div>
-        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section className="mx-auto max-w-[1120px] px-6 pt-[88px]">
@@ -429,7 +436,7 @@ export function GrowthAssessmentPage({
         <p className="max-w-[760px] text-[13.5px] leading-relaxed text-[#9CA3AF]">
           {content.financialDisclaimer}
         </p>
-        <SectionFormCta label={content.sectionCtaLabel} />
+        <SectionFormCta label={content.sectionCtaLabel} centered />
       </section>
 
       <section className="mx-auto max-w-[1120px] px-6 pt-[88px]">
