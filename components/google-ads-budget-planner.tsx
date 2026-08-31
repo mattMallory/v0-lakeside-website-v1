@@ -54,7 +54,13 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
   const budgetLabel = formatBudgetRange(result.budgetLow, result.budgetHigh)
   const landingConversionLabel = `${Math.round(result.landingConversion * 100)}%`
 
-  async function handleEmailSubmit(email: string) {
+  async function handleEmailSubmit({
+    firstName,
+    email,
+  }: {
+    firstName: string
+    email: string
+  }) {
     const root = rootRef.current
     if (!root) {
       return { ok: false, error: "Calculator not ready. Please try again." }
@@ -63,6 +69,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
     const state = readBudgetPlannerStateFromDom(root)
 
     return submitGhlContact({
+      firstName,
       email,
       source: GHL_BUDGET_PLANNER_SOURCE,
       tags: [...GHL_BUDGET_PLANNER_TAGS],
@@ -79,7 +86,7 @@ export function GoogleAdsBudgetPlanner({ embedded = false }: { embedded?: boolea
         Save your budget plan
       </div>
       <div className="budget-planner-save-desc mb-4 text-xs leading-relaxed text-[#64748B]">
-        Enter your email below. Your calculator answers are included automatically.
+        Enter your name and email below. Your calculator answers are included automatically.
       </div>
     </>
   )

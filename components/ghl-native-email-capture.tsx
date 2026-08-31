@@ -8,6 +8,11 @@ import { cn } from "@/lib/utils"
 const fieldClass =
   "w-full rounded-xl border border-border bg-white px-4 py-3 text-[15px] text-heading outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
 
+export type GhlNativeEmailCaptureValues = {
+  firstName: string
+  email: string
+}
+
 type GhlNativeEmailCaptureProps = {
   title?: string
   description?: string
@@ -16,7 +21,7 @@ type GhlNativeEmailCaptureProps = {
   successMessage?: string
   disabled?: boolean
   disabledMessage?: string
-  onSubmit: (email: string) => Promise<{ ok: boolean; error?: string }>
+  onSubmit: (values: GhlNativeEmailCaptureValues) => Promise<{ ok: boolean; error?: string }>
   className?: string
   tone?: "light" | "dark"
 }
@@ -34,6 +39,7 @@ export function GhlNativeEmailCapture({
   tone = "light",
 }: GhlNativeEmailCaptureProps) {
   const [mounted, setMounted] = useState(false)
+  const [firstName, setFirstName] = useState("")
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle")
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
@@ -52,7 +58,7 @@ export function GhlNativeEmailCapture({
   if (!mounted) {
     return (
       <div
-        className={cn("min-h-[216px] rounded-[11px]", className)}
+        className={cn("min-h-[280px] rounded-[11px]", className)}
         aria-busy="true"
         aria-label="Loading email form"
       />
@@ -87,7 +93,10 @@ export function GhlNativeEmailCapture({
     setStatus("submitting")
     setErrorMessage(null)
 
-    const result = await onSubmit(email.trim())
+    const result = await onSubmit({
+      firstName: firstName.trim(),
+      email: email.trim(),
+    })
 
     if (!result.ok) {
       setStatus("error")
@@ -103,24 +112,52 @@ export function GhlNativeEmailCapture({
       {title ? <div className={cn("mb-3", titleClass)}>{title}</div> : null}
       {description ? <p className={cn("mb-4", descriptionClass)}>{description}</p> : null}
 
-      <label htmlFor="ghl-native-email" className="sr-only">Email</label>
-      <input
-        id="ghl-native-email"
-        name="email"
-        type="email"
-        required
-        autoComplete="email"
-        placeholder="your@email.com"
-        data-lpignore="true"
-        data-1p-ignore
-        className={fieldClass}
-        value={email}
-        onChange={(event) => setEmail(event.target.value)}
-        disabled={status === "submitting"}
-      />
+      <div className="flex flex-col gap-3">
+        <div>
+          <label htmlFor="ghl-native-first-name" className="sr-only">
+            First name
+          </label>
+          <input
+            id="ghl-native-first-name"
+            name="firstName"
+            type="text"
+            required
+            autoComplete="given-name"
+            placeholder="First name"
+            data-lpignore="true"
+            data-1p-ignore
+            className={fieldClass}
+            value={firstName}
+            onChange={(event) => setFirstName(event.target.value)}
+            disabled={status === "submitting"}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="ghl-native-email" className="sr-only">
+            Email
+          </label>
+          <input
+            id="ghl-native-email"
+            name="email"
+            type="email"
+            required
+            autoComplete="email"
+            placeholder="your@email.com"
+            data-lpignore="true"
+            data-1p-ignore
+            className={fieldClass}
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            disabled={status === "submitting"}
+          />
+        </div>
+      </div>
 
       {status === "error" && errorMessage ? (
-        <p className="mt-2 text-sm text-destructive" role="alert">{errorMessage}</p>
+        <p className="mt-2 text-sm text-destructive" role="alert">
+          {errorMessage}
+        </p>
       ) : null}
 
       <Button

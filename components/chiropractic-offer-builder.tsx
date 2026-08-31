@@ -128,8 +128,9 @@ function OfferBuilderEmailPanel({ clarity, state }: { clarity: OfferBuilderClari
         successMessage="We emailed your offer summary with all the details you built above."
         disabled={!clarity.ready}
         disabledMessage="Complete all four offer clarity checks above to unlock the email form. Your answers will be included automatically."
-        onSubmit={async (email) =>
+        onSubmit={async ({ firstName, email }) =>
           submitGhlContact({
+            firstName,
             email,
             source: GHL_OFFER_BUILDER_SOURCE,
             tags: [...GHL_OFFER_BUILDER_TAGS],
