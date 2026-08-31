@@ -472,7 +472,6 @@ export function GrowthAssessmentPage({
             </p>
           </div>
         </div>
-        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section
@@ -538,7 +537,6 @@ export function GrowthAssessmentPage({
             </div>
           ))}
         </div>
-        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section className="mx-auto max-w-[820px] px-6 pt-[88px]">
@@ -564,7 +562,6 @@ export function GrowthAssessmentPage({
             </details>
           ))}
         </div>
-        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section id="assessment" className="mx-auto max-w-6xl px-6 pb-14 pt-[88px] md:pb-20">
