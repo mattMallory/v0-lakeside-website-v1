@@ -27,8 +27,9 @@ export function DemoSystemWaitlist({
         buttonLabel={formButtonLabel}
         successTitle={successTitle}
         successMessage={successMessage}
-        onSubmit={(email) =>
+        onSubmit={({ firstName, email }) =>
           submitGhlContact({
+            firstName,
             email,
             source: GHL_DEMO_SYSTEM_SOURCE,
             tags: [...GHL_DEMO_SYSTEM_TAGS],
