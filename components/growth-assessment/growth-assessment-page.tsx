@@ -2,6 +2,8 @@ import Link from "next/link"
 import { ArrowRight, Check } from "lucide-react"
 
 import { GrowthAssessmentForm, GrowthAssessmentHowNote, type GrowthAssessmentConsentCopy } from "@/components/growth-assessment/growth-assessment-form"
+import { GrowthAssessmentDataSection } from "@/components/growth-assessment/growth-assessment-data-section"
+import { GrowthAssessmentPractitionersSection } from "@/components/growth-assessment/growth-assessment-practitioners-section"
 import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 import { layeredSectionBackground } from "@/lib/growth-system-backgrounds"
 import type { GrowthAssessmentContent } from "@/lib/growth-assessment-defaults"
@@ -254,6 +256,22 @@ export function GrowthAssessmentPage({
         </div>
         <SectionFormCta label={content.sectionCtaLabel} centered />
       </section>
+
+      <GrowthAssessmentDataSection
+        eyebrow={content.dataEyebrow}
+        headline={content.dataHeadline}
+        description={content.dataDescription}
+        credibilityLine={content.dataCredibilityLine}
+        dataSources={content.dataSources}
+        humanReviewLabel={content.dataHumanReviewLabel}
+        flowSteps={content.dataFlowSteps}
+        dataSourcesNote={content.dataSourcesNote}
+        useCasesHeadline={content.useCasesHeadline}
+        useCasesDescription={content.useCasesDescription}
+        useCases={content.useCases}
+        bridgeLine={content.dataBridgeLine}
+        ctaLabel={content.sectionCtaLabel}
+      />
 
       <section id="how-it-works" className="mx-auto max-w-[1120px] px-6 pt-[88px]">
         <div className="mb-11 max-w-[640px]">
@@ -568,6 +586,13 @@ export function GrowthAssessmentPage({
           ))}
         </div>
       </section>
+
+      <GrowthAssessmentPractitionersSection
+        eyebrow={content.practitionersEyebrow}
+        headline={content.practitionersHeadline}
+        description={content.practitionersDescription}
+        practitioners={content.practitioners}
+      />
 
       <section id="assessment" className="mx-auto max-w-6xl px-6 pb-14 pt-[88px] md:pb-20">
         <div className="grid items-start gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-16">

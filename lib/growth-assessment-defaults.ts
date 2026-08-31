@@ -34,6 +34,26 @@ export type GrowthAssessmentFaqItem = {
   answer: string
 }
 
+export type GrowthAssessmentDataSource = {
+  icon: string
+  title: string
+  description: string
+}
+
+export type GrowthAssessmentUseCase = {
+  number: string
+  title: string
+  description: string
+}
+
+export type GrowthAssessmentPractitioner = {
+  name: string
+  specialty: string
+  quote: string
+  photoUrl?: string
+  initials?: string
+}
+
 export type GrowthAssessmentContent = {
   heroEyebrow: string
   heroHeadline: string
@@ -56,6 +76,18 @@ export type GrowthAssessmentContent = {
   assessHeadline: string
   assessDescription: string
   assessItems: GrowthAssessmentIconCard[]
+  dataEyebrow: string
+  dataHeadline: string
+  dataDescription: string
+  dataCredibilityLine: string
+  dataSources: GrowthAssessmentDataSource[]
+  dataHumanReviewLabel: string
+  dataFlowSteps: string[]
+  dataSourcesNote: string
+  useCasesHeadline: string
+  useCasesDescription: string
+  useCases: GrowthAssessmentUseCase[]
+  dataBridgeLine: string
   howEyebrow: string
   howHeadline: string
   howSteps: GrowthAssessmentStep[]
@@ -86,6 +118,10 @@ export type GrowthAssessmentContent = {
   faqEyebrow: string
   faqHeadline: string
   faqItems: GrowthAssessmentFaqItem[]
+  practitionersEyebrow: string
+  practitionersHeadline: string
+  practitionersDescription: string
+  practitioners: GrowthAssessmentPractitioner[]
   formEyebrow: string
   formHeadline: string
   formDescription: string
@@ -180,6 +216,89 @@ export const defaultGrowthAssessmentContent: GrowthAssessmentContent = {
       description: "Which improvements should happen first — and what can wait?",
     },
   ],
+  dataEyebrow: "Real Analysis",
+  dataHeadline: "Real Data. Real Analysis. Reviewed by a Real Marketer.",
+  dataDescription:
+    "Your Growth Assessment isn't generated from a few prompts and generic marketing advice.\n\nLakeside combines live search, advertising, geographic, demographic, website and local-market data to build a picture of where your practice stands — and where the strongest opportunities may be.\n\nThen someone from our team actually reviews it.\n\nWe're picking up the cost of the data, technology and professional review because we'd rather show you what we can uncover than tell you how good we are.",
+  dataCredibilityLine: "Built from multiple independent data sources — not assumptions.",
+  dataSources: [
+    {
+      icon: "line-chart",
+      title: "Search Demand",
+      description: "What patients are actually searching for.",
+    },
+    {
+      icon: "circle-dollar-sign",
+      title: "Advertising Costs",
+      description: "Current CPCs, competition and paid-search opportunity.",
+    },
+    {
+      icon: "map-pin",
+      title: "Local Market",
+      description: "Population, income and geographic opportunity.",
+    },
+    {
+      icon: "eye",
+      title: "Google Presence",
+      description: "Local visibility and competitive positioning.",
+    },
+    {
+      icon: "monitor",
+      title: "Website Performance",
+      description: "Conversion opportunities and potential friction.",
+    },
+    {
+      icon: "bar-chart-3",
+      title: "Business Economics",
+      description: "Patient value, budget and realistic acquisition targets.",
+    },
+  ],
+  dataHumanReviewLabel: "+ Lakeside Human Review",
+  dataFlowSteps: ["Data", "Lakeside Analysis", "Human Review", "Actionable Plan"],
+  dataSourcesNote:
+    "Sources include Google, Google Maps, advertising data, SEO and search intelligence, demographic information, and Lakeside's proprietary analysis.",
+  useCasesHeadline: "See what's actually holding your practice back.",
+  useCasesDescription:
+    "The assessment isn't designed to give you another score to look at. It's designed to help answer practical growth questions.",
+  useCases: [
+    {
+      number: "01",
+      title: "Find Your Best Markets",
+      description:
+        "See where patient demand exists and whether your current service area is targeting the right communities.",
+    },
+    {
+      number: "02",
+      title: "Understand Search Demand",
+      description:
+        "See what people are searching for around your services — and where demand may be stronger or weaker than expected.",
+    },
+    {
+      number: "03",
+      title: "Set a Realistic Ad Budget",
+      description:
+        "Compare current search costs, patient value and acquisition assumptions before deciding what you should spend.",
+    },
+    {
+      number: "04",
+      title: "Find Website Friction",
+      description:
+        "Identify issues that may be preventing traffic from turning into new-patient inquiries.",
+    },
+    {
+      number: "05",
+      title: "Evaluate Your Current Marketing",
+      description:
+        "Compare what you're doing today against the opportunities visible in your market.",
+    },
+    {
+      number: "06",
+      title: "Know What to Fix First",
+      description:
+        "Turn dozens of marketing data points into a shorter list of priorities that can actually move the practice forward.",
+    },
+  ],
+  dataBridgeLine: "You don't need more marketing data. You need to know what to do with it.",
   howEyebrow: "How It Works",
   howHeadline: "Three steps. Two minutes of your time.",
   howSteps: [
@@ -355,6 +474,36 @@ export const defaultGrowthAssessmentContent: GrowthAssessmentContent = {
       question: "Will this work for a new practice?",
       answer:
         "The assessment can still be useful, but projections will be less certain when historical patient, conversion, and revenue data are limited.",
+    },
+  ],
+  practitionersEyebrow: "Built From Real Experience",
+  practitionersHeadline: "We don't just study practice growth. We work on it every day.",
+  practitionersDescription:
+    "Lakeside works alongside chiropractors, acupuncturists, nutrition-focused practices and natural healthcare teams to solve the same problems we're evaluating in your Growth Assessment.\n\nMore qualified patients. Better advertising. Better follow-up. Better visibility into what's actually working.",
+  practitioners: [
+    {
+      name: "Dr. [Name]",
+      specialty: "Chiropractic + Nutrition",
+      quote: "[Approved client quote]",
+      initials: "DN",
+    },
+    {
+      name: "Dr. [Name]",
+      specialty: "Acupuncture + Holistic Health",
+      quote: "[Approved client quote]",
+      initials: "DN",
+    },
+    {
+      name: "Dr. [Name]",
+      specialty: "Natural Healthcare",
+      quote: "[Approved client quote]",
+      initials: "DN",
+    },
+    {
+      name: "Dr. [Name]",
+      specialty: "Integrative Practice",
+      quote: "[Approved client quote]",
+      initials: "DN",
     },
   ],
   formEyebrow: "Start Your Assessment",

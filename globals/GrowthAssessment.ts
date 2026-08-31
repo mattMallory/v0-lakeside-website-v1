@@ -90,6 +90,51 @@ export const GrowthAssessment: GlobalConfig = {
           ],
         },
         {
+          label: "Real Data",
+          fields: [
+            { name: "dataEyebrow", type: "text", defaultValue: defaultGrowthAssessmentContent.dataEyebrow },
+            { name: "dataHeadline", type: "text", defaultValue: defaultGrowthAssessmentContent.dataHeadline },
+            { name: "dataDescription", type: "textarea", defaultValue: defaultGrowthAssessmentContent.dataDescription },
+            { name: "dataCredibilityLine", type: "text", defaultValue: defaultGrowthAssessmentContent.dataCredibilityLine },
+            {
+              name: "dataSources",
+              type: "array",
+              label: "Data Sources",
+              defaultValue: defaultGrowthAssessmentContent.dataSources,
+              fields: [
+                { name: "icon", type: "select", options: iconOptions, required: true },
+                { name: "title", type: "text", required: true },
+                { name: "description", type: "textarea", required: true },
+              ],
+            },
+            {
+              name: "dataHumanReviewLabel",
+              type: "text",
+              defaultValue: defaultGrowthAssessmentContent.dataHumanReviewLabel,
+            },
+            stringListField(
+              "dataFlowSteps",
+              "Data Flow Steps",
+              defaultGrowthAssessmentContent.dataFlowSteps,
+            ),
+            { name: "dataSourcesNote", type: "textarea", defaultValue: defaultGrowthAssessmentContent.dataSourcesNote },
+            { name: "useCasesHeadline", type: "text", defaultValue: defaultGrowthAssessmentContent.useCasesHeadline },
+            { name: "useCasesDescription", type: "textarea", defaultValue: defaultGrowthAssessmentContent.useCasesDescription },
+            {
+              name: "useCases",
+              type: "array",
+              label: "Use Cases",
+              defaultValue: defaultGrowthAssessmentContent.useCases,
+              fields: [
+                { name: "number", type: "text", required: true },
+                { name: "title", type: "text", required: true },
+                { name: "description", type: "textarea", required: true },
+              ],
+            },
+            { name: "dataBridgeLine", type: "text", defaultValue: defaultGrowthAssessmentContent.dataBridgeLine },
+          ],
+        },
+        {
           label: "How It Works",
           fields: [
             { name: "howEyebrow", type: "text", defaultValue: defaultGrowthAssessmentContent.howEyebrow },
@@ -184,6 +229,48 @@ export const GrowthAssessment: GlobalConfig = {
               fields: [
                 { name: "question", type: "text", required: true },
                 { name: "answer", type: "textarea", required: true },
+              ],
+            },
+          ],
+        },
+        {
+          label: "Practitioners",
+          fields: [
+            {
+              name: "practitionersEyebrow",
+              type: "text",
+              defaultValue: defaultGrowthAssessmentContent.practitionersEyebrow,
+            },
+            {
+              name: "practitionersHeadline",
+              type: "text",
+              defaultValue: defaultGrowthAssessmentContent.practitionersHeadline,
+            },
+            {
+              name: "practitionersDescription",
+              type: "textarea",
+              defaultValue: defaultGrowthAssessmentContent.practitionersDescription,
+            },
+            {
+              name: "practitioners",
+              type: "array",
+              label: "Practitioner Cards",
+              defaultValue: defaultGrowthAssessmentContent.practitioners,
+              fields: [
+                { name: "name", type: "text", required: true },
+                { name: "specialty", type: "text", required: true },
+                { name: "quote", type: "textarea", required: true },
+                {
+                  name: "photo",
+                  type: "upload",
+                  relationTo: "media",
+                  label: "Photo",
+                },
+                {
+                  name: "initials",
+                  type: "text",
+                  label: "Initials (fallback when no photo)",
+                },
               ],
             },
           ],
