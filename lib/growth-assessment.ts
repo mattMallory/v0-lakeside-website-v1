@@ -3,11 +3,14 @@ import { cache } from "react"
 import {
   defaultGrowthAssessmentContent,
   type GrowthAssessmentContent,
+  type GrowthAssessmentDataSource,
   type GrowthAssessmentFinding,
   type GrowthAssessmentIconCard,
+  type GrowthAssessmentPractitioner,
   type GrowthAssessmentScenario,
   type GrowthAssessmentScenarioRow,
   type GrowthAssessmentStep,
+  type GrowthAssessmentUseCase,
 } from "@/lib/growth-assessment-defaults"
 
 function withFallback<T>(value: T | null | undefined, fallback: T): T {
@@ -132,6 +135,63 @@ function mapFaq(
   })
 }
 
+type MediaLike = { url?: string | null }
+
+function resolveMediaUrl(media: number | MediaLike | null | undefined): string | undefined {
+  if (!media || typeof media === "number") return undefined
+  return typeof media.url === "string" && media.url.trim() ? media.url : undefined
+}
+
+function mapDataSources(
+  value: unknown[] | null | undefined,
+  fallback: GrowthAssessmentDataSource[],
+): GrowthAssessmentDataSource[] {
+  return mergeArray(value, fallback).map((item, index) => {
+    const doc = item as Partial<GrowthAssessmentDataSource>
+    const fb = fallback[index] ?? fallback[0]
+    return {
+      icon: withFallback(doc.icon, fb.icon),
+      title: withFallback(doc.title, fb.title),
+      description: withFallback(doc.description, fb.description),
+    }
+  })
+}
+
+function mapUseCases(
+  value: unknown[] | null | undefined,
+  fallback: GrowthAssessmentUseCase[],
+): GrowthAssessmentUseCase[] {
+  return mergeArray(value, fallback).map((item, index) => {
+    const doc = item as Partial<GrowthAssessmentUseCase>
+    const fb = fallback[index] ?? fallback[0]
+    return {
+      number: withFallback(doc.number, fb.number),
+      title: withFallback(doc.title, fb.title),
+      description: withFallback(doc.description, fb.description),
+    }
+  })
+}
+
+function mapPractitioners(
+  value: unknown[] | null | undefined,
+  fallback: GrowthAssessmentPractitioner[],
+): GrowthAssessmentPractitioner[] {
+  return mergeArray(value, fallback).map((item, index) => {
+    const doc = item as Partial<GrowthAssessmentPractitioner> & {
+      photo?: number | MediaLike | null
+    }
+    const fb = fallback[index] ?? fallback[0]
+    const photoUrl = resolveMediaUrl(doc.photo) ?? fb.photoUrl
+    return {
+      name: withFallback(doc.name, fb.name),
+      specialty: withFallback(doc.specialty, fb.specialty),
+      quote: withFallback(doc.quote, fb.quote),
+      ...(photoUrl ? { photoUrl } : {}),
+      initials: withFallback(doc.initials, fb.initials),
+    }
+  })
+}
+
 function mapGrowthAssessmentContent(doc: Record<string, unknown>): GrowthAssessmentContent {
   const defaults = defaultGrowthAssessmentContent
 
@@ -167,6 +227,27 @@ function mapGrowthAssessmentContent(doc: Record<string, unknown>): GrowthAssessm
     assessHeadline: withFallback(doc.assessHeadline as string, defaults.assessHeadline),
     assessDescription: withFallback(doc.assessDescription as string, defaults.assessDescription),
     assessItems: mapIconCards(doc.assessItems as unknown[] | null | undefined, defaults.assessItems),
+    dataEyebrow: withFallback(doc.dataEyebrow as string, defaults.dataEyebrow),
+    dataHeadline: withFallback(doc.dataHeadline as string, defaults.dataHeadline),
+    dataDescription: withFallback(doc.dataDescription as string, defaults.dataDescription),
+    dataCredibilityLine: withFallback(doc.dataCredibilityLine as string, defaults.dataCredibilityLine),
+    dataSources: mapDataSources(doc.dataSources as unknown[] | null | undefined, defaults.dataSources),
+    dataHumanReviewLabel: withFallback(
+      doc.dataHumanReviewLabel as string,
+      defaults.dataHumanReviewLabel,
+    ),
+    dataFlowSteps: mapStringItems(
+      doc.dataFlowSteps as unknown[] | null | undefined,
+      defaults.dataFlowSteps,
+    ),
+    dataSourcesNote: withFallback(doc.dataSourcesNote as string, defaults.dataSourcesNote),
+    useCasesHeadline: withFallback(doc.useCasesHeadline as string, defaults.useCasesHeadline),
+    useCasesDescription: withFallback(
+      doc.useCasesDescription as string,
+      defaults.useCasesDescription,
+    ),
+    useCases: mapUseCases(doc.useCases as unknown[] | null | undefined, defaults.useCases),
+    dataBridgeLine: withFallback(doc.dataBridgeLine as string, defaults.dataBridgeLine),
     howEyebrow: withFallback(doc.howEyebrow as string, defaults.howEyebrow),
     howHeadline: withFallback(doc.howHeadline as string, defaults.howHeadline),
     howSteps: mapSteps(doc.howSteps as unknown[] | null | undefined, defaults.howSteps),
@@ -224,6 +305,22 @@ function mapGrowthAssessmentContent(doc: Record<string, unknown>): GrowthAssessm
     faqEyebrow: withFallback(doc.faqEyebrow as string, defaults.faqEyebrow),
     faqHeadline: withFallback(doc.faqHeadline as string, defaults.faqHeadline),
     faqItems: mapFaq(doc.faqItems as unknown[] | null | undefined, defaults.faqItems),
+    practitionersEyebrow: withFallback(
+      doc.practitionersEyebrow as string,
+      defaults.practitionersEyebrow,
+    ),
+    practitionersHeadline: withFallback(
+      doc.practitionersHeadline as string,
+      defaults.practitionersHeadline,
+    ),
+    practitionersDescription: withFallback(
+      doc.practitionersDescription as string,
+      defaults.practitionersDescription,
+    ),
+    practitioners: mapPractitioners(
+      doc.practitioners as unknown[] | null | undefined,
+      defaults.practitioners,
+    ),
     formEyebrow: withFallback(doc.formEyebrow as string, defaults.formEyebrow),
     formHeadline: withFallback(doc.formHeadline as string, defaults.formHeadline),
     formDescription: withFallback(doc.formDescription as string, defaults.formDescription),
@@ -262,7 +359,7 @@ async function fetchGrowthAssessmentContent(): Promise<GrowthAssessmentContent> 
     const payload = await getPayload({ config })
     const growthAssessment = await payload.findGlobal({
       slug: "growth-assessment",
-      depth: 0,
+      depth: 1,
     })
 
     return mapGrowthAssessmentContent(growthAssessment as unknown as Record<string, unknown>)
