@@ -216,7 +216,6 @@ export function GrowthAssessmentPage({
           </div>
           <p className="mt-4 text-[14.5px] text-muted-foreground">{content.problemFootnote}</p>
         </div>
-        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section id="assess" className="mx-auto max-w-[1120px] px-6 pt-[88px]">
@@ -269,7 +268,6 @@ export function GrowthAssessmentPage({
           ))}
         </div>
         <GrowthAssessmentHowNote note={content.howNote} />
-        <SectionFormCta label={content.sectionCtaLabel} />
       </section>
 
       <section id="report" className="mx-auto max-w-[1120px] px-6 pt-[88px]">
