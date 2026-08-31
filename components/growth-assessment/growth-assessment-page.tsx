@@ -594,8 +594,6 @@ export function GrowthAssessmentPage({
           <div className="min-w-0">
             <GrowthAssessmentForm
               ctaLabel={content.formCtaLabel}
-              showInvestmentStep={content.formShowInvestmentStep}
-              investmentOptions={content.formInvestmentOptions}
               processingSteps={content.formProcessingSteps}
               consent={consent}
             />

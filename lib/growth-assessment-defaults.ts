@@ -187,7 +187,7 @@ export const defaultGrowthAssessmentContent: GrowthAssessmentContent = {
       label: "Step 1",
       title: "Tell us what you want to grow",
       description:
-        "Your website, primary service, location, patient value, and growth goal. Just the things we can't find on our own.",
+        "Your website, primary service, zip code, patient value, and growth goal. Just the things we can't find on our own.",
     },
     {
       label: "Step 2",
@@ -366,7 +366,7 @@ export const defaultGrowthAssessmentContent: GrowthAssessmentContent = {
     'And if the honest answer is "don\'t advertise yet," that\'s what your plan will say. No gimmicks.',
   formCtaLabel: "Get My Free Growth Plan",
   sectionCtaLabel: "Get Your Free Growth Plan",
-  formShowInvestmentStep: true,
+  formShowInvestmentStep: false,
   formInvestmentOptions: [
     "Under $1,500",
     "$1,500–$3,000",

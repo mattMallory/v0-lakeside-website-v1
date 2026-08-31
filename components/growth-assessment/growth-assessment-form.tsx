@@ -9,6 +9,10 @@ import {
   GHL_GROWTH_ASSESSMENT_SOURCE,
   GHL_GROWTH_ASSESSMENT_TAGS,
 } from "@/lib/ghl-growth-assessment"
+import {
+  buildGrowthAssessmentCustomFields,
+  buildGrowthAssessmentSummary,
+} from "@/lib/growth-assessment-ghl"
 import { submitGhlContact } from "@/lib/submit-ghl-contact"
 import { cn } from "@/lib/utils"
 
@@ -21,15 +25,13 @@ export type GrowthAssessmentConsentCopy = {
 
 type GrowthAssessmentFormProps = {
   ctaLabel: string
-  showInvestmentStep: boolean
-  investmentOptions: string[]
   processingSteps: string[]
   consent: GrowthAssessmentConsentCopy
 }
 
 type FormFields = {
   website: string
-  location: string
+  zipCode: string
   service: string
   goal: string
   value: string
@@ -37,11 +39,12 @@ type FormFields = {
   last: string
   email: string
   phone: string
-  invest: string
 }
 
-const STEP_HINTS = ["Your practice", "What to grow", "Patient value", "Where to send it", "Optional"]
+const STEP_HINTS = ["Your practice", "What to grow", "Patient value", "Where to send it"]
 const STORAGE_KEY = "lk-bga-form"
+const TOTAL_STEPS = 4
+const LAST_STEP = 3
 
 const formCardClass =
   "scroll-mt-24 rounded-2xl border border-border bg-card p-6 shadow-sm ring-1 ring-border md:p-8"
@@ -51,12 +54,9 @@ const fieldClass =
 
 const labelClass = "mb-1.5 block text-sm font-medium text-heading"
 
-const investOptionClass =
-  "rounded-xl border border-border bg-white px-4 py-3 text-left text-[15px] font-medium text-heading transition-colors hover:border-primary/40"
-
 const emptyFields: FormFields = {
   website: "",
-  location: "",
+  zipCode: "",
   service: "",
   goal: "",
   value: "",
@@ -64,7 +64,6 @@ const emptyFields: FormFields = {
   last: "",
   email: "",
   phone: "",
-  invest: "",
 }
 
 function fmtPhone(value: string) {
@@ -79,13 +78,21 @@ function fmtMoney(value: string) {
   return digits ? `$${Number(digits).toLocaleString()}` : ""
 }
 
+function fmtZipCode(value: string) {
+  const digits = value.replace(/\D/g, "").slice(0, 9)
+  if (digits.length <= 5) return digits
+  return `${digits.slice(0, 5)}-${digits.slice(5)}`
+}
+
 function validateStep(step: number, fields: FormFields) {
   const errs: Partial<Record<keyof FormFields, string>> = {}
 
   if (step === 0) {
     if (!fields.website.trim()) errs.website = "Please enter your practice website."
     else if (!/\./.test(fields.website)) errs.website = "That doesn't look like a web address yet."
-    if (!fields.location.trim()) errs.location = "Please enter your primary location."
+    const zipDigits = fields.zipCode.replace(/\D/g, "")
+    if (!zipDigits) errs.zipCode = "Please enter your zip code."
+    else if (zipDigits.length !== 5) errs.zipCode = "Please enter a valid 5-digit zip code."
   }
 
   if (step === 1) {
@@ -115,14 +122,9 @@ function validateStep(step: number, fields: FormFields) {
 
 export function GrowthAssessmentForm({
   ctaLabel,
-  showInvestmentStep,
-  investmentOptions,
   processingSteps,
   consent,
 }: GrowthAssessmentFormProps) {
-  const totalSteps = showInvestmentStep ? 5 : 4
-  const lastRequiredStep = 3
-
   const [step, setStep] = useState(0)
   const [submitted, setSubmitted] = useState(false)
   const [done, setDone] = useState(0)
@@ -139,8 +141,13 @@ export function GrowthAssessmentForm({
         step?: number
       } | null
       if (saved?.f) {
-        setFields({ ...emptyFields, ...saved.f })
-        setStep(Math.min(saved.step ?? 0, 4))
+        const legacy = saved.f as FormFields & { location?: string }
+        setFields({
+          ...emptyFields,
+          ...legacy,
+          zipCode: legacy.zipCode || legacy.location || "",
+        })
+        setStep(Math.min(saved.step ?? 0, LAST_STEP))
       }
     } catch {
       // ignore
@@ -176,6 +183,7 @@ export function GrowthAssessmentForm({
     if (key === "phone") value = fmtPhone(raw)
     if (key === "value") value = fmtMoney(raw)
     if (key === "goal") value = raw.replace(/[^\d]/g, "").slice(0, 4)
+    if (key === "zipCode") value = fmtZipCode(raw)
 
     const next = { ...fields, [key]: value }
     setFields(next)
@@ -199,18 +207,15 @@ export function GrowthAssessmentForm({
     setSubmitError(null)
     const payloadFields = { ...fields, ...override }
 
-    const note = [
-      `Website: ${payloadFields.website}`,
-      `Location: ${payloadFields.location}`,
-      `Primary service: ${payloadFields.service}`,
-      `New patients goal: ${payloadFields.goal}/mo`,
-      `New patient value: ${payloadFields.value}`,
-      payloadFields.invest ? `Investment range: ${payloadFields.invest}` : null,
-      `SMS non-marketing consent: ${(override?.smsNonMarketingConsent ?? smsNonMarketingConsent) ? "Yes" : "No"}`,
-      `SMS marketing consent: ${(override?.smsMarketingConsent ?? smsMarketingConsent) ? "Yes" : "No"}`,
-    ]
-      .filter(Boolean)
-      .join("\n")
+    const note = buildGrowthAssessmentSummary({
+      website: payloadFields.website,
+      zipCode: payloadFields.zipCode,
+      service: payloadFields.service,
+      goal: payloadFields.goal,
+      value: payloadFields.value,
+      smsNonMarketingConsent: override?.smsNonMarketingConsent ?? smsNonMarketingConsent,
+      smsMarketingConsent: override?.smsMarketingConsent ?? smsMarketingConsent,
+    })
 
     const result = await submitGhlContact({
       firstName: payloadFields.first,
@@ -220,6 +225,15 @@ export function GrowthAssessmentForm({
       source: GHL_GROWTH_ASSESSMENT_SOURCE,
       tags: [...GHL_GROWTH_ASSESSMENT_TAGS],
       note,
+      customFields: buildGrowthAssessmentCustomFields({
+        website: payloadFields.website,
+        zipCode: payloadFields.zipCode,
+        service: payloadFields.service,
+        goal: payloadFields.goal,
+        value: payloadFields.value,
+        smsNonMarketingConsent: override?.smsNonMarketingConsent ?? smsNonMarketingConsent,
+        smsMarketingConsent: override?.smsMarketingConsent ?? smsMarketingConsent,
+      }),
     })
 
     if (!result.ok) {
@@ -242,8 +256,7 @@ export function GrowthAssessmentForm({
       return
     }
 
-    const isLastRequired = step === lastRequiredStep
-    if (step === 4 || (isLastRequired && !showInvestmentStep)) {
+    if (step === LAST_STEP) {
       void submitAssessment()
       return
     }
@@ -262,12 +275,8 @@ export function GrowthAssessmentForm({
     persist(fields, nextStep)
   }
 
-  const onFinalStep = step === 4 || (step === lastRequiredStep && !showInvestmentStep)
-  const nextLabel = useMemo(() => {
-    if (onFinalStep) return ctaLabel
-    if (step === lastRequiredStep && showInvestmentStep) return "Continue"
-    return "Next"
-  }, [ctaLabel, onFinalStep, showInvestmentStep, step, lastRequiredStep])
+  const onFinalStep = step === LAST_STEP
+  const nextLabel = useMemo(() => (onFinalStep ? ctaLabel : "Next"), [ctaLabel, onFinalStep])
 
   if (submitted) {
     return (
@@ -315,12 +324,12 @@ export function GrowthAssessmentForm({
       <div className="mb-8">
         <div className="mb-2 flex items-center justify-between gap-3">
           <p className="font-brand-display text-[11px] font-bold uppercase tracking-[0.08em] text-[#6B7280]">
-            Step {step + 1} of {totalSteps}
+            Step {step + 1} of {TOTAL_STEPS}
           </p>
           <p className="text-sm text-muted-foreground">{STEP_HINTS[step]}</p>
         </div>
         <div className="flex gap-2" aria-hidden="true">
-          {Array.from({ length: totalSteps }).map((_, index) => (
+          {Array.from({ length: TOTAL_STEPS }).map((_, index) => (
             <span
               key={index}
               className={cn(
@@ -354,20 +363,21 @@ export function GrowthAssessmentForm({
           <p className="min-h-5 text-sm text-destructive" role="alert">
             {errors.website}
           </p>
-          <label htmlFor="bga-location" className={labelClass}>
-            Primary location
+          <label htmlFor="bga-zip-code" className={labelClass}>
+            Zip code
           </label>
           <input
-            id="bga-location"
+            id="bga-zip-code"
             type="text"
-            autoComplete="address-level2"
-            placeholder="City, State"
-            value={fields.location}
-            onChange={(event) => updateField("location", event.target.value)}
+            inputMode="numeric"
+            autoComplete="postal-code"
+            placeholder="60156"
+            value={fields.zipCode}
+            onChange={(event) => updateField("zipCode", event.target.value)}
             className={fieldClass}
           />
           <p className="min-h-5 text-sm text-destructive" role="alert">
-            {errors.location}
+            {errors.zipCode}
           </p>
         </div>
       ) : null}
@@ -544,32 +554,6 @@ export function GrowthAssessmentForm({
         </div>
       ) : null}
 
-      {step === 4 && showInvestmentStep ? (
-        <div className="animate-in fade-in slide-in-from-bottom-1 duration-300">
-          <h3 className="font-brand-display text-balance text-[21px] font-bold tracking-[-0.02em] text-heading">
-            What level of monthly investment feels realistic?
-          </h3>
-          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-            Optional — it helps us tailor the scenarios. You can skip this.
-          </p>
-          <div className="mt-4 grid grid-cols-1 gap-2 sm:grid-cols-2">
-            {investmentOptions.map((option) => (
-              <button
-                key={option}
-                type="button"
-                onClick={() => updateField("invest", option)}
-                className={cn(
-                  investOptionClass,
-                  fields.invest === option && "border-primary bg-[#EFF6FF] shadow-[inset_0_0_0_1px_#2563A8]",
-                )}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-      ) : null}
-
       {submitError ? (
         <p className="mt-4 text-sm text-destructive" role="alert">
           {submitError}
@@ -586,15 +570,6 @@ export function GrowthAssessmentForm({
         )}
 
         <div className="flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center">
-          {step === 4 && showInvestmentStep ? (
-            <button
-              type="button"
-              onClick={() => void submitAssessment({ invest: "" })}
-              className="text-sm font-medium text-muted-foreground underline underline-offset-2"
-            >
-              Skip this question
-            </button>
-          ) : null}
           <Button type="button" onClick={handleNext} className="w-full sm:w-auto">
             {nextLabel}
           </Button>
