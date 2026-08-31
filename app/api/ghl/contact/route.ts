@@ -9,6 +9,10 @@ import {
   getConsultationMessageFieldId,
 } from "@/lib/ghl-consultation"
 import {
+  GHL_GROWTH_ASSESSMENT_NOTE_TITLE,
+  GHL_GROWTH_ASSESSMENT_SOURCE,
+} from "@/lib/ghl-growth-assessment"
+import {
   createGhlContactNote,
   GhlApiError,
   GhlConfigError,
@@ -136,9 +140,14 @@ export async function POST(request: Request) {
     }
 
     if (contactId && noteBody) {
+      const noteTitle =
+        body.source?.trim() === GHL_GROWTH_ASSESSMENT_SOURCE
+          ? GHL_GROWTH_ASSESSMENT_NOTE_TITLE
+          : GHL_CONSULTATION_NOTE_TITLE
+
       try {
         await createGhlContactNote(contactId, {
-          title: GHL_CONSULTATION_NOTE_TITLE,
+          title: noteTitle,
           body: noteBody,
         })
       } catch (noteError) {
