@@ -29,6 +29,7 @@ import * as migration_20260825_fix_navigation_footer_address_columns from './202
 import * as migration_20260825_homepage_section_backgrounds from './20260825_homepage_section_backgrounds';
 import * as migration_20260825_page_section_backgrounds from './20260825_page_section_backgrounds';
 import * as migration_20260827_demo_system_global from './20260827_demo_system_global';
+import * as migration_20260901_growth_assessment_global from './20260901_growth_assessment_global';
 
 export const migrations = [
   {
@@ -180,5 +181,10 @@ export const migrations = [
     up: migration_20260827_demo_system_global.up,
     down: migration_20260827_demo_system_global.down,
     name: '20260827_demo_system_global'
+  },
+  {
+    up: migration_20260901_growth_assessment_global.up,
+    down: migration_20260901_growth_assessment_global.down,
+    name: '20260901_growth_assessment_global'
   },
 ];
