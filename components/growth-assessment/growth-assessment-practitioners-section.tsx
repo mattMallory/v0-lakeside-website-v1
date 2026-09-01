@@ -45,23 +45,25 @@ export function GrowthAssessmentPractitionersSection({
   practitioners,
 }: GrowthAssessmentPractitionersSectionProps) {
   return (
-    <section className="mx-auto max-w-[1120px] px-6 pt-[88px]">
-      <div className="mb-10 max-w-[680px]">
-        <SectionEyebrow>{eyebrow}</SectionEyebrow>
-        <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.08] tracking-[-0.03em] text-heading">
-          {headline}
-        </h2>
-        <div className="mt-4 space-y-4 text-pretty text-[16.5px] leading-relaxed text-muted-foreground">
-          {description.split("\n\n").map((paragraph) => (
-            <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+    <section className="mt-[88px] bg-[#0E1726]">
+      <div className="mx-auto max-w-[1120px] px-6 py-20">
+        <div className="mb-10 max-w-[680px]">
+          <SectionEyebrow variant="dark">{eyebrow}</SectionEyebrow>
+          <h2 className="font-brand-display text-balance text-[clamp(1.75rem,3.6vw,2.625rem)] font-bold leading-[1.08] tracking-[-0.03em] text-white">
+            {headline}
+          </h2>
+          <div className="mt-4 space-y-4 text-pretty text-[16.5px] leading-relaxed text-[#B9C2CF]">
+            {description.split("\n\n").map((paragraph) => (
+              <p key={paragraph.slice(0, 40)}>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+
+        <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
+          {practitioners.map((practitioner) => (
+            <PractitionerCard key={`${practitioner.name}-${practitioner.specialty}`} practitioner={practitioner} />
           ))}
         </div>
-      </div>
-
-      <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:overflow-visible sm:snap-none lg:grid-cols-4 [&::-webkit-scrollbar]:hidden">
-        {practitioners.map((practitioner) => (
-          <PractitionerCard key={`${practitioner.name}-${practitioner.specialty}`} practitioner={practitioner} />
-        ))}
       </div>
     </section>
   )
