@@ -182,12 +182,26 @@ function mapPractitioners(
     }
     const fb = fallback[index] ?? fallback[0]
     const photoUrl = resolveMediaUrl(doc.photo) ?? fb.photoUrl
+    const caseStudyUrl =
+      typeof doc.caseStudyUrl === "string" && doc.caseStudyUrl.trim()
+        ? doc.caseStudyUrl.trim()
+        : undefined
+
     return {
       name: withFallback(doc.name, fb.name),
       specialty: withFallback(doc.specialty, fb.specialty),
       quote: withFallback(doc.quote, fb.quote),
       ...(photoUrl ? { photoUrl } : {}),
       initials: withFallback(doc.initials, fb.initials),
+      ...(caseStudyUrl
+        ? {
+            caseStudyUrl,
+            caseStudyLabel: withFallback(
+              typeof doc.caseStudyLabel === "string" ? doc.caseStudyLabel : undefined,
+              fb.caseStudyLabel ?? "Read case study",
+            ),
+          }
+        : {}),
     }
   })
 }

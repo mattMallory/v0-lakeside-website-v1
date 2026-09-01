@@ -31,6 +31,7 @@ import * as migration_20260825_page_section_backgrounds from './20260825_page_se
 import * as migration_20260827_demo_system_global from './20260827_demo_system_global';
 import * as migration_20260901_growth_assessment_global from './20260901_growth_assessment_global';
 import * as migration_20260901_services_page_schema_fix from './20260901_services_page_schema_fix';
+import * as migration_20260902_growth_assessment_practitioner_case_study from './20260902_growth_assessment_practitioner_case_study';
 
 export const migrations = [
   {
@@ -192,5 +193,10 @@ export const migrations = [
     up: migration_20260901_services_page_schema_fix.up,
     down: migration_20260901_services_page_schema_fix.down,
     name: '20260901_services_page_schema_fix'
+  },
+  {
+    up: migration_20260902_growth_assessment_practitioner_case_study.up,
+    down: migration_20260902_growth_assessment_practitioner_case_study.down,
+    name: '20260902_growth_assessment_practitioner_case_study'
   },
 ];

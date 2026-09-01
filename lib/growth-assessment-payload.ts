@@ -78,6 +78,8 @@ export function growthAssessmentToPayloadData(content: GrowthAssessmentContent) 
       specialty: practitioner.specialty,
       quote: practitioner.quote,
       initials: practitioner.initials ?? "",
+      caseStudyUrl: practitioner.caseStudyUrl ?? "",
+      caseStudyLabel: practitioner.caseStudyLabel ?? "",
     })),
     formEyebrow: content.formEyebrow,
     formHeadline: content.formHeadline,

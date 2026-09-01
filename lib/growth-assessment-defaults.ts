@@ -52,6 +52,9 @@ export type GrowthAssessmentPractitioner = {
   quote: string
   photoUrl?: string
   initials?: string
+  /** Optional link to a related case study or article. */
+  caseStudyUrl?: string
+  caseStudyLabel?: string
 }
 
 export type GrowthAssessmentContent = {
@@ -482,28 +485,34 @@ export const defaultGrowthAssessmentContent: GrowthAssessmentContent = {
     "Lakeside works alongside chiropractors, acupuncturists, nutrition-focused practices and natural healthcare teams to solve the same problems we're evaluating in your Growth Assessment.\n\nMore qualified patients. Better advertising. Better follow-up. Better visibility into what's actually working.",
   practitioners: [
     {
-      name: "Dr. [Name]",
+      name: "Dr. Bill Hemmer",
       specialty: "Chiropractic + Nutrition",
-      quote: "[Approved client quote]",
-      initials: "DN",
+      quote:
+        "Lakeside has given us a clear, consistent way to reach more people and turn that attention into real growth for our practice. I would highly recommend them to any clinic looking to grow.",
+      initials: "BH",
+      caseStudyUrl: "/blog/tuscola-pain-wellness-center-case-study",
+      caseStudyLabel: "Read case study",
     },
     {
-      name: "Dr. [Name]",
-      specialty: "Acupuncture + Holistic Health",
-      quote: "[Approved client quote]",
-      initials: "DN",
+      name: "Dr. Dan Ourada",
+      specialty: "Chiropractic",
+      quote:
+        "Lakeside understands that growing a practice takes more than simply running ads. They have helped us create a clearer strategy for reaching the right people and turning that interest into real opportunities for growth.",
+      initials: "DO",
     },
     {
-      name: "Dr. [Name]",
-      specialty: "Natural Healthcare",
-      quote: "[Approved client quote]",
-      initials: "DN",
+      name: "Dr. Shannon Roznay",
+      specialty: "Chiropractic + NRT",
+      quote:
+        "The Lakeside team understands natural healthcare and the importance of communicating what makes a practice different. They have helped us strengthen our online presence and connect with more of the people we are here to serve.",
+      initials: "SR",
     },
     {
-      name: "Dr. [Name]",
-      specialty: "Integrative Practice",
-      quote: "[Approved client quote]",
-      initials: "DN",
+      name: "Gerald Roliz",
+      specialty: "CNC",
+      quote:
+        "Lakeside has helped our team use website development, email marketing, and digital advertising to generate leads and increase online sales.",
+      initials: "GR",
     },
   ],
   formEyebrow: "Start Your Assessment",

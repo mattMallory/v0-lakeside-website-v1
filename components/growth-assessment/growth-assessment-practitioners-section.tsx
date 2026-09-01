@@ -1,3 +1,6 @@
+import Link from "next/link"
+import { ArrowRight } from "lucide-react"
+
 import { CmsImage } from "@/components/cms-image"
 import { SectionEyebrow } from "@/components/homepage-growth-system/section-eyebrow"
 import type { GrowthAssessmentPractitioner } from "@/lib/growth-assessment-defaults"
@@ -10,6 +13,8 @@ type GrowthAssessmentPractitionersSectionProps = {
 }
 
 function PractitionerCard({ practitioner }: { practitioner: GrowthAssessmentPractitioner }) {
+  const caseStudyUrl = practitioner.caseStudyUrl?.trim()
+
   return (
     <article className="flex w-[min(100%,280px)] shrink-0 snap-start flex-col rounded-xl border border-border bg-white p-5 sm:w-auto sm:shrink">
       <div className="relative mb-4 aspect-[4/5] w-full max-w-[120px] overflow-hidden rounded-xl border border-[#EDEEF0] bg-[#F4F8FC]">
@@ -31,9 +36,18 @@ function PractitionerCard({ practitioner }: { practitioner: GrowthAssessmentPrac
         {practitioner.name}
       </h3>
       <p className="mt-0.5 text-[13px] font-semibold text-primary">{practitioner.specialty}</p>
-      <blockquote className="mt-3 border-l-2 border-[#E8E5DF] pl-3 text-[14px] leading-relaxed text-[#4B5563]">
+      <blockquote className="mt-3 text-[14px] leading-relaxed text-[#4B5563]">
         {practitioner.quote}
       </blockquote>
+      {caseStudyUrl ? (
+        <Link
+          href={caseStudyUrl}
+          className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-semibold text-primary transition-colors hover:text-primary/80"
+        >
+          {practitioner.caseStudyLabel?.trim() || "Read case study"}
+          <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
+        </Link>
+      ) : null}
     </article>
   )
 }

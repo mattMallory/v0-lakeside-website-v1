@@ -271,6 +271,25 @@ export const GrowthAssessment: GlobalConfig = {
                   type: "text",
                   label: "Initials (fallback when no photo)",
                 },
+                {
+                  name: "caseStudyUrl",
+                  type: "text",
+                  label: "Case Study URL",
+                  admin: {
+                    description:
+                      "Optional. Link to a case study or article. Leave blank to hide the link on the card.",
+                  },
+                },
+                {
+                  name: "caseStudyLabel",
+                  type: "text",
+                  label: "Case Study Link Label",
+                  defaultValue: "Read case study",
+                  admin: {
+                    description: "Shown below the quote when a case study URL is set.",
+                    condition: (_, siblingData) => Boolean(siblingData?.caseStudyUrl?.trim()),
+                  },
+                },
               ],
             },
           ],
