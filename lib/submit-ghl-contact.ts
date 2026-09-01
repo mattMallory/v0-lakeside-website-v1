@@ -35,12 +35,12 @@ export async function submitGhlContact(
 
   const data = (await response.json().catch(() => null)) as SubmitGhlContactResult | null
 
-  if (!response.ok) {
+  if (!response.ok || !data?.ok) {
     return {
       ok: false,
       error: data?.error ?? `Request failed (${response.status})`,
     }
   }
 
-  return data ?? { ok: true }
+  return data
 }

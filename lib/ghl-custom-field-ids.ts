@@ -193,7 +193,7 @@ export async function buildCustomFieldsFromKeys(
     })
   }
 
-  if (unresolved.length && process.env.NODE_ENV !== "production") {
+  if (unresolved.length) {
     console.warn(
       `[ghl] Custom fields skipped (no ID found): ${unresolved.join(", ")}. ` +
         "Create them in GHL or set GHL_CF_<KEY> env vars.",

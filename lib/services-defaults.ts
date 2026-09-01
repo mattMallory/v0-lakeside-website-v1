@@ -96,13 +96,11 @@ export const defaultServicesContent: ServicesContent = {
       "We deploy and manage the platforms top-performing lead gen teams rely on — integrated, monitored, and optimized as a single operating system for your growth.",
     logos: [
       { id: "google", name: "Google" },
+      { id: "youtube", name: "YouTube" },
       { id: "meta", name: "Meta" },
       { id: "microsoft", name: "Microsoft" },
-      { id: "youtube", name: "YouTube" },
       { id: "highlevel", name: "Go High Level" },
-      { id: "zapier", name: "Zapier" },
-      { id: "make", name: "Make" },
-      { id: "calendly", name: "Calendly" },
+      { id: "payload", name: "Payload" },
     ],
     categories: [
       {

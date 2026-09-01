@@ -126,12 +126,22 @@ export async function POST(request: Request) {
       state: body.state,
       source: body.source,
       tags: parseTags(body.tags),
-      customFields: customFields.length ? customFields : undefined,
     })
 
     const contactId = await resolveGhlContactId(result, email || undefined, phone || undefined)
 
-    if (contactId && customFields.length) {
+    if (!contactId) {
+      console.error("[ghl/contact] upsert succeeded but contact id could not be resolved", result)
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Could not save your request. Please try again or contact us directly.",
+        },
+        { status: 502 },
+      )
+    }
+
+    if (customFields.length) {
       try {
         await updateGhlContact(contactId, { customFields })
       } catch (updateError) {
@@ -139,7 +149,7 @@ export async function POST(request: Request) {
       }
     }
 
-    if (contactId && noteBody) {
+    if (noteBody) {
       const noteTitle =
         body.source?.trim() === GHL_GROWTH_ASSESSMENT_SOURCE
           ? GHL_GROWTH_ASSESSMENT_NOTE_TITLE
@@ -151,26 +161,8 @@ export async function POST(request: Request) {
           body: noteBody,
         })
       } catch (noteError) {
-        console.error("[ghl/contact] note creation failed", noteError)
-        return NextResponse.json(
-          {
-            ok: false,
-            error:
-              "We saved your contact but could not store your message. Please email us directly.",
-          },
-          { status: 502 },
-        )
+        console.error("[ghl/contact] note creation failed (contact saved)", noteError)
       }
-    } else if (noteBody && !contactId) {
-      console.error("[ghl/contact] could not resolve contact id for note/custom fields")
-      return NextResponse.json(
-        {
-          ok: false,
-          error:
-            "We saved your contact but could not attach your message. Please email us directly.",
-        },
-        { status: 502 },
-      )
     }
 
     return NextResponse.json({ ok: true, contactId })

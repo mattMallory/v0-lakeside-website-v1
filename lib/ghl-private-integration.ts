@@ -60,6 +60,58 @@ export function getGhlConfig(): GhlConfig | null {
   return { token, locationId }
 }
 
+export type GhlLocationSummary = {
+  id: string
+  name?: string
+  city?: string
+  state?: string
+}
+
+/** Resolve which GHL sub-account the server token is writing to (for diagnostics). */
+export async function getGhlLocationSummary(): Promise<GhlLocationSummary | null> {
+  const config = getGhlConfig()
+  if (!config) return null
+
+  const response = await fetch(`${GHL_API_BASE}/locations/${config.locationId}`, {
+    headers: {
+      Authorization: `Bearer ${config.token}`,
+      Version: GHL_API_VERSION,
+      Accept: "application/json",
+    },
+    cache: "no-store",
+  })
+
+  const text = await response.text()
+  let parsed: unknown = null
+
+  try {
+    parsed = text ? JSON.parse(text) : null
+  } catch {
+    parsed = null
+  }
+
+  if (!response.ok) {
+    const detail =
+      typeof parsed === "object" && parsed !== null && "message" in parsed
+        ? String((parsed as { message: unknown }).message)
+        : text || response.statusText
+    throw new GhlApiError(response.status, detail)
+  }
+
+  const root = parsed && typeof parsed === "object" ? (parsed as Record<string, unknown>) : {}
+  const location =
+    root.location && typeof root.location === "object"
+      ? (root.location as Record<string, unknown>)
+      : root
+
+  return {
+    id: config.locationId,
+    name: typeof location.name === "string" ? location.name : undefined,
+    city: typeof location.city === "string" ? location.city : undefined,
+    state: typeof location.state === "string" ? location.state : undefined,
+  }
+}
+
 /**
  * Create or update a contact via Private Integration (contacts.write scope).
  * Uses upsert so repeat submissions from the same email do not create duplicates.

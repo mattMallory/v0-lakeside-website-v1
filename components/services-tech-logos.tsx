@@ -50,36 +50,20 @@ function PlatformLogo({ id }: { id: string }) {
     case "highlevel":
       return (
         <svg viewBox="0 0 24 24" aria-hidden className="h-6 w-6 sm:h-7 sm:w-7">
-          <rect fill="#FBC02D" x="2" y="2" width="20" height="20" rx="5" />
           <path
-            fill="#111827"
-            d="M7.5 16V8h2.1l2.4 4.6L14.4 8H16.5v8h-1.8v-4.8L12 16h-1.1l-2.7-4.8V16H7.5z"
+            fill="#188AF5"
+            d="M12 2.5 4.5 19h4.8l1.2-2.8h3l1.2 2.8H19.5L12 2.5zm0 6.8 1.5 3.5h-3L12 9.3z"
           />
         </svg>
       )
-    case "zapier":
+    case "payload":
       return (
         <svg viewBox="0 0 24 24" aria-hidden className="h-6 w-6 sm:h-7 sm:w-7">
-          <path fill="#FF4A00" d="M12 2 4 12h5.5v10L20 12h-5.5V2z" />
-        </svg>
-      )
-    case "make":
-      return (
-        <svg viewBox="0 0 24 24" aria-hidden className="h-6 w-6 sm:h-7 sm:w-7">
-          <circle fill="#6D00CC" cx="6" cy="12" r="3.5" />
-          <circle fill="#6D00CC" cx="12" cy="6" r="3.5" />
-          <circle fill="#6D00CC" cx="18" cy="12" r="3.5" />
-          <circle fill="#6D00CC" cx="12" cy="18" r="3.5" />
-        </svg>
-      )
-    case "calendly":
-      return (
-        <svg viewBox="0 0 24 24" aria-hidden className="h-6 w-6 sm:h-7 sm:w-7">
-          <rect fill="#006BFF" x="2" y="2" width="20" height="20" rx="5" />
           <path
             fill="#fff"
-            d="M8 7.5h8v1.6H8V7.5zm0 3.4h8v1.6H8v-1.6zm0 3.4h5.2v1.6H8v-1.6z"
+            d="M12 2 3 7v10l9 5 9-5V7l-9-5zm0 2.3 6.5 3.6v7.2L12 18.1l-6.5-3.6V7.9L12 4.3z"
           />
+          <path fill="#64748B" d="m12 8.5-3 1.7v3.6l3 1.7 3-1.7v-3.6l-3-1.7z" />
         </svg>
       )
     default:
@@ -102,7 +86,7 @@ export function ServicesTechLogos({
     <div
       data-tech-logos
       className={cn(
-        "grid max-w-sm grid-cols-4 gap-2 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:gap-3",
+        "grid max-w-xs grid-cols-3 gap-2 sm:max-w-none sm:flex sm:flex-wrap sm:items-center sm:gap-3",
         align === "center" ? "mb-10 justify-items-center mx-auto sm:justify-center" : "justify-items-start",
       )}
     >
