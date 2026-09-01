@@ -19,8 +19,9 @@ const createStatements = [
     _order integer NOT NULL,
     _parent_id integer NOT NULL,
     id text PRIMARY KEY NOT NULL,
+    icon text NOT NULL DEFAULT 'database',
     image_id integer REFERENCES media(id) ON DELETE set null ON UPDATE no action,
-    image_alt text NOT NULL,
+    image_alt text,
     title text NOT NULL,
     FOREIGN KEY (_parent_id) REFERENCES services_page(id) ON UPDATE no action ON DELETE cascade
   )`,

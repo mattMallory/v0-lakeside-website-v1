@@ -69,6 +69,7 @@ export async function seedServicesIfEmpty(payload: Payload) {
     ])
 
     const seededTechnologyCategories = defaultServicesContent.technology.categories.map((category, index) => ({
+      icon: category.icon,
       title: category.title,
       imageAlt: category.imageAlt,
       ...(categoryImageIds[index] ? { image: categoryImageIds[index] } : {}),
