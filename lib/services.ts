@@ -3,6 +3,7 @@ import {
   type ServiceOffering,
   type ServicesContent,
   type TechCategory,
+  type TechLogo,
 } from "@/lib/services-defaults"
 import { mapCaseStudyHighlight } from "@/lib/case-study-highlight"
 
@@ -21,6 +22,11 @@ type TechCategoryDoc = {
   image?: number | MediaLike | null
   imageAlt?: string | null
   items?: TechCategoryItemDoc[] | null
+}
+
+type TechLogoDoc = {
+  logoId?: string | null
+  name?: string | null
 }
 
 type OfferingItemDoc = {
@@ -99,6 +105,24 @@ function mergeTechCategories(
   return [...ordered, ...extras]
 }
 
+function mapTechLogos(
+  value: unknown[] | null | undefined,
+  fallback: TechLogo[],
+): TechLogo[] {
+  const mapped =
+    value
+      ?.map((item) => {
+        const doc = item as TechLogoDoc
+        const id = typeof doc.logoId === "string" ? doc.logoId.trim() : ""
+        const name = typeof doc.name === "string" ? doc.name.trim() : ""
+        if (!id) return null
+        return { id, name: name || id }
+      })
+      .filter((logo): logo is TechLogo => Boolean(logo)) ?? []
+
+  return mapped.length > 0 ? mapped : fallback
+}
+
 function mapOfferingItem(doc: OfferingItemDoc, fallback: ServiceOffering): ServiceOffering | null {
   if (!doc.title || !doc.description) return null
 
@@ -155,7 +179,10 @@ export async function getServicesContent(): Promise<ServicesContent> {
           services.technologyDescription,
           defaultServicesContent.technology.description,
         ),
-        logos: defaultServicesContent.technology.logos,
+        logos: mapTechLogos(
+          services.technologyLogos as unknown[] | null | undefined,
+          defaultServicesContent.technology.logos,
+        ),
         categories: categories.length > 0 ? categories : defaultServicesContent.technology.categories,
       },
       about: {

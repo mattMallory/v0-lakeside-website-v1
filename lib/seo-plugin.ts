@@ -3,22 +3,7 @@ import type { Plugin } from "payload"
 
 import { defaultAboutSeo } from "@/lib/about-seo-defaults"
 import { defaultHomepageSeo } from "@/lib/homepage-seo-defaults"
-
-function getSiteURL(): string {
-  if (process.env.NEXT_PUBLIC_SERVER_URL) {
-    return process.env.NEXT_PUBLIC_SERVER_URL.replace(/\/$/, "")
-  }
-
-  if (process.env.VERCEL_PROJECT_PRODUCTION_URL) {
-    return `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  }
-
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`
-  }
-
-  return "http://localhost:3000"
-}
+import { getSiteUrl } from "@/lib/site-url"
 
 export function getSeoPlugin(): Plugin {
   return seoPlugin({
@@ -57,14 +42,14 @@ export function getSeoPlugin(): Plugin {
     },
     generateURL: ({ doc, collectionConfig, globalConfig }) => {
       if (collectionConfig?.slug === "posts" && typeof doc?.slug === "string" && doc.slug.trim()) {
-        return `${getSiteURL()}/blog/${doc.slug.trim()}`
+        return `${getSiteUrl()}/blog/${doc.slug.trim()}`
       }
 
       if (globalConfig?.slug === "about") {
-        return `${getSiteURL()}/about`
+        return `${getSiteUrl()}/about`
       }
 
-      return getSiteURL()
+      return getSiteUrl()
     },
   })
 }

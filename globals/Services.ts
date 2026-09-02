@@ -2,7 +2,7 @@ import type { GlobalConfig } from "payload"
 
 import { iconOptions } from "@/lib/icons"
 import { caseStudyHighlightFields } from "@/fields/caseStudyHighlight"
-import { defaultServicesContent } from "@/lib/services-defaults"
+import { defaultServicesContent, TECH_LOGO_OPTIONS } from "@/lib/services-defaults"
 import { revalidateSite } from "@/lib/revalidate-site"
 
 const iconField = {
@@ -195,6 +195,40 @@ export const Services: GlobalConfig = {
               type: "textarea",
               label: "Description",
               defaultValue: defaultServicesContent.technology.description,
+            },
+            {
+              name: "technologyLogos",
+              type: "array",
+              label: "Logo Row",
+              admin: {
+                description:
+                  "Icons shown under the Technology Stack intro. Order here controls the live order.",
+              },
+              defaultValue: defaultServicesContent.technology.logos.map((logo) => ({
+                logoId: logo.id,
+                name: logo.name,
+              })),
+              fields: [
+                {
+                  name: "logoId",
+                  type: "select",
+                  label: "Logo",
+                  required: true,
+                  options: TECH_LOGO_OPTIONS.map((option) => ({
+                    label: option.label,
+                    value: option.value,
+                  })),
+                },
+                {
+                  name: "name",
+                  type: "text",
+                  label: "Accessible name",
+                  required: true,
+                  admin: {
+                    description: "Screen-reader / hover label (e.g. Google, Go High Level).",
+                  },
+                },
+              ],
             },
             {
               name: "technologyCategories",

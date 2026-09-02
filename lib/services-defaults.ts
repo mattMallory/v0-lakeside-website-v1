@@ -15,6 +15,21 @@ export type TechCategory = {
   imageAlt: string
 }
 
+export type TechLogo = {
+  id: string
+  name: string
+}
+
+/** Built-in SVG marks available for the Technology Stack logo row. */
+export const TECH_LOGO_OPTIONS = [
+  { label: "Google", value: "google" },
+  { label: "YouTube", value: "youtube" },
+  { label: "Meta", value: "meta" },
+  { label: "Microsoft", value: "microsoft" },
+  { label: "Go High Level", value: "highlevel" },
+  { label: "Payload", value: "payload" },
+] as const
+
 export type ServicesContent = {
   hero: {
     eyebrow: string
@@ -31,7 +46,7 @@ export type ServicesContent = {
     eyebrow: string
     headline: string
     description: string
-    logos: Array<{ id: string; name: string }>
+    logos: TechLogo[]
     categories: TechCategory[]
   }
   about: {

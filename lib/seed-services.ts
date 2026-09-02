@@ -49,11 +49,13 @@ export async function seedServicesIfEmpty(payload: Payload) {
 
     const offeringsItems = services.offeringsItems ?? []
     const technologyCategories = services.technologyCategories ?? []
+    const technologyLogos = (services as { technologyLogos?: unknown[] }).technologyLogos ?? []
     const needsOfferings = offeringsItems.length === 0
     const needsTechnology = technologyCategories.length === 0
+    const needsLogos = technologyLogos.length === 0
     const isNew = !services.id
 
-    if (!isNew && !needsOfferings && !needsTechnology) {
+    if (!isNew && !needsOfferings && !needsTechnology && !needsLogos) {
       return
     }
 
@@ -114,6 +116,14 @@ export async function seedServicesIfEmpty(payload: Payload) {
               technologyDescription:
                 services.technologyDescription ?? defaultServicesContent.technology.description,
               technologyCategories: seededTechnologyCategories,
+            }
+          : {}),
+        ...(needsLogos
+          ? {
+              technologyLogos: defaultServicesContent.technology.logos.map((logo) => ({
+                logoId: logo.id,
+                name: logo.name,
+              })),
             }
           : {}),
       },

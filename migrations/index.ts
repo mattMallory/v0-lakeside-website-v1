@@ -32,6 +32,7 @@ import * as migration_20260827_demo_system_global from './20260827_demo_system_g
 import * as migration_20260901_growth_assessment_global from './20260901_growth_assessment_global';
 import * as migration_20260901_services_page_schema_fix from './20260901_services_page_schema_fix';
 import * as migration_20260902_growth_assessment_practitioner_case_study from './20260902_growth_assessment_practitioner_case_study';
+import * as migration_20260902_services_technology_logos from './20260902_services_technology_logos';
 
 export const migrations = [
   {
@@ -198,5 +199,10 @@ export const migrations = [
     up: migration_20260902_growth_assessment_practitioner_case_study.up,
     down: migration_20260902_growth_assessment_practitioner_case_study.down,
     name: '20260902_growth_assessment_practitioner_case_study'
+  },
+  {
+    up: migration_20260902_services_technology_logos.up,
+    down: migration_20260902_services_technology_logos.down,
+    name: '20260902_services_technology_logos'
   },
 ];

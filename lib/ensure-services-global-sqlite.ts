@@ -32,6 +32,14 @@ const createStatements = [
     label text NOT NULL,
     FOREIGN KEY (_parent_id) REFERENCES services_page_technology_categories(id) ON UPDATE no action ON DELETE cascade
   )`,
+  `CREATE TABLE IF NOT EXISTS services_page_technology_logos (
+    _order integer NOT NULL,
+    _parent_id integer NOT NULL,
+    id text PRIMARY KEY NOT NULL,
+    logo_id text NOT NULL,
+    name text NOT NULL,
+    FOREIGN KEY (_parent_id) REFERENCES services_page(id) ON UPDATE no action ON DELETE cascade
+  )`,
   "PRAGMA foreign_keys=ON",
 ]
 
@@ -68,6 +76,17 @@ export async function ensureServicesGlobalSqlite() {
         for (const statement of renameStatements) {
           await client.execute(statement)
         }
+      }
+
+      if (!(await tableExists(client, "services_page_technology_logos"))) {
+        await client.execute(`CREATE TABLE IF NOT EXISTS services_page_technology_logos (
+          _order integer NOT NULL,
+          _parent_id integer NOT NULL,
+          id text PRIMARY KEY NOT NULL,
+          logo_id text NOT NULL,
+          name text NOT NULL,
+          FOREIGN KEY (_parent_id) REFERENCES services_page(id) ON UPDATE no action ON DELETE cascade
+        )`)
       }
       return
     }
