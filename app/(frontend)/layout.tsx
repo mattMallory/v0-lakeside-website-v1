@@ -3,6 +3,7 @@ import type { Metadata } from "next"
 import Script from "next/script"
 
 import { BrandingProvider } from "@/components/branding-provider"
+import { GoogleAdsBaseScript } from "@/components/google-ads-base-script"
 import { NavigationProvider } from "@/components/navigation-provider"
 import { buildBrandingCssVariables, getBrandingContent } from "@/lib/branding"
 import { getNavigationContent } from "@/lib/navigation"
@@ -81,6 +82,7 @@ export default async function RootLayout({
         <BrandingProvider value={branding}>
           <NavigationProvider value={navigation}>{children}</NavigationProvider>
         </BrandingProvider>
+        <GoogleAdsBaseScript />
         <Script src="/scripts/lakeside-budget-planner.js" strategy="afterInteractive" />
         <Script src="/scripts/lakeside-offer-builder.js" strategy="afterInteractive" />
         <Script src="/scripts/lakeside-metric-count-up.js" strategy="afterInteractive" />

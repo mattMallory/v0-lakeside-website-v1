@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Script from "next/script"
+import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -31,6 +32,10 @@ import {
   GHL_CONSULTATION_TAGS,
 } from "@/lib/ghl-consultation"
 import { isValidEmail } from "@/lib/ghl-form"
+import {
+  CONSULTATION_CONVERSION_FLAG,
+  CONSULTATION_THANK_YOU_PATH,
+} from "@/lib/google-ads"
 import { submitGhlContact } from "@/lib/submit-ghl-contact"
 import { cn } from "@/lib/utils"
 
@@ -176,6 +181,7 @@ function CheckboxOptionList({
 }
 
 function NativeConsultationForm({ consent }: { consent: ConsultationConsentCopy }) {
+  const router = useRouter()
   const [mounted, setMounted] = useState(false)
   const [step, setStep] = useState(1)
   const [state, setState] = useState<ConsultationFormState>(defaultConsultationFormState)
@@ -283,7 +289,15 @@ function NativeConsultationForm({ consent }: { consent: ConsultationConsentCopy 
       return
     }
 
+    // Flag real submissions so the thank-you page can fire Google Ads conversion once.
+    try {
+      sessionStorage.setItem(CONSULTATION_CONVERSION_FLAG, "1")
+    } catch {
+      // sessionStorage unavailable — thank-you page still works; conversion may not fire.
+    }
+
     setStatus("success")
+    router.push(CONSULTATION_THANK_YOU_PATH)
   }
 
   if (!mounted) {
@@ -300,9 +314,7 @@ function NativeConsultationForm({ consent }: { consent: ConsultationConsentCopy 
     return (
       <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-sm ring-1 ring-border md:p-10">
         <h2 className="font-brand-display text-2xl font-bold text-heading">Thanks — we&apos;ll be in touch.</h2>
-        <p className="mt-3 text-muted-foreground">
-          We received your consultation request and will reply within one business day.
-        </p>
+        <p className="mt-3 text-muted-foreground">Redirecting…</p>
       </div>
     )
   }
