@@ -77,12 +77,12 @@ export default async function RootLayout({
     >
       <head>
         <style dangerouslySetInnerHTML={{ __html: buildBrandingCssVariables(branding) }} />
+        <GoogleAdsBaseScript />
       </head>
       <body className={`${manrope.variable} overflow-x-clip antialiased bg-background text-[18px] leading-[1.72]`}>
         <BrandingProvider value={branding}>
           <NavigationProvider value={navigation}>{children}</NavigationProvider>
         </BrandingProvider>
-        <GoogleAdsBaseScript />
         <Script src="/scripts/lakeside-budget-planner.js" strategy="afterInteractive" />
         <Script src="/scripts/lakeside-offer-builder.js" strategy="afterInteractive" />
         <Script src="/scripts/lakeside-metric-count-up.js" strategy="afterInteractive" />

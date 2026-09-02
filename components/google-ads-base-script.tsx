@@ -1,5 +1,3 @@
-"use client"
-
 import Script from "next/script"
 
 import {
@@ -11,7 +9,7 @@ import {
 
 /**
  * Loads gtag.js for Google Ads and/or GA4 when env vars are set.
- * Place once in the root layout.
+ * beforeInteractive injects into <head> so Google Ads can verify the tag.
  */
 export function GoogleAdsBaseScript() {
   if (!isGoogleTagConfigured()) return null
@@ -30,9 +28,9 @@ export function GoogleAdsBaseScript() {
     <>
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${loaderId}`}
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
       />
-      <Script id="google-tag-base" strategy="afterInteractive">
+      <Script id="google-tag-base" strategy="beforeInteractive">
         {`
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
