@@ -1,17 +1,19 @@
 /**
- * Google Ads conversion tracking (gtag.js)
+ * Google tag (gtag.js) — Ads + Analytics
  *
- * Vercel → Environment Variables:
+ * Vercel → Environment Variables (Config, Production):
  *   NEXT_PUBLIC_GOOGLE_ADS_ID=AW-XXXXXXXXX
  *   NEXT_PUBLIC_GOOGLE_ADS_CONSULTATION_CONVERSION_LABEL=AbCdEfGhIjKlMnOp
+ *   NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
  *
- * In Google Ads → Goals → Conversions → New conversion → Website:
- *   - Category: Submit lead form (or similar)
- *   - Use "Thank-you page" / page load
- *   - URL contains: /consultation/thank-you
+ * Consultation conversion:
+ *   In Google Ads → Goals → Conversions → Website thank-you page
+ *   URL contains: /consultation/thank-you
  *
- * Paste the Conversion ID into NEXT_PUBLIC_GOOGLE_ADS_ID and the
- * Conversion Label into NEXT_PUBLIC_GOOGLE_ADS_CONSULTATION_CONVERSION_LABEL.
+ * GA4:
+ *   Reuse an existing Measurement ID (G-…) from another site, or create a new
+ *   data stream in the same GA4 property for madebylakeside.com.
+ *
  * Redeploy after setting env vars.
  */
 
@@ -27,6 +29,8 @@ export const GOOGLE_ADS_ID = process.env.NEXT_PUBLIC_GOOGLE_ADS_ID?.trim() || ""
 export const GOOGLE_ADS_CONSULTATION_CONVERSION_LABEL =
   process.env.NEXT_PUBLIC_GOOGLE_ADS_CONSULTATION_CONVERSION_LABEL?.trim() || ""
 
+export const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || ""
+
 export const CONSULTATION_THANK_YOU_PATH = "/consultation/thank-you"
 
 /** sessionStorage key set after a successful consultation submit */
@@ -39,4 +43,18 @@ export function getGoogleAdsConsultationSendTo(): string | null {
 
 export function isGoogleAdsConfigured(): boolean {
   return Boolean(GOOGLE_ADS_ID)
+}
+
+export function isGoogleAnalyticsConfigured(): boolean {
+  return Boolean(GA_MEASUREMENT_ID)
+}
+
+/** True when Ads and/or GA4 should load gtag.js */
+export function isGoogleTagConfigured(): boolean {
+  return isGoogleAdsConfigured() || isGoogleAnalyticsConfigured()
+}
+
+/** Primary ID used to load the gtag.js script (Ads preferred, else GA4). */
+export function getGoogleTagLoaderId(): string | null {
+  return GOOGLE_ADS_ID || GA_MEASUREMENT_ID || null
 }

@@ -2,26 +2,42 @@
 
 import Script from "next/script"
 
-import { GOOGLE_ADS_ID, isGoogleAdsConfigured } from "@/lib/google-ads"
+import {
+  GA_MEASUREMENT_ID,
+  GOOGLE_ADS_ID,
+  getGoogleTagLoaderId,
+  isGoogleTagConfigured,
+} from "@/lib/google-ads"
 
 /**
- * Loads the Google tag (gtag.js) for Ads when NEXT_PUBLIC_GOOGLE_ADS_ID is set.
+ * Loads gtag.js for Google Ads and/or GA4 when env vars are set.
  * Place once in the root layout.
  */
 export function GoogleAdsBaseScript() {
-  if (!isGoogleAdsConfigured()) return null
+  if (!isGoogleTagConfigured()) return null
 
-  const id = GOOGLE_ADS_ID
+  const loaderId = getGoogleTagLoaderId()
+  if (!loaderId) return null
+
+  const configLines = [
+    GOOGLE_ADS_ID ? `gtag('config', '${GOOGLE_ADS_ID}');` : "",
+    GA_MEASUREMENT_ID ? `gtag('config', '${GA_MEASUREMENT_ID}');` : "",
+  ]
+    .filter(Boolean)
+    .join("\n")
 
   return (
     <>
-      <Script src={`https://www.googletagmanager.com/gtag/js?id=${id}`} strategy="afterInteractive" />
-      <Script id="google-ads-base" strategy="afterInteractive">
+      <Script
+        src={`https://www.googletagmanager.com/gtag/js?id=${loaderId}`}
+        strategy="afterInteractive"
+      />
+      <Script id="google-tag-base" strategy="afterInteractive">
         {`
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-gtag('config', '${id}');
+${configLines}
         `.trim()}
       </Script>
     </>
