@@ -87,6 +87,12 @@ export default async function RootLayout({
         <Script src="/scripts/lakeside-offer-builder.js" strategy="afterInteractive" />
         <Script src="/scripts/lakeside-metric-count-up.js" strategy="afterInteractive" />
         <Script src="/scripts/lakeside-tech-logos-reveal.js" strategy="afterInteractive" />
+        <Script
+          src="https://widgets.leadconnectorhq.com/loader.js"
+          strategy="afterInteractive"
+          data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"
+          data-widget-id="6a99b1ad98f3179f2ed95867"
+        />
         {process.env.NODE_ENV === "production" && <Analytics />}
       </body>
     </html>
