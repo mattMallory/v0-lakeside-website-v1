@@ -1,5 +1,3 @@
-import Script from "next/script"
-
 import {
   GA_MEASUREMENT_ID,
   GOOGLE_ADS_ID,
@@ -9,7 +7,9 @@ import {
 
 /**
  * Loads gtag.js for Google Ads and/or GA4 when env vars are set.
- * beforeInteractive injects into <head> so Google Ads can verify the tag.
+ *
+ * Uses raw <script> tags (not next/script) so the initial HTML matches
+ * Google's recommended snippet and Ads can verify the tag without executing JS.
  */
 export function GoogleAdsBaseScript() {
   if (!isGoogleTagConfigured()) return null
@@ -22,22 +22,23 @@ export function GoogleAdsBaseScript() {
     GA_MEASUREMENT_ID ? `gtag('config', '${GA_MEASUREMENT_ID}');` : "",
   ]
     .filter(Boolean)
-    .join("\n")
+    .join("\n  ")
 
   return (
     <>
-      <Script
-        src={`https://www.googletagmanager.com/gtag/js?id=${loaderId}`}
-        strategy="beforeInteractive"
-      />
-      <Script id="google-tag-base" strategy="beforeInteractive">
-        {`
+      {/* Google tag (gtag.js) */}
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${loaderId}`} />
+      <script
+        id="google-tag-base"
+        dangerouslySetInnerHTML={{
+          __html: `
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
-${configLines}
-        `.trim()}
-      </Script>
+  ${configLines}
+`.trim(),
+        }}
+      />
     </>
   )
 }
